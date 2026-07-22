@@ -1,7 +1,5 @@
 Code to run it
-tree -a -L 5 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
-tree -a -I "node_modules|.git" > project-tree.txt
-
+tree -a -L 7 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 
 .
 ├── .gitignore
@@ -15,6 +13,7 @@ tree -a -I "node_modules|.git" > project-tree.txt
 ├── package-lock.json
 ├── package.json
 ├── postcss.config.mjs
+├── project-tree-runner.sh
 ├── project-tree.txt
 ├── public
 │   ├── fonts
@@ -29,8 +28,6 @@ tree -a -I "node_modules|.git" > project-tree.txt
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── components
-│   │   ├── common
-│   │   │   └── .gitkeep
 │   │   ├── forms
 │   │   │   └── .gitkeep
 │   │   ├── layout
@@ -40,27 +37,49 @@ tree -a -I "node_modules|.git" > project-tree.txt
 │   │   │   └── Section.tsx
 │   │   ├── sections
 │   │   │   └── .gitkeep
+│   │   ├── shared
+│   │   │   └── .gitkeep
 │   │   └── ui
-│   │       └── button.tsx
+│   │       ├── Badge.tsx
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx
+│   │       ├── Heading.tsx
+│   │       ├── Input.tsx
+│   │       ├── Text.tsx
+│   │       └── Textarea.tsx
 │   ├── config
 │   │   └── .gitkeep
 │   ├── constants
 │   │   ├── .gitkeep
 │   │   ├── design-tokens.ts
-│   │   ├── navigation.ts
 │   │   └── typography.ts
-│   ├── hooks
-│   │   └── .gitkeep
+│   ├── features
+│   │   └── navigation
+│   │       ├── components
+│   │       │   ├── DesktopNav.tsx
+│   │       │   ├── FeatureCard.tsx
+│   │       │   ├── Logo.tsx
+│   │       │   ├── MegaMenu.tsx
+│   │       │   ├── MegaMenuSection.tsx
+│   │       │   ├── MobileDrawer.tsx
+│   │       │   ├── MobileNav.tsx
+│   │       │   ├── NavLink.tsx
+│   │       │   └── Navbar.tsx
+│   │       ├── constants
+│   │       │   └── navigation.ts
+│   │       ├── hooks
+│   │       │   ├── useMegaMenu.ts
+│   │       │   ├── useOutsideClick.ts
+│   │       │   └── useScroll.ts
+│   │       ├── index.ts
+│   │       └── types
+│   │           └── navigation.ts
 │   ├── lib
 │   │   └── utils.ts
 │   ├── services
 │   │   └── .gitkeep
-│   ├── styles
-│   │   └── .gitkeep
-│   ├── types
-│   │   └── .gitkeep
-│   └── utils
+│   └── styles
 │       └── .gitkeep
 └── tsconfig.json
 
-23 directories, 36 files
+26 directories, 54 files
