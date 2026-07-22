@@ -9,10 +9,26 @@ interface MegaMenuProps {
 export default function MegaMenu({
   sections,
 }: MegaMenuProps) {
+
+  const width =
+    sections.length === 1
+      ? "760px"
+      : sections.length === 2
+      ? "900px"
+      : "1100px";
+
   return (
-    <div className="absolute left-0 top-full pt-6">
-      <div className="w-[920px] rounded-3xl border border-border bg-background p-8 shadow-2xl">
-        <div className="grid grid-cols-4 gap-8">
+    <div className="w-[100vw] flex justify-center pt-6">
+      <div
+        className="rounded-[32px] border border-slate-200 bg-white/95 p-10 shadow-[0_35px_90px_rgba(15,23,42,.15)] backdrop-blur-xl"
+        style={{ width }}
+      >
+        <div
+          className="grid gap-10"
+          style={{
+            gridTemplateColumns: `repeat(${sections.length}, minmax(180px,1fr)) 320px`,
+          }}
+        >
           {sections.map((section) => (
             <MegaMenuSection
               key={section.title}

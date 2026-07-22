@@ -38,13 +38,13 @@ export default function NavItem({
   return (
     <div
       ref={menuRef}
-      className="relative"
+      className="group relative"
       onMouseEnter={() => hasMegaMenu && open(item.label)}
       onMouseLeave={close}
     >
       <button
         type="button"
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 rounded-xl px-2 py-2 transition-colors hover:bg-slate-50"
         onClick={() =>
           hasMegaMenu && toggle(item.label)
         }
@@ -63,7 +63,7 @@ export default function NavItem({
         {hasMegaMenu && (
           <ChevronDown
             className={cn(
-              "h-4 w-4 transition-transform duration-200",
+              "h-4 w-4 text-slate-400 transition-all duration-300",
               isOpen && "rotate-180"
             )}
           />
@@ -71,31 +71,19 @@ export default function NavItem({
       </button>
 
       <AnimatePresence>
-        {hasMegaMenu && isOpen && (
-          <motion.div
-            id={`mega-menu-${item.label}`}
-            initial={{
-              opacity: 0,
-              y: 10,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              y: 10,
-            }}
-            transition={{
-              duration: 0.2,
-            }}
-          >
-            <MegaMenu
-              sections={item.sections!}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {hasMegaMenu && isOpen && (
+            <motion.div
+              id={`mega-menu-${item.label}`}
+              className="fixed left-1/2 top-20 z-50 -translate-x-1/2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <MegaMenu sections={item.sections!} />
+            </motion.div>
+          )}
+        </AnimatePresence>
     </div>
   );
 }
