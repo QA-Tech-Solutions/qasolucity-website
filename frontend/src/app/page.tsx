@@ -1,19 +1,30 @@
-import Container from "@/components/layout/Container";
+import Navbar from "@/features/navigation/components/Navbar";
 
-export default function Home() {
+import Hero from "@/features/home/components/hero/Hero";
+
+import TechMarquee from "@/features/home/components/trusted-by/TechMarquee";
+import TrustedBy from "@/features/home/components/trusted-by/TrustedBy";
+
+import Services from "@/features/home/components/services";
+
+import Process from "@/features/home/components/process";
+
+export default function HomePage() {
   return (
-    <main>
-      <Container>
-        <div className="rounded-xl border p-8">
-          <h1 className="text-4xl font-bold">
-            QA Solucity
-          </h1>
+    <>
+      <Navbar />
 
-          <p className="mt-4">
-            Our design system is working 🚀
-          </p>
-        </div>
-      </Container>
-    </main>
+      <main>
+        <Hero />
+
+        <TechMarquee />
+
+        <TrustedBy />
+
+        <Process />
+
+        <Services />
+      </main>
+    </>
   );
 }
