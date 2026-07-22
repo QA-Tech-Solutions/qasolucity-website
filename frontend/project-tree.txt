@@ -1,7 +1,11 @@
 Code to run it
+<<<<<<< Updated upstream
 tree -a -L 5 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 tree -a -I "node_modules|.git" > project-tree.txt
 
+=======
+tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
+>>>>>>> Stashed changes
 
 .
 ├── .gitignore
@@ -16,12 +20,6 @@ tree -a -I "node_modules|.git" > project-tree.txt
 ├── package.json
 ├── postcss.config.mjs
 ├── project-tree.txt
-├── public
-│   ├── fonts
-│   ├── icons
-│   ├── illustrations
-│   ├── images
-│   └── logos
 ├── src
 │   ├── app
 │   │   ├── favicon.ico
@@ -34,12 +32,17 @@ tree -a -I "node_modules|.git" > project-tree.txt
 │   │   ├── forms
 │   │   │   └── .gitkeep
 │   │   ├── layout
-│   │   │   ├── .gitkeep
 │   │   │   ├── Container.tsx
 │   │   │   ├── PageWrapper.tsx
 │   │   │   └── Section.tsx
 │   │   ├── sections
 │   │   │   └── .gitkeep
+<<<<<<< Updated upstream
+=======
+│   │   ├── shared
+│   │   │   ├── .gitkeep
+│   │   │   └── FadeIn.tsx
+>>>>>>> Stashed changes
 │   │   └── ui
 │   │       └── button.tsx
 │   ├── config
@@ -49,8 +52,74 @@ tree -a -I "node_modules|.git" > project-tree.txt
 │   │   ├── design-tokens.ts
 │   │   ├── navigation.ts
 │   │   └── typography.ts
+<<<<<<< Updated upstream
 │   ├── hooks
 │   │   └── .gitkeep
+=======
+│   ├── features
+│   │   ├── home
+│   │   │   ├── components
+│   │   │   │   ├── cta
+│   │   │   │   ├── dashboard
+│   │   │   │   ├── footer
+│   │   │   │   ├── hero
+│   │   │   │   │   ├── Hero.tsx
+│   │   │   │   │   ├── HeroActions.tsx
+│   │   │   │   │   ├── HeroBadge.tsx
+│   │   │   │   │   ├── HeroContent.tsx
+│   │   │   │   │   ├── HeroVisual.tsx
+│   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   ├── BrowserCard.tsx
+│   │   │   │   │   │   ├── Dashboard.tsx
+│   │   │   │   │   │   ├── DashboardHeader.tsx
+│   │   │   │   │   │   ├── DecorativeDots.tsx
+│   │   │   │   │   │   ├── FloatingCard.tsx
+│   │   │   │   │   │   ├── MainMonitor.tsx
+│   │   │   │   │   │   ├── MetricCard.tsx
+│   │   │   │   │   │   ├── ProgressCard.tsx
+│   │   │   │   │   │   ├── StatusCard.tsx
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── industries
+│   │   │   │   ├── process
+│   │   │   │   ├── resources
+│   │   │   │   ├── services
+│   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   ├── Services.tsx
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── testimonials
+│   │   │   │   ├── trusted-by
+│   │   │   │   │   ├── LogoCarousel.tsx
+│   │   │   │   │   └── TrustedBy.tsx
+│   │   │   │   └── why-us
+│   │   │   ├── constants
+│   │   │   │   └── hero.ts
+│   │   │   ├── hooks
+│   │   │   ├── index.ts
+│   │   │   └── types
+│   │   └── navigation
+│   │       ├── components
+│   │       │   ├── DesktopNav.tsx
+│   │       │   ├── FeaturedCard.tsx
+│   │       │   ├── Logo.tsx
+│   │       │   ├── MegaMenu.tsx
+│   │       │   ├── MegaMenuSection.tsx
+│   │       │   ├── MobileDrawer.tsx
+│   │       │   ├── MobileMenuItem.tsx
+│   │       │   ├── MobileNav.tsx
+│   │       │   ├── NavItem.tsx
+│   │       │   ├── NavLink.tsx
+│   │       │   └── Navbar.tsx
+│   │       ├── constants
+│   │       │   └── navigation.ts
+│   │       ├── hooks
+│   │       │   ├── useMegaMenu.ts
+│   │       │   ├── useOutsideClick.ts
+│   │       │   └── useScroll.ts
+│   │       ├── index.ts
+│   │       └── types
+│   │           └── navigation.ts
+>>>>>>> Stashed changes
 │   ├── lib
 │   │   └── utils.ts
 │   ├── services
@@ -63,4 +132,8 @@ tree -a -I "node_modules|.git" > project-tree.txt
 │       └── .gitkeep
 └── tsconfig.json
 
+<<<<<<< Updated upstream
 23 directories, 36 files
+=======
+37 directories, 79 files
+>>>>>>> Stashed changes
