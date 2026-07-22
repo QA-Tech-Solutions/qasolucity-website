@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/Button";
 
 export default function FeaturedCard() {
   return (
-    <div className="flex h-full flex-col justify-between rounded-3xl border border-border bg-muted p-6">
+    <div className="flex h-full flex-col justify-between max-w-[300px] rounded-[28px] bg-gradient-to-br from-indigo-600 to-violet-600 p-8 text-white">
       <div>
-        <span className="mb-3 inline-flex rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+        <span className="inline-flex w-fit rounded-full bg-white/15 px-4 py-2 text-xs font-semibold backdrop-blur">
           Free Consultation
         </span>
 
@@ -13,13 +13,16 @@ export default function FeaturedCard() {
           Not sure which QA service fits your needs?
         </h3>
 
-        <p className="mt-3 text-sm leading-6 text-muted-foreground">
+        <p className="mt-4 text-sm leading-7 text-indigo-100">
           Speak with our team and get expert guidance on choosing the right testing
           strategy for your product.
         </p>
       </div>
 
-      <Button className="mt-6 w-full">
+      <Button
+          variant="secondary"
+          className="mt-8 h-14 rounded-2xl bg-white px-6 text-base font-semibold text-indigo-700 hover:bg-slate-100"
+        >
         Book Consultation
         <ArrowRight className="ml-2 h-4 w-4" />
       </Button>
