@@ -1,11 +1,5 @@
 Code to run it
-<<<<<<< Updated upstream
-tree -a -L 5 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
-tree -a -I "node_modules|.git" > project-tree.txt
-
-=======
-tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
->>>>>>> Stashed changes
+tree -a -L 7 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 
 .
 ├── .gitignore
@@ -40,9 +34,7 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 <<<<<<< Updated upstream
 =======
 │   │   ├── shared
-│   │   │   ├── .gitkeep
-│   │   │   └── FadeIn.tsx
->>>>>>> Stashed changes
+│   │   │   └── .gitkeep
 │   │   └── ui
 │   │       └── button.tsx
 │   ├── config
@@ -132,8 +124,4 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │       └── .gitkeep
 └── tsconfig.json
 
-<<<<<<< Updated upstream
-23 directories, 36 files
-=======
-37 directories, 79 files
->>>>>>> Stashed changes
+26 directories, 54 files
