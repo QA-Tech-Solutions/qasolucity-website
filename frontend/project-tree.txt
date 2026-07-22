@@ -1,0 +1,66 @@
+Code to run it
+tree -a -L 5 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
+tree -a -I "node_modules|.git" > project-tree.txt
+
+
+.
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+├── README.md
+├── components.json
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── project-tree.txt
+├── public
+│   ├── fonts
+│   ├── icons
+│   ├── illustrations
+│   ├── images
+│   └── logos
+├── src
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── common
+│   │   │   └── .gitkeep
+│   │   ├── forms
+│   │   │   └── .gitkeep
+│   │   ├── layout
+│   │   │   ├── .gitkeep
+│   │   │   ├── Container.tsx
+│   │   │   ├── PageWrapper.tsx
+│   │   │   └── Section.tsx
+│   │   ├── sections
+│   │   │   └── .gitkeep
+│   │   └── ui
+│   │       └── button.tsx
+│   ├── config
+│   │   └── .gitkeep
+│   ├── constants
+│   │   ├── .gitkeep
+│   │   ├── design-tokens.ts
+│   │   ├── navigation.ts
+│   │   └── typography.ts
+│   ├── hooks
+│   │   └── .gitkeep
+│   ├── lib
+│   │   └── utils.ts
+│   ├── services
+│   │   └── .gitkeep
+│   ├── styles
+│   │   └── .gitkeep
+│   ├── types
+│   │   └── .gitkeep
+│   └── utils
+│       └── .gitkeep
+└── tsconfig.json
+
+23 directories, 36 files
