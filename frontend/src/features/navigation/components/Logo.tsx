@@ -7,11 +7,19 @@ export default function Logo() {
       className="flex items-center gap-3"
       aria-label="QA Solucity Home"
     >
-      {/* SVG goes here */}
+      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-500 text-lg font-bold text-white shadow-lg">
+        Q
+      </div>
 
-      <span className="text-xl font-bold tracking-tight">
-        QA Solucity
-      </span>
+      <div>
+        <h2 className="text-xl font-bold tracking-tight text-slate-900">
+          QA Solucity
+        </h2>
+
+        <p className="-mt-1 text-xs tracking-[0.25em] text-slate-400 uppercase">
+          Quality Assurance
+        </p>
+      </div>
     </Link>
   );
 }

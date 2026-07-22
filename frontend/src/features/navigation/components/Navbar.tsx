@@ -26,16 +26,11 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        
           scrolled
-            ? "border-b border-border bg-background/90 backdrop-blur-xl shadow-sm"
-            : cn(
-                "sticky top-0 z-50 transition-all duration-300",
-
-                scrolled
-                ? "border-b border-border bg-background/80 backdrop-blur-xl shadow-md"
-                : "bg-transparent"
-                )
+            ? "border-b border-slate-200/70 bg-white/80 shadow-lg backdrop-blur-2xl"
+            : "bg-transparent"
         )}
       >
         <Container>
@@ -43,7 +38,7 @@ export default function Navbar() {
             role="navigation"
             aria-label="Main navigation"
           >
-          <div className="flex h-20 items-center justify-between">
+          <div className="flex h-24 items-center justify-between">
             <Logo />
 
             <DesktopNav
@@ -54,7 +49,9 @@ export default function Navbar() {
             />
 
             <div className="hidden lg:block">
-              <Button>
+              <Button
+                className="rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 px-7 py-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
                 Book Consultation
               </Button>
             </div>

@@ -1,5 +1,5 @@
 Code to run it
-tree -a -L 7 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
+tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 
 .
 ├── .gitignore
@@ -15,12 +15,6 @@ tree -a -L 7 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 ├── postcss.config.mjs
 ├── project-tree-runner.sh
 ├── project-tree.txt
-├── public
-│   ├── fonts
-│   ├── icons
-│   ├── illustrations
-│   ├── images
-│   └── logos
 ├── src
 │   ├── app
 │   │   ├── favicon.ico
@@ -31,14 +25,14 @@ tree -a -L 7 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 │   │   ├── forms
 │   │   │   └── .gitkeep
 │   │   ├── layout
-│   │   │   ├── .gitkeep
 │   │   │   ├── Container.tsx
 │   │   │   ├── PageWrapper.tsx
 │   │   │   └── Section.tsx
 │   │   ├── sections
 │   │   │   └── .gitkeep
 │   │   ├── shared
-│   │   │   └── .gitkeep
+│   │   │   ├── .gitkeep
+│   │   │   └── FadeIn.tsx
 │   │   └── ui
 │   │       ├── Badge.tsx
 │   │       ├── Button.tsx
@@ -54,15 +48,57 @@ tree -a -L 7 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 │   │   ├── design-tokens.ts
 │   │   └── typography.ts
 │   ├── features
+│   │   ├── home
+│   │   │   ├── components
+│   │   │   │   ├── cta
+│   │   │   │   ├── dashboard
+│   │   │   │   ├── footer
+│   │   │   │   ├── hero
+│   │   │   │   │   ├── Hero.tsx
+│   │   │   │   │   ├── HeroActions.tsx
+│   │   │   │   │   ├── HeroBadge.tsx
+│   │   │   │   │   ├── HeroContent.tsx
+│   │   │   │   │   ├── HeroVisual.tsx
+│   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   ├── BrowserCard.tsx
+│   │   │   │   │   │   ├── Dashboard.tsx
+│   │   │   │   │   │   ├── DashboardHeader.tsx
+│   │   │   │   │   │   ├── DecorativeDots.tsx
+│   │   │   │   │   │   ├── FloatingCard.tsx
+│   │   │   │   │   │   ├── MainMonitor.tsx
+│   │   │   │   │   │   ├── MetricCard.tsx
+│   │   │   │   │   │   ├── ProgressCard.tsx
+│   │   │   │   │   │   ├── StatusCard.tsx
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── industries
+│   │   │   │   ├── process
+│   │   │   │   ├── resources
+│   │   │   │   ├── services
+│   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   ├── Services.tsx
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── testimonials
+│   │   │   │   ├── trusted-by
+│   │   │   │   │   ├── LogoCarousel.tsx
+│   │   │   │   │   └── TrustedBy.tsx
+│   │   │   │   └── why-us
+│   │   │   ├── constants
+│   │   │   │   └── hero.ts
+│   │   │   ├── hooks
+│   │   │   ├── index.ts
+│   │   │   └── types
 │   │   └── navigation
 │   │       ├── components
 │   │       │   ├── DesktopNav.tsx
-│   │       │   ├── FeatureCard.tsx
+│   │       │   ├── FeaturedCard.tsx
 │   │       │   ├── Logo.tsx
 │   │       │   ├── MegaMenu.tsx
 │   │       │   ├── MegaMenuSection.tsx
 │   │       │   ├── MobileDrawer.tsx
+│   │       │   ├── MobileMenuItem.tsx
 │   │       │   ├── MobileNav.tsx
+│   │       │   ├── NavItem.tsx
 │   │       │   ├── NavLink.tsx
 │   │       │   └── Navbar.tsx
 │   │       ├── constants
@@ -82,4 +118,4 @@ tree -a -L 7 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
 │       └── .gitkeep
 └── tsconfig.json
 
-26 directories, 54 files
+37 directories, 79 files
