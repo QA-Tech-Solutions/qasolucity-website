@@ -7,13 +7,11 @@ import { cn } from "@/lib/utils";
 interface NavLinkProps {
   href: string;
   children: React.ReactNode;
-  className?: string;
 }
 
 export default function NavLink({
   href,
   children,
-  className,
 }: NavLinkProps) {
   const pathname = usePathname();
 
@@ -26,17 +24,22 @@ export default function NavLink({
     <Link
       href={href}
       className={cn(
+        "relative py-2 text-[15px] font-medium transition-all duration-300",
 
-      "text-sm font-medium transition-colors",
-
-      active
-      ? "text-accent"
-      : "text-foreground hover:text-accent"
-
+        active
+          ? "text-indigo-600"
+          : "text-slate-700 hover:text-indigo-600"
       )}
-      aria-current={active ? "page" : undefined}
     >
       {children}
+
+      <span
+        className={cn(
+          "absolute bottom-0 left-0 h-0.5 rounded-full bg-indigo-600 transition-all duration-300",
+
+          active ? "w-full" : "w-0 group-hover:w-full"
+        )}
+      />
     </Link>
   );
 }
