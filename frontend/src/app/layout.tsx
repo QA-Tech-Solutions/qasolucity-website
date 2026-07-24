@@ -54,6 +54,11 @@ export const metadata: Metadata = {
     description:
       "Helping businesses deliver reliable software through quality engineering, software testing, automation, DevOps, and AI-powered QA solutions.",
   },
+  icons: {
+    icon: "/images/logos/qa-solucity-logo.png",
+    // optionally add a smaller size for better compatibility
+    // icon: [{ url: "/images/logos/qa-solucity-logo.png", sizes: "32x32" }],
+  },
 };
 
 export default function RootLayout({
