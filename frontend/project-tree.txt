@@ -1,0 +1,132 @@
+Code to run it
+tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.txt
+
+.
+├── .DS_Store
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+├── README.md
+├── components.json
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── project-tree-runner.sh
+├── project-tree.txt
+├── src
+│   ├── .DS_Store
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── forms
+│   │   │   └── .gitkeep
+│   │   ├── layout
+│   │   │   ├── Container.tsx
+│   │   │   ├── PageWrapper.tsx
+│   │   │   └── Section.tsx
+│   │   ├── sections
+│   │   │   └── .gitkeep
+│   │   ├── shared
+│   │   │   ├── .gitkeep
+│   │   │   └── FadeIn.tsx
+│   │   └── ui
+│   │       ├── Badge.tsx
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx
+│   │       ├── Heading.tsx
+│   │       ├── Input.tsx
+│   │       ├── Text.tsx
+│   │       └── Textarea.tsx
+│   ├── config
+│   │   └── .gitkeep
+│   ├── constants
+│   │   ├── .gitkeep
+│   │   ├── design-tokens.ts
+│   │   └── typography.ts
+│   ├── features
+│   │   ├── home
+│   │   │   ├── components
+│   │   │   │   ├── certification
+│   │   │   │   │   ├── BenefitItem.tsx
+│   │   │   │   │   ├── BenefitsBar.tsx
+│   │   │   │   │   ├── Certification.tsx
+│   │   │   │   │   ├── CertificationCard.tsx
+│   │   │   │   │   ├── CertificationCards.tsx
+│   │   │   │   │   ├── data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── hero
+│   │   │   │   │   ├── Hero.tsx
+│   │   │   │   │   ├── HeroActions.tsx
+│   │   │   │   │   ├── HeroBadge.tsx
+│   │   │   │   │   ├── HeroContent.tsx
+│   │   │   │   │   ├── HeroVisual.tsx
+│   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   ├── Dashboard.tsx
+│   │   │   │   │   │   ├── DashboardHeader.tsx
+│   │   │   │   │   │   ├── DecorativeDots.tsx
+│   │   │   │   │   │   ├── FloatingCard.tsx
+│   │   │   │   │   │   ├── MainMonitor.tsx
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── process
+│   │   │   │   │   ├── Process.tsx
+│   │   │   │   │   ├── ProcessHeader.tsx
+│   │   │   │   │   ├── ProcessPath.tsx
+│   │   │   │   │   ├── ProcessStep.tsx
+│   │   │   │   │   ├── ProcessTimeline.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── services
+│   │   │   │   │   ├── SectionHeader.tsx
+│   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   ├── ServiceGrid.tsx
+│   │   │   │   │   ├── Services.tsx
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── services.ts
+│   │   │   │   └── trusted-by
+│   │   │   │       ├── LogoCarousel.tsx
+│   │   │   │       ├── TechCard.tsx
+│   │   │   │       ├── TechGrid.tsx
+│   │   │   │       ├── TechMarquee.tsx
+│   │   │   │       ├── TrustedBy.tsx
+│   │   │   │       ├── data.ts
+│   │   │   │       └── index.tsx
+│   │   │   ├── constants
+│   │   │   │   └── hero.ts
+│   │   │   └── index.ts
+│   │   └── navigation
+│   │       ├── components
+│   │       │   ├── DesktopNav.tsx
+│   │       │   ├── FeaturedCard.tsx
+│   │       │   ├── Logo.tsx
+│   │       │   ├── MegaMenu.tsx
+│   │       │   ├── MegaMenuSection.tsx
+│   │       │   ├── MobileDrawer.tsx
+│   │       │   ├── MobileMenuItem.tsx
+│   │       │   ├── MobileNav.tsx
+│   │       │   ├── NavItem.tsx
+│   │       │   ├── NavLink.tsx
+│   │       │   └── Navbar.tsx
+│   │       ├── constants
+│   │       │   └── navigation.ts
+│   │       ├── hooks
+│   │       │   ├── useMegaMenu.ts
+│   │       │   ├── useOutsideClick.ts
+│   │       │   └── useScroll.ts
+│   │       ├── index.ts
+│   │       └── types
+│   │           └── navigation.ts
+│   ├── lib
+│   │   └── utils.ts
+│   ├── services
+│   │   └── .gitkeep
+│   └── styles
+│       └── .gitkeep
+└── tsconfig.json
+
+29 directories, 98 files
