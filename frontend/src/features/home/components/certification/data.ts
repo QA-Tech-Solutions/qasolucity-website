@@ -28,4 +28,4 @@ export const certificationCards = [
     button: "Get QA Training",
     variant: "secondary",
   },
-];
+] as const;
