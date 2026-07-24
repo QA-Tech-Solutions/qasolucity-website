@@ -16,6 +16,27 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 ├── postcss.config.mjs
 ├── project-tree-runner.sh
 ├── project-tree.txt
+├── public
+│   ├── .DS_Store
+│   ├── fonts
+│   ├── icons
+│   │   └── badge.svg
+│   ├── illustrations
+│   └── images
+│       ├── .DS_Store
+│       ├── blog
+│       │   ├── .DS_Store
+│       │   ├── blog-1.png
+│       │   ├── blog-2.png
+│       │   └── blog-3.png
+│       ├── logos
+│       │   ├── .DS_Store
+│       │   └── qa-solucity-logo.png
+│       └── testimonials
+│           ├── .DS_Store
+│           ├── john.jpeg
+│           ├── michael.jpeg
+│           └── sarah.png
 ├── src
 │   ├── .DS_Store
 │   ├── app
@@ -52,6 +73,13 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   ├── features
 │   │   ├── home
 │   │   │   ├── components
+│   │   │   │   ├── blog
+│   │   │   │   │   ├── Blog.tsx
+│   │   │   │   │   ├── BlogCard.tsx
+│   │   │   │   │   ├── BlogGrid.tsx
+│   │   │   │   │   ├── BlogHeader.tsx
+│   │   │   │   │   ├── blogs.ts
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── certification
 │   │   │   │   │   ├── BenefitItem.tsx
 │   │   │   │   │   ├── BenefitsBar.tsx
@@ -59,6 +87,26 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │   │   ├── CertificationCard.tsx
 │   │   │   │   │   ├── CertificationCards.tsx
 │   │   │   │   │   ├── data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── cta
+│   │   │   │   │   ├── CTA.tsx
+│   │   │   │   │   ├── CTAContent.tsx
+│   │   │   │   │   ├── CTAMetrics.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── faq
+│   │   │   │   │   ├── FAQ.tsx
+│   │   │   │   │   ├── FAQAccordion.tsx
+│   │   │   │   │   ├── FAQHeader.tsx
+│   │   │   │   │   ├── FAQItem.tsx
+│   │   │   │   │   ├── FAQSidebar.tsx
+│   │   │   │   │   ├── faqs.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── footer
+│   │   │   │   │   ├── Footer.tsx
+│   │   │   │   │   ├── FooterBrand.tsx
+│   │   │   │   │   ├── FooterLinks.tsx
+│   │   │   │   │   ├── FooterNewsletter.tsx
+│   │   │   │   │   ├── footer.ts
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── hero
 │   │   │   │   │   ├── Hero.tsx
@@ -88,14 +136,29 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │   │   ├── Services.tsx
 │   │   │   │   │   ├── index.tsx
 │   │   │   │   │   └── services.ts
-│   │   │   │   └── trusted-by
-│   │   │   │       ├── LogoCarousel.tsx
-│   │   │   │       ├── TechCard.tsx
-│   │   │   │       ├── TechGrid.tsx
-│   │   │   │       ├── TechMarquee.tsx
-│   │   │   │       ├── TrustedBy.tsx
+│   │   │   │   ├── testimonials
+│   │   │   │   │   ├── TestimonialHeader.tsx
+│   │   │   │   │   ├── TestimonialSlider.tsx
+│   │   │   │   │   ├── Testimonials.tsx
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── testimonials.ts
+│   │   │   │   ├── trusted-by
+│   │   │   │   │   ├── LogoCarousel.tsx
+│   │   │   │   │   ├── TechCard.tsx
+│   │   │   │   │   ├── TechGrid.tsx
+│   │   │   │   │   ├── TechMarquee.tsx
+│   │   │   │   │   ├── TrustedBy.tsx
+│   │   │   │   │   ├── data.ts
+│   │   │   │   │   └── index.tsx
+│   │   │   │   └── why-choose-us
+│   │   │   │       ├── ReasonItem.tsx
+│   │   │   │       ├── Reasons.tsx
+│   │   │   │       ├── StatCard.tsx
+│   │   │   │       ├── StatsGrid.tsx
+│   │   │   │       ├── WhyChooseUs.tsx
+│   │   │   │       ├── WhyHeader.tsx
 │   │   │   │       ├── data.ts
-│   │   │   │       └── index.tsx
+│   │   │   │       └── index.ts
 │   │   │   ├── constants
 │   │   │   │   └── hero.ts
 │   │   │   └── index.ts
@@ -129,4 +192,4 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │       └── .gitkeep
 └── tsconfig.json
 
-29 directories, 98 files
+43 directories, 147 files
