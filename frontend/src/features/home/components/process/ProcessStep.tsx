@@ -14,22 +14,35 @@ export default function ProcessStep({
   icon: Icon,
 }: Props) {
   return (
-    <div className="relative flex flex-col">
-      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50">
-        <Icon className="h-7 w-7 text-indigo-600" />
-      </div>
-
-      <span className="absolute -right-4 top-0 text-7xl font-bold text-slate-100">
+    <div className="relative">
+      <span
+        className="
+          absolute
+          -left-6
+          -top-10
+          text-[130px]
+          font-black
+          leading-none
+          text-slate-100/60
+          select-none
+        "
+      >
         {number}
       </span>
 
-      <h3 className="mt-2 text-xl font-semibold text-slate-900">
-        {title}
-      </h3>
+      <div className="relative z-10">
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+          <Icon className="h-7 w-7 text-indigo-600" />
+        </div>
 
-      <p className="mt-4 leading-8 text-slate-500">
-        {description}
-      </p>
+        <h3 className="mt-6 text-xl font-semibold text-slate-900">
+          {title}
+        </h3>
+
+        <p className="mt-3 max-w-xs leading-7 text-slate-600">
+          {description}
+        </p>
+      </div>
     </div>
   );
 }

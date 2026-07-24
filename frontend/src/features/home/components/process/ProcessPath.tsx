@@ -2,23 +2,20 @@ export default function ProcessPath() {
   return (
     <svg
       className="absolute inset-0 h-full w-full"
-      viewBox="0 0 1200 700"
-      fill="none"
+      viewBox="0 0 1100 560"
       preserveAspectRatio="none"
+      fill="none"
     >
       <path
         d="
-          M170 520
-          C240 300,
-          430 180,
-          600 280
-          S930 560,
-          1030 250
+            M70 360
+            C250 470 340 120 500 200
+            C670 280 760 70 930 140
+            C1080 220 1180 430 1320 160
         "
-        stroke="#E0E7FF"
-        strokeWidth="4"
+        stroke="#4F46E5"
+        strokeWidth="3"
         strokeLinecap="round"
-        strokeDasharray="10 10"
       />
     </svg>
   );

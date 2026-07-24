@@ -1,22 +1,28 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Logo() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-3"
       aria-label="QA Solucity Home"
+      className="flex items-center gap-4 transition-opacity hover:opacity-90"
     >
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-500 text-lg font-bold text-white shadow-lg">
-        Q
-      </div>
+      <Image
+        src="/images/logos/qa-solucity-logo.png"
+        alt="QA Solucity"
+        width={52}
+        height={52}
+        priority
+        className="h-12 w-auto object-contain rounded-xl"
+      />
 
-      <div>
-        <h2 className="text-xl font-bold tracking-tight text-slate-900">
+      <div className="leading-none">
+        <h2 className="text-[22px] font-bold tracking-tight text-slate-900">
           QA Solucity
         </h2>
 
-        <p className="-mt-1 text-xs tracking-[0.25em] text-slate-400 uppercase">
+        <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.32em] text-indigo-600">
           Quality Assurance
         </p>
       </div>
