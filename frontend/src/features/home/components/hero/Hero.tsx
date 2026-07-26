@@ -1,5 +1,8 @@
+"use client";
+
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
+import { motion } from "framer-motion";
 
 import HeroContent from "./HeroContent";
 import HeroVisual from "./HeroVisual";
@@ -7,26 +10,62 @@ import HeroVisual from "./HeroVisual";
 export default function Hero() {
   return (
     <Section className="relative overflow-hidden bg-[#FCFBF8] pt-28 pb-24 lg:min-h-screen">
-      {/* Background */}
+      {/* ===== BACKGROUND ===== */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Center Glow */}
-        <div className="absolute left-1/2 top-0 h-[900px] w-[900px] -translate-x-1/2 rounded-full bg-indigo-100/35 blur-[140px]" />
+        
+        {/* Center Glow – Pulsing */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.35, 0.5, 0.35],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-indigo-100/35 blur-[140px]"
+        />
 
-        {/* Left Glow */}
-        <div className="absolute -left-56 top-10 h-[700px] w-[700px] rounded-full bg-slate-100/70 blur-[140px]" />
+        {/* Left Glow – Drifting */}
+        <motion.div
+          animate={{
+            x: [-20, 20, -20],
+            y: [-10, 15, -10],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -left-48 top-10 h-[600px] w-[600px] rounded-full bg-slate-100/60 blur-[140px]"
+        />
 
-        {/* Right Glow */}
-        <div className="absolute -right-52 top-20 h-[650px] w-[650px] rounded-full bg-violet-100/50 blur-[140px]" />
+        {/* Right Glow – Drifting Opposite */}
+        <motion.div
+          animate={{
+            x: [20, -20, 20],
+            y: [10, -15, 10],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute -right-48 top-20 h-[550px] w-[550px] rounded-full bg-violet-100/40 blur-[140px]"
+        />
 
-        {/* Bottom Glow */}
-        <div className="absolute left-1/2 bottom-[-320px] h-[650px] w-[650px] -translate-x-1/2 rounded-full bg-orange-50/60 blur-[150px]" />
+        {/* Subtle Brand Accent – Faint "QA" Monogram */}
+        <div className="absolute bottom-0 right-0 select-none opacity-[0.03]">
+          <span className="text-[200px] font-black leading-none tracking-[-0.08em] text-slate-900">
+            QA
+          </span>
+        </div>
 
-        {/* Soft Accent */}
-        <div className="absolute right-1/4 top-1/3 h-56 w-56 rounded-full bg-indigo-200/20 blur-[120px]" />
-
-        {/* Grid */}
+        {/* Grid Pattern – Slightly more visible */}
         <div
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgb(15 23 42 / 0.08) 1px, transparent 1px),
@@ -36,16 +75,17 @@ export default function Hero() {
           }}
         />
 
-        {/* Radial Fade */}
+        {/* Soft Radial Fade – Keeps focus on content */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at center, transparent 20%, rgba(252,251,248,0.55) 75%, #FCFBF8 100%)",
+              "radial-gradient(circle at center, transparent 30%, rgba(252,251,248,0.3) 70%, #FCFBF8 100%)",
           }}
         />
       </div>
 
+      {/* ===== CONTENT ===== */}
       <Container>
         <div className="grid min-h-[82vh] items-center gap-20 lg:grid-cols-12">
           <div className="order-1 lg:col-span-7">

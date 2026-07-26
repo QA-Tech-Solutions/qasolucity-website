@@ -32,11 +32,35 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │       ├── logos
 │       │   ├── .DS_Store
 │       │   └── qa-solucity-logo.png
+│       ├── technologies
+│       │   ├── .DS_Store
+│       │   ├── appium.svg
+│       │   ├── browserstack.svg
+│       │   ├── cypress.svg
+│       │   ├── github-actions.svg
+│       │   ├── jenkins.svg
+│       │   ├── jira.svg
+│       │   ├── jmeter.svg
+│       │   ├── playwright.svg
+│       │   ├── postman.svg
+│       │   ├── saucelabs.svg
+│       │   ├── selenium.svg
+│       │   ├── swagger.svg
+│       │   └── webdriverio.svg
 │       └── testimonials
 │           ├── .DS_Store
-│           ├── john.jpeg
-│           ├── michael.jpeg
-│           └── sarah.png
+│           ├── Iyeoluwa-1.png
+│           ├── Iyeoluwa-2.jpeg
+│           ├── Iyeoluwa-3.jpeg
+│           ├── John-2.jpeg
+│           ├── John-3.jpg
+│           ├── John-4.png
+│           ├── John-5.jpg
+│           ├── John-6.jpeg
+│           ├── John.jpeg
+│           ├── Joshua-1.jpg
+│           ├── Joshua-2.jpg
+│           └── Joshua.jpg
 ├── src
 │   ├── .DS_Store
 │   ├── app
@@ -78,7 +102,7 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │   │   ├── BlogCard.tsx
 │   │   │   │   │   ├── BlogGrid.tsx
 │   │   │   │   │   ├── BlogHeader.tsx
-│   │   │   │   │   ├── blogs.ts
+│   │   │   │   │   ├── blogs-data.ts
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── certification
 │   │   │   │   │   ├── BenefitItem.tsx
@@ -86,7 +110,7 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │   │   ├── Certification.tsx
 │   │   │   │   │   ├── CertificationCard.tsx
 │   │   │   │   │   ├── CertificationCards.tsx
-│   │   │   │   │   ├── data.ts
+│   │   │   │   │   ├── certification-data.ts
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── cta
 │   │   │   │   │   ├── CTA.tsx
@@ -99,14 +123,14 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │   │   ├── FAQHeader.tsx
 │   │   │   │   │   ├── FAQItem.tsx
 │   │   │   │   │   ├── FAQSidebar.tsx
-│   │   │   │   │   ├── faqs.ts
+│   │   │   │   │   ├── faqs-data.ts
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── footer
 │   │   │   │   │   ├── Footer.tsx
 │   │   │   │   │   ├── FooterBrand.tsx
 │   │   │   │   │   ├── FooterLinks.tsx
 │   │   │   │   │   ├── FooterNewsletter.tsx
-│   │   │   │   │   ├── footer.ts
+│   │   │   │   │   ├── footer-data.ts
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── hero
 │   │   │   │   │   ├── Hero.tsx
@@ -117,15 +141,11 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │   │   ├── dashboard
 │   │   │   │   │   │   ├── Dashboard.tsx
 │   │   │   │   │   │   ├── DashboardHeader.tsx
-│   │   │   │   │   │   ├── DecorativeDots.tsx
-│   │   │   │   │   │   ├── FloatingCard.tsx
-│   │   │   │   │   │   ├── MainMonitor.tsx
 │   │   │   │   │   │   └── index.tsx
 │   │   │   │   │   └── index.tsx
 │   │   │   │   ├── process
 │   │   │   │   │   ├── Process.tsx
 │   │   │   │   │   ├── ProcessHeader.tsx
-│   │   │   │   │   ├── ProcessPath.tsx
 │   │   │   │   │   ├── ProcessStep.tsx
 │   │   │   │   │   ├── ProcessTimeline.tsx
 │   │   │   │   │   └── index.ts
@@ -135,19 +155,23 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │   │   ├── ServiceGrid.tsx
 │   │   │   │   │   ├── Services.tsx
 │   │   │   │   │   ├── index.tsx
-│   │   │   │   │   └── services.ts
+│   │   │   │   │   └── services-data.ts
 │   │   │   │   ├── testimonials
 │   │   │   │   │   ├── TestimonialHeader.tsx
 │   │   │   │   │   ├── TestimonialSlider.tsx
 │   │   │   │   │   ├── Testimonials.tsx
 │   │   │   │   │   ├── index.ts
-│   │   │   │   │   └── testimonials.ts
+│   │   │   │   │   └── testimonials-data.ts
 │   │   │   │   ├── trusted-by
 │   │   │   │   │   ├── LogoCarousel.tsx
+│   │   │   │   │   ├── ResourceCard.tsx
 │   │   │   │   │   ├── TechCard.tsx
-│   │   │   │   │   ├── TechGrid.tsx
 │   │   │   │   │   ├── TechMarquee.tsx
+│   │   │   │   │   ├── TechnologyCategory.tsx
+│   │   │   │   │   ├── TechnologyPill.tsx
+│   │   │   │   │   ├── TechnologyStack.tsx
 │   │   │   │   │   ├── TrustedBy.tsx
+│   │   │   │   │   ├── TrustedByHeader.tsx
 │   │   │   │   │   ├── data.ts
 │   │   │   │   │   └── index.tsx
 │   │   │   │   └── why-choose-us
@@ -157,8 +181,8 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │   │   │   │       ├── StatsGrid.tsx
 │   │   │   │       ├── WhyChooseUs.tsx
 │   │   │   │       ├── WhyHeader.tsx
-│   │   │   │       ├── data.ts
-│   │   │   │       └── index.ts
+│   │   │   │       ├── index.ts
+│   │   │   │       └── why-choose-us-data.ts
 │   │   │   ├── constants
 │   │   │   │   └── hero.ts
 │   │   │   └── index.ts
@@ -192,4 +216,4 @@ tree -a -L 10 -I "node_modules|.git|.next|dist|build|coverage" > project-tree.tx
 │       └── .gitkeep
 └── tsconfig.json
 
-43 directories, 147 files
+44 directories, 170 files
