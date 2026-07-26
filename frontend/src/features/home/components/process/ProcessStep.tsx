@@ -14,35 +14,24 @@ export default function ProcessStep({
   icon: Icon,
 }: Props) {
   return (
-    <div className="relative">
-      <span
-        className="
-          absolute
-          -left-6
-          -top-10
-          text-[130px]
-          font-black
-          leading-none
-          text-slate-100/60
-          select-none
-        "
-      >
+    <div className="group relative flex flex-col items-center rounded-3xl border border-slate-200/50 bg-white/80 p-8 text-center shadow-xl shadow-slate-200/50 backdrop-blur-sm transition-all duration-500 hover:-translate-y-4 hover:border-indigo-200 hover:shadow-2xl hover:shadow-indigo-100/50">
+      {/* Large Background Number */}
+      <span className="absolute -top-4 right-4 text-8xl font-black leading-none text-slate-100/80 select-none transition-all duration-500 group-hover:text-indigo-100/50">
         {number}
       </span>
 
-      <div className="relative z-10">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
-          <Icon className="h-7 w-7 text-indigo-600" />
-        </div>
-
-        <h3 className="mt-6 text-xl font-semibold text-slate-900">
-          {title}
-        </h3>
-
-        <p className="mt-3 max-w-xs leading-7 text-slate-600">
-          {description}
-        </p>
+      {/* Icon Container */}
+      <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-100 to-violet-100 shadow-inner transition-all duration-500 group-hover:from-indigo-500 group-hover:to-violet-500 group-hover:shadow-lg group-hover:shadow-indigo-500/20">
+        <Icon className="h-9 w-9 text-indigo-600 transition-all duration-500 group-hover:scale-110 group-hover:text-white" />
       </div>
+
+      {/* Content */}
+      <h3 className="relative z-10 mt-6 text-xl font-bold text-slate-900 transition-colors group-hover:text-indigo-600">
+        {title}
+      </h3>
+      <p className="relative z-10 mt-2 text-sm leading-6 text-slate-500">
+        {description}
+      </p>
     </div>
   );
 }

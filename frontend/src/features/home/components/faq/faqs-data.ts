@@ -20,11 +20,6 @@ export const faqs: FAQ[] = [
       "Yes. We build scalable automation frameworks using Playwright, Cypress, Selenium, Postman, and other modern testing tools depending on your technology stack.",
   },
   {
-    question: "Which industries do you specialize in?",
-    answer:
-      "We work with FinTech, HealthTech, SaaS, Retail, Government, Education, Logistics, and enterprise software organizations.",
-  },
-  {
     question: "Can you test before product launch?",
     answer:
       "Definitely. We help teams validate releases through functional, regression, API, performance, and exploratory testing before production deployment.",

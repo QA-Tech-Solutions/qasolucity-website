@@ -41,11 +41,11 @@ const socials = [
     href: "#",
     icon: FaFacebookF,
   },
-  {
-    name: "Email",
-    href: "mailto:hello@qasolucity.com",
-    icon: Mail,
-  },
+  // {
+  //   name: "Email",
+  //   href: "mailto:hello@qasolucity.com",
+  //   icon: Mail,
+  // },
 ];
 
 export default function FooterBrand() {
