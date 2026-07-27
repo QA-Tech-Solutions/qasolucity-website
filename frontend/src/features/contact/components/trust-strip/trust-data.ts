@@ -2,7 +2,7 @@ import {
   Clock3,
   ShieldCheck,
   Users,
-  MessageCircleMore,
+  MessageCircle,
 } from "lucide-react";
 
 export const trustItems = [
@@ -25,7 +25,7 @@ export const trustItems = [
       "Supporting startups, growing businesses and enterprise teams.",
   },
   {
-    icon: MessageCircleMore,
+    icon: MessageCircle,
     title: "Free Consultation",
     description:
       "Schedule a discovery call with one of our QA specialists.",

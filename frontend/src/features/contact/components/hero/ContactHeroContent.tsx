@@ -1,30 +1,67 @@
-import ContactHeroActions from "./ContactHeroActions";
+"use client";
+
+import { motion } from "framer-motion";
+import { Mail, MessageCircle } from "lucide-react";
 
 export default function ContactHeroContent() {
   return (
-    <div>
-
-      <span className="text-sm font-semibold uppercase tracking-[0.28em] text-indigo-600">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-indigo-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 backdrop-blur-sm">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
+        </span>
         Contact Us
-      </span>
+      </div>
 
-      <h1 className="mt-6 text-5xl font-bold leading-tight tracking-tight text-slate-900 lg:text-7xl">
-
-        Let's build reliable software together.
-
+      <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
+        Let's build reliable{" "}
+        <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
+          software
+        </span>{" "}
+        together.
       </h1>
 
-      <p className="mt-8 max-w-2xl text-xl leading-9 text-slate-600">
-
+      <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
         Whether you're looking for software testing,
         automation, QA consulting or corporate training,
         we'd love to learn about your project and discuss
         how we can help.
-
       </p>
 
-      <ContactHeroActions />
+      {/* Contact Actions - Email & WhatsApp */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="mt-10 flex flex-wrap gap-4"
+      >
+        <motion.a
+          href="mailto:hello@qasolucity.com"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="group inline-flex h-14 items-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-8 text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+        >
+          <Mail className="mr-2 h-4 w-4" />
+          Email Us
+        </motion.a>
 
-    </div>
+        <motion.a
+          href="https://wa.me/2347080702920?text=Hello%20QA%20Solucity%2C%20I%27d%20like%20to%20discuss%20a%20project."
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="group inline-flex h-14 items-center rounded-2xl border border-slate-300 bg-white px-8 text-slate-700 transition-all duration-300 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700"
+        >
+          <MessageCircle className="mr-2 h-4 w-4" />
+          WhatsApp Us
+        </motion.a>
+      </motion.div>
+    </motion.div>
   );
 }
