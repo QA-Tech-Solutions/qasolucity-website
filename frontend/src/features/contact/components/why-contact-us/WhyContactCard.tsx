@@ -1,4 +1,7 @@
+"use client";
+
 import { LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface Props {
   icon: LucideIcon;
@@ -6,26 +9,30 @@ interface Props {
   description: string;
 }
 
-export default function WhyContactCard({
-  icon: Icon,
-  title,
-  description,
-}: Props) {
+export default function WhyContactCard({ icon: Icon, title, description }: Props) {
   return (
-    <div className="rounded-[28px] border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-2 hover:border-indigo-200 hover:shadow-xl">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+      className="group relative rounded-[28px] border border-slate-200/80 bg-white p-8 shadow-lg shadow-slate-200/40 transition-all duration-300 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-100/30"
+    >
+      {/* Decorative glow on hover */}
+      <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-indigo-500/5 via-transparent to-violet-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50">
-        <Icon className="h-7 w-7 text-indigo-600" />
+      <div className="relative flex items-start gap-5">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-100 to-violet-100 shadow-inner transition-all duration-300 group-hover:shadow-md group-hover:shadow-indigo-200/50">
+          <Icon className="h-7 w-7 text-indigo-600 transition-transform duration-300 group-hover:scale-110" />
+        </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-slate-900 transition-colors duration-300 group-hover:text-indigo-700">
+            {title}
+          </h3>
+          <p className="mt-2 leading-8 text-slate-500">{description}</p>
+        </div>
       </div>
-
-      <h3 className="mt-6 text-2xl font-semibold text-slate-900">
-        {title}
-      </h3>
-
-      <p className="mt-4 leading-8 text-slate-600">
-        {description}
-      </p>
-
-    </div>
+    </motion.div>
   );
 }
