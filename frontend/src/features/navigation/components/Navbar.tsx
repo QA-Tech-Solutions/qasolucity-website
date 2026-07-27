@@ -14,12 +14,11 @@ import { useMegaMenu } from "../hooks/useMegaMenu";
 import { useScroll } from "../hooks/useScroll";
 
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function Navbar() {
   const scrolled = useScroll();
-
   const { openMenu, open, close, toggle } = useMegaMenu();
-
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -27,7 +26,6 @@ export default function Navbar() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        
           scrolled
             ? "border-b border-slate-200/70 bg-white/80 shadow-lg backdrop-blur-2xl"
             : "bg-transparent"
@@ -37,8 +35,8 @@ export default function Navbar() {
           <nav
             role="navigation"
             aria-label="Main navigation"
+            className="flex h-24 items-center justify-between"
           >
-          <div className="flex h-24 items-center justify-between">
             <Logo />
 
             <DesktopNav
@@ -49,17 +47,20 @@ export default function Navbar() {
             />
 
             <div className="hidden lg:block">
-              <Button
-                className="rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 px-7 py-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                Book Consultation
-              </Button>
+              <Link href="/contact">
+                <Button
+                  className="rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 px-7 py-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25"
+                  aria-label="Book a consultation"
+                >
+                  Book Consultation
+                </Button>
+              </Link>
             </div>
 
             <MobileNav
               onOpen={() => setMobileOpen(true)}
+              aria-label="Open mobile menu"
             />
-          </div>
           </nav>
         </Container>
       </header>
