@@ -62,7 +62,7 @@ const KPICard = ({
   suffix?: string;
   color?: "indigo" | "emerald" | "red" | "amber";
   delay?: number;
-  dynamicValue?: number;
+  dynamicValue?: number | string;
 }) => {
   const colorMap = {
     indigo: "from-indigo-500/20 to-indigo-600/10 border-indigo-500/20",
