@@ -1,98 +1,75 @@
-import { ArrowRight, Clock3, ShieldCheck, Phone } from "lucide-react";
+"use client";
 
-import { Button } from "@/components/ui/Button";
+import { MessageSquare, Mail, Clock, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function FAQSidebar() {
   return (
-    
-      <aside className="sticky top-28">
-        <div className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-700 p-10 text-white shadow-[0_35px_90px_rgba(79,70,229,.35)]">
+    <motion.aside
+      initial={{ opacity: 0, x: 20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+      className="sticky top-28 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-indigo-50/30 p-8 shadow-xl shadow-slate-200/40"
+    >
+      {/* Decorative Glow */}
+      <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 blur-3xl" />
+      <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-violet-100/20 blur-3xl" />
 
-          {/* Glow */}
+      <div className="relative">
+        {/* Icon */}
+        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20">
+          <MessageSquare className="h-7 w-7 text-white" />
+        </div>
 
-          <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
+        <h3 className="mt-6 text-2xl font-bold text-slate-900">
+          Still have questions?
+        </h3>
 
-          <div className="absolute -left-10 bottom-0 h-52 w-52 rounded-full bg-violet-400/20 blur-3xl" />
+        <p className="mt-3 text-[15px] leading-7 text-slate-500">
+          We're here to help. Reach out and we'll get back to you within 24 hours.
+        </p>
 
-          <div className="relative">
-
-            <span className="inline-flex rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur">
-              Need More Help?
-            </span>
-
-            <h3 className="mt-6 text-3xl font-bold leading-tight">
-              Still have questions?
-            </h3>
-
-            <p className="mt-5 leading-8 text-indigo-100">
-              Our QA specialists are ready to discuss your product,
-              testing strategy and release goals.
-            </p>
-
-            <div className="mt-10 space-y-5">
-
-              <div className="flex items-start gap-4">
-                <Clock3 className="mt-1 h-5 w-5 text-indigo-200" />
-
-                <div>
-                  <h4 className="font-semibold">
-                    Quick Response
-                  </h4>
-
-                  <p className="mt-1 text-sm text-indigo-100">
-                    We'll respond within one business day.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <ShieldCheck className="mt-1 h-5 w-5 text-indigo-200" />
-
-                <div>
-                  <h4 className="font-semibold">
-                    NDA Friendly
-                  </h4>
-
-                  <p className="mt-1 text-sm text-indigo-100">
-                    Your product and data remain confidential.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <Phone className="mt-1 h-5 w-5 text-indigo-200" />
-
-                <div>
-                  <h4 className="font-semibold">
-                    Free Consultation
-                  </h4>
-
-                  <p className="mt-1 text-sm text-indigo-100">
-                    Speak directly with a QA expert.
-                  </p>
-                </div>
-              </div>
-
+        {/* Quick Stats */}
+        <div className="mt-8 space-y-4">
+          <div className="flex items-center gap-4 rounded-xl bg-slate-50/80 px-5 py-4">
+            <Clock className="h-5 w-5 text-indigo-500" />
+            <div>
+              <p className="text-sm font-medium text-slate-700">Response Time</p>
+              <p className="text-sm text-slate-500">Within 24 hours</p>
             </div>
-
-            <Button
-              className="
-                mt-12
-                h-14
-                w-full
-                rounded-2xl
-                bg-white
-                text-indigo-700
-                hover:bg-slate-100
-              "
-            >
-              Book Consultation
-
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-
+          </div>
+          <div className="flex items-center gap-4 rounded-xl bg-slate-50/80 px-5 py-4">
+            <Mail className="h-5 w-5 text-indigo-500" />
+            <div>
+              <p className="text-sm font-medium text-slate-700">Email Us</p>
+              <a
+                href="mailto:hello@qasolucity.com"
+                className="text-sm text-indigo-600 hover:underline"
+              >
+                hello@qasolucity.com
+              </a>
+            </div>
           </div>
         </div>
-    </aside>
+
+        {/* CTA */}
+        <motion.a
+          href="/contact"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="mt-8 flex h-14 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+        >
+          Get in Touch
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </motion.a>
+
+        {/* Trust Badge */}
+        <div className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-400">
+          <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          Typically replies within hours
+        </div>
+      </div>
+    </motion.aside>
   );
 }

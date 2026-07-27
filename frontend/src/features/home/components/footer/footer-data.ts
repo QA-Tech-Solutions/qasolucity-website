@@ -9,7 +9,7 @@ export const footerLinks = {
 
   company: [
     "About",
-    "Industries",
+    "Solutions",
     "Resources",
     "Careers",
     "Contact",

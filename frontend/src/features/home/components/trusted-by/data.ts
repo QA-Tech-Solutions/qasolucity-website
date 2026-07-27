@@ -1,38 +1,89 @@
-export const technologies = [
+export const technologyStack = [
   {
-    name: "Playwright",
-    category: "Automation Testing",
-    description:
-      "Reliable end-to-end testing across Chromium, Firefox and WebKit.",
+    title: "Automation",
+    technologies: [
+      {
+        name: "Playwright",
+        logo: "/images/technologies/playwright.svg",
+      },
+      {
+        name: "Cypress",
+        logo: "/images/technologies/cypress.svg",
+      },
+      {
+        name: "Selenium",
+        logo: "/images/technologies/selenium.svg",
+      },
+      {
+        name: "WebdriverIO",
+        logo: "/images/technologies/webdriverio.svg",
+      },
+    ],
   },
+
   {
-    name: "Postman",
-    category: "API Testing",
-    description:
-      "Validate REST APIs, automate collections and monitor endpoints.",
+    title: "API Testing",
+    technologies: [
+      {
+        name: "Postman",
+        logo: "/images/technologies/postman.svg",
+      },
+      {
+        name: "Swagger",
+        logo: "/images/technologies/swagger.svg",
+      },
+    ],
   },
+
   {
-    name: "Cypress",
-    category: "End-to-End Testing",
-    description:
-      "Fast browser testing with real-time debugging and assertions.",
+    title: "Performance",
+    technologies: [
+      {
+        name: "JMeter",
+        logo: "/images/technologies/jmeter.svg",
+      },
+    ],
   },
+
   {
-    name: "Appium",
-    category: "Mobile Testing",
-    description:
-      "Automated testing for Android and iOS applications.",
+    title: "Mobile",
+    technologies: [
+      {
+        name: "Appium",
+        logo: "/images/technologies/appium.svg",
+      },
+      {
+        name: "BrowserStack",
+        logo: "/images/technologies/browserstack.svg",
+      },
+      {
+        name: "Sauce Labs",
+        logo: "images/technologies/saucelabs.svg",
+      }
+    ],
   },
+
   {
-    name: "BrowserStack",
-    category: "Cross Browser",
-    description:
-      "Real device and browser testing across multiple environments.",
+    title: "CI / CD",
+    technologies: [
+      {
+        name: "GitHub Actions",
+        logo: "/images/technologies/github-actions.svg",
+      },
+      {
+        name: "Jenkins",
+        logo: "/images/technologies/jenkins.svg",
+      },
+    ],
   },
+
   {
-    name: "JMeter",
-    category: "Performance Testing",
-    description:
-      "Load, stress and scalability testing for modern applications.",
+    title: "Management",
+    technologies: [
+      {
+        name: "Jira",
+        logo: "/images/technologies/jira.svg",
+      },
+    ],
   },
 ];

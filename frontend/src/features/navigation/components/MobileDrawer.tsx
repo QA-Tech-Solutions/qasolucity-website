@@ -8,6 +8,8 @@ import { navigation } from "../constants/navigation";
 import MobileMenuItem from "./MobileMenuItem";
 import { Button } from "@/components/ui/Button";
 
+import Link from "next/link";
+
 interface MobileDrawerProps {
   open: boolean;
   onClose: () => void;
@@ -99,9 +101,11 @@ export default function MobileDrawer({
 
             {/* Footer */}
             <div className="border-t border-border p-6">
-              <Button className="w-full">
-                Book Consultation
-              </Button>
+              <Link href="/contact">
+                <Button className="w-full">
+                  Book Consultation
+                </Button>
+              </Link>
             </div>
           </motion.aside>
         </>
