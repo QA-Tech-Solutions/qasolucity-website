@@ -1,8 +1,8 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
-
-import { FAQ } from "./faqs";
+import { motion, AnimatePresence } from "framer-motion";
+import { FAQ } from "./faqs-data";
 
 interface Props {
   faq: FAQ;
@@ -18,23 +18,25 @@ export default function FAQItem({
   onClick,
 }: Props) {
   return (
-    <article
+    <motion.article
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.2 }}
       className={`
         overflow-hidden
-        rounded-[28px]
+        rounded-[24px]
         border
         transition-all
         duration-300
         ${
           open
-            ? "border-indigo-200 bg-white shadow-xl shadow-indigo-100/20"
-            : "border-slate-200 bg-white hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg"
+            ? "border-indigo-200 bg-white shadow-xl shadow-indigo-100/30"
+            : "border-slate-200/80 bg-white/80 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/10"
         }
       `}
     >
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between px-10 py-9 text-left"
+        className="flex w-full items-center justify-between px-8 py-7 text-left transition-colors duration-300 hover:bg-slate-50/50"
       >
         <div className="flex items-center gap-6">
           <span
@@ -42,17 +44,19 @@ export default function FAQItem({
               text-sm
               font-bold
               tracking-[0.25em]
+              transition-colors
+              duration-300
               ${
                 open
                   ? "text-indigo-600"
-                  : "text-slate-300"
+                  : "text-slate-300 group-hover:text-indigo-400"
               }
             `}
           >
             {(index + 1).toString().padStart(2, "0")}
           </span>
 
-          <h3 className="text-xl font-semibold text-slate-900">
+          <h3 className="text-lg font-semibold text-slate-900 md:text-xl">
             {faq.question}
           </h3>
         </div>
@@ -60,8 +64,9 @@ export default function FAQItem({
         <div
           className={`
             flex
-            h-12
-            w-12
+            h-11
+            w-11
+            shrink-0
             items-center
             justify-center
             rounded-full
@@ -69,7 +74,7 @@ export default function FAQItem({
             duration-300
             ${
               open
-                ? "bg-indigo-600 text-white"
+                ? "bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20"
                 : "bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
             }
           `}
@@ -82,21 +87,27 @@ export default function FAQItem({
         </div>
       </button>
 
-      <div
-        className={`grid transition-all duration-300 ${
-          open
-            ? "grid-rows-[1fr]"
-            : "grid-rows-[0fr]"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="pl-[92px] pr-24 pb-8">
-            <p className="text-[18px] leading-8 text-slate-600">
-              {faq.answer}
-            </p>
-          </div>
-        </div>
-      </div>
-    </article>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="overflow-hidden">
+              {/* Top accent bar when open */}
+              <div className="mx-8 h-0.5 bg-gradient-to-r from-indigo-500 to-violet-500" />
+              
+              <div className="px-8 pb-7 pt-5">
+                <p className="text-[16px] leading-7 text-slate-600 md:text-[17px] md:leading-8">
+                  {faq.answer}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.article>
   );
 }
