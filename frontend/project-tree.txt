@@ -1,6 +1,9 @@
 
 .
 ├── .DS_Store
+├── .github
+│   └── workflows
+│       └── ci.yml
 ├── .gitignore
 ├── AGENTS.md
 ├── CLAUDE.md
@@ -62,6 +65,8 @@
 ├── src
 │   ├── .DS_Store
 │   ├── app
+│   │   ├── about
+│   │   │   └── page.tsx
 │   │   ├── contact
 │   │   │   └── page.tsx
 │   │   ├── favicon.ico
@@ -84,8 +89,10 @@
 │   │       ├── Badge.tsx
 │   │       ├── Button.tsx
 │   │       ├── Card.tsx
+│   │       ├── CustomCursor.tsx
 │   │       ├── Heading.tsx
 │   │       ├── Input.tsx
+│   │       ├── Select.tsx
 │   │       ├── Text.tsx
 │   │       └── Textarea.tsx
 │   ├── config
@@ -95,8 +102,64 @@
 │   │   ├── design-tokens.ts
 │   │   └── typography.ts
 │   ├── features
+│   │   ├── about
+│   │   │   ├── components
+│   │   │   │   ├── cta
+│   │   │   │   │   ├── AboutCTA.tsx
+│   │   │   │   │   ├── AboutCTAContent.tsx
+│   │   │   │   │   ├── AboutCTAHighlights.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── expertise
+│   │   │   │   │   ├── Expertise.tsx
+│   │   │   │   │   ├── ExpertiseHeader.tsx
+│   │   │   │   │   ├── ExpertiseItem.tsx
+│   │   │   │   │   ├── expertise-data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── hero
+│   │   │   │   │   ├── AboutHero.tsx
+│   │   │   │   │   ├── AboutHeroActions.tsx
+│   │   │   │   │   ├── AboutHeroBadge.tsx
+│   │   │   │   │   ├── AboutHeroContent.tsx
+│   │   │   │   │   ├── AboutHeroVisual.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── our-story
+│   │   │   │   │   ├── OurStory.tsx
+│   │   │   │   │   ├── StoryContent.tsx
+│   │   │   │   │   ├── StoryTimeline.tsx
+│   │   │   │   │   ├── StoryVisual.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── principles
+│   │   │   │   │   ├── Principle.tsx
+│   │   │   │   │   ├── Principles.tsx
+│   │   │   │   │   ├── PrinciplesHeader.tsx
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── principles-data.ts
+│   │   │   │   └── why-us
+│   │   │   │       ├── WhyUs.tsx
+│   │   │   │       ├── WhyUsFeature.tsx
+│   │   │   │       ├── WhyUsHeader.tsx
+│   │   │   │       ├── index.ts
+│   │   │   │       └── why-us-data.ts
+│   │   │   ├── constants
+│   │   │   ├── hooks
+│   │   │   ├── index.tsx
+│   │   │   ├── services
+│   │   │   └── types
 │   │   ├── contact
 │   │   │   ├── components
+│   │   │   │   ├── contact-cta
+│   │   │   │   │   ├── CTAContent.tsx
+│   │   │   │   │   ├── CTAMetrics.tsx
+│   │   │   │   │   ├── ContactCTA.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── contact-faq
+│   │   │   │   │   ├── ContactFAQ.tsx
+│   │   │   │   │   ├── ContactFAQAccordion.tsx
+│   │   │   │   │   ├── ContactFAQHeader.tsx
+│   │   │   │   │   ├── ContactFAQItem.tsx
+│   │   │   │   │   ├── contact-faq-data.ts
+│   │   │   │   │   └── index.ts
 │   │   │   │   ├── contact-form
 │   │   │   │   │   ├── ContactForm.tsx
 │   │   │   │   │   ├── ContactFormCard.tsx
@@ -106,19 +169,26 @@
 │   │   │   │   │   ├── form-data.ts
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── contact-info
-│   │   │   │   ├── cta
-│   │   │   │   ├── faq
 │   │   │   │   ├── hero
 │   │   │   │   │   ├── ContactHero.tsx
-│   │   │   │   │   ├── ContatHeroStats.tsx
-│   │   │   │   │   ├── ContentHeroActions.tsx
-│   │   │   │   │   ├── ContentHeroContent.tsx
+│   │   │   │   │   ├── ContactHeroActions.tsx
+│   │   │   │   │   ├── ContactHeroContent.tsx
+│   │   │   │   │   ├── ContactHeroStats.tsx
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── index.ts
+│   │   │   │   ├── trust-strip
+│   │   │   │   │   ├── ContactTrustStrip.tsx
+│   │   │   │   │   ├── TrustItem.tsx
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── trust-data.ts
 │   │   │   │   └── why-contact-us
+│   │   │   │       ├── WhyContactCard.tsx
+│   │   │   │       ├── WhyContactUs.tsx
+│   │   │   │       ├── index.ts
+│   │   │   │       └── why-contact-data.ts
 │   │   │   ├── constants
 │   │   │   ├── hooks
-│   │   │   ├── index.ts
+│   │   │   ├── index.tsx
 │   │   │   ├── services
 │   │   │   └── types
 │   │   ├── home
@@ -242,4 +312,4 @@
 │       └── .gitkeep
 └── tsconfig.json
 
-57 directories, 185 files
+73 directories, 239 files

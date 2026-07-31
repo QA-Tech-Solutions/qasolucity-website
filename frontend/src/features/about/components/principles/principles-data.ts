@@ -2,7 +2,7 @@ export const principles = [
   {
     title: "Quality is everyone's responsibility.",
     description:
-      "Quality should be embedded into every stage of software development—not treated as a final checkpoint.",
+      "Quality should be embedded into every stage of software development, not treated as a final checkpoint.",
   },
   {
     title: "Automation should empower people.",
