@@ -1,35 +1,139 @@
+"use client";
+
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
+import { motion } from "framer-motion";
 
 import AboutHeroContent from "./AboutHeroContent";
 import AboutHeroVisual from "./AboutHeroVisual";
 
 export default function AboutHero() {
   return (
-    <Section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white pt-44 pb-32">
-
+    <Section className="relative overflow-hidden bg-gradient-to-b from-slate-100 via-white to-white pt-44 pb-32">
       {/* Background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        {/* Stronger animated glows */}
+        <motion.div
+          animate={{
+            x: [-20, 20, -20],
+            y: [-10, 10, -10],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -left-28 top-24 h-[500px] w-[500px] rounded-full bg-indigo-200/30 blur-[140px]"
+        />
+        <motion.div
+          animate={{
+            x: [20, -20, 20],
+            y: [10, -10, 10],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute -right-28 bottom-0 h-[550px] w-[550px] rounded-full bg-violet-200/30 blur-[180px]"
+        />
 
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Floating Blobs */}
+        <motion.div
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 20, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-20 left-[10%] h-32 w-32 rounded-full bg-indigo-200/20 blur-2xl"
+        />
+        <motion.div
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -20, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute bottom-32 right-[15%] h-40 w-40 rounded-full bg-violet-200/20 blur-2xl"
+        />
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+            x: [0, -30, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          className="absolute top-1/2 left-[60%] h-24 w-24 rounded-full bg-indigo-200/15 blur-2xl"
+        />
+        <motion.div
+          animate={{
+            y: [0, 25, 0],
+            x: [0, 15, 0],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+          className="absolute top-[15%] right-[25%] h-28 w-28 rounded-full bg-violet-200/15 blur-2xl"
+        />
 
-        <div className="absolute -left-28 top-24 h-[420px] w-[420px] rounded-full bg-indigo-100 blur-[140px]" />
+        {/* Decorative dots */}
+        <div className="absolute right-20 top-20 grid grid-cols-4 gap-3 opacity-20">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <span key={i} className="h-2 w-2 rounded-full bg-indigo-400" />
+          ))}
+        </div>
+        <div className="absolute bottom-20 left-20 grid grid-cols-4 gap-3 opacity-20">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <span key={i} className="h-2 w-2 rounded-full bg-violet-400" />
+          ))}
+        </div>
 
-        <div className="absolute right-0 bottom-0 h-[520px] w-[520px] rounded-full bg-violet-100 blur-[180px]" />
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0f172a 1px, transparent 1px),
+              linear-gradient(to bottom, #0f172a 1px, transparent 1px)
+            `,
+            backgroundSize: "48px 48px",
+          }}
+        />
 
+        {/* Radial fade */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at center, transparent 30%, rgba(248,250,252,0.3) 100%)",
+          }}
+        />
       </div>
 
       <Container>
-
-        <div className="grid items-center gap-20 lg:grid-cols-[1.1fr_.9fr]">
-
+        <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_.9fr]">
           <AboutHeroContent />
-
           <AboutHeroVisual />
-
         </div>
-
       </Container>
-
     </Section>
   );
 }

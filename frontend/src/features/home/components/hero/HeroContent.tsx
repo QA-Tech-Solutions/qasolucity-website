@@ -19,9 +19,8 @@ export default function HeroContent() {
           >
             Deliver Reliable Software with{" "}
             <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-              Expert Quality Assurance
+              Expert Quality Assurance.
             </span>
-            .
           </Heading>
 
           <Text

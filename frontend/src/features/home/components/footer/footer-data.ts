@@ -1,25 +1,24 @@
+// src/features/home/components/footer/footer-data.ts
 export const footerLinks = {
   services: [
-    "Manual Testing",
-    "Automation Testing",
-    "API Testing",
-    "Performance Testing",
-    "QA Consulting",
+    { label: "Manual Testing", href: "/services#manual-testing" },
+    { label: "Automation Testing", href: "/services#automation-testing" },
+    { label: "API Testing", href: "/services#api-testing" },
+    { label: "Performance Testing", href: "/services#performance-testing" },
+    { label: "QA Consulting", href: "/services#qa-consulting" },
   ],
 
   company: [
-    "About",
-    "Solutions",
-    "Resources",
-    "Careers",
-    "Contact",
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Contact", href: "/contact" },
   ],
 
   resources: [
-    "Blog",
-    "Case Studies",
-    "FAQs",
-    "Privacy Policy",
-    "Terms & Conditions",
+    { label: "Blog", href: "/blog" },
+    { label: "FAQs", href: "/faq" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Cookie Policy", href: "/cookies" },
   ],
 };
