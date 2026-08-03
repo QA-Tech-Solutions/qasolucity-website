@@ -8,7 +8,7 @@ export default function CustomCursor() {
   const [trailPos, setTrailPos] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleMove = (e: MouseEvent) => {
@@ -35,7 +35,10 @@ export default function CustomCursor() {
       window.removeEventListener("mouseleave", hide);
       window.removeEventListener("mouseenter", show);
       window.removeEventListener("mouseover", handleHover);
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      if (frameRef.current !== null) {
+          cancelAnimationFrame(frameRef.current);
+          frameRef.current = null;
+      }
     };
   }, []);
 
@@ -60,7 +63,10 @@ export default function CustomCursor() {
 
     frameRef.current = requestAnimationFrame(animate);
     return () => {
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+    }
     };
   }, [isVisible, mousePos]);
 
