@@ -28,6 +28,6 @@ export const reasons = [
     icon: GraduationCap,
     title: "Knowledge Transfer",
     description:
-      "We don't just test—we empower your team through mentoring and training.",
+      "We don't just test, we empower your team through mentoring and training.",
   },
 ];

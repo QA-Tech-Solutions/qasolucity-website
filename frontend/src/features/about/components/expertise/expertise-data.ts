@@ -1,10 +1,4 @@
-import {
-  Bug,
-  Bot,
-  Layers3,
-  Gauge,
-  GraduationCap,
-} from "lucide-react";
+import { Bug, Bot, Layers3, Gauge, GraduationCap } from "lucide-react";
 
 export const expertise = [
   {

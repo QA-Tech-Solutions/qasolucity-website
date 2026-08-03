@@ -1,9 +1,4 @@
-import {
-  Bot,
-  Briefcase,
-  ShieldCheck,
-  Users,
-} from "lucide-react";
+import { Bot, Briefcase, ShieldCheck, Users } from "lucide-react";
 
 export const whyUs = [
   {
@@ -11,7 +6,7 @@ export const whyUs = [
     icon: ShieldCheck,
     title: "Quality First",
     description:
-      "Quality is embedded into every stage of software delivery—not inspected at the end.",
+      "Quality is embedded into every stage of software delivery, not inspected at the end.",
   },
   {
     number: "02",
