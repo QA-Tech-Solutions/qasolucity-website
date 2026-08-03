@@ -1,5 +1,6 @@
 import Container from "@/components/layout/Container";
 import { Heart } from "lucide-react";
+import Link from "next/link";
 
 import FooterBrand from "./FooterBrand";
 import FooterLinks from "./FooterLinks";
@@ -28,15 +29,24 @@ export default function Footer() {
           
           {/* Center - Legal Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <a href="#" className="transition-colors duration-300 hover:text-indigo-400">
+            <Link
+              href="/privacy"
+              className="transition-colors duration-300 hover:text-indigo-400"
+            >
               Privacy
-            </a>
-            <a href="#" className="transition-colors duration-300 hover:text-indigo-400">
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors duration-300 hover:text-indigo-400"
+            >
               Terms
-            </a>
-            <a href="#" className="transition-colors duration-300 hover:text-indigo-400">
+            </Link>
+            <Link
+              href="/cookies"
+              className="transition-colors duration-300 hover:text-indigo-400"
+            >
               Cookies
-            </a>
+            </Link>
           </div>
           
           {/* Right - Credit */}
