@@ -63,7 +63,7 @@ export default function TestimonialSlider() {
               key={testimonial.id}
               className="min-w-0 flex-[0_0_100%]"
             >
-              <div className="grid items-center gap-12 lg:gap-16 lg:grid-cols-2">
+              <div className="grid items-center gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-2">
                 {/* ===== IMAGE SIDE ===== */}
                 <div className="relative mx-auto flex justify-center">
                   {/* Glows */}
@@ -89,7 +89,7 @@ export default function TestimonialSlider() {
                     <img
                       src={testimonial.image}
                       alt={testimonial.name}
-                      className="h-[400px] w-[340px] rounded-[20px] object-cover transition duration-700 hover:scale-105"
+                      className="h-[280px] w-full max-w-[340px] rounded-[20px] object-cover transition duration-700 hover:scale-105 sm:h-[340px] lg:h-[400px]"
                     />
                     {/* Gradient overlay for depth */}
                     <div className="absolute inset-3 rounded-[20px] bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none" />

@@ -10,7 +10,7 @@ export default function FAQSidebar() {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      className="sticky top-28 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-indigo-50/30 p-8 shadow-xl shadow-slate-200/40"
+      className="w-full self-start rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-indigo-50/30 p-8 shadow-xl shadow-slate-200/40 lg:sticky lg:top-28"
     >
       {/* Decorative Glow */}
       <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 blur-3xl" />
