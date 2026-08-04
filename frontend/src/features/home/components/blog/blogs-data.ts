@@ -9,6 +9,10 @@ export interface Blog {
   slug: string;
 }
 
+export function getBlogBySlug(slug: string) {
+  return blogs.find((blog) => blog.slug.replace("/blog/", "") === slug);
+}
+
 export const blogs: Blog[] = [
   {
     id: 1,
