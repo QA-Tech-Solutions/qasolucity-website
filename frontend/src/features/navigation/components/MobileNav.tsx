@@ -18,6 +18,7 @@ export default function MobileNav({
         onClick={onOpen}
         aria-label="Open navigation menu"
         aria-haspopup="dialog"
+        className="rounded-full p-2.5"
       >
         <Menu className="h-6 w-6" />
       </Button>
