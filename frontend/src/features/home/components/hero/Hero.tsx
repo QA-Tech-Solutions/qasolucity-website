@@ -87,12 +87,12 @@ export default function Hero() {
 
       {/* ===== CONTENT ===== */}
       <Container>
-        <div className="grid min-h-[82vh] items-center gap-20 lg:grid-cols-12">
+        <div className="grid min-h-[82vh] items-center gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-20">
           <div className="order-1 lg:col-span-7">
             <HeroContent />
           </div>
 
-          <div className="order-2 mt-16 lg:col-span-5 lg:mt-0">
+          <div className="order-2 mt-8 lg:col-span-5 lg:mt-0">
             <HeroVisual />
           </div>
         </div>

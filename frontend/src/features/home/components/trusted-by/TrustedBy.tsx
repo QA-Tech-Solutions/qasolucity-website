@@ -17,7 +17,7 @@ export default function TrustedBy() {
       <Container>
         <TrustedByHeader />
 
-        <div className="mt-20 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="mt-16 grid items-start gap-8 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
           <TechnologyStack />
           
           <ResourceCard />

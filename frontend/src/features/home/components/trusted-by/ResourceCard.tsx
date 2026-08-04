@@ -11,8 +11,8 @@ const resources = [
 
 export default function ResourceCard() {
   return (
-    <div className="sticky top-28">
-        <div className="relative rounded-[36px] bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-8 text-white shadow-[0_30px_80px_rgba(15,23,42,.45)]">
+    <div className="w-full self-start lg:sticky lg:top-28">
+        <div className="relative rounded-[36px] bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-6 text-white shadow-[0_30px_80px_rgba(15,23,42,.45)] sm:p-8">
 
           {/* Glow */}
 
