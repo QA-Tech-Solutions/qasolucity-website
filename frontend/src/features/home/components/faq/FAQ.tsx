@@ -38,11 +38,11 @@ export default function FAQ() {
 
       <Container>
         <FAQHeader />
-        <div className="mt-20 flex items-start gap-20">
-          <div className="flex-1">
+        <div className="mt-14 flex flex-col gap-10 lg:mt-20 lg:flex-row lg:items-start lg:gap-20">
+          <div className="w-full lg:flex-1">
             <FAQAccordion />
           </div>
-          <div className="hidden w-[380px] shrink-0 lg:block">
+          <div className="w-full lg:w-[380px] lg:shrink-0">
             <FAQSidebar />
           </div>
         </div>
