@@ -177,7 +177,7 @@ export default function Dashboard() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       whileHover={{ scale: 1.02 }}
-      className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-6 shadow-2xl shadow-indigo-500/20 transition-all duration-300"
+      className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-4 shadow-2xl shadow-indigo-500/20 transition-all duration-300 sm:p-6"
       onClick={handleManualUpdate}
     >
       {/* Animated Glow Orbs */}
@@ -314,7 +314,7 @@ export default function Dashboard() {
           }}
           initial="hidden"
           animate="visible"
-          className="mt-6 grid grid-cols-2 gap-3"
+          className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2"
         >
           <KPICard
             icon={CheckCircle2}
