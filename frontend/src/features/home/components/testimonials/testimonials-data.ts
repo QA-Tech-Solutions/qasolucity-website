@@ -34,7 +34,7 @@ export const testimonials: Testimonial[] = [
     name: "Iyeoluwa Malomo",
     role: "SCRUM Master",
     company: "Travel Agency",
-    image: "images/testimonials/Iyeoluwa-1.png",
+    image: "/images/testimonials/Iyeoluwa-1.png",
     rating: 5,
     quote:
       "Their QA consultants integrated seamlessly into our team. Communication was excellent and the automation suite they delivered reduced our regression time dramatically.",
@@ -54,7 +54,7 @@ export const testimonials: Testimonial[] = [
     name: "Chidinma Okafor",
     role: "Product Manager",
     company: "E-commerce Platform",
-    image: "images/testimonials/Iyeoluwa-2.jpeg",
+    image: "/images/testimonials/Iyeoluwa-2.jpeg",
     rating: 5,
     quote:
       "QA Solucity helped us ship faster with fewer bugs. Their detailed test reports gave our team the confidence to deploy weekly without breaking things.",
@@ -64,7 +64,7 @@ export const testimonials: Testimonial[] = [
     name: "Tunde Adebayo",
     role: "CTO",
     company: "HealthTech Startup",
-    image: "images/testimonials/Joshua-2.jpg",
+    image: "/images/testimonials/Joshua-2.jpg",
     rating: 5,
     quote:
       "We needed a QA partner who understood our compliance needs. QA Solucity not only delivered but also trained our internal team on best practices.",
@@ -74,7 +74,7 @@ export const testimonials: Testimonial[] = [
     name: "Ngozi Eze",
     role: "DevOps Engineer",
     company: "Cloud Infrastructure Firm",
-    image: "images/testimonials/John-6.jpeg",
+    image: "/images/testimonials/John-6.jpeg",
     rating: 4,
     quote:
       "Their DevOps and QA integration was flawless. We saw a 40% reduction in post-release defects within the first quarter of working together.",
@@ -84,7 +84,7 @@ export const testimonials: Testimonial[] = [
     name: "Oluwafemi Ogunleye",
     role: "Senior Developer",
     company: "EdTech Company",
-    image: "images/testimonials/Joshua-1.jpg",
+    image: "/images/testimonials/Joshua-1.jpg",
     rating: 5,
     quote:
       "QA Solucity's automation scripts saved us countless hours. Their framework is robust, maintainable, and runs reliably in our CI/CD pipeline.",
@@ -94,7 +94,7 @@ export const testimonials: Testimonial[] = [
     name: "Folake Balogun",
     role: "Head of Product",
     company: "Logistics Startup",
-    image: "images/testimonials/Iyeoluwa-3.jpeg",
+    image: "/images/testimonials/Iyeoluwa-3.jpeg",
     rating: 5,
     quote:
       "They helped us identify critical performance bottlenecks before our peak season. Our uptime improved significantly after their load testing recommendations.",
@@ -104,7 +104,7 @@ export const testimonials: Testimonial[] = [
     name: "Emeka Nwosu",
     role: "QA Lead",
     company: "Banking Solutions",
-    image: "images/testimonials/John.jpeg",
+    image: "/images/testimonials/John.jpeg",
     rating: 5,
     quote:
       "As a QA lead, I appreciated their collaborative approach. They shared knowledge freely and helped us adopt modern testing tools we hadn't considered.",
@@ -114,7 +114,7 @@ export const testimonials: Testimonial[] = [
     name: "Temilade Ajayi",
     role: "Project Manager",
     company: "Government Agency (Digital Services)",
-    image: "images/testimonials/John-2.jpeg",
+    image: "/images/testimonials/John-2.jpeg",
     rating: 4,
     quote:
       "QA Solucity delivered under a tight timeline and with strict compliance requirements. Their attention to detail gave us the confidence to go live.",

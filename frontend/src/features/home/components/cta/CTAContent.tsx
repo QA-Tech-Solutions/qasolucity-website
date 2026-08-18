@@ -60,11 +60,12 @@ export default function CTAContent() {
         transition={{ delay: 0.5, duration: 0.6 }}
         className="mt-12 flex flex-wrap gap-5"
       >
-        <Link href="/contact">
-          <a className="group inline-flex h-14 items-center rounded-2xl bg-white px-8 text-slate-900 shadow-lg shadow-white/10 transition-transform duration-300 hover:scale-105 hover:bg-slate-100 hover:shadow-white/20 active:scale-95">
-            Book a Consultation
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
+        <Link
+          href="/contact"
+          className="group inline-flex h-14 items-center rounded-2xl bg-white px-8 text-slate-900 shadow-lg shadow-white/10 transition-transform duration-300 hover:scale-105 hover:bg-slate-100 hover:shadow-white/20 active:scale-95"
+        >
+          Book a Consultation
+          <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
 
 
