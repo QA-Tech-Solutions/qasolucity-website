@@ -58,21 +58,48 @@
 │           ├── John-4.png
 │           ├── John-5.jpg
 │           ├── John-6.jpeg
-│           ├── John.jpeg
 │           ├── Joshua-1.jpg
 │           ├── Joshua-2.jpg
-│           └── Joshua.jpg
+│           ├── Joshua.jpg
+│           └── john.jpeg
 ├── src
 │   ├── .DS_Store
 │   ├── app
 │   │   ├── about
 │   │   │   └── page.tsx
+│   │   ├── api
+│   │   │   └── contact
+│   │   │       └── route.ts
 │   │   ├── contact
+│   │   │   └── page.tsx
+│   │   ├── cookies
+│   │   │   ├── components
+│   │   │   │   └── CookiesContent.tsx
 │   │   │   └── page.tsx
 │   │   ├── favicon.ico
 │   │   ├── globals.css
 │   │   ├── layout.tsx
-│   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   ├── privacy
+│   │   │   ├── components
+│   │   │   │   └── PrivacyContent.tsx
+│   │   │   └── page.tsx
+│   │   ├── resources
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── services
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── solutions
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── terms
+│   │       ├── components
+│   │       │   └── TermsContent.tsx
+│   │       └── page.tsx
 │   ├── components
 │   │   ├── forms
 │   │   │   └── .gitkeep
@@ -165,8 +192,6 @@
 │   │   │   │   │   ├── ContactFormCard.tsx
 │   │   │   │   │   ├── ContactInfoCard.tsx
 │   │   │   │   │   ├── FormHeader.tsx
-│   │   │   │   │   ├── ServiceSelect.tsx
-│   │   │   │   │   ├── form-data.ts
 │   │   │   │   │   └── index.ts
 │   │   │   │   ├── contact-info
 │   │   │   │   ├── hero
@@ -196,6 +221,7 @@
 │   │   │   │   ├── blog
 │   │   │   │   │   ├── Blog.tsx
 │   │   │   │   │   ├── BlogCard.tsx
+│   │   │   │   │   ├── BlogDetailPage.tsx
 │   │   │   │   │   ├── BlogGrid.tsx
 │   │   │   │   │   ├── BlogHeader.tsx
 │   │   │   │   │   ├── blogs-data.ts
@@ -282,34 +308,64 @@
 │   │   │   ├── constants
 │   │   │   │   └── hero.ts
 │   │   │   └── index.ts
-│   │   └── navigation
+│   │   ├── navigation
+│   │   │   ├── components
+│   │   │   │   ├── DesktopNav.tsx
+│   │   │   │   ├── FeaturedCard.tsx
+│   │   │   │   ├── Logo.tsx
+│   │   │   │   ├── MegaMenu.tsx
+│   │   │   │   ├── MegaMenuSection.tsx
+│   │   │   │   ├── MobileDrawer.tsx
+│   │   │   │   ├── MobileMenuItem.tsx
+│   │   │   │   ├── MobileNav.tsx
+│   │   │   │   ├── NavItem.tsx
+│   │   │   │   ├── NavLink.tsx
+│   │   │   │   └── Navbar.tsx
+│   │   │   ├── constants
+│   │   │   │   └── navigation.ts
+│   │   │   ├── hooks
+│   │   │   │   ├── useMegaMenu.ts
+│   │   │   │   ├── useOutsideClick.ts
+│   │   │   │   └── useScroll.ts
+│   │   │   ├── index.ts
+│   │   │   └── types
+│   │   │       └── navigation.ts
+│   │   ├── resources
+│   │   │   ├── components
+│   │   │   │   ├── ResourceDetailPage.tsx
+│   │   │   │   ├── ResourcesCTA.tsx
+│   │   │   │   ├── ResourcesHero.tsx
+│   │   │   │   └── ResourcesOverview.tsx
+│   │   │   ├── data
+│   │   │   │   └── resources.ts
+│   │   │   └── index.tsx
+│   │   ├── services
+│   │   │   ├── components
+│   │   │   │   ├── ServiceDetailPage.tsx
+│   │   │   │   ├── ServicesCTA.tsx
+│   │   │   │   ├── ServicesHero.tsx
+│   │   │   │   ├── ServicesOverview.tsx
+│   │   │   │   └── ServicesPageShell.tsx
+│   │   │   ├── data
+│   │   │   │   └── services.ts
+│   │   │   └── index.tsx
+│   │   └── solutions
 │   │       ├── components
-│   │       │   ├── DesktopNav.tsx
-│   │       │   ├── FeaturedCard.tsx
-│   │       │   ├── Logo.tsx
-│   │       │   ├── MegaMenu.tsx
-│   │       │   ├── MegaMenuSection.tsx
-│   │       │   ├── MobileDrawer.tsx
-│   │       │   ├── MobileMenuItem.tsx
-│   │       │   ├── MobileNav.tsx
-│   │       │   ├── NavItem.tsx
-│   │       │   ├── NavLink.tsx
-│   │       │   └── Navbar.tsx
-│   │       ├── constants
-│   │       │   └── navigation.ts
-│   │       ├── hooks
-│   │       │   ├── useMegaMenu.ts
-│   │       │   ├── useOutsideClick.ts
-│   │       │   └── useScroll.ts
-│   │       ├── index.ts
-│   │       └── types
-│   │           └── navigation.ts
+│   │       │   ├── SolutionDetailPage.tsx
+│   │       │   ├── SolutionsCTA.tsx
+│   │       │   ├── SolutionsHero.tsx
+│   │       │   ├── SolutionsOverview.tsx
+│   │       │   └── SolutionsPageShell.tsx
+│   │       ├── data
+│   │       │   └── solutions.ts
+│   │       └── index.tsx
 │   ├── lib
 │   │   └── utils.ts
 │   ├── services
 │   │   └── .gitkeep
 │   └── styles
 │       └── .gitkeep
-└── tsconfig.json
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
 
-73 directories, 239 files
+96 directories, 272 files
