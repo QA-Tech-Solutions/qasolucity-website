@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { motion, AnimatePresence } from "framer-motion";
@@ -86,9 +87,13 @@ export default function TestimonialSlider() {
 
                   {/* Image card - smaller */}
                   <div className="relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white p-3 shadow-[0_25px_60px_rgba(15,23,42,.10)]">
-                    <img
+                    <Image
                       src={testimonial.image}
                       alt={testimonial.name}
+                      width={340}
+                      height={400}
+                      sizes="340px"
+                      priority={index === 0}
                       className="h-[280px] w-full max-w-[340px] rounded-[20px] object-cover transition duration-700 hover:scale-105 sm:h-[340px] lg:h-[400px]"
                     />
                     {/* Gradient overlay for depth */}

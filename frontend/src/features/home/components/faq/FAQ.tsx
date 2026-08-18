@@ -6,7 +6,7 @@ import FAQSidebar from "./FAQSidebar";
 
 export default function FAQ() {
   return (
-    <Section className="relative overflow-hidden bg-[#FCFBF8] py-32">
+    <Section className="relative overflow-clip bg-[#FCFBF8] py-32">
       {/* Background Design */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Gradient Orbs */}
@@ -38,7 +38,7 @@ export default function FAQ() {
 
       <Container>
         <FAQHeader />
-        <div className="mt-14 flex flex-col gap-10 lg:mt-20 lg:flex-row lg:items-start lg:gap-20">
+        <div className="mt-14 flex flex-col gap-10 lg:mt-20 lg:flex-row lg:gap-20">
           <div className="w-full lg:flex-1">
             <FAQAccordion />
           </div>

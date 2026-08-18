@@ -89,25 +89,28 @@ export default function NavItem({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button
-        type="button"
-        className="flex items-center gap-1 rounded-xl px-2 py-2 transition-colors"
-        onClick={() => hasMegaMenu && toggle(item.label)}
-        aria-expanded={hasMegaMenu ? isOpen : undefined}
-        aria-haspopup={hasMegaMenu ? "menu" : undefined}
-        aria-controls={hasMegaMenu ? `mega-menu-${item.label}` : undefined}
-      >
+      <div className="flex items-center gap-1 rounded-xl px-2 py-2">
         <NavLink href={item.href}>{item.label}</NavLink>
 
         {hasMegaMenu && (
-          <ChevronDown
-            className={cn(
-              "h-4 w-4 text-slate-400 transition-all duration-300",
-              isOpen && "rotate-180"
-            )}
-          />
+          <button
+            type="button"
+            onClick={() => toggle(item.label)}
+            aria-expanded={isOpen}
+            aria-haspopup="menu"
+            aria-controls={`mega-menu-${item.label}`}
+            aria-label={`Toggle ${item.label} menu`}
+            className="transition-colors"
+          >
+            <ChevronDown
+              className={cn(
+                "h-4 w-4 text-slate-400 transition-all duration-300",
+                isOpen && "rotate-180"
+              )}
+            />
+          </button>
         )}
-      </button>
+      </div>
 
       <AnimatePresence>
         {hasMegaMenu && isOpen && (
