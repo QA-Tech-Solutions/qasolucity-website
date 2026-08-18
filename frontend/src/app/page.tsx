@@ -1,5 +1,3 @@
-import Navbar from "@/features/navigation/components/Navbar";
-
 import Hero from "@/features/home/components/hero/Hero";
 
 import TechMarquee from "@/features/home/components/trusted-by/TechMarquee";
@@ -24,8 +22,6 @@ import Footer from "@/features/home/components/footer";
 export default function HomePage() {
   return (
     <>
-      <Navbar />
-
       <main>
         <Hero />
 
