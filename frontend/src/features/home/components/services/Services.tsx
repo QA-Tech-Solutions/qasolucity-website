@@ -5,7 +5,7 @@ import ServiceGrid from "./ServiceGrid";
 
 export default function Services() {
   return (
-    <Section className="relative overflow-hidden bg-[linear-gradient(135deg,_#faf8f4_0%,_#f7f3ff_48%,_#f8fafc_100%)] py-32">
+    <Section className="relative overflow-hidden bg-[linear-gradient(135deg,_#faf8f4_0%,_#f7f3ff_48%,_#f8fafc_100%)] py-40">
       <div className="absolute inset-0 -z-10">
         <div className="absolute -left-24 -top-24 h-[480px] w-[480px] rounded-full bg-indigo-100/50 blur-[140px]" />
         <div className="absolute bottom-[-8%] right-[-4%] h-[520px] w-[520px] rounded-full bg-violet-100/50 blur-[150px]" />
@@ -24,9 +24,9 @@ export default function Services() {
       </div>
 
       <Container>
-        <div className="rounded-[32px] border border-white/70 bg-white/70 p-6 shadow-[0_20px_60px_-28px_rgba(15,23,42,0.24)] backdrop-blur sm:p-8">
+        <div className="rounded-[20px] border border-white/70 bg-white/70 p-6 shadow-[0_20px_4px_-28px_rgba(15,23,42,0.24)] backdrop-blur sm:px-8 sm:py-12">
           <SectionHeader />
-          <div className="mt-10">
+          <div className="mt-12">
             <ServiceGrid />
           </div>
         </div>

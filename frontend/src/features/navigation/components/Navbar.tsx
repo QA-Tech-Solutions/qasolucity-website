@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
@@ -16,7 +16,7 @@ import { useScroll } from "../hooks/useScroll";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export default function Navbar() {
+function NavbarComponent() {
   const scrolled = useScroll();
   const { openMenu, open, close, toggle } = useMegaMenu();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -72,3 +72,5 @@ export default function Navbar() {
     </>
   );
 }
+
+export default memo(NavbarComponent);
