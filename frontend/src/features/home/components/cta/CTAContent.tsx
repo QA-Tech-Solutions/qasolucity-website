@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function CTAContent() {
   return (
@@ -45,7 +46,7 @@ export default function CTAContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.4, duration: 0.6 }}
-        className="mt-8 max-w-2xl text-lg leading-9 text-slate-300 md:text-xl"
+        className="mt-8 max-w-2xl text-base leading-9 text-slate-300 md:text-xl"
       >
         Whether you're launching a new product, scaling an existing platform,
         or strengthening your QA process, our team is ready to help you
@@ -59,17 +60,15 @@ export default function CTAContent() {
         transition={{ delay: 0.5, duration: 0.6 }}
         className="mt-12 flex flex-wrap gap-5"
       >
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          <Button className="group h-14 rounded-2xl bg-white px-8 text-slate-900 shadow-lg shadow-white/10 transition-all duration-300 hover:bg-slate-100 hover:shadow-white/20">
+        <Link href="/contact">
+          <a className="group inline-flex h-14 items-center rounded-2xl bg-white px-8 text-slate-900 shadow-lg shadow-white/10 transition-transform duration-300 hover:scale-105 hover:bg-slate-100 hover:shadow-white/20 active:scale-95">
             Book a Consultation
             <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Button>
-        </motion.div>
+          </a>
+        </Link>
 
-        <motion.div
+
+        {/* <motion.div
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
         >
@@ -79,8 +78,8 @@ export default function CTAContent() {
           >
             Contact Us
             <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Button>
-        </motion.div>
+          </Button> */}
+        {/* </motion.div> */}
       </motion.div>
     </motion.div>
   );

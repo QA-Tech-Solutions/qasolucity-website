@@ -24,7 +24,7 @@ export default function HeroContent() {
           </Heading>
 
           <Text
-            className="mt-6 max-w-lg text-[18px] leading-8 text-muted-foreground"
+            className="mt-6 max-w-lg text-[17px] leading-8 text-muted-foreground"
           >
             QA Solucity partners with startups, enterprises, and product teams
             to deliver high-quality web, mobile, and API applications through

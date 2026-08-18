@@ -63,7 +63,7 @@ export default function ContactInfoCard() {
           ))}
         </div>
 
-        <Link href="/contact" className="block mt-8">
+        <Link href="https://calendar.google.com" className="block mt-8">
           <Button className="group h-12 w-full rounded-2xl border-indigo-200 bg-transparent text-indigo-600 transition-all duration-300 hover:bg-indigo-50 hover:border-indigo-300">
             Schedule a Call Instead
             <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
