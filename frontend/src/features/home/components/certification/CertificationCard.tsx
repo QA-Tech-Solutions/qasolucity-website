@@ -53,7 +53,7 @@ export default function CertificationCard({
           {title}
         </h3>
 
-        <p className="mx-auto mt-6 max-w-md text-[19px] leading-8 text-slate-500">
+        <p className="mx-auto mt-6 max-w-md text-[17px] leading-8 text-slate-500">
           {description}
         </p>
 
