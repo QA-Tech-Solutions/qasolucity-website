@@ -19,31 +19,42 @@ export default function StoryContent() {
       </div>
 
       <h2 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
-        Quality isn't the final step.{" "}
+        Quality for businesses.{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-          It's the foundation.
+          Opportunity for people.
         </span>
       </h2>
 
       <div className="mt-10 space-y-6 text-lg leading-8 text-slate-600">
         <p>
-          QA Solucity was founded with a simple belief:
-          software quality should never be an afterthought.
-          It should be built into every stage of product
-          development.
+          QA Solucity was founded in 2023 with a simple idea: better
+          software and better QA talent should be easier to access.
         </p>
 
         <p>
-          We partner with startups, scale-ups and enterprise
-          teams to improve software quality through manual
-          testing, automation, API testing, performance
-          engineering and modern QA practices.
+          We started by helping businesses test their websites and
+          digital products, giving teams the support they need to
+          identify issues, improve user experience and release with
+          greater confidence.
         </p>
 
         <p>
-          Our mission is to help ambitious teams release
-          faster, reduce production issues and build products
-          users genuinely trust.
+          But we also saw another side of the industry. There were
+          talented people who wanted to build careers in Quality
+          Assurance but didn't always know where to start, how to gain
+          practical experience or how to access professional
+          certifications recognised by the industry.
+        </p>
+
+        <p className="font-semibold text-slate-900">
+          So we built QA Solucity to serve both sides.
+        </p>
+
+        <p>
+          Today, we help businesses build more reliable digital
+          products while helping aspiring and growing QA professionals
+          develop the skills, credentials and experience they need to
+          move forward.
         </p>
       </div>
     </motion.div>

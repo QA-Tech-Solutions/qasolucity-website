@@ -1,10 +1,9 @@
 import AboutHero from "./components/hero";
 import OurStory from "./components/our-story";
-import WhyUs from "./components/why-us";
+import TwoSides from "./components/two-sides";
+import Journey from "./components/journey";
 import Principles from "./components/principles";
-import Expertise from "./components/expertise";
-
-import Process from "@/features/home/components/process";
+import Capabilities from "./components/capabilities";
 
 import AboutCTA from "./components/cta";
 
@@ -17,13 +16,13 @@ export default function AboutPage() {
 
       <OurStory />
 
-      <WhyUs />
+      <TwoSides />
+
+      <Journey />
 
       <Principles />
 
-      <Expertise />
-
-      <Process />
+      <Capabilities />
 
       <AboutCTA />
 

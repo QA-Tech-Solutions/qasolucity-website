@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Sparkles, Shield, Users } from "lucide-react";
+import { CheckCircle2, Award, TrendingUp, Users } from "lucide-react";
 
 const highlights = [
   { label: "Quality Engineering", icon: CheckCircle2 },
-  { label: "Automation First", icon: Sparkles },
-  { label: "Enterprise Ready", icon: Shield },
+  { label: "QA Certification Prep", icon: Award },
+  { label: "Career Development", icon: TrendingUp },
   { label: "Trusted Partnership", icon: Users },
 ];
 

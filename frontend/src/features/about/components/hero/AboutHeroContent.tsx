@@ -13,17 +13,23 @@ export default function AboutHeroContent() {
     >
       <AboutHeroBadge />
 
-      <h1 className="mt-8 text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
-        Building confidence through{" "}
+      <h1 className="mt-8 text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl">
+        Building{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-          quality engineering.
+          better software.
+        </span>
+        <br />
+        Building{" "}
+        <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
+          better QA careers.
         </span>
       </h1>
 
-      <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
-        QA Solucity partners with startups, scale-ups and enterprise
-        teams to build reliable software through modern quality
-        assurance, automation and quality engineering practices.
+      <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
+        QA Solucity helps businesses test and improve their digital
+        products while creating pathways for aspiring and growing QA
+        professionals through practical training, industry-recognised
+        certifications and real-world opportunities.
       </p>
 
       <AboutHeroActions />

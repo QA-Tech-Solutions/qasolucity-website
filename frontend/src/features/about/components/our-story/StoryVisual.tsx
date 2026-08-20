@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import StoryTimeline from "./StoryTimeline";
+import { Quote } from "lucide-react";
 
 export default function StoryVisual() {
   return (
@@ -10,19 +10,21 @@ export default function StoryVisual() {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="rounded-[28px] border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 lg:p-10"
+      className="relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 lg:p-10"
     >
-      <span className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">
-        Our Journey
-      </span>
+      {/* Decorative glow */}
+      <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 blur-3xl pointer-events-none" />
 
-      <h3 className="mt-5 text-3xl font-bold text-slate-900">
-        How we approach quality.
-      </h3>
-
-      <div className="mt-10">
-        <StoryTimeline />
+      <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg shadow-indigo-500/20">
+        <Quote className="h-5 w-5 text-white" fill="currentColor" />
       </div>
+
+      <p className="relative mt-8 text-2xl font-bold leading-tight text-slate-900 lg:text-3xl">
+        We believe quality should create{" "}
+        <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
+          value on both sides of the screen.
+        </span>
+      </p>
     </motion.div>
   );
 }

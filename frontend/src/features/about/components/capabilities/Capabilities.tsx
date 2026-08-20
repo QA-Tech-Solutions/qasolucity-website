@@ -4,11 +4,11 @@ import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import { motion } from "framer-motion";
 
-import ExpertiseHeader from "./ExpertiseHeader";
-import ExpertiseItem from "./ExpertiseItem";
-import { expertise } from "./expertise-data";
+import CapabilitiesHeader from "./CapabilitiesHeader";
+import CapabilityGroup from "./CapabilityGroup";
+import { capabilityGroups } from "./capabilities-data";
 
-export default function Expertise() {
+export default function Capabilities() {
   return (
     <Section className="relative overflow-hidden bg-slate-50 py-32">
       {/* Background */}
@@ -34,19 +34,17 @@ export default function Expertise() {
       </div>
 
       <Container>
-        <ExpertiseHeader />
+        <CapabilitiesHeader />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
-          className="mx-auto mt-16 max-w-7xl lg:mt-24"
-        >
-          {expertise.map((item) => (
-            <ExpertiseItem key={item.title} {...item} />
+        <div className="mx-auto mt-16 grid max-w-5xl gap-8 lg:mt-24 lg:grid-cols-2">
+          {capabilityGroups.map((group, index) => (
+            <CapabilityGroup
+              key={group.audience}
+              {...group}
+              delay={index * 0.15}
+            />
           ))}
-        </motion.div>
+        </div>
       </Container>
     </Section>
   );
