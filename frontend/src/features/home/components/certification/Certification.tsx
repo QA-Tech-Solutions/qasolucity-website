@@ -1,6 +1,7 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 
+import CertificationHeader from "./CertificationHeader";
 import BenefitsBar from "./BenefitsBar";
 import CertificationCards from "./CertificationCards";
 
@@ -29,6 +30,7 @@ export default function Certification() {
       </div>
 
       <Container>
+        <CertificationHeader />
         <BenefitsBar />
         <CertificationCards />
       </Container>

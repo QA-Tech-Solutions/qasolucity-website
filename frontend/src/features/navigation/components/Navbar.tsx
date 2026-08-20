@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
@@ -16,7 +16,7 @@ import { useScroll } from "../hooks/useScroll";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export default function Navbar() {
+function NavbarComponent() {
   const scrolled = useScroll();
   const { openMenu, open, close, toggle } = useMegaMenu();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -52,7 +52,7 @@ export default function Navbar() {
                   className="rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 px-7 py-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25"
                   aria-label="Book a consultation"
                 >
-                  Book Consultation
+                  Let's Talk
                 </Button>
               </Link>
             </div>
@@ -72,3 +72,5 @@ export default function Navbar() {
     </>
   );
 }
+
+export default memo(NavbarComponent);

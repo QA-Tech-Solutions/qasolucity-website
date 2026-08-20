@@ -24,7 +24,7 @@ export default function Testimonials() {
       </div>
 
       <Container>
-        <div className="rounded-[36px] border border-white/70 bg-white/70 p-6 shadow-[0_20px_60px_-28px_rgba(15,23,42,0.2)] backdrop-blur sm:p-8 lg:p-10">
+        <div className="rounded-[20px] border border-white/70 bg-white/70 p-6 shadow-[0_20px_6px_-28px_rgba(15,23,42,0.2)] backdrop-blur sm:py-12 sm:px-8 lg:p-10">
           <TestimonialHeader />
           <div className="mt-16">
             <TestimonialSlider />

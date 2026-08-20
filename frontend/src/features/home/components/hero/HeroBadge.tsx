@@ -8,7 +8,7 @@ export default function HeroBadge() {
         <ShieldCheck className="h-4 w-4" />
       </span>
       <span className="font-semibold text-slate-800">
-        Trusted Quality Assurance Partner
+        Built for teams that care about quality
       </span>
       {/* Optional: subtle decorative dot */}
       <span className="relative flex h-2 w-2">

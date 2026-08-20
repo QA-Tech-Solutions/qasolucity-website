@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
@@ -53,12 +54,13 @@ export default function CertificationCard({
           {title}
         </h3>
 
-        <p className="mx-auto mt-6 max-w-md text-[19px] leading-8 text-slate-500">
+        <p className="mx-auto mt-6 max-w-md text-[17px] leading-8 text-slate-500">
           {description}
         </p>
 
         {/* Button with enhanced hover effects */}
         <Button
+          render={<Link href="/contact" />}
           className={`group/btn mt-10 h-14 rounded-2xl px-8 text-[15px] font-semibold transition-all duration-300 ${
             variant === "primary"
               ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 hover:scale-105 hover:from-indigo-700 hover:to-violet-700 hover:shadow-indigo-500/30"

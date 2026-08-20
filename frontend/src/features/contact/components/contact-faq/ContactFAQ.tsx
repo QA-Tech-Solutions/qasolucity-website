@@ -9,7 +9,7 @@ import ContactFAQHeader from "./ContactFAQHeader";
 
 export default function ContactFAQ() {
   return (
-    <Section className="relative overflow-hidden bg-[#FCFBF8] py-28">
+    <Section className="relative overflow-hidden bg-white py-28">
       {/* Background Design */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <motion.div

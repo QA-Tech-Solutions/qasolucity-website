@@ -2,26 +2,26 @@ export const principles = [
   {
     title: "Quality is everyone's responsibility.",
     description:
-      "Quality should be embedded into every stage of software development, not treated as a final checkpoint.",
+      "Quality should be considered throughout product development, not treated as a final checkpoint.",
   },
   {
-    title: "Automation should empower people.",
+    title: "Practical experience matters.",
     description:
-      "Automation isn't about replacing testers. It's about enabling teams to deliver faster with greater confidence.",
+      "Good QA is built through hands-on experience, continuous learning and real-world problem solving.",
   },
   {
     title: "Business outcomes matter.",
     description:
-      "Every testing decision should reduce business risk, improve customer experience and support product growth.",
+      "Testing should reduce risk, improve customer experience and support business growth.",
   },
   {
-    title: "Transparency builds trust.",
+    title: "People are part of the solution.",
     description:
-      "We communicate openly, provide actionable insights and make quality visible throughout every engagement.",
+      "Technology can accelerate QA, but strong people, collaboration and critical thinking remain essential.",
   },
   {
-    title: "Partnership over outsourcing.",
+    title: "Partnership over transactions.",
     description:
-      "We work as an extension of your engineering team, collaborating toward shared goals rather than simply delivering tasks.",
+      "We work with businesses and QA professionals to create long-term value, not simply complete tasks.",
   },
 ];

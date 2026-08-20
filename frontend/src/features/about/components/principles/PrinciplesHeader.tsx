@@ -20,16 +20,15 @@ export default function PrinciplesHeader() {
       </div>
 
       <h2 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
-        The principles that guide{" "}
+        What we believe{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-          every engagement.
+          about quality.
         </span>
       </h2>
 
       <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
-        Our approach to quality engineering is built on a set of
-        practical beliefs that shape how we collaborate, deliver and
-        create long-term value for every client.
+        A simple set of beliefs that shapes how we work with
+        businesses and QA professionals alike.
       </p>
     </motion.div>
   );

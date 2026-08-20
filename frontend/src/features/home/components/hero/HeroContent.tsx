@@ -17,18 +17,17 @@ export default function HeroContent() {
             level="h1"
             className="max-w-3xl leading-[0.95] tracking-[-0.04em]"
           >
-            Deliver Reliable Software with{" "}
+            Ship with Confidence.{" "} <br />
             <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-              Expert Quality Assurance.
+              We find what breaks{" "}
             </span>
+            before users do
           </Heading>
 
           <Text
-            className="mt-6 max-w-lg text-[18px] leading-8 text-muted-foreground"
+            className="mt-6 max-w-lg text-[17px] leading-8 text-muted-foreground"
           >
-            QA Solucity partners with startups, enterprises, and product teams
-            to deliver high-quality web, mobile, and API applications through
-            expert quality assurance services.
+            QA Solucity tests web, mobile and API products to uncover the bugs, gaps and risks that can hurt your users, revenue and reputation.
           </Text>
         </div>
 
