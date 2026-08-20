@@ -7,7 +7,7 @@ export const contactFaqs: ContactFAQ[] = [
   {
     question: "How quickly will I receive a response?",
     answer:
-      "Our team typically responds to all enquiries within one business day. For urgent requests, we'll do our best to respond even sooner.",
+      "Our team typically responds to all enquiries within 24 hours. For urgent requests, we'll do our best to respond even sooner.",
   },
   {
     question: "Do you work with international clients?",
@@ -32,6 +32,6 @@ export const contactFaqs: ContactFAQ[] = [
   {
     question: "What's the best way to reach you?",
     answer:
-      "Email or WhatsApp both work well for a quick chat. For project enquiries, the contact form above ensures the right details reach our team so we can respond within a business day.",
+      "Email or WhatsApp both work well for a quick chat. For project enquiries, the contact form above ensures the right details reach our team so we can respond within 24 hours.",
   },
 ];

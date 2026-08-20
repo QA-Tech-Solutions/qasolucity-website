@@ -16,11 +16,11 @@ export default function ContactPage() {
 
       <ContactForm />
 
-      <WhyContactUs />
+      {/* <WhyContactUs /> */}
 
       <ContactFAQ />
 
-      <ContactCTA />
+      {/* <ContactCTA /> */}
 
       <Footer />
     </>

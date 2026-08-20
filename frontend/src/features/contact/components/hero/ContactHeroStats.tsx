@@ -19,13 +19,13 @@ const contactItems = [
     href: "https://wa.me/2347080702920?text=Hello%20QA%20Solucity%2C%20I%27d%20like%20to%20discuss%20a%20project.",
     action: "Chat with us instantly",
   },
-  {
-    icon: MapPin,
-    title: "Location",
-    value: "Lagos, Nigeria",
-    href: null,
-    action: "Find us on Google Maps",
-  },
+  // {
+  //   icon: MapPin,
+  //   title: "Location",
+  //   value: "Lagos, Nigeria",
+  //   href: null,
+  //   action: "Find us on Google Maps",
+  // },
   {
     icon: Clock3,
     title: "Business Hours",
@@ -115,7 +115,7 @@ export default function ContactHeroStats() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
           <span className="text-sm text-slate-600">
-            Typically replies within a few hours
+            Typically replies within 24 hours
           </span>
         </div>
       </div>

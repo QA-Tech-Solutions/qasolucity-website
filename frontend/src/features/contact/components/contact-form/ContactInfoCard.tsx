@@ -8,8 +8,8 @@ import Link from "next/link";
 const steps = [
   {
     icon: Clock3,
-    title: "Quick Response",
-    description: "We'll review your enquiry and respond within one business day.",
+    title: "24-Hour Response",
+    description: "We'll review your enquiry and respond within 24 hours.",
   },
   {
     icon: ShieldCheck,

@@ -1,33 +1,33 @@
 import {
   Clock3,
   ShieldCheck,
-  Users,
-  MessageCircle,
+  Repeat,
+  PhoneCall,
 } from "lucide-react";
 
 export const trustItems = [
   {
     icon: Clock3,
-    title: "24 Hour Response",
+    title: "24-Hour Response",
     description:
-      "We typically respond to enquiries within one business day.",
+      "We respond to every enquiry within 24 hours.",
   },
   {
     icon: ShieldCheck,
-    title: "NDA Friendly",
+    title: "Confidential Discussion",
     description:
-      "Your ideas, products and business information remain confidential.",
+      "NDA-friendly conversations to protect your ideas and product.",
   },
   {
-    icon: Users,
-    title: "Trusted by Teams",
+    icon: Repeat,
+    title: "Flexible QA Support",
     description:
-      "Supporting startups, growing businesses and enterprise teams.",
+      "Scale testing up or down as your project and priorities change.",
   },
   {
-    icon: MessageCircle,
-    title: "Free Consultation",
+    icon: PhoneCall,
+    title: "Free Discovery Call",
     description:
-      "Schedule a discovery call with one of our QA specialists.",
+      "Talk through your goals and QA challenges at no cost.",
   },
 ];

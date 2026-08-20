@@ -19,18 +19,16 @@ export default function ContactHeroContent() {
       </div>
 
       <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
-        Let's build reliable{" "}
+        Let's talk about your{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-          software
+          software quality.
         </span>{" "}
-        together.
       </h1>
 
       <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
-        Whether you're looking for software testing,
-        automation, QA consulting or corporate training,
-        we'd love to learn about your project and discuss
-        how we can help.
+        Tell us what you're building, where you're facing challenges, 
+        and what you need tested. Our QA team will help you identify the 
+        right next step.
       </p>
 
       {/* Contact Actions - Email & WhatsApp */}
