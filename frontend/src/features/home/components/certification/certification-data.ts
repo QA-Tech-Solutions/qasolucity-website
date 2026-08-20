@@ -24,7 +24,7 @@ export const certificationCards = [
   {
     title: "Become a QA Engineer",
     description:
-      "New to software testing? Learn from the ground up with hands-on mentorship built to take you from complete beginner to job-ready QA engineer.",
+      "New to software testing? Learn manual and automated testing from the ground up with hands-on mentorship built to take you from complete beginner to job-ready QA engineer.",
     button: "Start Training",
     variant: "secondary",
   },
