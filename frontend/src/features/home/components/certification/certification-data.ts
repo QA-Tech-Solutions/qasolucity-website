@@ -1,31 +1,31 @@
 export const benefits = [
   {
-    title: "Software Stellar Solutions",
-    icon: "star",
-  },
-  {
-    title: "Recognized Expertise",
+    title: "ISTQB-Aligned Training",
     icon: "award",
   },
   {
-    title: "Innovative Approach",
+    title: "Beginner to Certified",
+    icon: "star",
+  },
+  {
+    title: "Hands-On Mentorship",
     icon: "sparkles",
   },
 ];
 
 export const certificationCards = [
   {
-    title: "QA Excellence Certified",
+    title: "Get ISTQB Certified",
     description:
-      "Formalize your skills and stand out in the industry. Earn QA Solucity's certification for an elevated testing career.",
-    button: "Get Certified",
+      "Prepare for the ISTQB and other industry-recognized certifications with structured coaching, mock exams, and expert guidance to formalize your QA expertise and stand out to employers.",
+    button: "Start Certification Prep",
     variant: "primary",
   },
   {
-    title: "QA Mastery\nTraining",
+    title: "Become a QA Engineer",
     description:
-      "Equip yourself with industry best practices. Enroll in QA Solucity's training for in-depth QA testing knowledge.",
-    button: "Get QA Training",
+      "New to software testing? Learn from the ground up with hands-on mentorship built to take you from complete beginner to job-ready QA engineer.",
+    button: "Start Training",
     variant: "secondary",
   },
 ] as const;

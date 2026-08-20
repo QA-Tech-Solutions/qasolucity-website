@@ -23,9 +23,9 @@ export default function BenefitsBar() {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="max-w-[260px] text-4xl font-bold leading-tight text-slate-900"
         >
-          Elevate with <br />
+          Two Paths. <br />
           <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-            QA Solucity
+            One Career.
           </span>
         </motion.h3>
 

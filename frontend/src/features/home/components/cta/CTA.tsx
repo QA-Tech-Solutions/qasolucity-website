@@ -5,7 +5,7 @@ import Section from "@/components/layout/Section";
 import { motion } from "framer-motion";
 
 import CTAContent from "./CTAContent";
-import CTAMetrics from "./CTAMetrics";
+import CTAHighlights from "./CTAHighlights";
 
 export default function CTA() {
   return (
@@ -46,7 +46,7 @@ export default function CTA() {
       <Container>
         <div className="grid items-center gap-20 lg:grid-cols-[1fr_380px]">
           <CTAContent />
-          <CTAMetrics />
+          <CTAHighlights />
         </div>
       </Container>
     </Section>
