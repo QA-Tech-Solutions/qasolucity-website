@@ -1,0 +1,103 @@
+import Container from "@/components/layout/Container";
+import Section from "@/components/layout/Section";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import CookiesContent from "./components/CookiesContent";
+import Footer from "@/features/home/components/footer";
+
+export const metadata = {
+  title: "Cookie Policy | QA Solucity",
+  description:
+    "QA Solucity's cookie policy – how we use cookies and tracking technologies on our website.",
+};
+
+export default function CookiesPage() {
+  return (
+    <>
+      <main className="pb-32">
+        <Section className="relative overflow-hidden bg-gradient-to-b from-slate-100 via-white to-white pt-44 pb-32">
+          <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+            <div className="absolute -left-28 top-24 h-[500px] w-[500px] rounded-full bg-indigo-200/30 blur-[140px]" />
+            <div className="absolute -right-28 bottom-0 h-[550px] w-[550px] rounded-full bg-violet-200/30 blur-[180px]" />
+
+            <div className="absolute top-20 left-[10%] h-32 w-32 rounded-full bg-indigo-200/20 blur-2xl" />
+            <div className="absolute bottom-32 right-[15%] h-40 w-40 rounded-full bg-violet-200/20 blur-2xl" />
+
+            <div className="absolute right-20 top-20 grid grid-cols-4 gap-3 opacity-20">
+              {Array.from({ length: 16 }).map((_, i) => (
+                <span key={i} className="h-2 w-2 rounded-full bg-indigo-400" />
+              ))}
+            </div>
+            <div className="absolute bottom-20 left-20 grid grid-cols-4 gap-3 opacity-20">
+              {Array.from({ length: 16 }).map((_, i) => (
+                <span key={i} className="h-2 w-2 rounded-full bg-violet-400" />
+              ))}
+            </div>
+
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to right, #0f172a 1px, transparent 1px),
+                  linear-gradient(to bottom, #0f172a 1px, transparent 1px)
+                `,
+                backgroundSize: "48px 48px",
+              }}
+            />
+
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at center, transparent 30%, rgba(248,250,252,0.3) 100%)",
+              }}
+            />
+          </div>
+
+          <Container>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 transition-colors duration-300 hover:text-indigo-600"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Home
+            </Link>
+
+            <div className="mt-8 max-w-4xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-indigo-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
+                </span>
+                Legal
+              </div>
+
+              <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
+                <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
+                  Cookie Policy
+                </span>
+              </h1>
+
+              <p className="mt-4 text-lg text-slate-500">
+                Last updated:{" "}
+                {new Date().toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
+          </Container>
+        </Section>
+
+        <Container>
+          <div className="mx-auto max-w-4xl -mt-12">
+            <CookiesContent />
+          </div>
+        </Container>
+      </main>
+
+      <Footer />
+    </>
+  );
+}

@@ -1,0 +1,371 @@
+
+.
+├── .DS_Store
+├── .github
+│   └── workflows
+│       └── ci.yml
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+├── README.md
+├── components.json
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── project-tree-runner.sh
+├── project-tree.txt
+├── public
+│   ├── .DS_Store
+│   ├── fonts
+│   ├── icons
+│   │   └── badge.svg
+│   ├── illustrations
+│   └── images
+│       ├── .DS_Store
+│       ├── blog
+│       │   ├── .DS_Store
+│       │   ├── blog-1.png
+│       │   ├── blog-2.png
+│       │   └── blog-3.png
+│       ├── logos
+│       │   ├── .DS_Store
+│       │   └── qa-solucity-logo.png
+│       ├── technologies
+│       │   ├── .DS_Store
+│       │   ├── appium.svg
+│       │   ├── browserstack.svg
+│       │   ├── cypress.svg
+│       │   ├── github-actions.svg
+│       │   ├── jenkins.svg
+│       │   ├── jira.svg
+│       │   ├── jmeter.svg
+│       │   ├── playwright.svg
+│       │   ├── postman.svg
+│       │   ├── saucelabs.svg
+│       │   ├── selenium.svg
+│       │   ├── swagger.svg
+│       │   └── webdriverio.svg
+│       └── testimonials
+│           ├── .DS_Store
+│           ├── Iyeoluwa-1.png
+│           ├── Iyeoluwa-2.jpeg
+│           ├── Iyeoluwa-3.jpeg
+│           ├── John-2.jpeg
+│           ├── John-3.jpg
+│           ├── John-4.png
+│           ├── John-5.jpg
+│           ├── John-6.jpeg
+│           ├── Joshua-1.jpg
+│           ├── Joshua-2.jpg
+│           ├── Joshua.jpg
+│           └── john.jpeg
+├── src
+│   ├── .DS_Store
+│   ├── app
+│   │   ├── about
+│   │   │   └── page.tsx
+│   │   ├── api
+│   │   │   └── contact
+│   │   │       └── route.ts
+│   │   ├── contact
+│   │   │   └── page.tsx
+│   │   ├── cookies
+│   │   │   ├── components
+│   │   │   │   └── CookiesContent.tsx
+│   │   │   └── page.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── privacy
+│   │   │   ├── components
+│   │   │   │   └── PrivacyContent.tsx
+│   │   │   └── page.tsx
+│   │   ├── resources
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── services
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── solutions
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── terms
+│   │       ├── components
+│   │       │   └── TermsContent.tsx
+│   │       └── page.tsx
+│   ├── components
+│   │   ├── forms
+│   │   │   └── .gitkeep
+│   │   ├── layout
+│   │   │   ├── Container.tsx
+│   │   │   ├── PageWrapper.tsx
+│   │   │   └── Section.tsx
+│   │   ├── sections
+│   │   │   └── .gitkeep
+│   │   ├── shared
+│   │   │   ├── .gitkeep
+│   │   │   └── FadeIn.tsx
+│   │   └── ui
+│   │       ├── Badge.tsx
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx
+│   │       ├── CustomCursor.tsx
+│   │       ├── Heading.tsx
+│   │       ├── Input.tsx
+│   │       ├── Select.tsx
+│   │       ├── Text.tsx
+│   │       └── Textarea.tsx
+│   ├── config
+│   │   └── .gitkeep
+│   ├── constants
+│   │   ├── .gitkeep
+│   │   ├── design-tokens.ts
+│   │   └── typography.ts
+│   ├── features
+│   │   ├── about
+│   │   │   ├── components
+│   │   │   │   ├── cta
+│   │   │   │   │   ├── AboutCTA.tsx
+│   │   │   │   │   ├── AboutCTAContent.tsx
+│   │   │   │   │   ├── AboutCTAHighlights.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── expertise
+│   │   │   │   │   ├── Expertise.tsx
+│   │   │   │   │   ├── ExpertiseHeader.tsx
+│   │   │   │   │   ├── ExpertiseItem.tsx
+│   │   │   │   │   ├── expertise-data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── hero
+│   │   │   │   │   ├── AboutHero.tsx
+│   │   │   │   │   ├── AboutHeroActions.tsx
+│   │   │   │   │   ├── AboutHeroBadge.tsx
+│   │   │   │   │   ├── AboutHeroContent.tsx
+│   │   │   │   │   ├── AboutHeroVisual.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── our-story
+│   │   │   │   │   ├── OurStory.tsx
+│   │   │   │   │   ├── StoryContent.tsx
+│   │   │   │   │   ├── StoryTimeline.tsx
+│   │   │   │   │   ├── StoryVisual.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── principles
+│   │   │   │   │   ├── Principle.tsx
+│   │   │   │   │   ├── Principles.tsx
+│   │   │   │   │   ├── PrinciplesHeader.tsx
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── principles-data.ts
+│   │   │   │   └── why-us
+│   │   │   │       ├── WhyUs.tsx
+│   │   │   │       ├── WhyUsFeature.tsx
+│   │   │   │       ├── WhyUsHeader.tsx
+│   │   │   │       ├── index.ts
+│   │   │   │       └── why-us-data.ts
+│   │   │   ├── constants
+│   │   │   ├── hooks
+│   │   │   ├── index.tsx
+│   │   │   ├── services
+│   │   │   └── types
+│   │   ├── contact
+│   │   │   ├── components
+│   │   │   │   ├── contact-cta
+│   │   │   │   │   ├── CTAContent.tsx
+│   │   │   │   │   ├── CTAMetrics.tsx
+│   │   │   │   │   ├── ContactCTA.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── contact-faq
+│   │   │   │   │   ├── ContactFAQ.tsx
+│   │   │   │   │   ├── ContactFAQAccordion.tsx
+│   │   │   │   │   ├── ContactFAQHeader.tsx
+│   │   │   │   │   ├── ContactFAQItem.tsx
+│   │   │   │   │   ├── contact-faq-data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── contact-form
+│   │   │   │   │   ├── ContactForm.tsx
+│   │   │   │   │   ├── ContactFormCard.tsx
+│   │   │   │   │   ├── ContactInfoCard.tsx
+│   │   │   │   │   ├── FormHeader.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── contact-info
+│   │   │   │   ├── hero
+│   │   │   │   │   ├── ContactHero.tsx
+│   │   │   │   │   ├── ContactHeroActions.tsx
+│   │   │   │   │   ├── ContactHeroContent.tsx
+│   │   │   │   │   ├── ContactHeroStats.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── trust-strip
+│   │   │   │   │   ├── ContactTrustStrip.tsx
+│   │   │   │   │   ├── TrustItem.tsx
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── trust-data.ts
+│   │   │   │   └── why-contact-us
+│   │   │   │       ├── WhyContactCard.tsx
+│   │   │   │       ├── WhyContactUs.tsx
+│   │   │   │       ├── index.ts
+│   │   │   │       └── why-contact-data.ts
+│   │   │   ├── constants
+│   │   │   ├── hooks
+│   │   │   ├── index.tsx
+│   │   │   ├── services
+│   │   │   └── types
+│   │   ├── home
+│   │   │   ├── components
+│   │   │   │   ├── blog
+│   │   │   │   │   ├── Blog.tsx
+│   │   │   │   │   ├── BlogCard.tsx
+│   │   │   │   │   ├── BlogDetailPage.tsx
+│   │   │   │   │   ├── BlogGrid.tsx
+│   │   │   │   │   ├── BlogHeader.tsx
+│   │   │   │   │   ├── blogs-data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── certification
+│   │   │   │   │   ├── BenefitItem.tsx
+│   │   │   │   │   ├── BenefitsBar.tsx
+│   │   │   │   │   ├── Certification.tsx
+│   │   │   │   │   ├── CertificationCard.tsx
+│   │   │   │   │   ├── CertificationCards.tsx
+│   │   │   │   │   ├── certification-data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── cta
+│   │   │   │   │   ├── CTA.tsx
+│   │   │   │   │   ├── CTAContent.tsx
+│   │   │   │   │   ├── CTAMetrics.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── faq
+│   │   │   │   │   ├── FAQ.tsx
+│   │   │   │   │   ├── FAQAccordion.tsx
+│   │   │   │   │   ├── FAQHeader.tsx
+│   │   │   │   │   ├── FAQItem.tsx
+│   │   │   │   │   ├── FAQSidebar.tsx
+│   │   │   │   │   ├── faqs-data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── footer
+│   │   │   │   │   ├── Footer.tsx
+│   │   │   │   │   ├── FooterBrand.tsx
+│   │   │   │   │   ├── FooterLinks.tsx
+│   │   │   │   │   ├── FooterNewsletter.tsx
+│   │   │   │   │   ├── footer-data.ts
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── hero
+│   │   │   │   │   ├── Hero.tsx
+│   │   │   │   │   ├── HeroActions.tsx
+│   │   │   │   │   ├── HeroBadge.tsx
+│   │   │   │   │   ├── HeroContent.tsx
+│   │   │   │   │   ├── HeroVisual.tsx
+│   │   │   │   │   ├── dashboard
+│   │   │   │   │   │   ├── Dashboard.tsx
+│   │   │   │   │   │   ├── DashboardHeader.tsx
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── process
+│   │   │   │   │   ├── Process.tsx
+│   │   │   │   │   ├── ProcessHeader.tsx
+│   │   │   │   │   ├── ProcessStep.tsx
+│   │   │   │   │   ├── ProcessTimeline.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── services
+│   │   │   │   │   ├── SectionHeader.tsx
+│   │   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   │   ├── ServiceGrid.tsx
+│   │   │   │   │   ├── Services.tsx
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── services-data.ts
+│   │   │   │   ├── testimonials
+│   │   │   │   │   ├── TestimonialHeader.tsx
+│   │   │   │   │   ├── TestimonialSlider.tsx
+│   │   │   │   │   ├── Testimonials.tsx
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── testimonials-data.ts
+│   │   │   │   ├── trusted-by
+│   │   │   │   │   ├── LogoCarousel.tsx
+│   │   │   │   │   ├── ResourceCard.tsx
+│   │   │   │   │   ├── TechCard.tsx
+│   │   │   │   │   ├── TechMarquee.tsx
+│   │   │   │   │   ├── TechnologyCategory.tsx
+│   │   │   │   │   ├── TechnologyPill.tsx
+│   │   │   │   │   ├── TechnologyStack.tsx
+│   │   │   │   │   ├── TrustedBy.tsx
+│   │   │   │   │   ├── TrustedByHeader.tsx
+│   │   │   │   │   ├── data.ts
+│   │   │   │   │   └── index.tsx
+│   │   │   │   └── why-choose-us
+│   │   │   │       ├── ReasonItem.tsx
+│   │   │   │       ├── Reasons.tsx
+│   │   │   │       ├── StatCard.tsx
+│   │   │   │       ├── StatsGrid.tsx
+│   │   │   │       ├── WhyChooseUs.tsx
+│   │   │   │       ├── WhyHeader.tsx
+│   │   │   │       ├── index.ts
+│   │   │   │       └── why-choose-us-data.ts
+│   │   │   ├── constants
+│   │   │   │   └── hero.ts
+│   │   │   └── index.ts
+│   │   ├── navigation
+│   │   │   ├── components
+│   │   │   │   ├── DesktopNav.tsx
+│   │   │   │   ├── FeaturedCard.tsx
+│   │   │   │   ├── Logo.tsx
+│   │   │   │   ├── MegaMenu.tsx
+│   │   │   │   ├── MegaMenuSection.tsx
+│   │   │   │   ├── MobileDrawer.tsx
+│   │   │   │   ├── MobileMenuItem.tsx
+│   │   │   │   ├── MobileNav.tsx
+│   │   │   │   ├── NavItem.tsx
+│   │   │   │   ├── NavLink.tsx
+│   │   │   │   └── Navbar.tsx
+│   │   │   ├── constants
+│   │   │   │   └── navigation.ts
+│   │   │   ├── hooks
+│   │   │   │   ├── useMegaMenu.ts
+│   │   │   │   ├── useOutsideClick.ts
+│   │   │   │   └── useScroll.ts
+│   │   │   ├── index.ts
+│   │   │   └── types
+│   │   │       └── navigation.ts
+│   │   ├── resources
+│   │   │   ├── components
+│   │   │   │   ├── ResourceDetailPage.tsx
+│   │   │   │   ├── ResourcesCTA.tsx
+│   │   │   │   ├── ResourcesHero.tsx
+│   │   │   │   └── ResourcesOverview.tsx
+│   │   │   ├── data
+│   │   │   │   └── resources.ts
+│   │   │   └── index.tsx
+│   │   ├── services
+│   │   │   ├── components
+│   │   │   │   ├── ServiceDetailPage.tsx
+│   │   │   │   ├── ServicesCTA.tsx
+│   │   │   │   ├── ServicesHero.tsx
+│   │   │   │   ├── ServicesOverview.tsx
+│   │   │   │   └── ServicesPageShell.tsx
+│   │   │   ├── data
+│   │   │   │   └── services.ts
+│   │   │   └── index.tsx
+│   │   └── solutions
+│   │       ├── components
+│   │       │   ├── SolutionDetailPage.tsx
+│   │       │   ├── SolutionsCTA.tsx
+│   │       │   ├── SolutionsHero.tsx
+│   │       │   ├── SolutionsOverview.tsx
+│   │       │   └── SolutionsPageShell.tsx
+│   │       ├── data
+│   │       │   └── solutions.ts
+│   │       └── index.tsx
+│   ├── lib
+│   │   └── utils.ts
+│   ├── services
+│   │   └── .gitkeep
+│   └── styles
+│       └── .gitkeep
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
+
+96 directories, 272 files
