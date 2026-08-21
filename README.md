@@ -78,6 +78,10 @@ RESEND_API_KEY=your_resend_api_key
 # Optional — maintenance mode (see below)
 MAINTENANCE_MODE=false
 MAINTENANCE_BYPASS_SECRET=
+
+# Optional — only needed if you're running qasolucity-automation
+# against your local dev server (see "Quality Command Center" below)
+AUTOMATION_API_TOKEN=
 ```
 
 Then run the dev server:
@@ -107,6 +111,7 @@ Run from `frontend/`:
 | `RESEND_API_KEY` | Yes | Sends contact form notification emails via Resend |
 | `MAINTENANCE_MODE` | No | Set `true` to show a 503 maintenance page site-wide |
 | `MAINTENANCE_BYPASS_SECRET` | No | Visit `/?bypass=<secret>` during maintenance to get a cookie that lets you preview the live site |
+| `AUTOMATION_API_TOKEN` | No | Bearer token [qasolucity-automation](https://github.com/QA-Tech-Solutions/qasolucity-automation) authenticates with to POST live test results to `/api/quality-metrics`. Generate one with `node -e "console.log(require('crypto').randomBytes(24).toString('hex'))"` |
 
 ## Writing a blog post
 
@@ -140,8 +145,21 @@ The homepage's scrolling tech/testing-type marquee automatically links a pill to
 - **Mega-menu navigation** across Services, Solutions, and Resources, each backed by structured data with FAQ accordions and cross-links between related content.
 - **Contact form** with server-side validation and branded email notifications via Resend.
 - **File-based blog** with MDX rendering, category filtering, related-post suggestions, social sharing, and copy-link functionality.
+- **A bundled FAQ page** (`/faq`) — pulls every question already defined on the Services, Solutions, Resources, and Contact pages into one searchable, filterable hub, rather than duplicating content. See `src/features/faq/data/faq-data.ts`.
 - **Maintenance mode** — a real `HTTP 503` (not just a themed 200 page) triggered by an environment variable, with a bypass mechanism for the team.
 - **Custom error states** — a branded 404 page and 500 error boundaries (route-level and global), not the framework defaults.
+
+## Quality Command Center
+
+The homepage hero includes a live-looking dashboard card ("Quality Command Center") showing test pass rate, coverage, open bugs, and API health. That data is real, not decorative — it comes from a companion repo, [qasolucity-automation](https://github.com/QA-Tech-Solutions/qasolucity-automation), a Playwright test suite that runs against this site on a schedule and reports its results back here.
+
+How the two repos connect:
+
+1. **qasolucity-automation** runs its full test suite against the deployed site (on a GitHub Actions cron schedule) and POSTs a metrics summary to this repo's `POST /api/quality-metrics`, authenticated with a shared bearer token (`AUTOMATION_API_TOKEN`, set on both sides).
+2. **This repo**'s `/api/quality-metrics` route stores the latest result and serves it back via `GET`. The `Dashboard` component (`src/features/home/components/hero/dashboard/Dashboard.tsx`) fetches it on load and polls every 60 seconds.
+3. Until a real automation run has reported in, the dashboard shows seed/placeholder numbers and a **"Baseline"** badge instead of **"Live"** — it never claims real-time data it doesn't actually have.
+
+**Current limitation:** `/api/quality-metrics` persists the latest result to a JSON file on disk (`frontend/data/quality-metrics.json`), which only works on a host with a writable, persistent filesystem. It will not silently succeed on a serverless deploy (Vercel, Netlify, ...) — the route returns an explicit error there instead of losing data quietly. See the automation repo's README for the production-persistence options (KV store, external DB, or a committed-results-file approach) before relying on this in production.
 
 ## Deployment
 
