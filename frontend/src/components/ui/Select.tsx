@@ -23,6 +23,7 @@ export default function Select({
   return (
     <div className="relative w-full">
       <select
+        aria-label={placeholder}
         className={cn(
           `
           h-14

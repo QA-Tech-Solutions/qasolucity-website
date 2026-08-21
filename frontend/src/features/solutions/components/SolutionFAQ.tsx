@@ -32,6 +32,7 @@ export default function SolutionFAQ({ faqs }: Props) {
           >
             <button
               onClick={() => setOpen(isOpen ? -1 : index)}
+              aria-expanded={isOpen}
               className="flex w-full items-center justify-between gap-4 px-7 py-6 text-left"
             >
               <h4 className="text-base font-semibold text-slate-900 md:text-lg">
