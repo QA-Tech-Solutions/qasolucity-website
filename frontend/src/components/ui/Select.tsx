@@ -23,6 +23,11 @@ export default function Select({
   return (
     <div className="relative w-full">
       <select
+        // This component has no associated <label>, so without an
+        // explicit name a screen reader has nothing to announce for it —
+        // caught by an automated accessibility scan (axe: "select-name").
+        // Falls back to the placeholder text; a caller passing their own
+        // aria-label via {...props} still wins, since that spreads after.
         aria-label={placeholder}
         className={cn(
           `
