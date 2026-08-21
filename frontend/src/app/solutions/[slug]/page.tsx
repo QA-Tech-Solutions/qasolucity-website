@@ -18,5 +18,5 @@ export default async function Page({ params }: SolutionPageProps) {
     notFound();
   }
 
-  return <SolutionDetailPage solution={solution} />;
+  return <SolutionDetailPage slug={slug} />;
 }

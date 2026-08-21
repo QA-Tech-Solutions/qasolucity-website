@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
+import { slugify } from "@/lib/slugify";
 
 // ----- Data -----
 const topRow = [
@@ -146,8 +147,13 @@ function Stars() {
 }
 
 // ----- Main Component -----
-export default function TechMarquee() {
+interface TechMarqueeProps {
+  existingSlugs?: string[];
+}
+
+export default function TechMarquee({ existingSlugs = [] }: TechMarqueeProps) {
   const duplicate = (arr: string[]) => [...arr, ...arr];
+  const slugSet = new Set(existingSlugs);
 
   return (
     <section className="relative overflow-hidden bg-slate-900 py-10">
@@ -194,20 +200,31 @@ export default function TechMarquee() {
               transformStyle: "preserve-3d",
             }}
           >
-            {duplicate(topRow).map((item, idx) => (
-              <div key={`${item}-${idx}`} className="flex items-center gap-6 whitespace-nowrap">
-                <Link
-                  href={`/blog?tag=${encodeURIComponent(item)}`}
-                  className="group relative inline-flex items-center rounded-full bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white backdrop-blur-sm ring-1 ring-white/10 transition-all duration-300 hover:bg-white/15 hover:ring-indigo-400/60 hover:shadow-lg hover:shadow-indigo-500/20 overflow-visible"
-                >
-                  <span className="relative">
-                    {item}
-                    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-indigo-400 to-violet-400 transition-all duration-300 group-hover:w-full" />
-                  </span>
-                </Link>
-                <span className="h-1.5 w-1.5 rounded-full bg-indigo-400/40" />
-              </div>
-            ))}
+            {duplicate(topRow).map((item, idx) => {
+              const slug = slugify(item);
+              const hasPost = slugSet.has(slug);
+              const pillClassName =
+                "group relative inline-flex items-center rounded-full bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white backdrop-blur-sm ring-1 ring-white/10 transition-all duration-300 hover:bg-white/15 hover:ring-indigo-400/60 hover:shadow-lg hover:shadow-indigo-500/20 overflow-visible";
+              const label = (
+                <span className="relative">
+                  {item}
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-indigo-400 to-violet-400 transition-all duration-300 group-hover:w-full" />
+                </span>
+              );
+
+              return (
+                <div key={`${item}-${idx}`} className="flex items-center gap-6 whitespace-nowrap">
+                  {hasPost ? (
+                    <Link href={`/blogs/${slug}`} className={pillClassName}>
+                      {label}
+                    </Link>
+                  ) : (
+                    <span className={pillClassName}>{label}</span>
+                  )}
+                  <span className="h-1.5 w-1.5 rounded-full bg-indigo-400/40" />
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -220,20 +237,31 @@ export default function TechMarquee() {
               transformStyle: "preserve-3d",
             }}
           >
-            {duplicate(bottomRow).map((item, idx) => (
-              <div key={`${item}-${idx}`} className="flex items-center gap-6 whitespace-nowrap">
-                <Link
-                  href={`/blog?tag=${encodeURIComponent(item)}`}
-                  className="group relative inline-flex items-center rounded-full bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white backdrop-blur-sm ring-1 ring-white/10 transition-all duration-300 hover:bg-white/15 hover:ring-violet-400/60 hover:shadow-lg hover:shadow-violet-500/20 overflow-visible"
-                >
-                  <span className="relative">
-                    {item}
-                    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-indigo-400 transition-all duration-300 group-hover:w-full" />
-                  </span>
-                </Link>
-                <span className="h-1.5 w-1.5 rounded-full bg-violet-400/40" />
-              </div>
-            ))}
+            {duplicate(bottomRow).map((item, idx) => {
+              const slug = slugify(item);
+              const hasPost = slugSet.has(slug);
+              const pillClassName =
+                "group relative inline-flex items-center rounded-full bg-white/5 px-6 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-white backdrop-blur-sm ring-1 ring-white/10 transition-all duration-300 hover:bg-white/15 hover:ring-violet-400/60 hover:shadow-lg hover:shadow-violet-500/20 overflow-visible";
+              const label = (
+                <span className="relative">
+                  {item}
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-400 to-indigo-400 transition-all duration-300 group-hover:w-full" />
+                </span>
+              );
+
+              return (
+                <div key={`${item}-${idx}`} className="flex items-center gap-6 whitespace-nowrap">
+                  {hasPost ? (
+                    <Link href={`/blogs/${slug}`} className={pillClassName}>
+                      {label}
+                    </Link>
+                  ) : (
+                    <span className={pillClassName}>{label}</span>
+                  )}
+                  <span className="h-1.5 w-1.5 rounded-full bg-violet-400/40" />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

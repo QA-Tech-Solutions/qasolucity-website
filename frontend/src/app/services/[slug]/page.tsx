@@ -30,5 +30,5 @@ export default async function Page({ params }: ServicePageProps) {
     notFound();
   }
 
-  return <ServicesDetailPage service={service} />;
+  return <ServicesDetailPage slug={slug} />;
 }

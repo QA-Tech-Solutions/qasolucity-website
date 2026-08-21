@@ -18,5 +18,5 @@ export default async function Page({ params }: ResourcePageProps) {
     notFound();
   }
 
-  return <ResourceDetailPage resource={resource} />;
+  return <ResourceDetailPage slug={slug} />;
 }
