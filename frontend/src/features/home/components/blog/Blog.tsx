@@ -1,9 +1,16 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import BlogHeader from "./BlogHeader";
-import BlogGrid from "./BlogGrid";
+import BlogCard from "@/components/blog/BlogCard";
+import { getAllPosts } from "@/lib/blog";
 
 export default function Blog() {
+  const posts = getAllPosts().slice(0, 3);
+
+  if (posts.length === 0) {
+    return null;
+  }
+
   return (
     <Section className="relative overflow-hidden bg-[#FCFBF8] py-32">
       {/* Background Design */}
@@ -11,7 +18,7 @@ export default function Blog() {
         {/* Gradient Orbs */}
         <div className="absolute -left-40 top-1/3 h-[500px] w-[500px] rounded-full bg-indigo-100/25 blur-3xl" />
         <div className="absolute -bottom-40 right-1/4 h-[400px] w-[400px] rounded-full bg-violet-100/25 blur-3xl" />
-        
+
         {/* Subtle Grid */}
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -36,8 +43,10 @@ export default function Blog() {
 
       <Container>
         <BlogHeader />
-        <div className="mt-20">
-          <BlogGrid />
+        <div className="mt-20 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, index) => (
+            <BlogCard key={post.slug} post={post} index={index} />
+          ))}
         </div>
       </Container>
     </Section>

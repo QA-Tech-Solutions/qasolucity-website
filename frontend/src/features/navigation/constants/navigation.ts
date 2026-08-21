@@ -66,7 +66,7 @@ export const navigation: NavigationItem[] = [
       {
         title: "Resources",
         links: [
-          { label: "Blog", href: "/blog" },
+          { label: "Blog", href: "/blogs" },
           { label: "QA Templates", href: "/resources/templates" },
           { label: "QA Guides", href: "/resources/guides" },
           { label: "E-books", href: "/resources/ebooks" },

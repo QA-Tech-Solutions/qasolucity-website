@@ -1,43 +1,85 @@
+"use client";
+
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
-import { Heading } from "@/components/ui/Heading";
-import { Text } from "@/components/ui/Text";
-import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function ResourcesHero() {
   return (
     <Section className="relative overflow-hidden bg-[linear-gradient(135deg,_#f8fafc_0%,_#eef2ff_45%,_#fdf2f8_100%)] pt-36 pb-24">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute left-[-6%] top-[-8%] h-72 w-72 rounded-full bg-indigo-200/50 blur-[140px]" />
-        <div className="absolute right-[-4%] top-[12%] h-80 w-80 rounded-full bg-violet-200/50 blur-[140px]" />
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <motion.div
+          animate={{ x: [-20, 20, -20], y: [-10, 10, -10], scale: [1, 1.05, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -left-24 top-0 h-[480px] w-[480px] rounded-full bg-indigo-200/40 blur-[140px]"
+        />
+        <motion.div
+          animate={{ x: [20, -20, 20], y: [10, -10, 10], scale: [1, 1.05, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute -right-24 top-1/4 h-[500px] w-[500px] rounded-full bg-violet-200/40 blur-[150px]"
+        />
+
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0f172a 1px, transparent 1px),
+              linear-gradient(to bottom, #0f172a 1px, transparent 1px)
+            `,
+            backgroundSize: "48px 48px",
+          }}
+        />
       </div>
 
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/80 bg-white/70 px-4 py-2 text-sm font-medium text-indigo-700 shadow-sm backdrop-blur">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            Materials to help teams move with confidence
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
+            </span>
+            Resources
           </div>
 
-          <Heading as="h1" level="h1" className="mt-8 text-[clamp(2.4rem,4.2vw,3.8rem)] leading-[0.95] tracking-[-0.04em] text-slate-900">
-            Practical resources for better quality thinking.
-          </Heading>
+          <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 md:text-5xl lg:text-6xl">
+            Practical resources for{" "}
+            <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
+              better quality thinking.
+            </span>
+          </h1>
 
-          <Text className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            Explore templates, guides, and events shaped for teams that want to build smarter testing habits without slowing delivery down.
-          </Text>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
+            Explore templates, guides, and events shaped for teams that want
+            to build smarter testing habits without slowing delivery down.
+          </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link href="/contact" className="inline-flex h-12 items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-1">
-              Request a resource pack
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <a href="#resources" className="inline-flex h-12 items-center justify-center rounded-2xl border border-slate-200 bg-white/80 px-6 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:-translate-y-1 hover:bg-white">
-              Browse resources
-            </a>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/contact"
+                className="group inline-flex h-14 items-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-8 text-white font-semibold shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+              >
+                Request a Resource Pack
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <a
+                href="#resources"
+                className="inline-flex h-14 items-center rounded-2xl border border-slate-300 bg-white/80 px-8 font-semibold text-slate-700 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-indigo-300 hover:bg-white"
+              >
+                Browse Resources
+              </a>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </Container>
     </Section>
   );

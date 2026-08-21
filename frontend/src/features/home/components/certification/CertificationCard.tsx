@@ -61,6 +61,7 @@ export default function CertificationCard({
         {/* Button with enhanced hover effects */}
         <Button
           render={<Link href="/contact" />}
+          nativeButton={false}
           className={`group/btn mt-10 h-14 rounded-2xl px-8 text-[15px] font-semibold transition-all duration-300 ${
             variant === "primary"
               ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 hover:scale-105 hover:from-indigo-700 hover:to-violet-700 hover:shadow-indigo-500/30"

@@ -15,7 +15,7 @@ export const footerLinks = {
   ],
 
   resources: [
-    { label: "Blog", href: "/blog" },
+    { label: "Blog", href: "/blogs" },
     { label: "FAQs", href: "/faq" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms & Conditions", href: "/terms" },

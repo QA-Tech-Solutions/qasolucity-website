@@ -18,14 +18,17 @@ import CTA from "@/features/home/components/cta";
 import Blog from "@/features/home/components/blog";
 
 import Footer from "@/features/home/components/footer";
+import { getPostSlugs } from "@/lib/blog";
 
 export default function HomePage() {
+  const existingSlugs = getPostSlugs();
+
   return (
     <>
       <main>
         <Hero />
 
-        <TechMarquee />
+        <TechMarquee existingSlugs={existingSlugs} />
 
         <TrustedBy />
 

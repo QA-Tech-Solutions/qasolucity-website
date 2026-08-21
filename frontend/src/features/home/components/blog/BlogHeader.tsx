@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function BlogHeader() {
   return (
@@ -40,13 +41,15 @@ export default function BlogHeader() {
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
       >
-        <Button
-          variant="outline"
-          className="group h-14 rounded-2xl border-2 border-indigo-200 px-7 text-indigo-600 hover:border-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
-        >
-          View All Articles
-          <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </Button>
+        <Link href="/blogs">
+          <Button
+            variant="outline"
+            className="group h-14 rounded-2xl border-2 border-indigo-200 px-7 text-indigo-600 hover:border-indigo-500 hover:bg-indigo-50 hover:text-indigo-700"
+          >
+            View All Articles
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Button>
+        </Link>
       </motion.div>
     </motion.div>
   );
