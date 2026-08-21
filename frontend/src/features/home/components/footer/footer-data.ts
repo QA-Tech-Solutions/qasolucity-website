@@ -1,11 +1,11 @@
 // src/features/home/components/footer/footer-data.ts
 export const footerLinks = {
   services: [
-    { label: "Manual Testing", href: "/services#manual-testing" },
-    { label: "Automation Testing", href: "/services#automation-testing" },
-    { label: "API Testing", href: "/services#api-testing" },
-    { label: "Performance Testing", href: "/services#performance-testing" },
-    { label: "QA Consulting", href: "/services#qa-consulting" },
+    { label: "Manual Testing", href: "/services/manual-testing" },
+    { label: "Automation Testing", href: "/services/automation-testing" },
+    { label: "API Testing", href: "/services/api-testing" },
+    { label: "Performance Testing", href: "/services/performance-testing" },
+    { label: "QA Consulting", href: "/services" },
   ],
 
   company: [

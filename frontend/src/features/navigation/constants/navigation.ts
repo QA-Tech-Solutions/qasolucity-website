@@ -71,6 +71,7 @@ export const navigation: NavigationItem[] = [
           { label: "QA Guides", href: "/resources/guides" },
           { label: "E-books", href: "/resources/ebooks" },
           { label: "Events", href: "/resources/events" },
+          { label: "FAQs", href: "/faq" },
         ],
       },
     ],

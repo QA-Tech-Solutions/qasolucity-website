@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   Zap,
   TrendingUp,
+  type LucideIcon,
 } from "lucide-react";
 
 // Helper: count-up animation
@@ -55,14 +56,16 @@ const KPICard = ({
   color = "indigo",
   delay = 0,
   dynamicValue,
+  testId,
 }: {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   value: number | string;
   suffix?: string;
   color?: "indigo" | "emerald" | "red" | "amber";
   delay?: number;
   dynamicValue?: number | string;
+  testId?: string;
 }) => {
   const colorMap = {
     indigo: "from-indigo-500/20 to-indigo-600/10 border-indigo-500/20",
@@ -95,7 +98,7 @@ const KPICard = ({
         <Icon className={`h-4 w-4 ${iconColorMap[color]}`} />
         <span className="text-xs font-medium text-slate-400">{label}</span>
       </div>
-      <p className="mt-2 text-2xl font-bold text-white">
+      <p className="mt-2 text-2xl font-bold text-white" data-testid={testId}>
         {typeof displayValue === "number" ? (
           <AnimatedNumber value={displayValue} suffix={suffix} duration={1000} />
         ) : (
@@ -106,18 +109,49 @@ const KPICard = ({
   );
 };
 
-export default function Dashboard() {
-  // Base data
-  const TOTAL_TESTS = 2710;
+interface QualityMetrics {
+  passRate: number;
+  passedTests: number;
+  totalTests: number;
+  bugs: number;
+  coverage: number;
+  apiHealth: "Healthy" | "Degraded";
+  lastUpdated: string | null;
+  source: "seed" | "automation";
+}
 
-  // State for dynamic metrics
-  const [passRate, setPassRate] = useState(94);
-  const [passedTests, setPassedTests] = useState(2548);
-  const [bugs, setBugs] = useState(3);
-  const [coverage, setCoverage] = useState(92);
-  const [apiHealth, setApiHealth] = useState("Healthy");
-  const [lastUpdated, setLastUpdated] = useState("2 min ago");
-  const [isLive, setIsLive] = useState(true);
+// Shown immediately on mount so the card never renders empty while the
+// first fetch is in flight; overwritten as soon as /api/quality-metrics
+// responds.
+const FALLBACK_METRICS: QualityMetrics = {
+  passRate: 94,
+  passedTests: 2548,
+  totalTests: 2710,
+  bugs: 3,
+  coverage: 92,
+  apiHealth: "Healthy",
+  lastUpdated: null,
+  source: "seed",
+};
+
+// How often the dashboard polls for a fresh automation run. CI runs the
+// suite on its own schedule (see qasolucity-automation); this just keeps
+// an open tab in sync with whatever the latest run reported.
+const POLL_INTERVAL_MS = 60_000;
+
+async function loadMetrics(): Promise<QualityMetrics | null> {
+  try {
+    const response = await fetch("/api/quality-metrics", { cache: "no-store" });
+    if (!response.ok) throw new Error(`status ${response.status}`);
+    return (await response.json()) as QualityMetrics;
+  } catch {
+    return null;
+  }
+}
+
+export default function Dashboard() {
+  const [metrics, setMetrics] = useState<QualityMetrics>(FALLBACK_METRICS);
+  const [isFetchFailing, setIsFetchFailing] = useState(false);
 
   // Chart line animation control
   const chartControls = useAnimation();
@@ -129,47 +163,44 @@ export default function Dashboard() {
     });
   }, [chartControls]);
 
-  // Function to generate realistic data updates
-  const generateDataUpdate = useCallback(() => {
-    // Fluctuate pass rate between 92-97%
-    const newPassRate = Math.min(97, Math.max(92, passRate + (Math.random() - 0.5) * 2));
-    const newPassedTests = Math.floor((newPassRate / 100) * TOTAL_TESTS);
-    
-    // Fluctuate bugs between 1-5
-    const newBugs = Math.max(1, Math.min(5, bugs + Math.floor(Math.random() * 3) - 1));
-    
-    // Fluctuate coverage between 90-95%
-    const newCoverage = Math.min(95, Math.max(90, coverage + (Math.random() - 0.5) * 2));
-    
-    // API Health - 90% healthy, 10% degraded
-    const healthStatus = Math.random() > 0.9 ? "Degraded" : "Healthy";
-    
-    // Update time
-    const now = new Date();
-    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    setLastUpdated(`${timeString}`);
+  const applyFetchResult = useCallback((data: QualityMetrics | null) => {
+    if (data) {
+      setMetrics(data);
+      setIsFetchFailing(false);
+    } else {
+      // Leave the last-known metrics on screen rather than clearing them;
+      // only the "Live" badge reflects that we're now stale.
+      setIsFetchFailing(true);
+    }
+  }, []);
 
-    // Apply updates
-    setPassRate(Math.round(newPassRate));
-    setPassedTests(newPassedTests);
-    setBugs(newBugs);
-    setCoverage(Math.round(newCoverage));
-    setApiHealth(healthStatus);
-  }, [passRate, bugs, coverage]);
+  const fetchMetrics = useCallback(async () => {
+    applyFetchResult(await loadMetrics());
+  }, [applyFetchResult]);
 
-  // Auto-update every 5-10 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      generateDataUpdate();
-    }, 5000 + Math.random() * 5000); // Random interval 5-10 seconds
+    let cancelled = false;
 
-    return () => clearInterval(interval);
-  }, [generateDataUpdate]);
+    const poll = async () => {
+      const data = await loadMetrics();
+      if (!cancelled) applyFetchResult(data);
+    };
 
-  // Manual update on hover (optional)
-  const handleManualUpdate = () => {
-    generateDataUpdate();
-  };
+    poll();
+    const interval = setInterval(poll, POLL_INTERVAL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [applyFetchResult]);
+
+  const { passRate, passedTests, bugs, coverage, apiHealth, lastUpdated, source } = metrics;
+  // "Live" only when a real automation run has reported in and the most
+  // recent poll succeeded — never claim real-time data we don't have.
+  const isLive = source === "automation" && !isFetchFailing;
+  const lastUpdatedLabel = lastUpdated
+    ? new Date(lastUpdated).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    : "No automation run yet";
 
   return (
     <motion.div
@@ -178,7 +209,8 @@ export default function Dashboard() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       whileHover={{ scale: 1.02 }}
       className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-4 shadow-2xl shadow-indigo-500/20 transition-all duration-300 sm:p-6"
-      onClick={handleManualUpdate}
+      onClick={fetchMetrics}
+      data-testid="quality-command-center"
     >
       {/* Animated Glow Orbs */}
       <motion.div
@@ -232,12 +264,28 @@ export default function Dashboard() {
               <p className="text-xs text-slate-400">Quality Command Center</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1">
+          <div
+            className={`flex items-center gap-2 rounded-full px-3 py-1 ${
+              isLive ? "bg-emerald-500/20" : "bg-slate-500/20"
+            }`}
+            data-testid="qcc-live-badge"
+            data-live={isLive}
+          >
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              {isLive && (
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              )}
+              <span
+                className={`relative inline-flex h-2 w-2 rounded-full ${
+                  isLive ? "bg-emerald-400" : "bg-slate-400"
+                }`}
+              />
             </span>
-            <span className="text-xs font-medium text-emerald-400">Live</span>
+            <span
+              className={`text-xs font-medium ${isLive ? "text-emerald-400" : "text-slate-400"}`}
+            >
+              {isLive ? "Live" : "Baseline"}
+            </span>
           </div>
         </motion.div>
 
@@ -255,7 +303,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-slate-400">Test Pass Rate</p>
-              <h4 className="text-3xl font-bold text-white">
+              <h4 className="text-3xl font-bold text-white" data-testid="qcc-pass-rate">
                 <AnimatedNumber value={passRate} suffix="%" duration={800} />
               </h4>
             </div>
@@ -322,7 +370,7 @@ export default function Dashboard() {
             value={passedTests}
             color="emerald"
             delay={0.1}
-            dynamicValue={passedTests}
+            testId="qcc-passed"
           />
           <KPICard
             icon={Bug}
@@ -330,7 +378,7 @@ export default function Dashboard() {
             value={bugs}
             color="red"
             delay={0.2}
-            dynamicValue={bugs}
+            testId="qcc-bugs"
           />
           <KPICard
             icon={Zap}
@@ -339,7 +387,7 @@ export default function Dashboard() {
             suffix="%"
             color="amber"
             delay={0.3}
-            dynamicValue={coverage}
+            testId="qcc-coverage"
           />
           <KPICard
             icon={Activity}
@@ -347,7 +395,7 @@ export default function Dashboard() {
             value={apiHealth}
             color={apiHealth === "Healthy" ? "emerald" : "red"}
             delay={0.4}
-            dynamicValue={apiHealth}
+            testId="qcc-api-health"
           />
         </motion.div>
 
@@ -362,8 +410,8 @@ export default function Dashboard() {
           transition={{ delay: 0.7, duration: 0.4 }}
           className="mt-4 flex items-center justify-between border-t border-white/5 pt-4 text-xs text-slate-500"
         >
-          <span>
-            Last updated: <span className="text-slate-400">{lastUpdated}</span>
+          <span data-testid="qcc-last-updated">
+            Last updated: <span className="text-slate-400">{lastUpdatedLabel}</span>
           </span>
           <span className="flex items-center gap-1">
             <span className={`h-1.5 w-1.5 rounded-full ${apiHealth === "Healthy" ? "bg-green-400" : "bg-red-400 animate-pulse"}`} />
