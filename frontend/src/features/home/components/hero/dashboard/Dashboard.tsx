@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import {
   Activity,
@@ -12,18 +12,28 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-// Helper: count-up animation
+// Helper: count-up animation. Animates from whatever is currently on
+// screen to the new target, rather than always restarting from 0 — the
+// dashboard polls for fresh data every 60s, and resetting to 0 on every
+// poll would make a live metric look like it just broke.
 const useCountUp = (target: number, duration: number = 1200) => {
   const [count, setCount] = useState(0);
+  const countRef = useRef(0);
 
   useEffect(() => {
+    const startValue = countRef.current;
+    const delta = target - startValue;
+    if (delta === 0) return;
+
     let startTime: number;
     let animationFrame: number;
 
     const updateCount = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
+      const next = Math.round(startValue + delta * progress);
+      countRef.current = next;
+      setCount(next);
       if (progress < 1) {
         animationFrame = requestAnimationFrame(updateCount);
       }
