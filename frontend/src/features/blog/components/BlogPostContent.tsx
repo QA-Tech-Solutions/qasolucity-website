@@ -9,6 +9,7 @@ import Section from "@/components/layout/Section";
 import BlogCard from "@/components/blog/BlogCard";
 import ZoomableImage from "@/components/blog/ZoomableImage";
 import ShareButtons from "@/components/blog/ShareButtons";
+import Footer from "@/features/home/components/footer";
 import type { BlogPost } from "@/lib/blog";
 
 interface Props {
@@ -163,6 +164,8 @@ export default function BlogPostContent({ post, relatedPosts, children }: Props)
           </Container>
         </Section>
       )}
+
+      <Footer />
     </>
   );
 }
