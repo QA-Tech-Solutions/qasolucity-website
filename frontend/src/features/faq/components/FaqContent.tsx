@@ -9,6 +9,10 @@ import Section from "@/components/layout/Section";
 import { Input } from "@/components/ui/Input";
 import { faqs, faqCategories, type FaqEntry } from "../data/faq-data";
 
+// Same collapsible-question pattern as ServiceFAQ/SolutionFAQ/ResourceFAQ
+// elsewhere in the app, but kept as its own component rather than reused
+// directly: this one also shows which category a question belongs to and
+// links back to the page it came from, which those don't need to do.
 function FaqItem({ faq, index }: { faq: FaqEntry; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -81,6 +85,11 @@ export default function FaqContent() {
     useState<(typeof faqCategories)[number]>("All");
   const [query, setQuery] = useState("");
 
+  // Category and search combine (narrow to a category, then search
+  // within it) rather than being mutually exclusive — with ~50 questions
+  // across four categories, someone who's already filtered down to
+  // "Services" and searched "automation" almost certainly wants both
+  // applied, not one to reset the other.
   const filtered = useMemo(() => {
     const byCategory =
       activeCategory === "All"
@@ -113,6 +122,10 @@ export default function FaqContent() {
           </div>
         </div>
 
+        {/* aria-label is deliberately more specific than the visible
+            "Services"/"Solutions" text — the page also has a "Services"
+            nav link and questions containing those words, so a screen
+            reader announcing just the category name would be ambiguous. */}
         <div className="mb-14 flex flex-wrap items-center justify-center gap-3">
           {faqCategories.map((category) => (
             <button
