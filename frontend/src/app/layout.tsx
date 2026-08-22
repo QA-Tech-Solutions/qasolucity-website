@@ -55,11 +55,10 @@ export const metadata: Metadata = {
     description:
       "Helping businesses deliver reliable software through quality engineering, software testing, automation, DevOps, and AI-powered QA solutions.",
   },
-  icons: {
-    icon: "/images/logos/qa-solucity-logo.png",
-    // optionally add a smaller size for better compatibility
-    // icon: [{ url: "/images/logos/qa-solucity-logo.png", sizes: "32x32" }],
-  },
+  // No manual `icons` entry: app/icon.png, app/apple-icon.png, and
+  // app/favicon.ico (Next's file-convention icons) are picked up and
+  // linked automatically. Explicitly setting `icons` here would override
+  // that and silently disable them.
 };
 
 export default function RootLayout({

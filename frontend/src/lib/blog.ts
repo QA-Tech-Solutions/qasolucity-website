@@ -4,6 +4,28 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
+const BLOG_IMAGES_DIR = path.join(process.cwd(), "public", "images", "blog");
+
+// Most posts' frontmatter points at a per-slug cover image
+// (/images/blog/<slug>.png) that was never actually supplied — only 3
+// real cover images exist so far. Rather than 404ing on every one of
+// those posts, fall back to one of the 3 real images, picked
+// deterministically per slug so the same post always gets the same
+// placeholder instead of a different one on every rebuild.
+const FALLBACK_IMAGES = [
+  "/images/blog/blog-1.png",
+  "/images/blog/blog-2.png",
+  "/images/blog/blog-3.png",
+];
+
+function resolveImage(slug: string, image: string): string {
+  const filename = path.basename(image);
+  if (fs.existsSync(path.join(BLOG_IMAGES_DIR, filename))) {
+    return image;
+  }
+  const hash = [...slug].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return FALLBACK_IMAGES[hash % FALLBACK_IMAGES.length];
+}
 
 export interface BlogFrontmatter {
   title: string;
@@ -29,6 +51,7 @@ function readPostFile(filename: string): BlogPost {
 
   return {
     ...frontmatter,
+    image: resolveImage(slug, frontmatter.image),
     slug,
     content,
     readTime: readingTime(content).text,
