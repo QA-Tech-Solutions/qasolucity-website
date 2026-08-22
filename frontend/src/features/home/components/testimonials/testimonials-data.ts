@@ -104,7 +104,7 @@ export const testimonials: Testimonial[] = [
     name: "Emeka Nwosu",
     role: "QA Lead",
     company: "Banking Solutions",
-    image: "/images/testimonials/John.jpeg",
+    image: "/images/testimonials/john.jpeg",
     rating: 5,
     quote:
       "As a QA lead, I appreciated their collaborative approach. They shared knowledge freely and helped us adopt modern testing tools we hadn't considered.",
