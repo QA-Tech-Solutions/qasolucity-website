@@ -11,6 +11,7 @@ import {
   TrendingUp,
   type LucideIcon,
 } from "lucide-react";
+import type { QualityMetrics } from "@/lib/quality-metrics-store";
 
 // Helper: count-up animation. Animates from whatever is currently on
 // screen to the new target, rather than always restarting from 0 — the
@@ -118,17 +119,6 @@ const KPICard = ({
     </motion.div>
   );
 };
-
-interface QualityMetrics {
-  passRate: number;
-  passedTests: number;
-  totalTests: number;
-  bugs: number;
-  coverage: number;
-  apiHealth: "Healthy" | "Degraded";
-  lastUpdated: string | null;
-  source: "seed" | "automation";
-}
 
 // Shown immediately on mount so the card never renders empty while the
 // first fetch is in flight; overwritten as soon as /api/quality-metrics
