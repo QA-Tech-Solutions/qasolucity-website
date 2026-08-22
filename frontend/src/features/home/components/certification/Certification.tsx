@@ -7,11 +7,11 @@ import CertificationCards from "./CertificationCards";
 
 export default function Certification() {
   return (
-    <Section className="relative overflow-hidden bg-white py-28">
+    <Section className="relative overflow-hidden bg-white dark:bg-slate-900 py-28">
       {/* Background Design */}
       <div className="absolute inset-0 -z-10">
         {/* Top-left glow */}
-        <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-indigo-100/30 blur-3xl" />
+        <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-indigo-100/30 dark:bg-indigo-900/20 blur-3xl" />
         
         {/* Bottom-right glow */}
         <div className="absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full bg-violet-100/30 blur-3xl" />

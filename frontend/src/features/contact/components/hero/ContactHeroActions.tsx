@@ -25,7 +25,7 @@ export default function ContactHeroActions() {
       <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
         <Button
           variant="outline"
-          className="group h-14 rounded-2xl border-slate-300 px-8 transition-all duration-300 hover:border-indigo-300 hover:bg-indigo-50"
+          className="group h-14 rounded-2xl border-slate-300 dark:border-slate-700 px-8 transition-all duration-300 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/40"
         >
           <Mail className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
           hello@qasolucity.com

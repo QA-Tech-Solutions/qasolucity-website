@@ -30,7 +30,7 @@ export default function MobileMenuItem({
       <Link
         href={item.href}
         onClick={onClose}
-        className="block py-3 text-base font-medium text-slate-800 transition-colors hover:text-indigo-600"
+        className="block py-3 text-base font-medium text-slate-800 dark:text-slate-200 transition-colors hover:text-indigo-600 dark:hover:text-indigo-400"
       >
         {item.label}
       </Link>
@@ -38,11 +38,11 @@ export default function MobileMenuItem({
   }
 
   return (
-    <div className="border-b border-slate-200/80 py-2">
+    <div className="border-b border-slate-200/80 dark:border-slate-800/80 py-2">
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-between py-3 text-left text-base font-medium text-slate-800"
+        className="flex w-full items-center justify-between py-3 text-left text-base font-medium text-slate-800 dark:text-slate-200"
         aria-expanded={expanded}
       >
         {item.label}
@@ -70,14 +70,14 @@ export default function MobileMenuItem({
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="ml-3 mt-3 space-y-3 border-l border-slate-200 pl-4 pb-2">
+            <div className="ml-3 mt-3 space-y-3 border-l border-slate-200 dark:border-slate-800 pl-4 pb-2">
               {item.sections!.flatMap((section) =>
                 section.links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={onClose}
-                    className="block py-1 text-sm text-slate-600 transition hover:text-indigo-600"
+                    className="block py-1 text-sm text-slate-600 dark:text-slate-400 transition hover:text-indigo-600 dark:hover:text-indigo-400"
                   >
                     {link.label}
                   </Link>

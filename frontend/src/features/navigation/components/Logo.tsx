@@ -17,7 +17,7 @@ export default function Logo() {
         className="h-12 w-auto object-contain rounded-xl"
       />
 
-      <span className="text-xl font-bold tracking-tight text-slate-900">
+      <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
         QA Solucity
       </span>
     </Link>

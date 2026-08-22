@@ -9,6 +9,7 @@ import DesktopNav from "./DesktopNav";
 import Logo from "./Logo";
 import MobileDrawer from "./MobileDrawer";
 import MobileNav from "./MobileNav";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 
 import { useMegaMenu } from "../hooks/useMegaMenu";
 import { useScroll } from "../hooks/useScroll";
@@ -27,7 +28,7 @@ function NavbarComponent() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
           scrolled
-            ? "border-b border-slate-200/70 bg-white/80 shadow-lg backdrop-blur-2xl"
+            ? "border-b border-slate-200/70 dark:border-slate-800/70 bg-white/80 dark:bg-slate-900/80 shadow-lg backdrop-blur-2xl"
             : "bg-transparent"
         )}
       >
@@ -46,21 +47,25 @@ function NavbarComponent() {
               toggle={toggle}
             />
 
-            <div className="hidden lg:block">
-              <Link href="/contact">
-                <Button
-                  className="rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 px-7 py-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25"
-                  aria-label="Book a consultation"
-                >
-                  Let's Talk
-                </Button>
-              </Link>
-            </div>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
 
-            <MobileNav
-              onOpen={() => setMobileOpen(true)}
-              aria-label="Open mobile menu"
-            />
+              <div className="hidden lg:block">
+                <Link href="/contact">
+                  <Button
+                    className="rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 px-7 py-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25"
+                    aria-label="Book a consultation"
+                  >
+                    Let's Talk
+                  </Button>
+                </Link>
+              </div>
+
+              <MobileNav
+                onOpen={() => setMobileOpen(true)}
+                aria-label="Open mobile menu"
+              />
+            </div>
           </nav>
         </Container>
       </header>

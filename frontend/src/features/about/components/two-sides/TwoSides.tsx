@@ -10,7 +10,7 @@ import { twoSides } from "./two-sides-data";
 
 export default function TwoSides() {
   return (
-    <Section className="relative overflow-hidden bg-slate-50 py-32">
+    <Section className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 py-32">
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <motion.div
@@ -19,7 +19,7 @@ export default function TwoSides() {
             opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-20 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 blur-3xl"
+          className="absolute -left-20 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 dark:bg-indigo-900/30 blur-3xl"
         />
         <motion.div
           animate={{

@@ -36,18 +36,18 @@ export default function Select({
           appearance-none
           rounded-2xl
           border
-          border-slate-200
-          bg-white
+          border-slate-200 dark:border-slate-800
+          bg-white dark:bg-slate-900
           px-5
           pr-12
-          text-slate-700
+          text-slate-700 dark:text-slate-300
           outline-none
           transition-all
           duration-200
-          hover:border-slate-300
-          focus:border-indigo-500
+          hover:border-slate-300 dark:hover:border-slate-600
+          focus:border-indigo-500 dark:focus:border-indigo-400
           focus:ring-4
-          focus:ring-indigo-100
+          focus:ring-indigo-100 dark:focus:ring-indigo-500/20
           disabled:cursor-not-allowed
           disabled:opacity-50
         `,
@@ -68,7 +68,7 @@ export default function Select({
 
       {/* Custom Arrow Icon */}
       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
-        <ChevronDown className="h-5 w-5 text-slate-400 transition-transform duration-200 group-hover:text-slate-600" />
+        <ChevronDown className="h-5 w-5 text-slate-400 dark:text-slate-500 transition-transform duration-200 group-hover:text-slate-600 dark:group-hover:text-slate-400" />
       </div>
     </div>
   );

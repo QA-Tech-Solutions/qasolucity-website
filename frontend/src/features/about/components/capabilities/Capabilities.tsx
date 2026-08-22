@@ -10,7 +10,7 @@ import { capabilityGroups } from "./capabilities-data";
 
 export default function Capabilities() {
   return (
-    <Section className="relative overflow-hidden bg-slate-50 py-32">
+    <Section className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 py-32">
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <motion.div

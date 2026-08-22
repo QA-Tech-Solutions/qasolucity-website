@@ -11,7 +11,7 @@ export default function TestimonialHeader() {
       transition={{ duration: 0.6 }}
       className="mx-auto mb-20 max-w-3xl text-center"
     >
-      <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-indigo-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 backdrop-blur-sm">
+      <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 dark:border-indigo-800/40 bg-indigo-50/50 dark:bg-indigo-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 dark:text-indigo-400 backdrop-blur-sm">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
           <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
@@ -19,7 +19,7 @@ export default function TestimonialHeader() {
         Testimonials
       </div>
 
-      <h2 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+      <h2 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
         What our{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
           clients
@@ -27,7 +27,7 @@ export default function TestimonialHeader() {
         are saying
       </h2>
 
-      <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+      <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
         Trusted by startups, enterprises and growing product teams to
         deliver reliable software through world-class quality assurance.
       </p>

@@ -9,7 +9,7 @@ import StoryVisual from "./StoryVisual";
 
 export default function OurStory() {
   return (
-    <Section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-indigo-50/30 py-32">
+    <Section className="relative overflow-hidden bg-gradient-to-b from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 py-32">
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Stronger animated glows */}

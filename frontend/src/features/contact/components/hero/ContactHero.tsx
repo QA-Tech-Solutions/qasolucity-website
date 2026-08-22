@@ -9,7 +9,7 @@ import ContactHeroStats from "./ContactHeroStats";
 
 export default function ContactHero() {
   return (
-    <Section className="relative overflow-hidden pt-40 pb-28 bg-[#FCFBF8]">
+    <Section className="relative overflow-hidden pt-40 pb-28 bg-[#FCFBF8] dark:bg-[#020617]">
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Glows */}
@@ -24,7 +24,7 @@ export default function ContactHero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -left-24 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 blur-[160px]"
+          className="absolute -left-24 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 dark:bg-indigo-900/30 blur-[160px]"
         />
 
         <motion.div

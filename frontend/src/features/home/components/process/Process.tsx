@@ -10,7 +10,7 @@ export default function Process() {
       {/* === BACKGROUND DESIGN === */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Orbs */}
-        <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-indigo-100/40 blur-3xl animate-pulse-glow" />
+        <div className="absolute -left-40 -top-40 h-[600px] w-[600px] rounded-full bg-indigo-100/40 dark:bg-indigo-900/30 blur-3xl animate-pulse-glow" />
         <div className="absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full bg-violet-100/40 blur-3xl animate-pulse-glow" style={{ animationDelay: "2s" }} />
         
         {/* Subtle Grid Pattern */}

@@ -23,7 +23,7 @@ export default function ServiceCard({
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-b from-white to-slate-50/60 p-8 transition-all duration-300 hover:border-indigo-200 hover:shadow-2xl hover:shadow-indigo-500/10"
+      className="group relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-b from-white dark:from-slate-900 to-slate-50/60 dark:to-slate-900/60 p-8 transition-all duration-300 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-2xl hover:shadow-indigo-500/10"
     >
       {/* Top Accent Gradient */}
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -52,17 +52,17 @@ export default function ServiceCard({
         </motion.div>
 
         {/* Title */}
-        <h3 className="text-[22px] font-semibold leading-snug tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-indigo-700">
+        <h3 className="text-[22px] font-semibold leading-snug tracking-tight text-slate-900 dark:text-slate-100 transition-colors duration-300 group-hover:text-indigo-700 dark:group-hover:text-indigo-300">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="mt-3 text-[15px] leading-7 text-slate-600">
+        <p className="mt-3 text-[15px] leading-7 text-slate-600 dark:text-slate-400">
           {description}
         </p>
 
         {/* Arrow */}
-        <div className="mt-6 flex items-center gap-2 text-sm font-medium text-indigo-600 opacity-0 transition-all duration-300 group-hover:opacity-100">
+        <div className="mt-6 flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 opacity-0 transition-all duration-300 group-hover:opacity-100">
           <span>Learn More</span>
           <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
         </div>

@@ -9,7 +9,7 @@ import HeroVisual from "./HeroVisual";
 
 export default function Hero() {
   return (
-    <Section className="relative overflow-hidden bg-[#FCFBF8] pt-28 pb-24 lg:min-h-screen">
+    <Section className="relative overflow-hidden bg-[#FCFBF8] dark:bg-[#020617] pt-28 pb-24 lg:min-h-screen">
       {/* ===== BACKGROUND ===== */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         
@@ -58,7 +58,7 @@ export default function Hero() {
 
         {/* Subtle Brand Accent – Faint "QA" Monogram */}
         <div className="absolute bottom-0 right-0 select-none opacity-[0.03]">
-          <span className="text-[200px] font-black leading-none tracking-[-0.08em] text-slate-900">
+          <span className="text-[200px] font-black leading-none tracking-[-0.08em] text-slate-900 dark:text-slate-100">
             QA
           </span>
         </div>
