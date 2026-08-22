@@ -8,14 +8,14 @@ import Modal from "@/components/ui/Modal";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import { services as serviceCatalog } from "@/features/services/data/services";
 
+// Sourced from the actual /services catalog so this list can't drift out
+// of sync with the services we offer; "Other" covers anything not yet
+// listed there.
 const services = [
-  { label: "Manual Testing", value: "manual-testing" },
-  { label: "Automation Testing", value: "automation-testing" },
-  { label: "API Testing", value: "api-testing" },
-  { label: "Performance Testing", value: "performance-testing" },
-  { label: "QA Consulting", value: "qa-consulting" },
-  { label: "Corporate Training", value: "corporate-training" },
+  ...serviceCatalog.map((service) => ({ label: service.title, value: service.slug })),
+  { label: "Other / Not sure", value: "other" },
 ];
 
 export default function ContactFormCard() {
@@ -102,6 +102,11 @@ export default function ContactFormCard() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Derived purely from formData, not from `errors` — `errors` only tracks
+  // blur-time messages and can retain stale keys after a field is
+  // corrected (handleChange clears a message to "" rather than deleting
+  // the key), which would otherwise leave this permanently false once any
+  // field had ever failed validation once, regardless of fill order.
   const isFormValid = (): boolean => {
     const required = ["firstName", "lastName", "email", "message"];
     const allFilled = required.every(
@@ -111,7 +116,8 @@ export default function ContactFormCard() {
     const nameValid = fullName.length >= 3;
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
     const messageValid = formData.message.trim().length >= 20;
-    return allFilled && nameValid && emailValid && messageValid && Object.keys(errors).length === 0;
+    const phoneValid = !formData.phone.trim() || /^[\+\d\s\-\(\)]{7,20}$/.test(formData.phone);
+    return allFilled && nameValid && emailValid && messageValid && phoneValid;
   };
 
   // ---------- Submit handler ----------

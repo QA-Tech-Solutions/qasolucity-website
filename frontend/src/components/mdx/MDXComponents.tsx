@@ -36,14 +36,14 @@ export const mdxComponents: MDXComponentsMap = {
   ),
   ol: (props) => (
     <ol
-      className="mt-6 list-decimal space-y-3 pl-6 text-[17px] leading-8 text-slate-600 dark:text-slate-400 marker:font-semibold marker:text-indigo-500 dark:text-indigo-400"
+      className="mt-6 list-decimal space-y-3 pl-6 text-[17px] leading-8 text-slate-600 dark:text-slate-400 marker:font-semibold marker:text-indigo-500 marker:dark:text-indigo-400"
       {...props}
     />
   ),
   li: (props) => <li className="pl-1.5 [&>p]:mt-0" {...props} />,
   blockquote: (props) => (
     <blockquote
-      className="mt-8 rounded-2xl border-l-4 border-indigo-500 bg-indigo-50/60 px-6 py-5 text-lg font-medium italic leading-8 text-slate-700 dark:text-slate-300"
+      className="mt-8 rounded-2xl border-l-4 border-indigo-500 dark:border-indigo-400 bg-indigo-50/60 dark:bg-indigo-950/40 px-6 py-5 text-lg font-medium italic leading-8 text-slate-700 dark:text-slate-300"
       {...props}
     />
   ),

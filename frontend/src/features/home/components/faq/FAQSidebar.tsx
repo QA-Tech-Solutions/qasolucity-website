@@ -14,7 +14,7 @@ export default function FAQSidebar() {
     >
       {/* Decorative Glow */}
       <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 dark:bg-indigo-900/20 blur-3xl" />
-      <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-violet-100/20 blur-3xl" />
+      <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-violet-100/20 dark:bg-violet-900/20 blur-3xl" />
 
       <div className="relative">
         {/* Icon */}
@@ -32,14 +32,14 @@ export default function FAQSidebar() {
 
         {/* Quick Stats */}
         <div className="mt-8 space-y-4">
-          <div className="flex items-center gap-4 rounded-xl bg-slate-50/80 px-5 py-4">
+          <div className="flex items-center gap-4 rounded-xl bg-slate-50/80 dark:bg-slate-800/60 px-5 py-4">
             <Clock className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
             <div>
               <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Response Time</p>
               <p className="text-sm text-slate-500 dark:text-slate-400">Within 24 hours</p>
             </div>
           </div>
-          <div className="flex items-center gap-4 rounded-xl bg-slate-50/80 px-5 py-4">
+          <div className="flex items-center gap-4 rounded-xl bg-slate-50/80 dark:bg-slate-800/60 px-5 py-4">
             <Mail className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
             <div>
               <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Email Us</p>

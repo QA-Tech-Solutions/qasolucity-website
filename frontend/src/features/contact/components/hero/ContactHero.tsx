@@ -39,12 +39,12 @@ export default function ContactHero() {
             ease: "easeInOut",
             delay: 1,
           }}
-          className="absolute -right-24 top-20 h-[450px] w-[450px] rounded-full bg-violet-100/40 blur-[180px]"
+          className="absolute -right-24 top-20 h-[450px] w-[450px] rounded-full bg-violet-100/40 dark:bg-violet-900/25 blur-[180px]"
         />
 
         {/* Subtle grid */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.04] dark:hidden"
           style={{
             backgroundImage: `
               linear-gradient(to right, #0f172a 1px, transparent 1px),
@@ -53,15 +53,19 @@ export default function ContactHero() {
             backgroundSize: "48px 48px",
           }}
         />
-
-        {/* Radial fade */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden opacity-[0.05] dark:block"
           style={{
-            background:
-              "radial-gradient(circle at center, transparent 30%, rgba(252,251,248,0.6) 100%)",
+            backgroundImage: `
+              linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+              linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)
+            `,
+            backgroundSize: "48px 48px",
           }}
         />
+
+        {/* Radial fade */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(252,251,248,0.6)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_30%,rgba(2,6,23,0.45)_100%)]" />
       </div>
 
       <Container>

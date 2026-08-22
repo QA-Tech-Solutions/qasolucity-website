@@ -17,7 +17,7 @@ export default function MegaMenu({ sections }: MegaMenuProps) {
   return (
     <div className="w-[100vw] flex justify-center pt-4">
       <div
-        className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white/95 p-8 shadow-[0_35px_90px_rgba(15,23,42,.15)] backdrop-blur-xl"
+        className="rounded-[28px] border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 p-8 shadow-[0_35px_90px_rgba(15,23,42,.15)] dark:shadow-[0_35px_90px_rgba(0,0,0,.4)] backdrop-blur-xl"
         style={{ width }}
       >
         <div

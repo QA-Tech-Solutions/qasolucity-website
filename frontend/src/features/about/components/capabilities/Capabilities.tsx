@@ -19,7 +19,7 @@ export default function Capabilities() {
             opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -right-20 top-1/2 h-[500px] w-[500px] rounded-full bg-violet-100/30 blur-3xl"
+          className="absolute -right-20 top-1/2 h-[500px] w-[500px] rounded-full bg-violet-100/30 dark:bg-violet-900/20 blur-3xl"
         />
         <div
           className="absolute inset-0 opacity-[0.03]"
