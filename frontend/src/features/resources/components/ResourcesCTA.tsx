@@ -65,12 +65,12 @@ export default function ResourcesCTA() {
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <a
-                href="#resources"
+              <Link
+                href="/resources#resources"
                 className="inline-flex h-14 items-center rounded-2xl border border-white/20 bg-transparent px-8 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30"
               >
                 Review Resource Library
-              </a>
+              </Link>
             </motion.div>
           </div>
         </motion.div>

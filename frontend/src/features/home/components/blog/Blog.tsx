@@ -16,12 +16,12 @@ export default function Blog() {
       {/* Background Design */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Orbs */}
-        <div className="absolute -left-40 top-1/3 h-[500px] w-[500px] rounded-full bg-indigo-100/25 blur-3xl" />
-        <div className="absolute -bottom-40 right-1/4 h-[400px] w-[400px] rounded-full bg-violet-100/25 blur-3xl" />
+        <div className="absolute -left-40 top-1/3 h-[500px] w-[500px] rounded-full bg-indigo-100/25 dark:bg-indigo-900/20 blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 h-[400px] w-[400px] rounded-full bg-violet-100/25 dark:bg-violet-900/20 blur-3xl" />
 
         {/* Subtle Grid */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.03] dark:hidden"
           style={{
             backgroundImage: `
               linear-gradient(to right, #0f172a 1px, transparent 1px),
@@ -30,15 +30,19 @@ export default function Blog() {
             backgroundSize: "48px 48px",
           }}
         />
-
-        {/* Radial Vignette */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden opacity-[0.05] dark:block"
           style={{
-            background:
-              "radial-gradient(circle at center, transparent 40%, rgba(252,251,248,0.8) 100%)",
+            backgroundImage: `
+              linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+              linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)
+            `,
+            backgroundSize: "48px 48px",
           }}
         />
+
+        {/* Radial Vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(252,251,248,0.8)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_40%,rgba(2,6,23,0.55)_100%)]" />
       </div>
 
       <Container>
