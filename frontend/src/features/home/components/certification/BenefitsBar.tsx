@@ -10,11 +10,11 @@ export default function BenefitsBar() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="relative overflow-hidden rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-12 py-10 shadow-xl shadow-slate-200/40"
+      className="relative overflow-hidden rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-12 py-10 shadow-xl shadow-slate-200/40 dark:shadow-black/20"
     >
       {/* Decorative Glows */}
       <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-indigo-100/20 dark:bg-indigo-900/20 blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-violet-100/20 blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-violet-100/20 dark:bg-violet-900/20 blur-3xl" />
 
       <div className="relative flex flex-wrap items-center justify-between gap-12">
         <motion.h3

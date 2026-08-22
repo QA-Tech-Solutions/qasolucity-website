@@ -37,7 +37,7 @@ export default function TwoSidesCard({
       <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-100/30 dark:bg-indigo-900/20 blur-3xl transition-opacity duration-500 group-hover:opacity-75" />
 
       <div className="relative flex items-start justify-between">
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-100 via-white dark:via-slate-900 to-violet-100 shadow-md ring-1 ring-slate-200/50 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-indigo-200/50">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-100 dark:from-indigo-950/60 via-white dark:via-slate-900 to-violet-100 dark:to-violet-950/60 shadow-md ring-1 ring-slate-200/50 dark:ring-slate-700/50 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-indigo-200/50 dark:group-hover:shadow-indigo-950/50">
           <Icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400 transition-transform duration-300 group-hover:scale-110" />
         </div>
         <span className="text-6xl font-black text-slate-100 transition-colors duration-300 group-hover:text-indigo-100">

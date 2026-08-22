@@ -24,7 +24,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-indigo-100/35 blur-[140px]"
+          className="absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-indigo-100/35 dark:bg-indigo-900/25 blur-[140px]"
         />
 
         {/* Left Glow – Drifting */}
@@ -38,7 +38,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -left-48 top-10 h-[600px] w-[600px] rounded-full bg-slate-100/60 blur-[140px]"
+          className="absolute -left-48 top-10 h-[600px] w-[600px] rounded-full bg-slate-100/60 dark:bg-slate-800/30 blur-[140px]"
         />
 
         {/* Right Glow – Drifting Opposite */}
@@ -53,7 +53,7 @@ export default function Hero() {
             ease: "easeInOut",
             delay: 1,
           }}
-          className="absolute -right-48 top-20 h-[550px] w-[550px] rounded-full bg-violet-100/40 blur-[140px]"
+          className="absolute -right-48 top-20 h-[550px] w-[550px] rounded-full bg-violet-100/40 dark:bg-violet-900/25 blur-[140px]"
         />
 
         {/* Subtle Brand Accent – Faint "QA" Monogram */}
@@ -63,9 +63,11 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Grid Pattern – Slightly more visible */}
+        {/* Grid Pattern – Slightly more visible. Two divs because the
+            line color is baked into an inline backgroundImage, which a
+            dark: className variant can't override. */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.04] dark:hidden"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgb(15 23 42 / 0.08) 1px, transparent 1px),
@@ -74,15 +76,19 @@ export default function Hero() {
             backgroundSize: "48px 48px",
           }}
         />
-
-        {/* Soft Radial Fade – Keeps focus on content */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden opacity-[0.05] dark:block"
           style={{
-            background:
-              "radial-gradient(circle at center, transparent 30%, rgba(252,251,248,0.3) 70%, #FCFBF8 100%)",
+            backgroundImage: `
+              linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
+              linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px)
+            `,
+            backgroundSize: "48px 48px",
           }}
         />
+
+        {/* Soft Radial Fade – Keeps focus on content */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(252,251,248,0.3)_70%,#FCFBF8_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_30%,rgba(2,6,23,0.4)_70%,#020617_100%)]" />
       </div>
 
       {/* ===== CONTENT ===== */}

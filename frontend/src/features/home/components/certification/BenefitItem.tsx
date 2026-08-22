@@ -25,7 +25,7 @@ export default function BenefitItem({ title, icon }: Props) {
       }}
       className="group flex cursor-default items-center gap-4 transition-all duration-300 hover:-translate-y-1"
     >
-      <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-100 via-white dark:via-slate-900 to-violet-100 shadow-md ring-1 ring-slate-200/50 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-indigo-200/50">
+      <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-100 dark:from-indigo-950/60 via-white dark:via-slate-900 to-violet-100 dark:to-violet-950/60 shadow-md ring-1 ring-slate-200/50 dark:ring-slate-700/50 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-indigo-200/50 dark:group-hover:shadow-indigo-950/50">
         <Icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400 transition-transform duration-300 group-hover:scale-110" />
         
         {/* Subtle glow on hover */}

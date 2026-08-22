@@ -27,7 +27,7 @@ export default function TwoSides() {
             opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute -right-20 bottom-0 h-[450px] w-[450px] rounded-full bg-violet-100/40 blur-3xl"
+          className="absolute -right-20 bottom-0 h-[450px] w-[450px] rounded-full bg-violet-100/40 dark:bg-violet-900/25 blur-3xl"
         />
         <div
           className="absolute inset-0 opacity-[0.03]"

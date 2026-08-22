@@ -20,7 +20,7 @@ export default function ContactTrustStrip() {
         >
           {/* Decorative glows */}
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-indigo-100/20 dark:bg-indigo-900/20 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-violet-100/20 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-violet-100/20 dark:bg-violet-900/15 blur-3xl pointer-events-none" />
 
           <div className="relative grid gap-8 md:grid-cols-2 xl:grid-cols-4 xl:divide-x xl:divide-slate-200/70">
             {trustItems.map((item, index) => (

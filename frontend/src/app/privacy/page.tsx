@@ -51,13 +51,7 @@ export default function PrivacyPage() {
             />
 
             {/* Radial fade */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(circle at center, transparent 30%, rgba(248,250,252,0.3) 100%)",
-              }}
-            />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(248,250,252,0.3)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_30%,rgba(2,6,23,0.4)_100%)]" />
           </div>
 
           <Container>

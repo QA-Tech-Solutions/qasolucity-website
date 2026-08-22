@@ -27,8 +27,8 @@ export default function CertificationCard({
       className="group relative overflow-visible rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-10 pb-10 pt-14 text-center transition-all duration-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-[0_35px_80px_rgba(79,70,229,.12)]"
     >
       {/* Glow effects – stay subtle */}
-      <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-200/20 blur-3xl transition-opacity duration-500 group-hover:opacity-75" />
-      <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-violet-200/20 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-200/20 dark:bg-indigo-800/20 blur-3xl transition-opacity duration-500 group-hover:opacity-75" />
+      <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-violet-200/20 dark:bg-violet-800/20 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       {/* Badge */}
       <motion.div
@@ -37,7 +37,7 @@ export default function CertificationCard({
         transition={{ duration: 0.5, delay: 0.2 }}
         className="absolute -top-7 left-10 z-20"
       >
-        <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white dark:bg-slate-900 shadow-xl ring-8 ring-[#FCFBF8]">
+        <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white dark:bg-slate-900 shadow-xl ring-8 ring-[#FCFBF8] dark:ring-[#020617]">
           <Image
             src="/icons/badge.svg"
             alt="Badge"
@@ -50,7 +50,7 @@ export default function CertificationCard({
       </motion.div>
 
       <div className="relative z-10">
-        <h3 className="mx-auto max-w-[240px] whitespace-pre-line text-[38px] font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 transition-colors duration-300 group-hover:text-indigo-800 sm:max-w-xs md:max-w-sm">
+        <h3 className="mx-auto max-w-[240px] whitespace-pre-line text-[38px] font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 transition-colors duration-300 group-hover:text-indigo-800 dark:group-hover:text-indigo-300 sm:max-w-xs md:max-w-sm">
           {title}
         </h3>
 
