@@ -112,6 +112,7 @@ Run from `frontend/`:
 | `MAINTENANCE_MODE` | No | Set `true` to show a 503 maintenance page site-wide |
 | `MAINTENANCE_BYPASS_SECRET` | No | Visit `/?bypass=<secret>` during maintenance to get a cookie that lets you preview the live site |
 | `AUTOMATION_API_TOKEN` | No | Bearer token [qasolucity-automation](https://github.com/QA-Tech-Solutions/qasolucity-automation) authenticates with to POST live test results to `/api/quality-metrics`. Generate one with `node -e "console.log(require('crypto').randomBytes(24).toString('hex'))"` |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | No | Where `/api/quality-metrics` persists in production. Set automatically when you connect the Upstash Redis integration from Vercel's Marketplace tab — no need to fill these in by hand. Without them, falls back to a local file (dev only). |
 
 ## Writing a blog post
 
@@ -159,7 +160,7 @@ How the two repos connect:
 2. **This repo**'s `/api/quality-metrics` route stores the latest result and serves it back via `GET`. The `Dashboard` component (`src/features/home/components/hero/dashboard/Dashboard.tsx`) fetches it on load and polls every 60 seconds.
 3. Until a real automation run has reported in, the dashboard shows seed/placeholder numbers and a **"Baseline"** badge instead of **"Live"** — it never claims real-time data it doesn't actually have.
 
-**Current limitation:** `/api/quality-metrics` persists the latest result to a JSON file on disk (`frontend/data/quality-metrics.json`), which only works on a host with a writable, persistent filesystem. It will not silently succeed on a serverless deploy (Vercel, Netlify, ...) — the route returns an explicit error there instead of losing data quietly. See the automation repo's README for the production-persistence options (KV store, external DB, or a committed-results-file approach) before relying on this in production.
+**Storage:** `/api/quality-metrics` persists through `src/lib/quality-metrics-store.ts`, which uses Upstash Redis (connected via Vercel's Marketplace integration — set `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN`, or the older `KV_REST_API_URL`/`KV_REST_API_TOKEN` naming, either works) when configured. Locally, with neither set, it falls back to a JSON file (`frontend/data/quality-metrics.json`) automatically — no Redis needed just to run `npm run dev`. A production deploy without the integration connected will get an explicit 500 on POST rather than silently losing every reported run.
 
 ## Deployment
 
