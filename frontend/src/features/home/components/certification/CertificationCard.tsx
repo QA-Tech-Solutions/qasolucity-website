@@ -24,7 +24,7 @@ export default function CertificationCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="group relative overflow-visible rounded-[34px] border border-slate-200/80 bg-gradient-to-br from-white via-white to-indigo-50/30 px-10 pb-10 pt-14 text-center transition-all duration-500 hover:border-indigo-200 hover:shadow-[0_35px_80px_rgba(79,70,229,.12)]"
+      className="group relative overflow-visible rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-10 pb-10 pt-14 text-center transition-all duration-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-[0_35px_80px_rgba(79,70,229,.12)]"
     >
       {/* Glow effects – stay subtle */}
       <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-200/20 blur-3xl transition-opacity duration-500 group-hover:opacity-75" />
@@ -37,7 +37,7 @@ export default function CertificationCard({
         transition={{ duration: 0.5, delay: 0.2 }}
         className="absolute -top-7 left-10 z-20"
       >
-        <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-xl ring-8 ring-[#FCFBF8]">
+        <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white dark:bg-slate-900 shadow-xl ring-8 ring-[#FCFBF8]">
           <Image
             src="/icons/badge.svg"
             alt="Badge"
@@ -50,11 +50,11 @@ export default function CertificationCard({
       </motion.div>
 
       <div className="relative z-10">
-        <h3 className="mx-auto max-w-[240px] whitespace-pre-line text-[38px] font-bold leading-tight tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-indigo-800 sm:max-w-xs md:max-w-sm">
+        <h3 className="mx-auto max-w-[240px] whitespace-pre-line text-[38px] font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 transition-colors duration-300 group-hover:text-indigo-800 sm:max-w-xs md:max-w-sm">
           {title}
         </h3>
 
-        <p className="mx-auto mt-6 max-w-md text-[17px] leading-8 text-slate-500">
+        <p className="mx-auto mt-6 max-w-md text-[17px] leading-8 text-slate-500 dark:text-slate-400">
           {description}
         </p>
 
@@ -65,7 +65,7 @@ export default function CertificationCard({
           className={`group/btn mt-10 h-14 rounded-2xl px-8 text-[15px] font-semibold transition-all duration-300 ${
             variant === "primary"
               ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 hover:scale-105 hover:from-indigo-700 hover:to-violet-700 hover:shadow-indigo-500/30"
-              : "border border-indigo-200 bg-white text-indigo-600 shadow-sm hover:scale-105 hover:bg-indigo-50 hover:shadow-lg hover:shadow-indigo-100/50"
+              : "border border-indigo-200 dark:border-indigo-800/60 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm hover:scale-105 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:shadow-lg hover:shadow-indigo-100/50"
           }`}
         >
           {button}

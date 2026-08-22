@@ -18,7 +18,7 @@ const quickLinks = [
 
 export default function NotFoundContent() {
   return (
-    <Section className="relative flex min-h-[80vh] items-center overflow-hidden bg-gradient-to-b from-slate-100 via-white to-white pt-44 pb-32">
+    <Section className="relative flex min-h-[80vh] items-center overflow-hidden bg-gradient-to-b from-slate-100 dark:from-slate-800 via-white dark:via-slate-900 to-white dark:to-slate-900 pt-44 pb-32">
       {/* Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <motion.div
@@ -77,11 +77,11 @@ export default function NotFoundContent() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-2xl text-center"
         >
-          <Badge className="group inline-flex items-center gap-3 rounded-full border-0 bg-white/80 px-5 py-2.5 shadow-sm shadow-indigo-100/50 backdrop-blur-sm">
+          <Badge className="group inline-flex items-center gap-3 rounded-full border-0 bg-white/80 dark:bg-slate-900/80 px-5 py-2.5 shadow-sm shadow-indigo-100/50 backdrop-blur-sm">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-md">
               <Bug className="h-4 w-4" />
             </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700 dark:text-slate-300">
               404 Error
             </span>
             <span className="relative flex h-2 w-2">
@@ -94,11 +94,11 @@ export default function NotFoundContent() {
             404
           </p>
 
-          <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+          <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-4xl">
             This page didn't pass QA.
           </h1>
 
-          <p className="mx-auto mt-6 max-w-lg text-lg leading-8 text-slate-600">
+          <p className="mx-auto mt-6 max-w-lg text-lg leading-8 text-slate-600 dark:text-slate-400">
             The page you're looking for doesn't exist, may have moved, or
             failed our quality check. Let's get you back on track.
           </p>
@@ -117,7 +117,7 @@ export default function NotFoundContent() {
               <Link href="/contact">
                 <Button
                   variant="outline"
-                  className="group h-14 rounded-2xl border-slate-300 px-8 transition-all duration-300 hover:border-indigo-300 hover:bg-indigo-50"
+                  className="group h-14 rounded-2xl border-slate-300 dark:border-slate-700 px-8 transition-all duration-300 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/40"
                 >
                   Contact Us
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -127,12 +127,12 @@ export default function NotFoundContent() {
           </div>
 
           <div className="mt-14 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-sm">
-            <span className="text-slate-400">Or try one of these:</span>
+            <span className="text-slate-400 dark:text-slate-500">Or try one of these:</span>
             {quickLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-full border border-slate-200/80 bg-white px-4 py-1.5 font-medium text-slate-600 shadow-sm transition-all duration-300 hover:border-indigo-200 hover:text-indigo-600 hover:shadow-md"
+                className="rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 px-4 py-1.5 font-medium text-slate-600 dark:text-slate-400 shadow-sm transition-all duration-300 hover:border-indigo-200 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-md"
               >
                 {link.label}
               </Link>

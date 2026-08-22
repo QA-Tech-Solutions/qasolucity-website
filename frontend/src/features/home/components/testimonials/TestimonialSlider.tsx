@@ -86,7 +86,7 @@ export default function TestimonialSlider() {
                   </div>
 
                   {/* Image card - smaller */}
-                  <div className="relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white p-3 shadow-[0_25px_60px_rgba(15,23,42,.10)]">
+                  <div className="relative overflow-hidden rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-3 shadow-[0_25px_60px_rgba(15,23,42,.10)]">
                     <Image
                       src={testimonial.image}
                       alt={testimonial.name}
@@ -103,18 +103,18 @@ export default function TestimonialSlider() {
                   {/* Nav buttons */}
                   <button
                     onClick={scrollPrev}
-                    className="absolute left-0 top-1/2 z-20 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-white/90 shadow-lg backdrop-blur-xl transition-all duration-300 hover:-translate-y-[55%] hover:scale-105 hover:bg-white hover:shadow-xl"
+                    className="absolute left-0 top-1/2 z-20 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-white/90 dark:bg-slate-900/90 shadow-lg backdrop-blur-xl transition-all duration-300 hover:-translate-y-[55%] hover:scale-105 hover:bg-white dark:hover:bg-slate-800 hover:shadow-xl"
                     aria-label="Previous testimonial"
                   >
-                    <ChevronLeft className="h-5 w-5 text-slate-700" />
+                    <ChevronLeft className="h-5 w-5 text-slate-700 dark:text-slate-300" />
                   </button>
 
                   <button
                     onClick={scrollNext}
-                    className="absolute right-0 top-1/2 z-20 flex h-11 w-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-white/90 shadow-lg backdrop-blur-xl transition-all duration-300 hover:-translate-y-[55%] hover:scale-105 hover:bg-white hover:shadow-xl"
+                    className="absolute right-0 top-1/2 z-20 flex h-11 w-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-white/90 dark:bg-slate-900/90 shadow-lg backdrop-blur-xl transition-all duration-300 hover:-translate-y-[55%] hover:scale-105 hover:bg-white dark:hover:bg-slate-800 hover:shadow-xl"
                     aria-label="Next testimonial"
                   >
-                    <ChevronRight className="h-5 w-5 text-slate-700" />
+                    <ChevronRight className="h-5 w-5 text-slate-700 dark:text-slate-300" />
                   </button>
                 </div>
 
@@ -136,7 +136,7 @@ export default function TestimonialSlider() {
                         />
                       ))}
                     </div>
-                    <span className="text-sm font-medium text-slate-500">
+                    <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
                       Rated 5.0
                     </span>
                   </div>
@@ -147,7 +147,7 @@ export default function TestimonialSlider() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="relative mt-6 text-[26px] font-serif font-medium leading-[1.45] tracking-tight text-slate-900 lg:text-[32px]"
+                    className="relative mt-6 text-[26px] font-serif font-medium leading-[1.45] tracking-tight text-slate-900 dark:text-slate-100 lg:text-[32px]"
                   >
                     "{testimonial.quote}"
                   </motion.blockquote>
@@ -159,13 +159,13 @@ export default function TestimonialSlider() {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="mt-10"
                   >
-                    <h4 className="text-2xl font-bold text-slate-900">
+                    <h4 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                       {testimonial.name}
                     </h4>
-                    <p className="mt-1 text-[16px] text-slate-500">
+                    <p className="mt-1 text-[16px] text-slate-500 dark:text-slate-400">
                       {testimonial.role}
                     </p>
-                    <p className="mt-0.5 font-semibold text-indigo-600">
+                    <p className="mt-0.5 font-semibold text-indigo-600 dark:text-indigo-400">
                       {testimonial.company}
                     </p>
 
@@ -175,7 +175,7 @@ export default function TestimonialSlider() {
                         <BadgeCheck className="h-3.5 w-3.5" />
                         Verified Client
                       </span>
-                      <span className="text-sm text-slate-400">
+                      <span className="text-sm text-slate-400 dark:text-slate-500">
                         ★ 100% Recommended
                       </span>
                     </div>
@@ -196,7 +196,7 @@ export default function TestimonialSlider() {
             className={`h-2.5 rounded-full transition-all duration-500 ${
               selectedIndex === index
                 ? "w-10 bg-indigo-600"
-                : "w-6 bg-slate-300 hover:bg-slate-400"
+                : "w-6 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400"
             }`}
             aria-label={`Go to testimonial ${index + 1}`}
           />

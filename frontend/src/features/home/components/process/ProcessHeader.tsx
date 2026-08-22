@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 export default function ProcessHeader() {
   return (
     <div className="max-w-2xl">
-      <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-indigo-50/50 px-3 py-1 text-xs font-semibold text-indigo-600 backdrop-blur-sm">
+      <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 dark:border-indigo-800/40 bg-indigo-50/50 dark:bg-indigo-950/30 px-3 py-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 backdrop-blur-sm">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
           <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600"></span>
@@ -12,11 +12,11 @@ export default function ProcessHeader() {
         OUR PROCESS
       </div>
 
-      <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+      <h2 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
         A proven QA workflow built for modern products.
       </h2>
 
-      <p className="mt-6 text-lg leading-8 text-slate-600">
+      <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-400">
         Every engagement follows a structured quality assurance process,
         from understanding your product to continuous optimization after
         release.

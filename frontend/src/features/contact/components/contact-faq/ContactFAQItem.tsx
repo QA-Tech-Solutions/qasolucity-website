@@ -30,14 +30,14 @@ export default function ContactFAQItem({
         duration-300
         ${
           open
-            ? "border-indigo-200 bg-white shadow-xl shadow-indigo-100/30"
-            : "border-slate-200/80 bg-white/80 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/10"
+            ? "border-indigo-200 dark:border-indigo-800/60 bg-white dark:bg-slate-900 shadow-xl shadow-indigo-100/30"
+            : "border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-lg hover:shadow-indigo-100/10"
         }
       `}
     >
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between px-8 py-7 text-left transition-colors duration-300 hover:bg-slate-50/50"
+        className="flex w-full items-center justify-between px-8 py-7 text-left transition-colors duration-300 hover:bg-slate-50/50 dark:hover:bg-slate-800/50"
       >
         <div className="flex items-center gap-6">
           <span
@@ -49,15 +49,15 @@ export default function ContactFAQItem({
               duration-300
               ${
                 open
-                  ? "text-indigo-600"
-                  : "text-slate-500"
+                  ? "text-indigo-600 dark:text-indigo-400"
+                  : "text-slate-500 dark:text-slate-400"
               }
             `}
           >
             {(index + 1).toString().padStart(2, "0")}
           </span>
 
-          <h3 className="text-lg font-semibold text-slate-900 md:text-xl">
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 md:text-xl">
             {faq.question}
           </h3>
         </div>
@@ -76,7 +76,7 @@ export default function ContactFAQItem({
             ${
               open
                 ? "bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20"
-                : "bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400"
             }
           `}
         >
@@ -99,7 +99,7 @@ export default function ContactFAQItem({
             <div className="overflow-hidden">
               <div className="mx-8 h-0.5 bg-gradient-to-r from-indigo-500 to-violet-500" />
               <div className="px-8 pb-7 pt-5">
-                <p className="text-[16px] leading-7 text-slate-600 md:text-[17px] md:leading-8">
+                <p className="text-[16px] leading-7 text-slate-600 dark:text-slate-400 md:text-[17px] md:leading-8">
                   {faq.answer}
                 </p>
               </div>

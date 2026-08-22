@@ -8,7 +8,7 @@ import ServiceCard from "./ServiceCard";
 
 export default function ServicesOverview() {
   return (
-    <Section id="services" className="bg-white py-28">
+    <Section id="services" className="bg-white dark:bg-slate-900 py-28">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -17,16 +17,16 @@ export default function ServicesOverview() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-600">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
             Our service portfolio
           </p>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
             Flexible support for every stage{" "}
             <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
               of quality delivery.
             </span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
             Whether you need a dedicated testing partner, advisory guidance,
             or a training program that lifts your team fast, we design the
             engagement around your goals.
@@ -50,17 +50,17 @@ export default function ServicesOverview() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="flex flex-col gap-3 border-b border-slate-200 pb-6 sm:flex-row sm:items-end sm:justify-between"
+                  className="flex flex-col gap-3 border-b border-slate-200 dark:border-slate-800 pb-6 sm:flex-row sm:items-end sm:justify-between"
                 >
                   <div>
-                    <h3 className="text-2xl font-bold text-slate-900">
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                       {category.name}
                     </h3>
-                    <p className="mt-2 max-w-xl text-[15px] leading-7 text-slate-600">
+                    <p className="mt-2 max-w-xl text-[15px] leading-7 text-slate-600 dark:text-slate-400">
                       {category.description}
                     </p>
                   </div>
-                  <span className="shrink-0 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-700">
+                  <span className="shrink-0 rounded-full border border-indigo-100 dark:border-indigo-900/60 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-indigo-700 dark:text-indigo-300">
                     {categoryServices.length} services
                   </span>
                 </motion.div>

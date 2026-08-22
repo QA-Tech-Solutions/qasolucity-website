@@ -110,9 +110,9 @@ const sections = [
 export default function TermsContent() {
   return (
     <div className="relative -mt-16">
-      <div className="rounded-[28px] border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-12">
+      <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-12">
         <div className="prose prose-lg prose-slate max-w-none">
-          <p className="text-lg leading-8 text-slate-600">
+          <p className="text-lg leading-8 text-slate-600 dark:text-slate-400">
             Welcome to QA Solucity. By using our website and services, you agree
             to comply with and be bound by these Terms & Conditions. Please read
             them carefully before using our services.
@@ -125,15 +125,15 @@ export default function TermsContent() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05, duration: 0.4 }}
-                className="border-b border-slate-100 pb-8 last:border-0 last:pb-0"
+                className="border-b border-slate-100 dark:border-slate-800 pb-8 last:border-0 last:pb-0"
               >
-                <h2 className="text-2xl font-bold text-slate-900">
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   {section.title}
                 </h2>
                 {section.content.map((paragraph, i) => (
                   <p
                     key={i}
-                    className={`mt-4 text-[16px] leading-8 text-slate-600 ${
+                    className={`mt-4 text-[16px] leading-8 text-slate-600 dark:text-slate-400 ${
                       paragraph.startsWith("•") ? "pl-4" : ""
                     }`}
                   >
@@ -144,9 +144,9 @@ export default function TermsContent() {
             ))}
           </div>
 
-          <div className="mt-12 rounded-2xl bg-gradient-to-br from-indigo-50 to-violet-50 p-6 text-sm text-slate-500">
+          <div className="mt-12 rounded-2xl bg-gradient-to-br from-indigo-50 dark:from-indigo-950/40 to-violet-50 dark:to-violet-950/40 p-6 text-sm text-slate-500 dark:text-slate-400">
             <p>
-              <strong className="text-slate-700">Effective Date:</strong>{" "}
+              <strong className="text-slate-700 dark:text-slate-300">Effective Date:</strong>{" "}
               {new Date().toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",

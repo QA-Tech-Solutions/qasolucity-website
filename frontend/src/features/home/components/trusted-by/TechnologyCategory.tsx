@@ -22,7 +22,7 @@ export default function TechnologyCategory({
         px-10
         py-8
         lg:grid-cols-[170px_minmax(0,1fr)]
-        ${!last ? "border-b border-slate-100" : ""}
+        ${!last ? "border-b border-slate-100 dark:border-slate-800" : ""}
       `}
     >
       <h3
@@ -31,7 +31,7 @@ export default function TechnologyCategory({
           font-bold
           uppercase
           tracking-[0.22em]
-          text-slate-500
+          text-slate-500 dark:text-slate-400
         "
       >
         {title}

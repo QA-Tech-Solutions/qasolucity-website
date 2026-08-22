@@ -23,7 +23,7 @@ export default function FeaturedCard() {
       <Link href="/contact">
         <Button
           variant="secondary"
-          className="mt-6 h-12 w-full rounded-2xl bg-white px-6 text-sm font-semibold text-indigo-700 hover:bg-slate-100"
+          className="mt-6 h-12 w-full rounded-2xl bg-white dark:bg-slate-900 px-6 text-sm font-semibold text-indigo-700 dark:text-indigo-300 hover:bg-slate-100 dark:hover:bg-slate-800"
         >
           Book Consultation
           <ArrowRight className="ml-2 h-4 w-4" />

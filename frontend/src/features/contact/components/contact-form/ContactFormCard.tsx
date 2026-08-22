@@ -163,7 +163,7 @@ export default function ContactFormCard() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="rounded-[28px] border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-10"
+        className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-10"
       >
         <form onSubmit={handleSubmit} noValidate>
           <div className="grid gap-5 md:grid-cols-2">
@@ -175,7 +175,7 @@ export default function ContactFormCard() {
                 onBlur={handleBlur}
                 placeholder="First Name"
                 required
-                className="rounded-xl border-slate-200 transition-all duration-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+                className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
               />
               {errors.firstName && (
                 <p className="mt-1 text-xs text-red-500">{errors.firstName}</p>
@@ -189,7 +189,7 @@ export default function ContactFormCard() {
                 onBlur={handleBlur}
                 placeholder="Last Name"
                 required
-                className="rounded-xl border-slate-200 transition-all duration-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+                className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
               />
               {errors.lastName && (
                 <p className="mt-1 text-xs text-red-500">{errors.lastName}</p>
@@ -207,7 +207,7 @@ export default function ContactFormCard() {
                 onBlur={handleBlur}
                 placeholder="Work Email"
                 required
-                className="rounded-xl border-slate-200 transition-all duration-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+                className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
               />
               {errors.email && (
                 <p className="mt-1 text-xs text-red-500">{errors.email}</p>
@@ -219,7 +219,7 @@ export default function ContactFormCard() {
                 value={formData.company}
                 onChange={handleChange}
                 placeholder="Company (Optional)"
-                className="rounded-xl border-slate-200 transition-all duration-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+                className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
               />
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function ContactFormCard() {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Phone Number (Optional)"
-              className="rounded-xl border-slate-200 transition-all duration-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+              className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
             />
             {errors.phone && (
               <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
@@ -245,7 +245,7 @@ export default function ContactFormCard() {
               onChange={handleChange}
               placeholder="Select a Service"
               options={services}
-              className="rounded-xl border-slate-200 pr-10 transition-all duration-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+              className="rounded-xl border-slate-200 dark:border-slate-800 pr-10 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
             />
           </div>
 
@@ -258,7 +258,7 @@ export default function ContactFormCard() {
               rows={5}
               placeholder="Tell us about your project..."
               required
-              className="rounded-xl border-slate-200 transition-all duration-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+              className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
             />
             {errors.message && (
               <p className="mt-1 text-xs text-red-500">{errors.message}</p>
@@ -286,7 +286,7 @@ export default function ContactFormCard() {
             </p>
           )}
 
-          <p className="mt-4 text-center text-xs text-slate-600">
+          <p className="mt-4 text-center text-xs text-slate-600 dark:text-slate-400">
             We'll respond within 24 hours. Your information is kept confidential.
           </p>
         </form>
@@ -298,13 +298,13 @@ export default function ContactFormCard() {
           <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
             <CheckCircle2 className="h-8 w-8 text-emerald-600" />
           </div>
-          <h4 className="text-xl font-bold text-slate-900">Message Sent! 🎉</h4>
-          <p className="mt-2 text-sm text-slate-600">
+          <h4 className="text-xl font-bold text-slate-900 dark:text-slate-100">Message Sent! 🎉</h4>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
             Thank you for reaching out to <strong>QA Solucity</strong>.
             <br />
             Our QA specialists will get back to you within 24 hours.
           </p>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             We've also sent a confirmation to your email.
           </p>
           <button

@@ -25,7 +25,7 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
 
   return (
     <>
-      <Section className="relative overflow-hidden bg-[linear-gradient(135deg,_#f8f7ff_0%,_#eef2ff_45%,_#fdf2f8_100%)] pt-36 pb-24">
+      <Section className="relative overflow-hidden bg-[linear-gradient(135deg,_#f8f7ff_0%,_#eef2ff_45%,_#fdf2f8_100%)] dark:bg-[linear-gradient(135deg,_#020617_0%,_#0b0f2e_50%,_#1a0e1f_100%)] pt-36 pb-24">
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
           <motion.div
             animate={{ x: [-20, 20, -20], y: [-10, 10, -10], scale: [1, 1.05, 1] }}
@@ -43,7 +43,7 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <Link
               href="/resources"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 transition-colors hover:text-indigo-900"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 dark:text-indigo-300 transition-colors hover:text-indigo-900 dark:hover:text-indigo-200"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to all resources
@@ -56,7 +56,7 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-white/70 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 dark:border-indigo-800/40 bg-white/70 dark:bg-slate-900/70 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 dark:text-indigo-400 backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
@@ -64,11 +64,11 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
                 {resource.eyebrow}
               </div>
 
-              <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 md:text-5xl">
+              <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 dark:text-slate-100 md:text-5xl">
                 {resource.title}
               </h1>
 
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
                 {resource.description}
               </p>
 
@@ -76,7 +76,7 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
                 {resource.highlights.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-slate-200 bg-white/80 px-3.5 py-2 text-sm font-medium text-slate-700 shadow-sm"
+                    className="rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-3.5 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm"
                   >
                     {item}
                   </span>
@@ -88,13 +88,13 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="rounded-[32px] border border-slate-200/80 bg-white/80 p-7 shadow-[0_18px_60px_-24px_rgba(15,23,42,0.28)] backdrop-blur"
+              className="rounded-[32px] border border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 p-7 shadow-[0_18px_60px_-24px_rgba(15,23,42,0.28)] backdrop-blur"
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-500/20">
                 <Icon className="h-6 w-6" />
               </div>
-              <h2 className="mt-6 text-xl font-semibold text-slate-900">Why this helps</h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{resource.summary}</p>
+              <h2 className="mt-6 text-xl font-semibold text-slate-900 dark:text-slate-100">Why this helps</h2>
+              <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">{resource.summary}</p>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
@@ -109,21 +109,21 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
         </Container>
       </Section>
 
-      <Section className="bg-white py-24">
+      <Section className="bg-white dark:bg-slate-900 py-24">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-[32px] border border-slate-200/80 bg-slate-50/70 p-8"
+            className="rounded-[32px] border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-8"
           >
-            <h3 className="text-2xl font-bold text-slate-900">What teams gain</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">What teams gain</h3>
             <ul className="mt-6 grid gap-4 md:grid-cols-2">
               {resource.outcomes.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-emerald-500" />
-                  <span className="text-base leading-7 text-slate-600">{item}</span>
+                  <span className="text-base leading-7 text-slate-600 dark:text-slate-400">{item}</span>
                 </li>
               ))}
             </ul>
@@ -132,7 +132,7 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
       </Section>
 
       {/* FAQ */}
-      <Section className="bg-slate-50 py-24">
+      <Section className="bg-slate-50 dark:bg-slate-950 py-24">
         <Container>
           <div className="mx-auto max-w-3xl">
             <motion.div
@@ -142,10 +142,10 @@ export default function ResourceDetailPage({ slug }: ResourceDetailPageProps) {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-600">
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
                 Common questions
               </p>
-              <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+              <h3 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-4xl">
                 About {resource.title}
               </h3>
             </motion.div>

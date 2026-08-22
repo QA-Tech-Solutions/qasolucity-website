@@ -9,7 +9,7 @@ import ContactFAQHeader from "./ContactFAQHeader";
 
 export default function ContactFAQ() {
   return (
-    <Section className="relative overflow-hidden bg-white py-28">
+    <Section className="relative overflow-hidden bg-white dark:bg-slate-900 py-28">
       {/* Background Design */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <motion.div
@@ -18,7 +18,7 @@ export default function ContactFAQ() {
             opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-indigo-100/40 blur-3xl"
+          className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-indigo-100/40 dark:bg-indigo-900/30 blur-3xl"
         />
         <motion.div
           animate={{

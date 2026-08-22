@@ -41,24 +41,24 @@ export default function ContactHeroStats() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="relative rounded-[28px] border border-slate-200/80 bg-white p-8 shadow-2xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30"
+      className="relative rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-2xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30"
     >
       {/* Decorative glow */}
-      <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 blur-3xl pointer-events-none" />
+      <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 dark:bg-indigo-900/20 blur-3xl pointer-events-none" />
 
       <div className="relative">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-slate-900">Get in Touch</h3>
-            <p className="mt-1 text-sm text-slate-500">
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Get in Touch</h3>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               We respond within 24 hours
             </p>
           </div>
           <Link
             href="https://calendar.google.com"
             target="_blank"
-            className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 transition-colors duration-300 hover:bg-indigo-100"
+            className="inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-950/40 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition-colors duration-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/40"
           >
             <Calendar className="h-4 w-4" />
             Schedule Call
@@ -73,15 +73,15 @@ export default function ContactHeroStats() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.08, duration: 0.4 }}
-              className="group flex items-center gap-4 rounded-xl p-3 transition-all duration-300 hover:bg-indigo-50/50"
+              className="group flex items-center gap-4 rounded-xl p-3 transition-all duration-300 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30"
             >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-50 transition-colors duration-300 group-hover:bg-indigo-100">
-                <Icon className="h-5 w-5 text-indigo-600" />
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/40 transition-colors duration-300 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50">
+                <Icon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
-                  <p className="text-xs font-medium uppercase tracking-[0.15em] text-slate-600">
+                  <p className="text-xs font-medium uppercase tracking-[0.15em] text-slate-600 dark:text-slate-400">
                     {title}
                   </p>
                   {href && (
@@ -95,26 +95,26 @@ export default function ContactHeroStats() {
                     href={href}
                     target={href.startsWith("http") ? "_blank" : undefined}
                     rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="mt-0.5 block font-semibold text-slate-900 transition-colors duration-300 hover:text-indigo-600"
+                    className="mt-0.5 block font-semibold text-slate-900 dark:text-slate-100 transition-colors duration-300 hover:text-indigo-600 dark:hover:text-indigo-400"
                   >
                     {value}
                   </a>
                 ) : (
-                  <p className="mt-0.5 font-semibold text-slate-900">{value}</p>
+                  <p className="mt-0.5 font-semibold text-slate-900 dark:text-slate-100">{value}</p>
                 )}
-                <p className="mt-0.5 text-xs text-slate-600">{action}</p>
+                <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-400">{action}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* Trust indicator */}
-        <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-indigo-50/50 px-4 py-3">
+        <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/30 px-4 py-3">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
-          <span className="text-sm text-slate-600">
+          <span className="text-sm text-slate-600 dark:text-slate-400">
             Typically replies within 24 hours
           </span>
         </div>

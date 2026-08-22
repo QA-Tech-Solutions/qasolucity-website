@@ -15,7 +15,7 @@ export default function PrivacyPage() {
   return (
     <>
       <main className="pb-32">
-        <Section className="relative overflow-hidden bg-gradient-to-b from-slate-100 via-white to-white pt-44 pb-32">
+        <Section className="relative overflow-hidden bg-gradient-to-b from-slate-100 dark:from-slate-800 via-white dark:via-slate-900 to-white dark:to-slate-900 pt-44 pb-32">
           {/* Background - static elements */}
           <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
             {/* Static glows */}
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
             {/* Back link */}
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 transition-colors duration-300 hover:text-indigo-600"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400 transition-colors duration-300 hover:text-indigo-600 dark:hover:text-indigo-400"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Home
@@ -72,7 +72,7 @@ export default function PrivacyPage() {
 
             {/* Header */}
             <div className="mt-8 max-w-4xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-indigo-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200/50 dark:border-indigo-800/40 bg-indigo-50/50 dark:bg-indigo-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.35em] text-indigo-600 dark:text-indigo-400 backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-600" />
@@ -80,13 +80,13 @@ export default function PrivacyPage() {
                 Legal
               </div>
 
-              <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
+              <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl lg:text-6xl">
               <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
                   Privacy Policy
               </span>
               </h1>
 
-              <p className="mt-4 text-lg text-slate-500">
+              <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
                 Last updated:{" "}
                 {new Date().toLocaleDateString("en-US", {
                   month: "long",

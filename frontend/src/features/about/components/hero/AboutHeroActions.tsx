@@ -26,7 +26,7 @@ export default function AboutHeroActions() {
         <Link href="/services">
           <Button
             variant="outline"
-            className="h-14 rounded-2xl border-slate-300 px-8 transition-all duration-300 hover:border-indigo-300 hover:bg-indigo-50"
+            className="h-14 rounded-2xl border-slate-300 dark:border-slate-700 px-8 transition-all duration-300 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/40"
           >
             Explore Our Services
           </Button>

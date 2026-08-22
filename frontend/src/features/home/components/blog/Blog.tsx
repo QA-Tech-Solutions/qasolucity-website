@@ -12,7 +12,7 @@ export default function Blog() {
   }
 
   return (
-    <Section className="relative overflow-hidden bg-[#FCFBF8] py-32">
+    <Section className="relative overflow-hidden bg-[#FCFBF8] dark:bg-[#020617] py-32">
       {/* Background Design */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Orbs */}
