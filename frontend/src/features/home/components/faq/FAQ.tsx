@@ -6,11 +6,11 @@ import FAQSidebar from "./FAQSidebar";
 
 export default function FAQ() {
   return (
-    <Section className="relative overflow-clip bg-[#FCFBF8] py-32">
+    <Section className="relative overflow-clip bg-[#FCFBF8] dark:bg-[#020617] py-32">
       {/* Background Design */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Gradient Orbs */}
-        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-indigo-100/30 blur-[140px]" />
+        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-indigo-100/30 dark:bg-indigo-900/20 blur-[140px]" />
         <div className="absolute -right-40 bottom-0 h-[550px] w-[550px] rounded-full bg-violet-100/30 blur-[170px]" />
         <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-50/40 blur-[120px]" />
         

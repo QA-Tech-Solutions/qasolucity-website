@@ -9,7 +9,7 @@ export default function TrustedBy() {
   return (
     <Section className="relative py-32">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-0 top-32 h-72 w-72 rounded-full bg-indigo-50 blur-[120px]" />
+        <div className="absolute left-0 top-32 h-72 w-72 rounded-full bg-indigo-50 dark:bg-indigo-950/40 blur-[120px]" />
 
         <div className="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-violet-50 blur-[160px]" />
       </div>

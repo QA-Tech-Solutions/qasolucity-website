@@ -21,19 +21,19 @@ export default function JourneyTimeline() {
               {index + 1}
             </div>
             {index !== journey.length - 1 && (
-              <div className="mt-2 w-px flex-1 bg-slate-200" />
+              <div className="mt-2 w-px flex-1 bg-slate-200 dark:bg-slate-700" />
             )}
           </div>
 
           {/* Content */}
           <div className="pb-16 pt-1 last:pb-0">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-indigo-600">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
               {stage.marker}
             </span>
-            <h3 className="mt-3 text-2xl font-bold text-slate-900 lg:text-3xl">
+            <h3 className="mt-3 text-2xl font-bold text-slate-900 dark:text-slate-100 lg:text-3xl">
               {stage.title}
             </h3>
-            <p className="mt-3 max-w-xl leading-7 text-slate-600 lg:text-lg lg:leading-8">
+            <p className="mt-3 max-w-xl leading-7 text-slate-600 dark:text-slate-400 lg:text-lg lg:leading-8">
               {stage.description}
             </p>
           </div>

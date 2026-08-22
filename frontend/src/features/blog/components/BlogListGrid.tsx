@@ -23,7 +23,7 @@ export default function BlogListGrid({ posts }: Props) {
       : posts.filter((post) => post.category === activeCategory);
 
   return (
-    <Section className="bg-white py-20">
+    <Section className="bg-white dark:bg-slate-900 py-20">
       <Container>
         {categories.length > 2 && (
           <div className="mb-14 flex flex-wrap items-center justify-center gap-3">
@@ -34,7 +34,7 @@ export default function BlogListGrid({ posts }: Props) {
                 className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
                   activeCategory === category
                     ? "border-indigo-600 bg-indigo-600 text-white shadow-md shadow-indigo-500/20"
-                    : "border-slate-200 bg-white text-slate-600 hover:border-indigo-200 hover:text-indigo-600"
+                    : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-indigo-200 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400"
                 }`}
               >
                 {category}
@@ -50,7 +50,7 @@ export default function BlogListGrid({ posts }: Props) {
             ))}
           </div>
         ) : (
-          <p className="text-center text-slate-500">
+          <p className="text-center text-slate-500 dark:text-slate-400">
             No articles in this category yet.
           </p>
         )}

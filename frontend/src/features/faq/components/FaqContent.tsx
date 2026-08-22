@@ -24,8 +24,8 @@ function FaqItem({ faq, index }: { faq: FaqEntry; index: number }) {
       transition={{ duration: 0.4, delay: Math.min(index, 8) * 0.05 }}
       className={`overflow-hidden rounded-[24px] border transition-all duration-300 ${
         isOpen
-          ? "border-indigo-200 bg-white shadow-lg shadow-indigo-100/30"
-          : "border-slate-200/80 bg-white/80 hover:border-indigo-200"
+          ? "border-indigo-200 dark:border-indigo-800/60 bg-white dark:bg-slate-900 shadow-lg shadow-indigo-100/30"
+          : "border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 hover:border-indigo-200 dark:hover:border-indigo-700"
       }`}
     >
       <button
@@ -35,10 +35,10 @@ function FaqItem({ faq, index }: { faq: FaqEntry; index: number }) {
         className="flex w-full items-center justify-between gap-4 px-7 py-6 text-left"
       >
         <div>
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500 dark:text-indigo-400">
             {faq.category}
           </span>
-          <h3 className="mt-1 text-base font-semibold text-slate-900 md:text-lg">
+          <h3 className="mt-1 text-base font-semibold text-slate-900 dark:text-slate-100 md:text-lg">
             {faq.question}
           </h3>
         </div>
@@ -46,7 +46,7 @@ function FaqItem({ faq, index }: { faq: FaqEntry; index: number }) {
           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
             isOpen
               ? "bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/20"
-              : "bg-slate-100 text-slate-700"
+              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
           }`}
         >
           {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
@@ -62,11 +62,11 @@ function FaqItem({ faq, index }: { faq: FaqEntry; index: number }) {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <div className="px-7 pb-6">
-              <p className="text-[15px] leading-7 text-slate-600">{faq.answer}</p>
+              <p className="text-[15px] leading-7 text-slate-600 dark:text-slate-400">{faq.answer}</p>
               {faq.source && (
                 <Link
                   href={faq.source.href}
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+                  className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
                 >
                   More about {faq.source.label}
                   <ArrowUpRight className="h-3.5 w-3.5" />
@@ -107,17 +107,17 @@ export default function FaqContent() {
   }, [activeCategory, query]);
 
   return (
-    <Section id="faq" className="bg-white py-20">
+    <Section id="faq" className="bg-white dark:bg-slate-900 py-20">
       <Container>
         <div className="mx-auto mb-10 max-w-xl">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
             <Input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search questions..."
               aria-label="Search FAQs"
-              className="h-14 rounded-2xl border-slate-200 pl-11"
+              className="h-14 rounded-2xl border-slate-200 dark:border-slate-800 pl-11"
             />
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function FaqContent() {
               className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
                 activeCategory === category
                   ? "border-indigo-600 bg-indigo-600 text-white shadow-md shadow-indigo-500/20"
-                  : "border-slate-200 bg-white text-slate-600 hover:border-indigo-200 hover:text-indigo-600"
+                  : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-indigo-200 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400"
               }`}
             >
               {category}
@@ -152,9 +152,9 @@ export default function FaqContent() {
             ))}
           </div>
         ) : (
-          <p className="text-center text-slate-500">
+          <p className="text-center text-slate-500 dark:text-slate-400">
             No questions match your search yet. Try a different term, or{" "}
-            <Link href="/contact" className="font-semibold text-indigo-600 hover:text-indigo-700">
+            <Link href="/contact" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
               ask us directly
             </Link>
             .

@@ -55,7 +55,7 @@ export default function MobileDrawer({
 
           {/* Drawer */}
           <motion.aside
-            className="fixed right-0 top-0 z-50 flex h-screen w-full max-w-[min(92vw,24rem)] flex-col bg-white shadow-2xl"
+            className="fixed right-0 top-0 z-50 flex h-screen w-full max-w-[min(92vw,24rem)] flex-col bg-white dark:bg-slate-900 shadow-2xl"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -68,10 +68,10 @@ export default function MobileDrawer({
             aria-labelledby="mobile-menu-title"
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-slate-200/80 px-5 py-4 sm:px-6 sm:py-5">
+            <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800/80 px-5 py-4 sm:px-6 sm:py-5">
               <h2
                 id="mobile-menu-title"
-                className="text-base font-semibold tracking-tight text-slate-900"
+                className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-100"
               >
                 QA Solucity
               </h2>
@@ -79,7 +79,7 @@ export default function MobileDrawer({
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-full p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                className="rounded-full p-2 text-slate-600 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100"
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />
@@ -101,7 +101,7 @@ export default function MobileDrawer({
             </nav>
 
             {/* Footer */}
-            <div className="border-t border-slate-200/80 px-5 py-4 sm:px-6 sm:py-5">
+            <div className="border-t border-slate-200/80 dark:border-slate-800/80 px-5 py-4 sm:px-6 sm:py-5">
               <Link href="/contact" onClick={onClose} className="block">
                 <Button className="h-12 w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-500 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20">
                   Book Consultation

@@ -10,7 +10,7 @@ import FormHeader from "./FormHeader";
 
 export default function ContactForm() {
   return (
-    <Section className="relative overflow-hidden bg-[#FCFBF8] py-28">
+    <Section className="relative overflow-hidden bg-[#FCFBF8] dark:bg-[#020617] py-28">
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <motion.div
@@ -19,7 +19,7 @@ export default function ContactForm() {
             opacity: [0.4, 0.7, 0.4],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -right-20 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 blur-3xl"
+          className="absolute -right-20 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 dark:bg-indigo-900/30 blur-3xl"
         />
         <motion.div
           animate={{

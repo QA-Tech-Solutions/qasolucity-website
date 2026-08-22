@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/ui/CustomCursor";
 import Navbar from "@/features/navigation/components/Navbar";
+import ThemeProvider from "@/components/theme/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,11 +68,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {/* <CustomCursor /> */}
-        <Navbar />
-        {children}
+        <ThemeProvider>
+          {/* <CustomCursor /> */}
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

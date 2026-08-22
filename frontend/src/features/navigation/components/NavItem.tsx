@@ -104,7 +104,7 @@ export default function NavItem({
           >
             <ChevronDown
               className={cn(
-                "h-4 w-4 text-slate-400 transition-all duration-300",
+                "h-4 w-4 text-slate-400 dark:text-slate-500 transition-all duration-300",
                 isOpen && "rotate-180"
               )}
             />

@@ -29,7 +29,7 @@ export default function ProcessTimeline() {
   return (
     <div className="relative mt-20">
       {/* Animated Connecting Line (Desktop) */}
-      <div className="absolute left-[calc(16.66%+1rem)] right-[calc(16.66%+1rem)] top-1/2 hidden h-[3px] -translate-y-1/2 overflow-hidden rounded-full bg-slate-200 md:block">
+      <div className="absolute left-[calc(16.66%+1rem)] right-[calc(16.66%+1rem)] top-1/2 hidden h-[3px] -translate-y-1/2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 md:block">
         <div className="absolute inset-0 -translate-x-full animate-[shimmer_3s_infinite] bg-gradient-to-r from-transparent via-indigo-500 to-violet-500"></div>
       </div>
 

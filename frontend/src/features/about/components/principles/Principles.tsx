@@ -10,7 +10,7 @@ import { principles } from "./principles-data";
 
 export default function Principles() {
   return (
-    <Section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-slate-50/40 py-32">
+    <Section className="relative overflow-hidden bg-gradient-to-b from-white dark:from-slate-900 via-white dark:via-slate-900 to-slate-50/40 dark:to-slate-900/40 py-32">
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Stronger animated glows */}

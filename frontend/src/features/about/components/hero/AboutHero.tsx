@@ -9,7 +9,7 @@ import AboutHeroVisual from "./AboutHeroVisual";
 
 export default function AboutHero() {
   return (
-    <Section className="relative overflow-hidden bg-gradient-to-b from-slate-100 via-white to-white pt-44 pb-32">
+    <Section className="relative overflow-hidden bg-gradient-to-b from-slate-100 dark:from-slate-800 via-white dark:via-slate-900 to-white dark:to-slate-900 pt-44 pb-32">
       {/* Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         {/* Stronger animated glows */}

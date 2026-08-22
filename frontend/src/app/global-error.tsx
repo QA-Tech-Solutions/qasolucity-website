@@ -13,23 +13,23 @@ export default function GlobalError({
 }) {
   return (
     <html lang="en">
-      <body className="flex min-h-screen items-center justify-center bg-white px-6">
+      <body className="flex min-h-screen items-center justify-center bg-white dark:bg-slate-900 px-6">
         <div className="mx-auto max-w-md text-center">
           <p className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-7xl font-black text-transparent">
             500
           </p>
 
-          <h1 className="mt-4 text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
             Something went wrong on our end.
           </h1>
 
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
             We hit an unexpected error while loading the site. Our team has
             been notified, please try again shortly.
           </p>
 
           {error.digest && (
-            <p className="mt-4 font-mono text-xs text-slate-400">
+            <p className="mt-4 font-mono text-xs text-slate-400 dark:text-slate-500">
               Error reference: {error.digest}
             </p>
           )}
@@ -43,7 +43,7 @@ export default function GlobalError({
             </button>
             <a
               href="/"
-              className="flex h-12 items-center rounded-2xl border border-slate-300 px-6 text-sm font-semibold text-slate-700"
+              className="flex h-12 items-center rounded-2xl border border-slate-300 dark:border-slate-700 px-6 text-sm font-semibold text-slate-700 dark:text-slate-300"
             >
               Back to Home
             </a>

@@ -46,11 +46,11 @@ export default function ShareButtons({ title, path }: Props) {
   };
 
   const buttonClassName =
-    "group flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-indigo-600 hover:text-white";
+    "group flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-600 hover:text-white";
 
   return (
     <div className="flex items-center gap-3">
-      <span className="text-sm font-medium text-slate-500">Share:</span>
+      <span className="text-sm font-medium text-slate-500 dark:text-slate-400">Share:</span>
 
       {shareLinks.map((social) => (
         <a

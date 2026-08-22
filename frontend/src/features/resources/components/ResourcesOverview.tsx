@@ -8,7 +8,7 @@ import ResourceCard from "./ResourceCard";
 
 export default function ResourcesOverview() {
   return (
-    <Section id="resources" className="bg-white py-28">
+    <Section id="resources" className="bg-white dark:bg-slate-900 py-28">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -17,16 +17,16 @@ export default function ResourcesOverview() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-600">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-600 dark:text-indigo-400">
             Resource library
           </p>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
             A richer way to keep{" "}
             <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
               quality knowledge close at hand.
             </span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
             Each resource is designed to help teams move from idea to action
             with practical structure and useful next steps.
           </p>

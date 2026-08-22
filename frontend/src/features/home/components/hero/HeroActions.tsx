@@ -20,7 +20,7 @@ export default function HeroActions() {
         <Button
           variant="outline"
           size="lg"
-          className="h-14 rounded-2xl border-slate-300 bg-white px-8 text-[15px] font-semibold text-slate-800 transition-all duration-300 hover:-translate-y-1 hover:border-slate-400 hover:bg-white hover:shadow-md"
+          className="h-14 rounded-2xl border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-8 text-[15px] font-semibold text-slate-800 dark:text-slate-200 transition-all duration-300 hover:-translate-y-1 hover:border-slate-400 hover:bg-white dark:hover:bg-slate-800 hover:shadow-md"
         >
           Explore Our Services
           <ArrowRight className="ml-2 h-4 w-4" />

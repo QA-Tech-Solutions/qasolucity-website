@@ -27,8 +27,8 @@ export default function NavLink({
         "relative py-2 text-[15px] font-medium transition-all duration-300",
 
         active
-          ? "text-indigo-600"
-          : "text-slate-700 hover:text-indigo-600"
+          ? "text-indigo-600 dark:text-indigo-400"
+          : "text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400"
       )}
     >
       {children}
