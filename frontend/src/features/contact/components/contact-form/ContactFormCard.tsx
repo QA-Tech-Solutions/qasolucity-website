@@ -286,7 +286,7 @@ export default function ContactFormCard() {
             </p>
           )}
 
-          <p className="mt-4 text-center text-xs text-slate-400">
+          <p className="mt-4 text-center text-xs text-slate-600">
             We'll respond within 24 hours. Your information is kept confidential.
           </p>
         </form>
