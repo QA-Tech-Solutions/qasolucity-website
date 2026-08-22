@@ -1,9 +1,26 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ServicesDetailPage from "@/features/services/components/ServiceDetailPage";
 import { getServiceBySlug } from "@/features/services/data/services";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: ServicePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
+
+  if (!service) {
+    return {};
+  }
+
+  return {
+    title: service.title,
+    description: service.summary,
+  };
 }
 
 export async function generateStaticParams() {

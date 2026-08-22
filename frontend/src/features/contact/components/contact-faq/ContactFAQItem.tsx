@@ -50,7 +50,7 @@ export default function ContactFAQItem({
               ${
                 open
                   ? "text-indigo-600"
-                  : "text-slate-300"
+                  : "text-slate-500"
               }
             `}
           >

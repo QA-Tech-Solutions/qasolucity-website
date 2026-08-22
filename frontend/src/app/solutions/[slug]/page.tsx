@@ -1,9 +1,26 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SolutionDetailPage from "@/features/solutions/components/SolutionDetailPage";
 import { getSolutionBySlug, solutions } from "@/features/solutions/data/solutions";
 
 interface SolutionPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: SolutionPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const solution = getSolutionBySlug(slug);
+
+  if (!solution) {
+    return {};
+  }
+
+  return {
+    title: solution.title,
+    description: solution.summary,
+  };
 }
 
 export async function generateStaticParams() {

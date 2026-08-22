@@ -81,7 +81,7 @@ export default function ContactHeroStats() {
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
-                  <p className="text-xs font-medium uppercase tracking-[0.15em] text-slate-400">
+                  <p className="text-xs font-medium uppercase tracking-[0.15em] text-slate-600">
                     {title}
                   </p>
                   {href && (
@@ -102,7 +102,7 @@ export default function ContactHeroStats() {
                 ) : (
                   <p className="mt-0.5 font-semibold text-slate-900">{value}</p>
                 )}
-                <p className="mt-0.5 text-xs text-slate-400">{action}</p>
+                <p className="mt-0.5 text-xs text-slate-600">{action}</p>
               </div>
             </motion.div>
           ))}
