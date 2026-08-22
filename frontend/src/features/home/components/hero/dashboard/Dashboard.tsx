@@ -211,6 +211,7 @@ export default function Dashboard() {
       className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-4 shadow-2xl shadow-indigo-500/20 transition-all duration-300 sm:p-6"
       onClick={fetchMetrics}
       data-testid="quality-command-center"
+      title="Our own QA automation suite tests qasolucity.com around the clock — this is what it found. Click to refresh."
     >
       {/* Animated Glow Orbs */}
       <motion.div
@@ -260,8 +261,8 @@ export default function Dashboard() {
               <ShieldCheck className="h-5 w-5 text-indigo-400" />
             </motion.div>
             <div>
-              <h3 className="text-sm font-semibold text-white">QA Solucity</h3>
-              <p className="text-xs text-slate-400">Quality Command Center</p>
+              <h3 className="text-sm font-semibold text-white">Quality Command Center</h3>
+              <p className="text-xs text-slate-400">Live test results for qasolucity.com</p>
             </div>
           </div>
           <div
@@ -270,6 +271,11 @@ export default function Dashboard() {
             }`}
             data-testid="qcc-live-badge"
             data-live={isLive}
+            title={
+              isLive
+                ? "Reporting real results from our automated test suite running against qasolucity.com"
+                : "Showing baseline numbers — waiting for the first automated test run to report in"
+            }
           >
             <span className="relative flex h-2 w-2">
               {isLive && (
@@ -391,7 +397,7 @@ export default function Dashboard() {
           />
           <KPICard
             icon={Activity}
-            label="API Health"
+            label="Site Health"
             value={apiHealth}
             color={apiHealth === "Healthy" ? "emerald" : "red"}
             delay={0.4}
