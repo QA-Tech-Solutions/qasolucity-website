@@ -77,9 +77,14 @@ export default function BlogPostContent({ post, relatedPosts, children }: Props)
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-[32px] border border-slate-200/80 dark:border-slate-800/80 shadow-[0_18px_60px_-24px_rgba(15,23,42,0.28)]"
           >
-            <div className="relative h-[280px] w-full md:h-[420px]">
-              <ZoomableImage src={post.image} alt={post.title} variant="fill" priority />
-            </div>
+            <ZoomableImage
+              src={post.image}
+              alt={post.title}
+              variant="adaptive"
+              width={post.imageWidth}
+              height={post.imageHeight}
+              priority
+            />
           </motion.div>
         </Container>
       </Section>

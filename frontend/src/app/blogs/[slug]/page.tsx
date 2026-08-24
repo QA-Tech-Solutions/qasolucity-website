@@ -29,6 +29,9 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blogs/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -49,18 +52,51 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = getRelatedPosts(post);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: `https://qasolucity.com${post.image}`,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "QA Solucity",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://qasolucity.com/images/logos/qa-solucity-logo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://qasolucity.com/blogs/${slug}`,
+    },
+  };
+
   return (
-    <BlogPostContent post={post} relatedPosts={relatedPosts}>
-      <MDXRemote
-        source={post.content}
-        components={mdxComponents}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeSlug],
-          },
-        }}
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </BlogPostContent>
+      <BlogPostContent post={post} relatedPosts={relatedPosts}>
+        <MDXRemote
+          source={post.content}
+          components={mdxComponents}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [rehypeSlug],
+            },
+          }}
+        />
+      </BlogPostContent>
+    </>
   );
 }

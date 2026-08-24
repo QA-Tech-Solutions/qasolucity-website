@@ -4,27 +4,23 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
-const BLOG_IMAGES_DIR = path.join(process.cwd(), "public", "images", "blog");
+const PUBLIC_DIR = path.join(process.cwd(), "public");
 
-// Most posts' frontmatter points at a per-slug cover image
-// (/images/blog/<slug>.png) that was never actually supplied — only 3
-// real cover images exist so far. Rather than 404ing on every one of
-// those posts, fall back to one of the 3 real images, picked
-// deterministically per slug so the same post always gets the same
-// placeholder instead of a different one on every rebuild.
-const FALLBACK_IMAGES = [
-  "/images/blog/blog-1.png",
-  "/images/blog/blog-2.png",
-  "/images/blog/blog-3.png",
-];
-
-function resolveImage(slug: string, image: string): string {
-  const filename = path.basename(image);
-  if (fs.existsSync(path.join(BLOG_IMAGES_DIR, filename))) {
-    return image;
+// Cover images aren't a uniform aspect ratio, and the article hero should
+// size itself to whatever the image actually is rather than cropping it
+// into a fixed box. PNG stores width/height as big-endian uint32s right
+// after the 8-byte signature + IHDR chunk header, so reading just the
+// first 24 bytes is enough — no need for an image-processing dependency.
+function readPngDimensions(publicPath: string): { width: number; height: number } | null {
+  try {
+    const fd = fs.openSync(path.join(PUBLIC_DIR, publicPath), "r");
+    const header = Buffer.alloc(24);
+    fs.readSync(fd, header, 0, 24, 0);
+    fs.closeSync(fd);
+    return { width: header.readUInt32BE(16), height: header.readUInt32BE(20) };
+  } catch {
+    return null;
   }
-  const hash = [...slug].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  return FALLBACK_IMAGES[hash % FALLBACK_IMAGES.length];
 }
 
 export interface BlogFrontmatter {
@@ -41,20 +37,29 @@ export interface BlogPost extends BlogFrontmatter {
   slug: string;
   readTime: string;
   content: string;
+  imageWidth: number;
+  imageHeight: number;
 }
+
+// Falls back to this aspect ratio (matches most of the real covers) if a
+// post's image is missing or isn't a readable PNG, so a broken image
+// still reserves a sane layout box instead of collapsing to 0 height.
+const DEFAULT_IMAGE_SIZE = { width: 1536, height: 1024 };
 
 function readPostFile(filename: string): BlogPost {
   const slug = filename.replace(/\.md$/, "");
   const raw = fs.readFileSync(path.join(BLOG_DIR, filename), "utf8");
   const { data, content } = matter(raw);
   const frontmatter = data as BlogFrontmatter;
+  const { width, height } = readPngDimensions(frontmatter.image) ?? DEFAULT_IMAGE_SIZE;
 
   return {
     ...frontmatter,
-    image: resolveImage(slug, frontmatter.image),
     slug,
     content,
     readTime: readingTime(content).text,
+    imageWidth: width,
+    imageHeight: height,
   };
 }
 

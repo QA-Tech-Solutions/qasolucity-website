@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Resources",
   description:
     "Templates, guides, e-books, and events for teams that want to build smarter testing habits without slowing delivery down.",
+  alternates: {
+    canonical: "/resources",
+  },
 };
 
 export default function Page() {

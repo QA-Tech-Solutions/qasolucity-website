@@ -3,7 +3,7 @@ title: "Playwright vs Cypress: Which Testing Tool Should You Choose?"
 excerpt: "A practical comparison of two of today's most popular automation testing frameworks."
 category: "Automation"
 date: "2026-07-26"
-image: "/images/blog/blog-2.png"
+image: "/images/blog/playwright-vs-cypress.png"
 author: "John Adeniyi"
 authorRole: "Senior Automation Engineer"
 ---

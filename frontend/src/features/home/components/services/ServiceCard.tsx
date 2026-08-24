@@ -17,11 +17,12 @@ export default function ServiceCard({
   featured = false,
 }: Props) {
   return (
+    // Entrance fade/slide lives on the wrapping motion.div in ServiceGrid
+    // (which also drives the per-card stagger delay) — animating it again
+    // here too used to nest two opacity transitions inside one another,
+    // which compound multiplicatively and made the section visibly slower
+    // to finish fading in than either animation alone.
     <motion.article
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
       className="group relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-b from-white dark:from-slate-900 to-slate-50/60 dark:to-slate-900/60 p-8 transition-all duration-300 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-2xl hover:shadow-indigo-500/10"
     >

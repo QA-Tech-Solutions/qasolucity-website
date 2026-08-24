@@ -65,15 +65,9 @@ export default function FooterBrand() {
           className="h-14 w-auto object-contain rounded-xl"
         />
 
-        <div>
-          <h3 className="text-2xl font-bold tracking-tight text-white">
-            QA Solucity
-          </h3>
-
-          <p className="mt-1 text-xs uppercase tracking-[0.35em] text-indigo-300">
-            Quality Assurance
-          </p>
-        </div>
+        <h3 className="text-2xl font-bold tracking-tight text-white">
+          QA Solucity
+        </h3>
       </Link>
 
       {/* Description */}

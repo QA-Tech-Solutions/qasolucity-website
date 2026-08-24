@@ -3,7 +3,7 @@ title: "Why Every Startup Needs a QA Strategy Before Launch"
 excerpt: "Learn how early quality assurance reduces bugs, lowers costs and improves customer trust."
 category: "QA Strategy"
 date: "2026-07-26"
-image: "/images/blog/blog-1.png"
+image: "/images/blog/qa-strategy-before-launch.png"
 author: "John Adeniyi"
 authorRole: "Senior QA Engineer"
 ---

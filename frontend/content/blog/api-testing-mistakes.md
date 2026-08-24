@@ -3,7 +3,7 @@ title: "Common API Testing Mistakes Teams Make"
 excerpt: "Avoid the pitfalls that lead to unstable integrations and production failures."
 category: "API Testing"
 date: "2026-07-26"
-image: "/images/blog/blog-3.png"
+image: "/images/blog/api-testing-mistakes.png"
 author: "John Adeniyi"
 authorRole: "Senior QA Engineer"
 ---
