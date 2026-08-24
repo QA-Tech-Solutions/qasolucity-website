@@ -109,7 +109,7 @@ function Stars() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
+    let animationId: number | null = null;
     let time = 0;
 
     const draw = () => {
@@ -132,9 +132,26 @@ function Stars() {
       animationId = requestAnimationFrame(draw);
     };
 
-    draw();
+    // This section sits well below the fold; without this, the canvas
+    // would redraw 150 stars every frame for as long as the page stays
+    // open, even while scrolled far out of view.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && animationId === null) {
+          draw();
+        } else if (!entry.isIntersecting && animationId !== null) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
 
-    return () => cancelAnimationFrame(animationId);
+    return () => {
+      observer.disconnect();
+      if (animationId !== null) cancelAnimationFrame(animationId);
+    };
   }, [dimensions]);
 
   return (
@@ -160,15 +177,19 @@ export default function TechMarquee({ existingSlugs = [] }: TechMarqueeProps) {
       {/* Stars background */}
       <Stars />
 
-      {/* Animated orbs – now behind content but above stars */}
+      {/* Animated orbs – now behind content but above stars. whileInView
+          (not animate) so these stop costing compositor work while the
+          section is scrolled out of view. */}
       <motion.div
         className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-indigo-500/30 blur-3xl"
         style={{ zIndex: 1 }}
-        animate={{
+        initial={{ x: "0%", y: "0%", scale: 1 }}
+        whileInView={{
           x: ["0%", "15%", "0%"],
           y: ["0%", "-15%", "0%"],
           scale: [1, 1.15, 1],
         }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{
           repeat: Infinity,
           duration: 14,
@@ -178,11 +199,13 @@ export default function TechMarquee({ existingSlugs = [] }: TechMarqueeProps) {
       <motion.div
         className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-violet-500/30 blur-3xl"
         style={{ zIndex: 1 }}
-        animate={{
+        initial={{ x: "0%", y: "0%", scale: 1 }}
+        whileInView={{
           x: ["0%", "-15%", "0%"],
           y: ["0%", "15%", "0%"],
           scale: [1, 1.2, 1],
         }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{
           repeat: Infinity,
           duration: 16,

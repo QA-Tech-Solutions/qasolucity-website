@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { Award, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 
@@ -24,7 +23,7 @@ export default function CertificationCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="group relative overflow-visible rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-10 pb-10 pt-14 text-center transition-all duration-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-[0_35px_80px_rgba(79,70,229,.12)]"
+      className="group relative overflow-visible rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-10 pb-10 pt-14 text-center transition-all duration-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-[0_35px_80px_rgba(79,70,229,.12)] dark:hover:shadow-[0_25px_50px_rgba(0,0,0,.35)]"
     >
       {/* Glow effects – stay subtle */}
       <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-200/20 dark:bg-indigo-800/20 blur-3xl transition-opacity duration-500 group-hover:opacity-75" />
@@ -37,13 +36,10 @@ export default function CertificationCard({
         transition={{ duration: 0.5, delay: 0.2 }}
         className="absolute -top-7 left-10 z-20"
       >
-        <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white dark:bg-slate-900 shadow-xl ring-8 ring-[#FCFBF8] dark:ring-[#020617]">
-          <Image
-            src="/icons/badge.svg"
-            alt="Badge"
-            width={38}
-            height={38}
-            className="transition-transform duration-500 group-hover:scale-110"
+        <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white dark:bg-slate-900 shadow-xl dark:shadow-black/30 ring-8 ring-[#FCFBF8] dark:ring-[#020617]">
+          <Award
+            className="h-[26px] w-[26px] text-indigo-800 dark:text-indigo-300 transition-transform duration-500 group-hover:scale-110"
+            strokeWidth={1.5}
           />
           <div className="absolute inset-0 -z-10 rounded-full bg-indigo-400/0 transition-all duration-500 group-hover:bg-indigo-400/10 group-hover:scale-110" />
         </div>

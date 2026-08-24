@@ -14,7 +14,7 @@ export const services = [
   {
     title: "QA & Testing Solutions",
     description:
-      "Ensure software excellence with comprehensive testing services - from manual to automated, performance to security.",
+      "Ensure software excellence with comprehensive testing services, from manual to automated, performance to security.",
     icon: ShieldCheck,
     featured: true,
   },
