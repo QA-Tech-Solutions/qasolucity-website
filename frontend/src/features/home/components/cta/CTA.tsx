@@ -13,13 +13,17 @@ export default function CTA() {
       {/* Background */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950" />
 
-      {/* Animated Glows */}
+      {/* Animated Glows — whileInView (not animate) so this stops costing
+          compositor work while scrolled out of view; these run for the
+          entire time the page is open otherwise, most of it off-screen. */}
       <motion.div
-        animate={{
+        initial={{ x: -20, y: -10, scale: 1 }}
+        whileInView={{
           x: [-20, 20, -20],
           y: [-10, 10, -10],
           scale: [1, 1.05, 1],
         }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{
           duration: 8,
           repeat: Infinity,
@@ -29,11 +33,13 @@ export default function CTA() {
       />
 
       <motion.div
-        animate={{
+        initial={{ x: 20, y: 10, scale: 1 }}
+        whileInView={{
           x: [20, -20, 20],
           y: [10, -10, 10],
           scale: [1, 1.05, 1],
         }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{
           duration: 10,
           repeat: Infinity,

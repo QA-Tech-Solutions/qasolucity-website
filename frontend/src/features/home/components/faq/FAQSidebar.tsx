@@ -18,7 +18,7 @@ export default function FAQSidebar() {
 
       <div className="relative">
         {/* Icon */}
-        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20">
+        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20 dark:shadow-indigo-950/40">
           <MessageSquare className="h-7 w-7 text-white" />
         </div>
 
@@ -58,7 +58,7 @@ export default function FAQSidebar() {
           href="/contact"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="mt-8 flex h-14 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+          className="mt-8 flex h-14 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold shadow-lg shadow-indigo-500/20 dark:shadow-indigo-950/40 transition-all duration-300 hover:shadow-indigo-500/30 dark:hover:shadow-indigo-950/50"
         >
           Get in Touch
           <ArrowRight className="ml-2 h-4 w-4" />

@@ -41,7 +41,7 @@ export default function ContactHeroStats() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="relative rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-2xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30"
+      className="relative rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-2xl shadow-slate-200/40 dark:shadow-black/30 transition-all duration-300 hover:shadow-indigo-100/30 dark:hover:shadow-black/40"
     >
       {/* Decorative glow */}
       <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 dark:bg-indigo-900/20 blur-3xl pointer-events-none" />

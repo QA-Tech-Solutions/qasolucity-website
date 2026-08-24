@@ -169,7 +169,7 @@ export default function ContactFormCard() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-10"
+        className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-xl shadow-slate-200/40 dark:shadow-black/30 transition-all duration-300 hover:shadow-indigo-100/30 dark:hover:shadow-black/40 md:p-10"
       >
         <form onSubmit={handleSubmit} noValidate>
           <div className="grid gap-5 md:grid-cols-2">
@@ -279,7 +279,7 @@ export default function ContactFormCard() {
             <Button
               type="submit"
               disabled={status === "loading" || !isFormValid()}
-              className="group h-14 w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30 disabled:cursor-not-allowed disabled:opacity-60"
+              className="group h-14 w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 dark:shadow-indigo-950/40 transition-all duration-300 hover:shadow-indigo-500/30 dark:hover:shadow-indigo-950/50 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status === "loading" ? "Sending..." : "Send Enquiry"}
               <Send className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

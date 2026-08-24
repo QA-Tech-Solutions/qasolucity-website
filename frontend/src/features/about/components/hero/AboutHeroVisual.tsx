@@ -26,7 +26,7 @@ export default function AboutHeroVisual() {
       transition={{ duration: 0.6, delay: 0.2 }}
       className="relative"
     >
-      <div className="relative overflow-hidden rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-2xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 lg:p-10">
+      <div className="relative overflow-hidden rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-2xl shadow-slate-200/40 dark:shadow-black/30 transition-all duration-300 hover:shadow-indigo-100/30 dark:hover:shadow-black/40 lg:p-10">
         {/* Decorative glow */}
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-indigo-100/20 dark:bg-indigo-900/20 blur-3xl pointer-events-none" />
 
@@ -43,9 +43,9 @@ export default function AboutHeroVisual() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
               whileHover={{ y: -4 }}
-              className="flex gap-4 rounded-2xl bg-gradient-to-br from-indigo-50 dark:from-indigo-950/40 to-violet-50 dark:to-violet-950/40 p-6 transition-all duration-300 hover:shadow-md hover:shadow-indigo-200/50"
+              className="flex gap-4 rounded-2xl bg-gradient-to-br from-indigo-50 dark:from-indigo-950/40 to-violet-50 dark:to-violet-950/40 p-6 transition-all duration-300 hover:shadow-md hover:shadow-indigo-200/50 dark:hover:shadow-black/30"
             >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white dark:bg-slate-900 shadow-sm ring-1 ring-slate-200/50">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white dark:bg-slate-900 shadow-sm ring-1 ring-slate-200/50 dark:ring-slate-700/50">
                 <Icon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               </div>
               <div>
