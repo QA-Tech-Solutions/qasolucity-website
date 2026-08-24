@@ -73,12 +73,7 @@ export default function CookiesPage() {
               </h1>
 
               <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
-                Last updated:{" "}
-                {new Date().toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+                Last updated: September 7, 2026
               </p>
             </div>
           </Container>

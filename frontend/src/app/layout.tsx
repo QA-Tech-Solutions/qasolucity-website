@@ -62,6 +62,34 @@ export const metadata: Metadata = {
   // that and silently disable them.
 };
 
+// Site-wide Organization/LocalBusiness structured data. Lives once in the
+// root layout (not per-page) per Google's guidance — a page-level
+// duplicate of this on every route would be redundant, not additive.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "QA Solucity",
+  alternateName: "QA Solucity",
+  url: "https://qasolucity.com",
+  logo: "https://qasolucity.com/images/logos/qa-solucity-logo.png",
+  image: "https://qasolucity.com/images/logos/qa-solucity-logo.png",
+  description:
+    "QA Solucity is a quality engineering and software testing company helping businesses build reliable, scalable, and high-performing digital products through manual testing, test automation, QA consulting, training, and AI-powered automation solutions.",
+  email: "hello@qasolucity.com",
+  telephone: "+234-708-070-2920",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Lagos",
+    addressCountry: "NG",
+  },
+  areaServed: "Worldwide",
+  sameAs: [
+    "https://www.linkedin.com/company/qasolucity/",
+    "https://medium.com/@qasolucity",
+    "https://instagram.com/qasolucity",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,6 +98,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <ThemeProvider>
           {/* <CustomCursor /> */}
           <Navbar />
