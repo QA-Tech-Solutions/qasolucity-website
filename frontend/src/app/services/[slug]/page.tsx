@@ -20,6 +20,9 @@ export async function generateMetadata({
   return {
     title: service.title,
     description: service.summary,
+    alternates: {
+      canonical: `/services/${slug}`,
+    },
   };
 }
 
@@ -47,5 +50,28 @@ export default async function Page({ params }: ServicePageProps) {
     notFound();
   }
 
-  return <ServicesDetailPage slug={slug} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.summary,
+    provider: {
+      "@type": "ProfessionalService",
+      name: "QA Solucity",
+      url: "https://qasolucity.com",
+    },
+    areaServed: "Worldwide",
+    url: `https://qasolucity.com/services/${slug}`,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ServicesDetailPage slug={slug} />
+    </>
+  );
 }

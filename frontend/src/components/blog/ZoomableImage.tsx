@@ -8,8 +8,11 @@ import { X, ZoomIn } from "lucide-react";
 interface Props {
   src: string;
   alt: string;
-  /** "fill" for a fixed-aspect cover container (e.g. article hero), "natural" for inline content images */
-  variant?: "fill" | "natural";
+  /** "adaptive" sizes the container to the image's own aspect ratio (e.g. the article hero, via next/image width/height), "natural" is a plain <img> for inline content images */
+  variant?: "adaptive" | "natural";
+  /** Required for "adaptive" — the image's real pixel dimensions, so the box reserves the correct aspect ratio instead of guessing. */
+  width?: number;
+  height?: number;
   className?: string;
   priority?: boolean;
 }
@@ -18,6 +21,8 @@ export default function ZoomableImage({
   src,
   alt,
   variant = "natural",
+  width,
+  height,
   className,
   priority,
 }: Props) {
@@ -45,18 +50,17 @@ export default function ZoomableImage({
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Zoom into image: ${alt}`}
-        className={`group relative block w-full cursor-zoom-in overflow-hidden ${
-          variant === "fill" ? "h-full w-full" : ""
-        } ${className ?? ""}`}
+        className={`group relative block w-full cursor-zoom-in overflow-hidden ${className ?? ""}`}
       >
-        {variant === "fill" ? (
+        {variant === "adaptive" && width && height ? (
           <Image
             src={src}
             alt={alt}
-            fill
+            width={width}
+            height={height}
             priority={priority}
             sizes="(max-width: 896px) 100vw, 896px"
-            className="object-cover"
+            className="h-auto w-full"
           />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element

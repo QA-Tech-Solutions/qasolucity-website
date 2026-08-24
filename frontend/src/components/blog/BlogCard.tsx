@@ -29,13 +29,13 @@ export default function BlogCard({ post, index = 0, animate = true }: Props) {
       className="group overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 shadow-sm transition-all duration-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-2xl hover:shadow-indigo-500/10"
     >
       {/* Image */}
-      <Link href={`/blogs/${post.slug}`} className="relative block h-72 overflow-hidden">
+      <Link href={`/blogs/${post.slug}`} className="relative block h-72 overflow-hidden bg-slate-100 dark:bg-slate-800">
         <Image
           src={post.image}
           alt={post.title}
           fill
           sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-contain p-3 transition-transform duration-700 group-hover:scale-105"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />

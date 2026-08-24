@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Hero from "@/features/home/components/hero/Hero";
 
 import TechMarquee from "@/features/home/components/trusted-by/TechMarquee";
@@ -19,6 +20,12 @@ import Blog from "@/features/home/components/blog";
 
 import Footer from "@/features/home/components/footer";
 import { getPostSlugs } from "@/lib/blog";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   const existingSlugs = getPostSlugs();
