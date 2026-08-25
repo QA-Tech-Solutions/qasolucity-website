@@ -9,6 +9,7 @@ interface Props {
   title: string;
   description: string;
   button: string;
+  href: string;
   variant: "primary" | "secondary";
 }
 
@@ -16,6 +17,7 @@ export default function CertificationCard({
   title,
   description,
   button,
+  href,
   variant,
 }: Props) {
   return (
@@ -56,7 +58,7 @@ export default function CertificationCard({
 
         {/* Button with enhanced hover effects */}
         <Button
-          render={<Link href="/contact" />}
+          render={<Link href={href} />}
           nativeButton={false}
           className={`group/btn mt-10 h-14 rounded-2xl px-8 text-[15px] font-semibold transition-all duration-300 ${
             variant === "primary"

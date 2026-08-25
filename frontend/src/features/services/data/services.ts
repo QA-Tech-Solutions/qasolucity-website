@@ -1,5 +1,6 @@
 import {
   Activity,
+  Award,
   BadgeCheck,
   BookOpen,
   Bot,
@@ -31,6 +32,10 @@ export interface ServiceDetail {
   idealFor: string[];
   faqs: ServiceFAQ[];
   icon: LucideIcon;
+  /** Overrides the default `/services/${slug}` destination — used for
+   * services that live on their own dedicated route instead of the
+   * generic service detail page. */
+  href?: string;
 }
 
 export const serviceCategories = [
@@ -461,6 +466,48 @@ export const services: ServiceDetail[] = [
       },
     ],
     icon: Wrench,
+  },
+  {
+    slug: "istqb-certification",
+    title: "ISTQB Certification Prep",
+    category: "Training",
+    eyebrow: "Get certified",
+    summary:
+      "Independent, instructor-led prep for ISTQB certification exams — live classes, mock exams, and an optional prepaid exam voucher bundle.",
+    description:
+      "Our ISTQB Certification Pathways program is an independent preparation track that gets you ready for the official exam, with live instructor-led classes, QA Solucity study guides, and full-length mock exams. Choose the Self-Starter Prep Track and book your own exam later, or the All-Inclusive Bundle with a prepaid official exam voucher included in one Naira invoice.",
+    highlights: [
+      "Live, instructor-led ISTQB prep classes",
+      "QA Solucity study guides and hands-on exercises",
+      "Full-length mock exams with scored feedback",
+      "Optional prepaid official exam voucher bundle",
+    ],
+    outcomes: [
+      "Walk into exam day fully prepared",
+      "Formalize your QA expertise with a recognized credential",
+      "Skip the currency and registrar hassle with the Bundle route",
+    ],
+    deliverables: [
+      "Live class schedule and recordings",
+      "Study guides and slide decks",
+      "Scored mock exam reports",
+    ],
+    tools: ["Live virtual classroom", "Mock exam simulators", "Independent registrar (AT*SQA / iSQI)"],
+    idealFor: ["QA professionals seeking certification", "Career switchers into QA", "Teams standardizing on ISTQB"],
+    faqs: [
+      {
+        question: "Is QA Solucity an official ISTQB partner?",
+        answer:
+          "No. QA Solucity is an independent training provider, not an official partner, accredited center, or authorized testing provider of ISTQB or NGSTQB. Your official exam is written, administered, and proctored entirely by an independent exam board such as AT*SQA or iSQI.",
+      },
+      {
+        question: "What's the difference between the two enrollment routes?",
+        answer:
+          "The Self-Starter Prep Track covers training only — you book and pay for your official exam directly with the registrar whenever you're ready. The All-Inclusive Bundle adds a prepaid official exam voucher to your training, in one Naira payment.",
+      },
+    ],
+    icon: Award,
+    href: "/certification",
   },
   {
     slug: "workshops",
