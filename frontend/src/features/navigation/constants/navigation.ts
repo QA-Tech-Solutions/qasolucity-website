@@ -34,6 +34,7 @@ export const navigation: NavigationItem[] = [
           { label: "Corporate QA Training", href: "/services/corporate-training" },
           { label: "Tools Training", href: "/services/tools-training" },
           { label: "Workshops", href: "/services/workshops" },
+          { label: "ISTQB Certification Prep", href: "/certification" },
         ],
       },
     ],

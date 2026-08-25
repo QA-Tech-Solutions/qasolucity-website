@@ -21,7 +21,7 @@ export default function ServiceCard({ service, delay = 0 }: Props) {
       transition={{ delay, duration: 0.5 }}
     >
       <Link
-        href={`/services/${service.slug}`}
+        href={service.href ?? `/services/${service.slug}`}
         className="group flex h-full flex-col rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-[0_18px_60px_-24px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-[0_24px_70px_-22px_rgba(79,70,229,0.28)]"
       >
         <div className="flex items-start justify-between gap-4">
