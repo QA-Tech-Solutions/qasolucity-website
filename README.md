@@ -82,6 +82,12 @@ MAINTENANCE_BYPASS_SECRET=
 # Optional — only needed if you're running qasolucity-automation
 # against your local dev server (see "Quality Command Center" below)
 AUTOMATION_API_TOKEN=
+
+# Optional — live USD→NGN rate providers for the ISTQB Certification
+# Bundle price (see "ISTQB Certification Pathways" below). Without
+# these, pricing falls back to a cached/hardcoded rate automatically.
+EXCHANGERATE_API_KEY=
+CURRENCYFREAKS_API_KEY=
 ```
 
 Then run the dev server:
@@ -112,7 +118,9 @@ Run from `frontend/`:
 | `MAINTENANCE_MODE` | No | Set `true` to show a 503 maintenance page site-wide |
 | `MAINTENANCE_BYPASS_SECRET` | No | Visit `/?bypass=<secret>` during maintenance to get a cookie that lets you preview the live site |
 | `AUTOMATION_API_TOKEN` | No | Bearer token [qasolucity-automation](https://github.com/QA-Tech-Solutions/qasolucity-automation) authenticates with to POST live test results to `/api/quality-metrics`. Generate one with `node -e "console.log(require('crypto').randomBytes(24).toString('hex'))"` |
-| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | No | Where `/api/quality-metrics` persists in production. Set automatically when you connect the Upstash Redis integration from Vercel's Marketplace tab — no need to fill these in by hand. Without them, falls back to a local file (dev only). |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | No | Where `/api/quality-metrics`, the ISTQB Bundle rate cache, and the voucher inventory all persist in production. Set automatically when you connect the Upstash Redis integration from Vercel's Marketplace tab — no need to fill these in by hand. Without them, each falls back to a local file (dev only). |
+| `EXCHANGERATE_API_KEY` | No | Primary live USD→NGN rate source for the ISTQB Bundle price, via [exchangerate-api.com](https://www.exchangerate-api.com/). Without it, pricing falls through to the next tier automatically — see "ISTQB Certification Pathways" below. |
+| `CURRENCYFREAKS_API_KEY` | No | Secondary fallback rate source, via [CurrencyFreaks](https://currencyfreaks.com/), used only if `EXCHANGERATE_API_KEY` is unset or its request fails. |
 
 ## Writing a blog post
 
@@ -146,6 +154,7 @@ The homepage's scrolling tech/testing-type marquee automatically links a pill to
 - **Mega-menu navigation** across Services, Solutions, and Resources, each backed by structured data with FAQ accordions and cross-links between related content.
 - **Contact form** with server-side validation and branded email notifications via Resend.
 - **File-based blog** with MDX rendering, category filtering, related-post suggestions, social sharing, and copy-link functionality.
+- **ISTQB Certification Pathways** (`/certification`) — two enrollment routes with live-computed Naira pricing and an email-based enrollment flow. See below.
 - **A bundled FAQ page** (`/faq`) — pulls every question already defined on the Services, Solutions, Resources, and Contact pages into one searchable, filterable hub, rather than duplicating content. See `src/features/faq/data/faq-data.ts`.
 - **Maintenance mode** — a real `HTTP 503` (not just a themed 200 page) triggered by an environment variable, with a bypass mechanism for the team.
 - **Custom error states** — a branded 404 page and 500 error boundaries (route-level and global), not the framework defaults.
@@ -161,6 +170,19 @@ How the two repos connect:
 3. Until a real automation run has reported in, the dashboard shows seed/placeholder numbers and a **"Baseline"** badge instead of **"Live"** — it never claims real-time data it doesn't actually have.
 
 **Storage:** `/api/quality-metrics` persists through `src/lib/quality-metrics-store.ts`, which uses Upstash Redis (connected via Vercel's Marketplace integration — set `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN`, or the older `KV_REST_API_URL`/`KV_REST_API_TOKEN` naming, either works) when configured. Locally, with neither set, it falls back to a JSON file (`frontend/data/quality-metrics.json`) automatically — no Redis needed just to run `npm run dev`. A production deploy without the integration connected will get an explicit 500 on POST rather than silently losing every reported run.
+
+## ISTQB Certification Pathways
+
+`/certification` offers two independent, ISTQB-adjacent enrollment routes — QA Solucity is a training provider, not an official ISTQB/NGSTQB partner or accredited center, and the site is explicit about that (see the disclaimer rendered on every certification page).
+
+- **Self-Starter Prep Track (Route A)** — training only, at a fixed Naira fee. The customer books and pays for their official exam directly with the registrar (AT\*SQA / iSQI) whenever they're ready.
+- **All-Inclusive Certification Bundle (Route C)** — training plus a prepaid official exam voucher, in one Naira price.
+
+**Live pricing.** The Prep Track's fee is fixed; the Bundle's price is computed from a live USD→NGN exchange rate every time the page renders, via `src/lib/certification-pricing.ts`. It resolves the rate through four fallback tiers — a primary live provider, a secondary live provider, the last cached rate, then a hardcoded emergency baseline — so pricing always resolves to something even if every external API is down, then applies a parallel-market spread and a safety margin before rounding up to a clean number. `GET /api/certification-pricing` exposes the same computation.
+
+**Enrollment.** There is currently **no payment gateway wired up** — `/certification/enroll` is a lead-capture form (mirroring the contact form's pattern) that emails a confirmation to the customer and a notification to `hello@qasolucity.com` via `POST /api/certification-enroll`. Payment itself happens offline, separately, until a real gateway is integrated. The confirmation page (and email) shows a track-specific next-steps guide: registrar sign-up instructions for Route A, or voucher-delivery status for Route C.
+
+**Voucher inventory.** Bundle purchases try to auto-assign a real voucher code from a per-certification stock list (`src/lib/certification-voucher-store.ts` — Upstash Redis in production, a local JSON file in dev). If a certification's stock is empty — the default until real codes are loaded — enrollment still succeeds, and the customer is told their voucher will follow by email within 24 hours instead. See [`frontend/data/VOUCHER_INVENTORY_TEMPLATE.md`](frontend/data/VOUCHER_INVENTORY_TEMPLATE.md) for the full walkthrough of that process (buying codes, loading them, and a known timing gap worth reading before pre-loading stock, given there's no payment gateway yet).
 
 ## Deployment
 
