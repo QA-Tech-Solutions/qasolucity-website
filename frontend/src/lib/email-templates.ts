@@ -690,3 +690,200 @@ export function launchpadConfirmationEmail(payload: LaunchpadEnrollmentDetails) 
     text,
   };
 }
+
+// ---------------------------------------------------------------------------
+// Job applications — deliberately different visual treatment from
+// wrapper()/badge()/button() above. Those carry QA Solucity's marketing
+// voice (gradient header, big rounded product-card look, colorful status
+// pills); a job application is a more formal, document-like moment, so
+// this uses a plain letterhead-style header, a thin-bordered card with
+// sharp corners, and a single monochrome accent instead of the gradient.
+// ---------------------------------------------------------------------------
+
+const APPLICATION_DARK_STYLE_BLOCK = `
+  @media (prefers-color-scheme: dark) {
+    .app-email-bg { background-color: #0b1120 !important; }
+    .app-email-card { background-color: #0f172a !important; border-color: #1e293b !important; }
+    .app-email-header { border-bottom-color: #f1f5f9 !important; }
+    .app-email-mark { background-color: #f1f5f9 !important; }
+    .app-email-mark-text { color: #0f172a !important; }
+    .app-email-wordmark { color: #f1f5f9 !important; }
+    .app-email-muted { color: #94a3b8 !important; }
+    .app-email-status-label { color: #64748b !important; border-bottom-color: #1e293b !important; }
+    .app-email-status-value { color: #f1f5f9 !important; border-bottom-color: #1e293b !important; }
+    .app-email-heading { color: #f1f5f9 !important; }
+    .app-email-body { color: #cbd5e1 !important; }
+    .app-email-button { background-color: #f1f5f9 !important; }
+    .app-email-button-text { color: #0f172a !important; }
+    .app-email-footer-bg { background-color: #0b1120 !important; border-top-color: #1e293b !important; }
+    .email-value { color: #e2e8f0 !important; }
+    .email-divider { border-color: #1e293b !important; }
+    .email-link { color: #cbd5e1 !important; }
+  }
+`;
+
+const applicationWrapper = (bodyHtml: string) => `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <style>${APPLICATION_DARK_STYLE_BLOCK}</style>
+  </head>
+  <body class="app-email-bg" style="margin:0;padding:0;background-color:#eef1f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="app-email-bg" style="background-color:#eef1f6;padding:40px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="app-email-card" style="max-width:560px;background-color:#ffffff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;">
+            <tr>
+              <td class="app-email-header" style="padding:26px 32px;border-bottom:2px solid #0f172a;">
+                <table role="presentation" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td class="app-email-mark" style="width:32px;height:32px;background-color:#0f172a;border-radius:6px;text-align:center;vertical-align:middle;">
+                      <span class="app-email-mark-text" style="font-size:14px;font-weight:800;color:#ffffff;line-height:32px;">Q</span>
+                    </td>
+                    <td style="padding-left:12px;">
+                      <span class="app-email-wordmark" style="color:#0f172a;font-size:15px;font-weight:700;">QA Solucity</span><br/>
+                      <span class="app-email-muted" style="color:#94a3b8;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;">Careers</span>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:34px 32px;">
+                ${bodyHtml}
+              </td>
+            </tr>
+            <tr>
+              <td class="app-email-footer-bg" style="padding:18px 32px;background-color:#f8fafc;border-top:1px solid #eef1f6;">
+                <p class="app-email-muted" style="margin:0;font-size:11px;color:#94a3b8;">
+                  QA Solucity Careers &middot; Lagos, Nigeria &middot;
+                  <a href="mailto:hello@qasolucity.com" class="app-email-muted" style="color:#94a3b8;">hello@qasolucity.com</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+`;
+
+const applicationStatusLine = (label: string, value: string) => `
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;">
+    <tr>
+      <td class="app-email-status-label" style="padding:0 0 8px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;border-bottom:1px solid #e2e8f0;">${label}</td>
+    </tr>
+    <tr>
+      <td class="app-email-status-value" style="padding:8px 0 0;font-size:16px;font-weight:700;color:#0f172a;">${value}</td>
+    </tr>
+  </table>
+`;
+
+const applicationButton = (href: string, label: string) => `
+  <table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0 4px;">
+    <tr>
+      <td class="app-email-button" style="border-radius:8px;background-color:#0f172a;">
+        <a href="${href}" class="app-email-button-text" style="display:inline-block;padding:13px 26px;font-size:13px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;letter-spacing:0.01em;">
+          ${label}
+        </a>
+      </td>
+    </tr>
+  </table>
+`;
+
+export interface JobApplicationDetails {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  jobTitle: string;
+  jobSlug: string;
+  message?: string;
+  resumeFilename: string;
+}
+
+export function jobApplicationInternalEmail(payload: JobApplicationDetails) {
+  const { firstName, lastName, email, phone, jobTitle, jobSlug, message, resumeFilename } = payload;
+
+  const html = applicationWrapper(`
+    ${applicationStatusLine("New application", jobTitle)}
+    <p class="app-email-body" style="margin:0 0 24px;font-size:14px;line-height:1.7;color:#334155;">
+      ${escapeHtml(firstName)} ${escapeHtml(lastName)} just applied for <strong>${escapeHtml(jobTitle)}</strong>. Their resume is attached to this email.
+    </p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:4px;">
+      ${detailRow("Name", escapeHtml(`${firstName} ${lastName}`))}
+      ${detailRow("Email", `<a href="mailto:${escapeHtml(email)}" class="email-link" style="color:#0f172a;text-decoration:underline;">${escapeHtml(email)}</a>`)}
+      ${detailRow("Phone", escapeHtml(phone))}
+      ${detailRow("Role", escapeHtml(jobTitle))}
+      ${detailRow("Resume", escapeHtml(resumeFilename))}
+    </table>
+    ${
+      message
+        ? `<p class="app-email-muted" style="margin:20px 0 8px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;">Note from applicant</p>
+    <p class="app-email-body" style="margin:0;font-size:14px;line-height:1.7;color:#334155;white-space:pre-wrap;background-color:#f8fafc;border-radius:8px;padding:16px;">${escapeHtml(message)}</p>`
+        : ""
+    }
+    ${applicationButton(`mailto:${email}`, `Reply to ${escapeHtml(firstName)}`)}
+  `);
+
+  const text = [
+    `New application for ${jobTitle} (${jobSlug})`,
+    `Name: ${firstName} ${lastName}`,
+    `Email: ${email}`,
+    `Phone: ${phone}`,
+    `Resume: ${resumeFilename} (attached)`,
+    message ? `\nNote from applicant:\n${message}` : null,
+    "",
+    `Reply directly to ${email} to follow up.`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return {
+    subject: `New application: ${jobTitle} — ${firstName} ${lastName}`,
+    html,
+    text,
+  };
+}
+
+export function jobApplicationConfirmationEmail(payload: JobApplicationDetails) {
+  const { firstName, jobTitle } = payload;
+
+  const html = applicationWrapper(`
+    ${applicationStatusLine("Application received", jobTitle)}
+    <p class="app-email-heading" style="margin:0 0 16px;font-size:18px;font-weight:700;color:#0f172a;">
+      Thanks for applying, ${escapeHtml(firstName)}.
+    </p>
+    <p class="app-email-body" style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#334155;">
+      We've received your application for <strong>${escapeHtml(jobTitle)}</strong>, along with your resume.
+      Our team reviews every application personally, no automated filtering, so it may take a little
+      time to hear back.
+    </p>
+    <p class="app-email-body" style="margin:0;font-size:14px;line-height:1.7;color:#334155;">
+      If your background looks like a fit, we'll reach out directly to set up a conversation. Either
+      way, you'll hear from us.
+    </p>
+    ${applicationButton("https://qasolucity.com/careers", "View other open roles")}
+  `);
+
+  const text = [
+    `Thanks for applying, ${firstName}.`,
+    "",
+    `We've received your application for ${jobTitle}, along with your resume. Our team reviews every`,
+    "application personally, no automated filtering, so it may take a little time to hear back.",
+    "",
+    "If your background looks like a fit, we'll reach out directly to set up a conversation. Either way,",
+    "you'll hear from us.",
+    "",
+    "Other open roles: https://qasolucity.com/careers",
+  ].join("\n");
+
+  return {
+    subject: `Application received: ${jobTitle}`,
+    html,
+    text,
+  };
+}
