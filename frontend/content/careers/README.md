@@ -54,9 +54,15 @@ on the page automatically, so there's no need to repeat them here.
   than leaving it blank if the role's pay isn't being disclosed publicly.
 - **`deadline`**: optional. Omit it for a rolling/open-until-filled role;
   the page then just doesn't show a deadline instead of showing a blank one.
+  Once this date passes (end of day, Lagos time), the posting **stops
+  counting as open on its own** — you don't have to remember to come back
+  and flip `status` by hand. It still exists, and its page is still
+  reachable, but it's off the public listing and its form is replaced with
+  a "no longer accepting applications" notice, same as `status: "closed"`.
 - **`status`**: set to `"closed"` once a role is filled rather than
-  deleting the file — closed postings stay out of the public listing and
-  `generateStaticParams`, but the file (and its history) stays around.
+  deleting the file. Closed (or deadline-passed) postings stay out of the
+  public `/careers` listing, but their page keeps working, so a shared or
+  bookmarked link doesn't just 404 once a role fills.
 - **`niceToHave`**: optional, omit entirely if there isn't a meaningful
   "bonus" list beyond the hard requirements.
 

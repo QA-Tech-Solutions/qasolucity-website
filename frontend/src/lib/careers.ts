@@ -1,12 +1,15 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { isJobOpen, type JobStatus } from "./careers-status";
+
+export type { JobStatus };
+export { isJobOpen };
 
 const CAREERS_DIR = path.join(process.cwd(), "content", "careers");
 
 export type WorkMode = "Remote" | "Hybrid" | "Onsite";
 export type EmploymentType = "Full-time" | "Part-time" | "Contract" | "Internship";
-export type JobStatus = "open" | "closed";
 
 export interface CareerFrontmatter {
   title: string;
@@ -65,7 +68,7 @@ export function getAllJobs(): CareerPosting[] {
 
 /** Only postings currently accepting applications. This is what the public careers page shows. */
 export function getOpenJobs(): CareerPosting[] {
-  return getAllJobs().filter((job) => job.status === "open");
+  return getAllJobs().filter(isJobOpen);
 }
 
 export function getJobSlugs(): string[] {

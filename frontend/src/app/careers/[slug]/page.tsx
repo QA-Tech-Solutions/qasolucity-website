@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 
 import JobDetailContent from "@/features/careers/components/JobDetailContent";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
-import { getJobBySlug, getJobSlugs, getRelatedJobs } from "@/lib/careers";
+import { getJobBySlug, getJobSlugs, getRelatedJobs, isJobOpen } from "@/lib/careers";
 
 interface JobPageProps {
   params: Promise<{ slug: string }>;
@@ -27,16 +27,21 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
   const { slug } = await params;
   const job = getJobBySlug(slug);
 
-  if (!job || job.status !== "open") {
+  if (!job) {
     return {};
   }
 
+  const open = isJobOpen(job);
+
   return {
-    title: job.title,
+    title: open ? job.title : `${job.title} (Closed)`,
     description: job.summary,
-    alternates: {
-      canonical: `/careers/${slug}`,
-    },
+    // Closed postings stay reachable (a shared or bookmarked link
+    // shouldn't just 404 once a role fills or its deadline passes), but
+    // not indexed as if they were still an open listing.
+    ...(open
+      ? { alternates: { canonical: `/careers/${slug}` } }
+      : { robots: { index: false, follow: true } }),
     openGraph: {
       title: job.title,
       description: job.summary,
@@ -50,13 +55,16 @@ export default async function JobPage({ params }: JobPageProps) {
   const { slug } = await params;
   const job = getJobBySlug(slug);
 
-  if (!job || job.status !== "open") {
+  if (!job) {
     notFound();
   }
 
   const relatedJobs = getRelatedJobs(job);
 
-  const jsonLd = {
+  // Google Jobs expects JobPosting markup only for postings actually
+  // accepting applications — omit it entirely once a role is closed or
+  // its deadline has passed.
+  const jsonLd = !isJobOpen(job) ? null : {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: job.title,
@@ -93,11 +101,13 @@ export default async function JobPage({ params }: JobPageProps) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <JobDetailContent job={job} relatedJobs={relatedJobs}>
         <MDXRemote
           source={job.content}

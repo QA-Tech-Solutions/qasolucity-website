@@ -11,6 +11,8 @@ import {
   Wallet,
   CheckCircle2,
   Star,
+  Lock,
+  Mail,
 } from "lucide-react";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
@@ -20,6 +22,7 @@ import JobCard from "./JobCard";
 import WhoWeAre from "./WhoWeAre";
 import JobApplicationForm from "./JobApplicationForm";
 import type { CareerPosting } from "@/lib/careers";
+import { isJobOpen } from "@/lib/careers-status";
 import { WORK_MODE_STYLE, formatDeadline, isDeadlineSoon } from "../lib/workMode";
 
 interface Props {
@@ -29,6 +32,7 @@ interface Props {
 }
 
 export default function JobDetailContent({ job, relatedJobs, children }: Props) {
+  const isOpen = isJobOpen(job);
   const modeStyle = WORK_MODE_STYLE[job.workMode];
   const ModeIcon = modeStyle.icon;
   const deadlineLabel = formatDeadline(job.deadline);
@@ -106,13 +110,20 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
             </div>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="#apply"
-                onClick={scrollToApply}
-                className="group inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-7 text-[15px] font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-indigo-500/30"
-              >
-                Apply for this role
-              </a>
+              {isOpen ? (
+                <a
+                  href="#apply"
+                  onClick={scrollToApply}
+                  className="group inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-7 text-[15px] font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-indigo-500/30"
+                >
+                  Apply for this role
+                </a>
+              ) : (
+                <span className="inline-flex h-14 items-center justify-center gap-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 px-7 text-[15px] font-semibold text-slate-500 dark:text-slate-400">
+                  <Lock className="h-4 w-4" />
+                  No longer accepting applications
+                </span>
+              )}
               <ShareButtons title={job.title} path={`/careers/${job.slug}`} />
             </div>
           </motion.div>
@@ -189,7 +200,37 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
             <WhoWeAre />
 
             <div id="apply" className="scroll-mt-28">
-              <JobApplicationForm jobTitle={job.title} jobSlug={job.slug} />
+              {isOpen ? (
+                <JobApplicationForm jobTitle={job.title} jobSlug={job.slug} />
+              ) : (
+                <div className="flex flex-col items-center gap-4 rounded-[28px] border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-900/70 px-8 py-12 text-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 shadow-md ring-1 ring-slate-200/60 dark:ring-slate-700/60">
+                    <Lock className="h-5 w-5 text-slate-400 dark:text-slate-500" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                    This role is no longer accepting applications.
+                  </h3>
+                  <p className="max-w-md text-[15px] leading-7 text-slate-600 dark:text-slate-400">
+                    It&apos;s either been filled or the posting closed. Take a look at what else is
+                    open, or send us your resume anyway.
+                  </p>
+                  <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+                    <Link
+                      href="/careers"
+                      className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+                    >
+                      See open roles
+                    </Link>
+                    <a
+                      href="mailto:hello@qasolucity.com?subject=Speculative%20application"
+                      className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    >
+                      <Mail className="h-4 w-4" />
+                      Send resume anyway
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </Container>
