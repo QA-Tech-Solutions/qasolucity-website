@@ -19,7 +19,7 @@ export default function MegaMenuSection({
           <li key={link.href}>
             <Link
               href={link.href}
-              className="block rounded-xl px-3 py-1.5 whitespace-nowrap text-[15px] font-medium text-slate-600 dark:text-slate-400 transition-all duration-200 hover:translate-x-1 hover:text-indigo-600 dark:hover:text-indigo-400"
+              className="-mx-3 block rounded-xl px-3 py-1.5 whitespace-nowrap text-[15px] font-medium text-slate-600 dark:text-slate-400 transition-all duration-200 hover:translate-x-1 hover:text-indigo-600 dark:hover:text-indigo-400"
             >
               {link.label}
             </Link>

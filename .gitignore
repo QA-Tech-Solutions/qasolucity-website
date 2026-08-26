@@ -44,3 +44,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# local-dev fallback for the voucher assignment audit trail. Contains real
+# customer names/emails, never commit it. Production uses Upstash Redis
+# instead (see lib/certification-voucher-log-store.ts).
+frontend/data/voucher-assignment-log.json
+
+# local-dev fallback caches that rewrite themselves on every fetch/poll —
+# tracking these in git just generates merge-conflict noise on every branch
+# that gets run locally, with no real content worth keeping in history.
+# Production uses Upstash Redis instead of these files (see
+# lib/certification-pricing.ts and lib/quality-metrics-store.ts).
+frontend/data/certification-rate-cache.json
+frontend/data/quality-metrics.json

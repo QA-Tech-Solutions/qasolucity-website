@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import Select from "@/components/ui/Select";
 import Modal from "@/components/ui/Modal";
-import { motion } from "framer-motion";
-import { Send, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { services as serviceCatalog } from "@/features/services/data/services";
 
@@ -16,6 +17,37 @@ import { services as serviceCatalog } from "@/features/services/data/services";
 const services = [
   ...serviceCatalog.map((service) => ({ label: service.title, value: service.slug })),
   { label: "Other / Not sure", value: "other" },
+];
+
+// Services with their own dedicated landing page (pricing, enrollment/apply
+// flow) rather than just a generic /services/[slug] detail page — see
+// ServiceDetail.href in features/services/data/services.ts. Picking one of
+// these routes the visitor there directly instead of through this form.
+const DEDICATED_PAGE_SERVICES: Record<string, { title: string; href: string; ctaLabel: string }> = {
+  "istqb-certification": {
+    title: "ISTQB Certification Prep",
+    href: "/certification",
+    ctaLabel: "Go to the certification page",
+  },
+  "qa-career-launchpad": {
+    title: "QA Career Launchpad",
+    href: "/qa-career-launchpad",
+    ctaLabel: "Go to the QA Career Launchpad",
+  },
+};
+
+// A small pool of phrasings for the dedicated-page suggestion, so it reads
+// as a live recommendation rather than the same static banner every time.
+// {title} is swapped for the selected service's display name.
+const SUGGESTION_INTROS = [
+  "Looks like {title} is what you're after. It has its own page with full pricing and a direct way to get started.",
+  "Good news: {title} already has a dedicated page, complete details, pricing, and a direct sign-up, ready to go.",
+  "For {title}, skip the wait on a reply. There's a page with everything you need and a direct way to register.",
+  "{title} has its own home on the site, with full details and a direct enrollment flow.",
+  "Good choice! {title} actually has its own home on our site with transparent pricing and an easy setup guide.",
+  "To save you some time, we've put all the details, rates, and registration steps for {title} on one convenient page.",
+  "Want to get started fast? The {title} page features upfront pricing and a direct enrollment flow.",
+  "We've got you covered. All the details and pricing for {title} are live on its main page right now.",
 ];
 
 export default function ContactFormCard() {
@@ -33,6 +65,9 @@ export default function ContactFormCard() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const [suggestionIntro, setSuggestionIntro] = useState("");
+  const dedicatedPageSuggestion = DEDICATED_PAGE_SERVICES[formData.service];
 
   // ---------- Validation functions ----------
   const validateField = (name: string, value: string): string => {
@@ -74,6 +109,19 @@ export default function ContactFormCard() {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+
+    // Roll a fresh suggestion phrasing here, in the event handler, rather
+    // than during render (e.g. in useMemo) — Math.random() during render
+    // is an impure call React explicitly disallows.
+    if (name === "service") {
+      const suggestion = DEDICATED_PAGE_SERVICES[value];
+      if (suggestion) {
+        const pick = SUGGESTION_INTROS[Math.floor(Math.random() * SUGGESTION_INTROS.length)];
+        setSuggestionIntro(pick.replace("{title}", suggestion.title));
+      } else {
+        setSuggestionIntro("");
+      }
     }
   };
 
@@ -251,8 +299,40 @@ export default function ContactFormCard() {
               onChange={handleChange}
               placeholder="Select a Service"
               options={services}
-              className="rounded-xl border-slate-200 dark:border-slate-800 pr-10 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
+              className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
             />
+            <AnimatePresence>
+              {dedicatedPageSuggestion && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                  animate={{ opacity: 1, height: "auto", marginTop: 12 }}
+                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="overflow-hidden"
+                >
+                  <div className="relative overflow-hidden rounded-2xl border border-indigo-200 dark:border-indigo-800/60 bg-gradient-to-br from-indigo-50 dark:from-indigo-950/40 via-white dark:via-slate-900 to-violet-50/60 dark:to-violet-950/20 p-4">
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-sm shadow-indigo-500/30">
+                        <Sparkles className="h-3.5 w-3.5" />
+                      </span>
+                      <div className="text-sm">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-indigo-600 dark:text-indigo-400">
+                          Suggested for you
+                        </p>
+                        <p className="mt-1 text-slate-700 dark:text-slate-300">{suggestionIntro}</p>
+                        <Link
+                          href={dedicatedPageSuggestion.href}
+                          className="group/link mt-3 inline-flex h-10 items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-4 text-[13px] font-semibold text-white shadow-sm shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+                        >
+                          {dedicatedPageSuggestion.ctaLabel}
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-1" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="mt-5">
@@ -278,7 +358,7 @@ export default function ContactFormCard() {
           >
             <Button
               type="submit"
-              disabled={status === "loading" || !isFormValid()}
+              disabled={status === "loading" || !isFormValid() || Boolean(dedicatedPageSuggestion)}
               className="group h-14 w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 dark:shadow-indigo-950/40 transition-all duration-300 hover:shadow-indigo-500/30 dark:hover:shadow-indigo-950/50 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status === "loading" ? "Sending..." : "Send Enquiry"}
@@ -293,7 +373,9 @@ export default function ContactFormCard() {
           )}
 
           <p className="mt-4 text-center text-xs text-slate-600 dark:text-slate-400">
-            We'll respond within 24 hours. Your information is kept confidential.
+            {dedicatedPageSuggestion
+              ? `This one's best handled from its own page, use the button above to continue.`
+              : "We'll respond within 24 hours. Your information is kept confidential."}
           </p>
         </form>
       </motion.div>
@@ -311,7 +393,7 @@ export default function ContactFormCard() {
             Our QA specialists will get back to you within 24 hours.
           </p>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            We've also sent a confirmation to your email.
+            We&apos;ve also sent a confirmation to your email.
           </p>
           <button
             onClick={() => setShowSuccessModal(false)}

@@ -7,6 +7,7 @@ import {
   BrainCircuit,
   GraduationCap,
   Radar,
+  Rocket,
   ShieldCheck,
   Sparkles,
   Wrench,
@@ -473,7 +474,7 @@ export const services: ServiceDetail[] = [
     category: "Training",
     eyebrow: "Get certified",
     summary:
-      "Independent, instructor-led prep for ISTQB certification exams — live classes, mock exams, and an optional prepaid exam voucher bundle.",
+      "Independent, instructor-led prep for ISTQB certification exams, with live classes, mock exams, and an optional prepaid exam voucher bundle.",
     description:
       "Our ISTQB Certification Pathways program is an independent preparation track that gets you ready for the official exam, with live instructor-led classes, QA Solucity study guides, and full-length mock exams. Choose the Self-Starter Prep Track and book your own exam later, or the All-Inclusive Bundle with a prepaid official exam voucher included in one Naira invoice.",
     highlights: [
@@ -503,11 +504,63 @@ export const services: ServiceDetail[] = [
       {
         question: "What's the difference between the two enrollment routes?",
         answer:
-          "The Self-Starter Prep Track covers training only — you book and pay for your official exam directly with the registrar whenever you're ready. The All-Inclusive Bundle adds a prepaid official exam voucher to your training, in one Naira payment.",
+          "The Self-Starter Prep Track covers training only, and you book and pay for your official exam directly with the registrar whenever you're ready. The All-Inclusive Bundle adds a prepaid official exam voucher to your training, in one Naira payment.",
       },
     ],
     icon: Award,
     href: "/certification",
+  },
+  {
+    slug: "qa-career-launchpad",
+    title: "QA Career Launchpad",
+    category: "Training",
+    eyebrow: "Beginner to job-ready",
+    summary:
+      "Go from complete beginner to job-ready QA engineer with hands-on, mentor-led training in manual and automated testing.",
+    description:
+      "The QA Career Launchpad is a structured, mentor-led program for people starting a software testing career from scratch. You'll build real manual and automation testing skills on realistic projects, not toy examples, with a mentor guiding you the whole way, so you come out the other side with a portfolio and the confidence to apply for QA roles.",
+    highlights: [
+      "Structured curriculum from testing fundamentals to automation",
+      "Hands-on projects on realistic applications",
+      "One-on-one mentorship from working QA engineers",
+      "Portfolio and interview preparation support",
+    ],
+    outcomes: [
+      "Build job-ready manual and automation testing skills",
+      "Graduate with a portfolio you can show employers",
+      "Move from complete beginner to confident QA engineer",
+    ],
+    deliverables: [
+      "Structured learning curriculum",
+      "Hands-on project assignments",
+      "Mentor feedback and career guidance",
+    ],
+    tools: ["Manual testing fundamentals", "Selenium", "Playwright", "Jira"],
+    idealFor: ["Career switchers", "Recent graduates", "Anyone new to software testing"],
+    faqs: [
+      {
+        question: "Do I need any prior experience to join?",
+        answer:
+          "No. The QA Career Launchpad is built for complete beginners. We start from testing fundamentals and build up from there.",
+      },
+      {
+        question: "Will I learn automation, or just manual testing?",
+        answer:
+          "Both. You'll build a solid manual testing foundation first, then move into automation tooling like Selenium and Playwright once the fundamentals are solid.",
+      },
+      {
+        question: "Is this the same as ISTQB certification?",
+        answer:
+          "No. The QA Career Launchpad teaches practical, job-ready QA skills and gives you a portfolio; it isn't a certification exam. If you also want a globally recognized credential, see our separate ISTQB Certification Pathways program.",
+      },
+      {
+        question: "Do you guarantee job placement?",
+        answer:
+          "No, and we're upfront about that. What we do provide is portfolio review, interview preparation, and career guidance to help you present your new skills to employers with confidence.",
+      },
+    ],
+    icon: Rocket,
+    href: "/qa-career-launchpad",
   },
   {
     slug: "workshops",

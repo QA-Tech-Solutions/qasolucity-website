@@ -8,7 +8,7 @@ import CertificationFAQ from "@/features/certification/components/CertificationF
 export const metadata: Metadata = {
   title: "ISTQB Certification Pathways",
   description:
-    "Independent ISTQB exam prep from QA Solucity — live classes and mock exams, then sit your official exam through an independent registrar like AT*SQA or iSQI. Choose the Self-Starter Prep Track or the All-Inclusive Bundle with a prepaid exam voucher.",
+    "Independent ISTQB exam prep from QA Solucity, with live classes and mock exams, then sit your official exam through an independent registrar like AT*SQA or iSQI. Choose the Self-Starter Prep Track, or the All-Inclusive Bundle with a prepaid exam voucher.",
   alternates: {
     canonical: "/certification",
   },
@@ -20,7 +20,7 @@ export default function Page() {
     "@type": "Course",
     name: "ISTQB Certification Preparation Program",
     description:
-      "Independent, instructor-led preparation for ISTQB certification exams — live classes, study guides, and mock exams. QA Solucity is not an official ISTQB or NGSTQB partner, accredited center, or authorized testing provider; official exams are administered by independent registrars such as AT*SQA and iSQI.",
+      "Independent, instructor-led preparation for ISTQB certification exams, with live classes, study guides, and mock exams. QA Solucity is not an official ISTQB or NGSTQB partner, accredited center, or authorized testing provider; official exams are administered by independent registrars such as AT*SQA and iSQI.",
     provider: {
       "@type": "ProfessionalService",
       name: "QA Solucity",

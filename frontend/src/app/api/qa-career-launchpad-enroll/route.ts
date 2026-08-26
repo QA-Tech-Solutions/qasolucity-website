@@ -1,43 +1,42 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-import { confirmationEmail, internalNotificationEmail } from "@/lib/email-templates";
+import {
+  launchpadConfirmationEmail,
+  launchpadInternalNotificationEmail,
+} from "@/lib/email-templates";
 
 const CONTACT_EMAIL = process.env.CONTACT_NOTIFICATION_EMAIL || "hello@qasolucity.com";
 
-interface ContactPayload {
+interface EnrollPayload {
   firstName: string;
   lastName: string;
   email: string;
-  company?: string;
-  phone?: string;
-  service?: string;
-  message: string;
+  phone: string;
+  notes?: string;
 }
 
-function validate(payload: Partial<ContactPayload>): string | null {
+function validate(payload: Partial<EnrollPayload>): string | null {
   const fullName = `${payload.firstName?.trim() ?? ""} ${payload.lastName?.trim() ?? ""}`.trim();
   if (fullName.length < 3) return "Full name must be at least 3 characters";
   if (!payload.email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
     return "Please enter a valid email address";
   }
-  if (payload.phone && !/^[\+\d\s\-\(\)]{7,20}$/.test(payload.phone)) {
+  if (!payload.phone?.trim()) return "Phone number is required";
+  if (!/^[\+\d\s\-\(\)]{7,20}$/.test(payload.phone)) {
     return "Enter a valid phone number";
-  }
-  if (!payload.message || payload.message.trim().length < 20) {
-    return "Message must be at least 20 characters";
   }
   return null;
 }
 
 export async function POST(request: Request) {
-  const payload = (await request.json()) as Partial<ContactPayload>;
+  const payload = (await request.json()) as Partial<EnrollPayload>;
 
   const validationError = validate(payload);
   if (validationError) {
     return NextResponse.json({ error: validationError }, { status: 400 });
   }
 
-  const { firstName, lastName, email, company, phone, service, message } = payload as ContactPayload;
+  const { firstName, lastName, email, phone, notes } = payload as EnrollPayload;
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -48,11 +47,11 @@ export async function POST(request: Request) {
   }
 
   const resend = new Resend(apiKey);
-  const details = { firstName, lastName, email, company, phone, service, message };
+  const details = { firstName, lastName, email, phone, notes };
 
   try {
-    const internal = internalNotificationEmail(details);
-    const confirmation = confirmationEmail(details);
+    const internal = launchpadInternalNotificationEmail(details);
+    const confirmation = launchpadConfirmationEmail(details);
 
     await Promise.all([
       resend.emails.send({
@@ -74,9 +73,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Failed to send contact email:", error);
+    console.error("Failed to send QA Career Launchpad application email:", error);
     return NextResponse.json(
-      { error: "Failed to send message. Please try again." },
+      { error: "Failed to submit your application. Please try again." },
       { status: 500 }
     );
   }

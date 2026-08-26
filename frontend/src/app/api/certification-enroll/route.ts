@@ -5,16 +5,16 @@ import {
   certificationInternalNotificationEmail,
 } from "@/lib/email-templates";
 import { getCertificationPricing } from "@/lib/certification-pricing";
-import { assignVoucherCode } from "@/lib/certification-voucher-store";
+import { peekNextVoucherCode } from "@/lib/certification-voucher-store";
 import { allCertifications } from "@/features/certification/data/certification-data";
 
-const CONTACT_EMAIL = "hello@qasolucity.com";
+const CONTACT_EMAIL = process.env.CONTACT_NOTIFICATION_EMAIL || "hello@qasolucity.com";
 
 interface EnrollPayload {
   firstName: string;
   lastName: string;
   email: string;
-  phone?: string;
+  phone: string;
   certification: string;
   track: "prep" | "bundle";
   notes?: string;
@@ -26,7 +26,8 @@ function validate(payload: Partial<EnrollPayload>): string | null {
   if (!payload.email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
     return "Please enter a valid email address";
   }
-  if (payload.phone && !/^[\+\d\s\-\(\)]{7,20}$/.test(payload.phone)) {
+  if (!payload.phone?.trim()) return "Phone number is required";
+  if (!/^[\+\d\s\-\(\)]{7,20}$/.test(payload.phone)) {
     return "Enter a valid phone number";
   }
   if (payload.track !== "prep" && payload.track !== "bundle") {
@@ -49,13 +50,21 @@ export async function POST(request: Request) {
   const { firstName, lastName, email, phone, certification, track, notes } = payload as EnrollPayload;
   const certificationEntry = allCertifications.find((item) => item.code === certification)!;
 
-  const pricing = await getCertificationPricing();
+  // Exam cost varies by certification level (Advanced Level costs more
+  // than Foundation Level, for example), so pricing must be resolved for
+  // the specific certification the buyer chose, not a flat default.
+  const pricing = await getCertificationPricing(certification);
   const priceNgn = track === "bundle" ? pricing.bundlePriceNgn : pricing.trainingFeeNgn;
 
-  // Route C only: try to hand out a real voucher code from bulk inventory
-  // immediately. An empty batch just means an admin assigns one by hand —
-  // enrollment still succeeds either way.
-  const voucherCode = track === "bundle" ? await assignVoucherCode(certification) : null;
+  // Deliberately no voucher assignment here — there's no payment gateway,
+  // so nothing has actually been paid for at this point. Popping a real
+  // code from inventory now would hand out a paid asset for free if the
+  // buyer never follows through. We only *peek* the next available code
+  // (read-only, doesn't remove it) as a convenience prefill for the admin's
+  // assign-voucher screen; it's actually consumed only once an admin
+  // completes that screen's payment-confirmed checklist. See
+  // frontend/data/VOUCHER_INVENTORY_TEMPLATE.md for the full process.
+  const suggestedVoucherCode = track === "bundle" ? await peekNextVoucherCode(certification) : null;
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -76,7 +85,7 @@ export async function POST(request: Request) {
     certificationName: certificationEntry.name,
     notes,
     priceNgn,
-    voucherCode,
+    suggestedVoucherCode,
   };
 
   try {
@@ -103,8 +112,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      voucherAssigned: Boolean(voucherCode),
-      voucherCode,
       priceNgn,
     });
   } catch (error) {

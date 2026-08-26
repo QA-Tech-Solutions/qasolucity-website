@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, GraduationCap, Ticket } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, GraduationCap, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import Select from "@/components/ui/Select";
-import { certificationCatalog, type Pathway } from "../data/certification-data";
+import Modal from "@/components/ui/Modal";
+import { allCertifications, certificationCatalog, type Pathway } from "../data/certification-data";
 
 interface Props {
   initialTrack: Pathway["track"];
@@ -29,7 +29,7 @@ const nairaFormatter = new Intl.NumberFormat("en-NG", {
 const TRACK_COPY: Record<Pathway["track"], { title: string; description: string; cta: string }> = {
   prep: {
     title: "Self-Starter Prep Track",
-    description: "Training only — you'll book and pay for your official exam yourself, later.",
+    description: "Training only. You'll book and pay for your official exam yourself, later.",
     cta: "Confirm Prep Enrollment",
   },
   bundle: {
@@ -40,7 +40,6 @@ const TRACK_COPY: Record<Pathway["track"], { title: string; description: string;
 };
 
 export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePriceNgn }: Props) {
-  const router = useRouter();
   const [track, setTrack] = useState<Pathway["track"]>(initialTrack);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -53,8 +52,46 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [enrolledTrack, setEnrolledTrack] = useState<Pathway["track"]>(initialTrack);
 
-  const price = track === "bundle" ? bundlePriceNgn : trainingFeeNgn;
+  // Both the training fee and the Bundle's exam voucher cost depend on
+  // which certification is picked (Advanced Level costs more than
+  // Foundation Level), so pricing starts at the server-rendered default
+  // (Foundation Level) and refetches once the buyer picks a certification.
+  const [pricing, setPricing] = useState({ trainingFeeNgn, bundlePriceNgn });
+  const [pricingLoading, setPricingLoading] = useState(false);
+
+  useEffect(() => {
+    if (!formData.certification) return;
+
+    let cancelled = false;
+    // Marks the fetch as in-flight so the price can dim while it resolves.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- kicking off a fetch is exactly what this effect exists to do; the result itself is applied from the .then() callback below, not synchronously here
+    setPricingLoading(true);
+
+    fetch(`/api/certification-pricing?certification=${encodeURIComponent(formData.certification)}`)
+      .then((res) => res.json())
+      .then((data: { trainingFeeNgn?: number; bundlePriceNgn?: number }) => {
+        if (!cancelled && typeof data.trainingFeeNgn === "number" && typeof data.bundlePriceNgn === "number") {
+          setPricing({ trainingFeeNgn: data.trainingFeeNgn, bundlePriceNgn: data.bundlePriceNgn });
+        }
+      })
+      .catch(() => {
+        // Keep whatever price was already showing — better a slightly
+        // stale number than a broken checkout.
+      })
+      .finally(() => {
+        if (!cancelled) setPricingLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [formData.certification]);
+
+  const price = track === "bundle" ? pricing.bundlePriceNgn : pricing.trainingFeeNgn;
+  const selectedCertification = allCertifications.find((item) => item.code === formData.certification);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -64,23 +101,76 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  // ---------- Validation functions (mirrors the contact form's pattern) ----------
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case "firstName":
+      case "lastName": {
+        const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`;
+        if (fullName.length < 3 && formData.firstName && formData.lastName) {
+          return "Full name must be at least 3 characters";
+        }
+        if (!value.trim()) return "This field is required";
+        return "";
+      }
+      case "email": {
+        if (!value.trim()) return "Email is required";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Please enter a valid email address";
+        return "";
+      }
+      case "phone": {
+        if (!value.trim()) return "Phone number is required";
+        if (!/^[\+\d\s\-\(\)]{7,20}$/.test(value)) {
+          return "Enter a valid phone number (e.g., +1 555 123 4567)";
+        }
+        return "";
+      }
+      case "certification": {
+        if (!value) return "Choose which certification you're targeting";
+        return "";
+      }
+      default:
+        return "";
+    }
+  };
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    if (error) setErrors((prev) => ({ ...prev, [name]: error }));
+  };
+
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
-    const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`.trim();
+    const fields = ["firstName", "lastName", "email", "phone", "certification"];
+    fields.forEach((field) => {
+      const value = formData[field as keyof typeof formData] as string;
+      const error = validateField(field, value);
+      if (error) newErrors[field] = error;
+    });
+    const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`;
     if (fullName.length < 3) {
       newErrors.firstName = "Full name must be at least 3 characters";
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-    if (formData.phone && !/^[\+\d\s\-\(\)]{7,20}$/.test(formData.phone)) {
-      newErrors.phone = "Enter a valid phone number";
-    }
-    if (!formData.certification) {
-      newErrors.certification = "Choose which certification you're targeting";
+      newErrors.lastName = "Full name must be at least 3 characters";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  // Derived purely from formData so it can't get stuck false after a field
+  // is corrected post-blur (see ContactFormCard for the same reasoning).
+  const isFormValid = (): boolean => {
+    const required = ["firstName", "lastName", "email", "phone", "certification"];
+    const allFilled = required.every(
+      (field) => formData[field as keyof typeof formData]?.trim()
+    );
+    const fullName = `${formData.firstName.trim()} ${formData.lastName.trim()}`;
+    const nameValid = fullName.length >= 3;
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+    const phoneValid = /^[\+\d\s\-\(\)]{7,20}$/.test(formData.phone);
+    return allFilled && nameValid && emailValid && phoneValid;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -102,18 +192,9 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
         throw new Error(data.error || "Something went wrong");
       }
 
-      sessionStorage.setItem(
-        "qas-certification-enrollment",
-        JSON.stringify({
-          firstName: formData.firstName,
-          track,
-          priceNgn: data.priceNgn,
-          voucherAssigned: Boolean(data.voucherAssigned),
-          voucherCode: data.voucherCode ?? null,
-        })
-      );
-
-      router.push(`/certification/enroll/confirmation?track=${track}`);
+      setEnrolledTrack(track);
+      setStatus("idle");
+      setShowSuccessModal(true);
     } catch (error) {
       setStatus("error");
       setErrorMessage(error instanceof Error ? error.message : "Failed to submit enrollment");
@@ -121,6 +202,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
   };
 
   return (
+    <>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -134,7 +216,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
         Reserve your seat.
       </h1>
       <p className="mt-3 text-[15px] leading-7 text-slate-600 dark:text-slate-400">
-        Tell us a bit about you and pick your route — we&apos;ll follow up by email with payment and onboarding
+        Tell us a bit about you and pick your route, and we&apos;ll follow up by email with payment and onboarding
         details.
       </p>
 
@@ -172,9 +254,27 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
         })}
       </div>
 
-      <div className="mt-6 flex items-baseline justify-between rounded-2xl bg-slate-50 dark:bg-slate-800/60 px-5 py-4">
-        <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Total due</span>
-        <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">{nairaFormatter.format(price)}</span>
+      <div className="mt-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 px-5 py-4">
+        <div className="flex items-baseline justify-between">
+          <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Total due</span>
+          <span
+            className={`text-2xl font-bold text-slate-900 dark:text-slate-100 transition-opacity ${pricingLoading ? "opacity-50" : ""}`}
+          >
+            {nairaFormatter.format(price)}
+          </span>
+        </div>
+        {!formData.certification ? (
+          <p className="mt-1 text-right text-xs text-slate-500 dark:text-slate-500">
+            Starting price shown. Pick a certification below for your exact total.
+          </p>
+        ) : (
+          selectedCertification && (
+            <p className="mt-1 flex items-center justify-end gap-1.5 text-right text-xs text-slate-500 dark:text-slate-500">
+              <Clock className="h-3 w-3" />
+              {selectedCertification.duration} of training for {selectedCertification.code}
+            </p>
+          )
+        )}
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="mt-8">
@@ -184,6 +284,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="First Name"
               required
               className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
@@ -195,6 +296,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Last Name"
               required
               className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
@@ -210,6 +312,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
               name="email"
               value={formData.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Email Address"
               required
               className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
@@ -221,7 +324,9 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Phone Number (Optional)"
+              onBlur={handleBlur}
+              placeholder="Phone Number"
+              required
               className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
             />
             {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
@@ -233,9 +338,11 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
             name="certification"
             value={formData.certification}
             onChange={handleChange}
+            onBlur={handleBlur}
+            aria-invalid={Boolean(errors.certification)}
             placeholder="Which certification are you targeting?"
             options={certificationOptions}
-            className="rounded-xl border-slate-200 dark:border-slate-800 pr-10 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
+            className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
           />
           {errors.certification && <p className="mt-1 text-xs text-red-500">{errors.certification}</p>}
         </div>
@@ -254,7 +361,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-6">
           <Button
             type="submit"
-            disabled={status === "loading"}
+            disabled={status === "loading" || !isFormValid()}
             className="group h-14 w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 dark:shadow-indigo-950/40 transition-all duration-300 hover:shadow-indigo-500/30 dark:hover:shadow-indigo-950/50 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {status === "loading" ? "Submitting..." : TRACK_COPY[track].cta}
@@ -273,5 +380,27 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
         </p>
       </form>
     </motion.div>
+
+    <Modal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)}>
+      <div className="flex flex-col items-center text-center">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
+          <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+        </div>
+        <h4 className="text-xl font-bold text-slate-900 dark:text-slate-100">You&apos;re enrolled! 🎉</h4>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Thanks for enrolling in the <strong>{TRACK_COPY[enrolledTrack].title}</strong>.
+        </p>
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          We&apos;ve sent a confirmation to your email. Our team will reach out shortly with next steps.
+        </p>
+        <button
+          onClick={() => setShowSuccessModal(false)}
+          className="mt-6 inline-flex items-center rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-2.5 font-semibold text-white transition hover:opacity-90"
+        >
+          Got it, thanks
+        </button>
+      </div>
+    </Modal>
+    </>
   );
 }
