@@ -1,7 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, Globe2, TrendingUp, Users } from "lucide-react";
+import {
+  Sparkles,
+  Globe2,
+  TrendingUp,
+  Users,
+  CheckCircle2,
+  ShieldCheck,
+  Bug,
+  Target,
+} from "lucide-react";
 
 const BADGES = [
   { icon: Globe2, label: "Remote-friendly" },
@@ -9,20 +18,56 @@ const BADGES = [
   { icon: Users, label: "Small team, real ownership" },
 ];
 
+// Ambient decorative icon chips scattered around the headline — purely
+// visual, so they're hidden below lg where there's no room for them
+// without colliding with the text.
+const FLOATING_ICONS = [
+  { icon: CheckCircle2, className: "top-[16%] left-[8%]", color: "text-indigo-500 dark:text-indigo-400", delay: 0 },
+  { icon: ShieldCheck, className: "top-[10%] right-[10%]", color: "text-violet-500 dark:text-violet-400", delay: 0.6 },
+  { icon: Bug, className: "top-[58%] left-[4%]", color: "text-rose-500 dark:text-rose-400", delay: 1.2 },
+  { icon: Target, className: "bottom-[12%] right-[6%]", color: "text-indigo-500 dark:text-indigo-400", delay: 1.8 },
+];
+
 export default function CareersHero() {
   return (
-    <div className="relative overflow-hidden bg-[#FCFBF8] dark:bg-[#020617] pt-40 pb-20">
+    <div className="relative overflow-hidden bg-[linear-gradient(135deg,_#f8f7ff_0%,_#eef2ff_45%,_#fdf2f8_100%)] dark:bg-[linear-gradient(135deg,_#020617_0%,_#0b0f2e_50%,_#1a0e1f_100%)] pt-40 pb-20">
       <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
         <motion.div
           animate={{ x: [-20, 20, -20], y: [-10, 10, -10], scale: [1, 1.05, 1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-24 top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/40 dark:bg-indigo-900/25 blur-[160px]"
+          className="absolute -left-24 top-0 h-[500px] w-[500px] rounded-full bg-indigo-200/40 dark:bg-indigo-900/25 blur-[160px]"
         />
         <motion.div
           animate={{ x: [20, -20, 20], y: [10, -10, 10], scale: [1, 1.05, 1] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute -right-24 top-20 h-[450px] w-[450px] rounded-full bg-violet-100/40 dark:bg-violet-900/25 blur-[160px]"
+          className="absolute -right-24 top-20 h-[450px] w-[450px] rounded-full bg-violet-200/40 dark:bg-violet-900/25 blur-[160px]"
         />
+        <div className="absolute bottom-[-10%] left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-fuchsia-200/30 dark:bg-fuchsia-900/20 blur-[140px]" />
+
+        {/* Subtle grid, matches the pattern used on ServicesHero/etc. */}
+        <div
+          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0f172a 1px, transparent 1px),
+              linear-gradient(to bottom, #0f172a 1px, transparent 1px)
+            `,
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
+
+      <div className="absolute inset-0 hidden lg:block pointer-events-none overflow-hidden">
+        {FLOATING_ICONS.map(({ icon: Icon, className, color, delay }, index) => (
+          <motion.div
+            key={index}
+            animate={{ y: [0, -14, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay }}
+            className={`absolute flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/80 dark:bg-slate-900/80 shadow-lg shadow-slate-200/40 dark:shadow-black/30 backdrop-blur-sm ${className}`}
+          >
+            <Icon className={`h-5 w-5 ${color}`} />
+          </motion.div>
+        ))}
       </div>
 
       <div className="mx-auto max-w-3xl px-6 text-center">

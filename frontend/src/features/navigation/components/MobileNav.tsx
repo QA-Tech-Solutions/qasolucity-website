@@ -11,7 +11,7 @@ export default function MobileNav({
   onOpen,
 }: MobileNavProps) {
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <Button
         variant="ghost"
         size="sm"

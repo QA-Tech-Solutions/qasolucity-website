@@ -66,7 +66,13 @@ export function getAllJobs(): CareerPosting[] {
     .sort((a, b) => (a.postedDate < b.postedDate ? 1 : -1));
 }
 
-/** Only postings currently accepting applications. This is what the public careers page shows. */
+/**
+ * Only postings currently accepting applications. The public careers page
+ * itself shows every posting (open and closed, via getAllJobs) so closed
+ * roles stay visible with the correct restrictions instead of vanishing —
+ * this narrower list is for things that should only ever surface open
+ * roles: the sitemap, and "related roles" on a job's own detail page.
+ */
 export function getOpenJobs(): CareerPosting[] {
   return getAllJobs().filter(isJobOpen);
 }

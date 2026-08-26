@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   Star,
   Lock,
-  Mail,
 } from "lucide-react";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
@@ -104,7 +103,7 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
                   className={`flex items-center gap-1.5 ${deadlineSoon ? "font-semibold text-amber-600 dark:text-amber-400" : ""}`}
                 >
                   <CalendarClock className="h-4 w-4" />
-                  Apply by {deadlineLabel}
+                  Apply before {deadlineLabel}
                 </span>
               )}
             </div>
@@ -212,7 +211,7 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
                   </h3>
                   <p className="max-w-md text-[15px] leading-7 text-slate-600 dark:text-slate-400">
                     It&apos;s either been filled or the posting closed. Take a look at what else is
-                    open, or send us your resume anyway.
+                    open.
                   </p>
                   <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
                     <Link
@@ -221,13 +220,6 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
                     >
                       See open roles
                     </Link>
-                    <a
-                      href="mailto:hello@qasolucity.com?subject=Speculative%20application"
-                      className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800"
-                    >
-                      <Mail className="h-4 w-4" />
-                      Send resume anyway
-                    </a>
                   </div>
                 </div>
               )}

@@ -19,6 +19,13 @@ const EMPLOYMENT_TYPE_SCHEMA: Record<string, string> = {
   Internship: "INTERN",
 };
 
+// Same reasoning as app/careers/page.tsx — open/closed here partly depends
+// on today's date vs. each posting's deadline, so this route must actually
+// re-check on every visit rather than freeze that check at build time.
+// generateStaticParams below still lets Next.js know every valid slug
+// up front; this just stops it from caching each one's rendered HTML.
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return getJobSlugs().map((slug) => ({ slug }));
 }

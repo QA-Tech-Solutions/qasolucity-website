@@ -11,8 +11,8 @@ export type JobStatus = "open" | "closed";
  *
  * Deliberately pure and dependency-free: lib/careers.ts (which this same
  * check also powers) touches Node's fs/path to load postings from disk,
- * so importing *that* from a Client Component (like JobDetailContent,
- * which needs this check to decide whether to show the application form)
+ * so importing *that* from a Client Component (like JobCard or
+ * JobDetailContent, which both need this check to decide what to render)
  * would pull the filesystem code into the browser bundle and break it.
  * Importing this file instead avoids that entirely.
  */
