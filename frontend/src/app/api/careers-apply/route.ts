@@ -4,7 +4,7 @@ import {
   jobApplicationConfirmationEmail,
   jobApplicationInternalEmail,
 } from "@/lib/email-templates";
-import { getJobBySlug } from "@/lib/careers";
+import { getJobBySlug, isJobOpen } from "@/lib/careers";
 
 const CONTACT_EMAIL = process.env.CONTACT_NOTIFICATION_EMAIL || "hello@qasolucity.com";
 
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   }
 
   const job = getJobBySlug(jobSlug);
-  if (!job || job.status !== "open") {
+  if (!job || !isJobOpen(job)) {
     return NextResponse.json(
       { error: "This role is no longer accepting applications" },
       { status: 400 }
