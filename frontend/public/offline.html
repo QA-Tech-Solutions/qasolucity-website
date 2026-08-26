@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>You're offline — QA Solucity</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --border: #e2e8f0;
+    --cell-bg: #f1f5f9;
+    --cell-border: #e2e8f0;
+    --accent-from: #4f46e5;
+    --accent-to: #7c3aed;
+    --accent-solid: #4f46e5;
+    --bug: #e11d48;
+    --ok: #059669;
+  }
+  html[data-theme="dark"] {
+    --bg: #020617;
+    --card-bg: #0f172a;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #1e293b;
+    --cell-bg: #1e293b;
+    --cell-border: #334155;
+    --accent-solid: #818cf8;
+    --bug: #fb7185;
+    --ok: #34d399;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+  }
+  .blob {
+    position: fixed;
+    z-index: -1;
+    border-radius: 9999px;
+    filter: blur(120px);
+    opacity: 0.35;
+    pointer-events: none;
+    animation: drift 14s ease-in-out infinite;
+  }
+  .blob.one { top: -120px; left: -100px; width: 420px; height: 420px; background: var(--accent-from); }
+  .blob.two { bottom: -100px; right: -120px; width: 420px; height: 420px; background: var(--accent-to); animation-delay: 2s; animation-direction: reverse; }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, 15px) scale(1.06); }
+  }
+
+  .status-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(225, 29, 72, 0.08);
+    color: var(--bug);
+    gap: 8px;
+    align-items: center;
+  }
+  .status-bar.online { background: rgba(5, 150, 105, 0.1); color: var(--ok); }
+  .status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: currentColor;
+  }
+  .status-dot.offline { animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  .status-bar button {
+    margin-left: 8px;
+    border: none;
+    background: currentColor;
+    color: var(--card-bg);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  main {
+    width: 100%;
+    max-width: 460px;
+    padding: 28px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .brand-mark {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+  .brand-name {
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 26px;
+    max-width: 360px;
+  }
+
+  .game-card {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 22px;
+    box-shadow: 0 18px 60px -24px rgba(15, 23, 42, 0.25);
+  }
+
+  .game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .game-title {
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hud {
+    display: flex;
+    gap: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .hud span.value { color: var(--text); }
+
+  .stage {
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 8px;
+  }
+  .panel p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 300px;
+  }
+  .panel .big-emoji { font-size: 34px; }
+  .panel .score-big {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .panel .best-line {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  button.primary {
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 26px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.5);
+  }
+  button.primary:active { transform: scale(0.98); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+  .cell {
+    aspect-ratio: 1 / 1;
+    background: var(--cell-bg);
+    border: 1px solid var(--cell-border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cell svg { width: 60%; height: 60%; opacity: 0; transform: scale(0.5); }
+  .cell.has-bug svg {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    color: var(--bug);
+  }
+  .cell.squashed svg {
+    opacity: 0;
+    transform: scale(1.5) rotate(20deg);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  footer {
+    margin-top: 26px;
+    color: var(--text-muted);
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  footer .powered {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+  }
+  footer .powered .dot {
+    width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+
+  <div class="status-bar offline" id="statusBar">
+    <span class="status-dot offline" id="statusDot"></span>
+    <span id="statusText">You're offline</span>
+  </div>
+
+  <main>
+    <div class="brand">
+      <div class="brand-mark">QA</div>
+      <div class="brand-name">QA Solucity</div>
+    </div>
+
+    <h1>No connection right now.</h1>
+    <p class="subtitle">
+      We couldn't reach the page you wanted. While your connection sorts itself out,
+      here's a small QA-flavored distraction.
+    </p>
+
+    <div class="game-card">
+      <div class="game-header">
+        <div class="game-title">🐛 Bug Squash</div>
+        <div class="hud" id="hud" style="display:none">
+          <div>Score <span class="value" id="scoreVal">0</span></div>
+          <div>Time <span class="value" id="timeVal">45</span>s</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="panel" id="startPanel">
+          <div class="big-emoji">🐞</div>
+          <p>Bugs will pop up in the grid. Tap them before they escape into production. 45 seconds, go for a high score.</p>
+          <button class="primary" id="startBtn">Start round</button>
+          <div class="best-line" id="bestLineStart"></div>
+        </div>
+
+        <div class="panel" id="endPanel" style="display:none">
+          <div class="score-big" id="finalScore">0</div>
+          <p id="endMessage"></p>
+          <p class="best-line" id="bestLineEnd"></p>
+          <button class="primary" id="againBtn">Play again</button>
+        </div>
+
+        <div class="grid" id="grid" style="display:none"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="powered">
+        <span>Powered by</span>
+        <span>QA Solucity</span>
+      </div>
+      <div>This page will reconnect automatically once you're back online.</div>
+    </footer>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- theme sync (mirrors the site's next-themes "theme" key) ----------
+  function applyTheme() {
+    var stored = null;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    var dark = stored === "dark" ||
+      (stored !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  }
+  applyTheme();
+  try {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+  } catch (e) {}
+
+  // ---------- connection status ----------
+  var statusBar = document.getElementById("statusBar");
+  var statusDot = document.getElementById("statusDot");
+  var statusText = document.getElementById("statusText");
+
+  function renderStatus() {
+    if (navigator.onLine) {
+      statusBar.className = "status-bar online";
+      statusDot.className = "status-dot";
+      statusText.textContent = "Back online";
+      if (!document.getElementById("reloadBtn")) {
+        var btn = document.createElement("button");
+        btn.id = "reloadBtn";
+        btn.textContent = "Reload";
+        btn.onclick = function () { location.reload(); };
+        statusBar.appendChild(btn);
+      }
+    } else {
+      statusBar.className = "status-bar offline";
+      statusDot.className = "status-dot offline";
+      statusText.textContent = "You're offline";
+      var existing = document.getElementById("reloadBtn");
+      if (existing) existing.remove();
+    }
+  }
+  window.addEventListener("online", renderStatus);
+  window.addEventListener("offline", renderStatus);
+  renderStatus();
+
+  // ---------- Bug Squash ----------
+  var GRID_SIZE = 16;
+  var ROUND_SECONDS = 45;
+  var BEST_KEY = "qas_bugsquash_best";
+
+  var grid = document.getElementById("grid");
+  var hud = document.getElementById("hud");
+  var startPanel = document.getElementById("startPanel");
+  var endPanel = document.getElementById("endPanel");
+  var startBtn = document.getElementById("startBtn");
+  var againBtn = document.getElementById("againBtn");
+  var scoreVal = document.getElementById("scoreVal");
+  var timeVal = document.getElementById("timeVal");
+  var finalScore = document.getElementById("finalScore");
+  var endMessage = document.getElementById("endMessage");
+  var bestLineStart = document.getElementById("bestLineStart");
+  var bestLineEnd = document.getElementById("bestLineEnd");
+
+  var BUG_SVG =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/>' +
+    '<path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/>' +
+    '<path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/>' +
+    '<path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/>' +
+    '<path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 4-4"/>' +
+    '<path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/>' +
+    '<path d="M22 13h-4"/><path d="M21 21c0-2.1-1.7-3.9-4-4"/>' +
+    "</svg>";
+
+  function getBest() {
+    try { return parseInt(localStorage.getItem(BEST_KEY) || "0", 10) || 0; } catch (e) { return 0; }
+  }
+  function setBest(v) {
+    try { localStorage.setItem(BEST_KEY, String(v)); } catch (e) {}
+  }
+
+  var cells = [];
+  for (var i = 0; i < GRID_SIZE; i++) {
+    var cell = document.createElement("div");
+    cell.className = "cell";
+    cell.dataset.index = String(i);
+    cell.innerHTML = BUG_SVG;
+    grid.appendChild(cell);
+    cells.push(cell);
+  }
+
+  var state = null;
+
+  function endMessageFor(squashed, escaped) {
+    var line;
+    if (squashed >= 20) line = "Ship it. Production-ready reflexes.";
+    else if (squashed >= 14) line = "Zero Defects Achieved.";
+    else if (squashed >= 8) line = "Sharp reflexes. Regression suite approved.";
+    else if (squashed >= 3) line = "Decent catch rate. The backlog thanks you.";
+    else line = "Rough round. Even senior QAs have days like this.";
+    if (escaped > 0) {
+      line += " " + escaped + " slipped into production.";
+    }
+    return line;
+  }
+
+  function clearCell(cell) {
+    if (cell._escapeTimeout) {
+      clearTimeout(cell._escapeTimeout);
+      cell._escapeTimeout = null;
+    }
+    cell.classList.remove("has-bug", "squashed");
+  }
+
+  function spawnBug() {
+    if (!state || !state.running) return;
+    var empty = cells.filter(function (c) { return !c.classList.contains("has-bug"); });
+    if (empty.length === 0) { scheduleSpawn(); return; }
+
+    var cell = empty[Math.floor(Math.random() * empty.length)];
+    cell.classList.remove("squashed");
+    cell.classList.add("has-bug");
+
+    cell._escapeTimeout = setTimeout(function () {
+      if (!cell.classList.contains("has-bug")) return;
+      clearCell(cell);
+      state.escaped++;
+    }, state.bugLifetime);
+
+    scheduleSpawn();
+  }
+
+  function scheduleSpawn() {
+    if (!state || !state.running) return;
+    var elapsed = (ROUND_SECONDS - state.timeLeft) / ROUND_SECONDS;
+    var interval = 950 - elapsed * 500; // 950ms -> 450ms
+    state.bugLifetime = 1200 - elapsed * 550; // 1200ms -> 650ms
+    state.spawnTimeout = setTimeout(spawnBug, Math.max(interval, 350));
+  }
+
+  grid.addEventListener("click", function (e) {
+    var cell = e.target.closest(".cell");
+    if (!cell || !state || !state.running) return;
+    if (!cell.classList.contains("has-bug")) return;
+
+    clearCell(cell);
+    cell.classList.add("squashed");
+    state.squashed++;
+    scoreVal.textContent = String(state.squashed);
+  });
+
+  function startRound() {
+    state = { running: true, squashed: 0, escaped: 0, timeLeft: ROUND_SECONDS, bugLifetime: 1200, spawnTimeout: null, tickInterval: null };
+    cells.forEach(clearCell);
+
+    startPanel.style.display = "none";
+    endPanel.style.display = "none";
+    hud.style.display = "flex";
+    grid.style.display = "grid";
+    scoreVal.textContent = "0";
+    timeVal.textContent = String(ROUND_SECONDS);
+
+    scheduleSpawn();
+    state.tickInterval = setInterval(function () {
+      state.timeLeft--;
+      timeVal.textContent = String(state.timeLeft);
+      if (state.timeLeft <= 0) endRound();
+    }, 1000);
+  }
+
+  function endRound() {
+    if (!state) return;
+    state.running = false;
+    clearTimeout(state.spawnTimeout);
+    clearInterval(state.tickInterval);
+    cells.forEach(clearCell);
+
+    var best = getBest();
+    if (state.squashed > best) { best = state.squashed; setBest(best); }
+
+    grid.style.display = "none";
+    hud.style.display = "none";
+    endPanel.style.display = "flex";
+    finalScore.textContent = String(state.squashed);
+    endMessage.textContent = endMessageFor(state.squashed, state.escaped);
+    bestLineEnd.textContent = "Best: " + best;
+  }
+
+  var startingBest = getBest();
+  if (startingBest > 0) bestLineStart.textContent = "Best: " + startingBest;
+
+  startBtn.addEventListener("click", startRound);
+  againBtn.addEventListener("click", startRound);
+})();
+</script>
+</body>
+</html>
