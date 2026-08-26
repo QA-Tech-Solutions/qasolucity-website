@@ -17,9 +17,9 @@ export default function DesktopNav({
   toggle,
 }: DesktopNavProps) {
   return (
-    <nav 
+    <nav
       aria-label="Primary"
-      className="hidden items-center gap-8 lg:flex">
+      className="hidden items-center gap-6 xl:flex">
       {navigation.map((item) => (
         <NavItem
           key={item.label}

@@ -1,13 +1,13 @@
 ---
-title: "QA Engineer"
+title: "QA Automation Engineer"
 department: "QA Testing"
 type: "Full-time"
 workMode: "Remote"
 location: "Lagos, Nigeria (Remote)"
-salaryLabel: "₦250,000 / month"
-deadline: "2026-07-30"
-postedDate: "2026-07-23"
-status: "closed"
+salaryLabel: "₦350,000 – ₦500,000 / month"
+deadline: "2026-08-30"
+postedDate: "2026-08-08"
+status: "open"
 summary: "Build and maintain automated test suites for client products, working closely with our QA and delivery teams."
 responsibilities:
   - "Design, build, and maintain automated test suites using Playwright and Selenium"
@@ -31,8 +31,6 @@ hiringProcess:
   - "Final interview with the team"
   - "Offer"
 ---
-
-**This is a sample posting, kept here so you can see the full format and how it renders — it's marked `status: "closed"`, so it won't show up on the public `/careers` listing or accept applications.** To preview it as a real page, this file's slug is `sample-qa-automation-engineer`, so it's viewable at `/careers/sample-qa-automation-engineer`. To turn it into a real opening: rename the file to match the actual role, edit every field below, and set `status` to `"open"`. To remove it entirely, just delete this file.
 
 ## About the role
 
