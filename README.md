@@ -159,11 +159,18 @@ The filename (minus `.md`) becomes the post's slug and URL: `content/blog/your-p
 
 The homepage's scrolling tech/testing-type marquee automatically links a pill to its matching blog post the moment a post with that slug exists — no extra wiring needed.
 
+## Posting a job
+
+Same pattern as the blog: job postings live in `frontend/content/careers/` as Markdown files with frontmatter, no CMS, no database. That folder is **empty by default** — `/careers` shows a real empty state until a posting is added, rather than shipping with placeholder roles that don't actually exist. See [`frontend/content/careers/README.md`](frontend/content/careers/README.md) for the full frontmatter shape (department, work mode, salary, deadline, responsibilities, requirements, hiring process, etc.) and field-by-field notes. The filename becomes the slug: `content/careers/qa-automation-engineer.md` → `/careers/qa-automation-engineer`. Set a posting's `status` to `"closed"` to pull it from the public listing without deleting the file.
+
+**Applying.** Each job page has a real in-page application form (name, email, phone, resume upload, optional note), not a `mailto:` link. `POST /api/careers-apply` validates the submission (resume must be PDF/DOC/DOCX, under 5MB), then emails the applicant's resume as an attachment to `CONTACT_NOTIFICATION_EMAIL` and sends the applicant a confirmation. Both use a deliberately different, more formal email layout (`applicationWrapper` in `src/lib/email-templates.ts`) than the marketing-gradient template every other email on this site shares — a plain letterhead header and a single monochrome accent instead of the indigo/violet gradient, since a job application is a different kind of moment than a lead or an enrollment.
+
 ## Key features
 
 - **Mega-menu navigation** across Services, Solutions, and Resources, each backed by structured data with FAQ accordions and cross-links between related content.
 - **Contact form** with server-side validation and branded email notifications via Resend.
 - **File-based blog** with MDX rendering, category filtering, related-post suggestions, social sharing, and copy-link functionality.
+- **File-based careers page** (`/careers`): open roles grouped by department, `JobPosting` structured data for Google Jobs, and a real empty state instead of placeholder listings when nothing's open. See "Posting a job" above.
 - **ISTQB Certification Pathways** (`/certification`): two enrollment routes with live-computed Naira pricing and an email-based enrollment flow. See below.
 - **QA Career Launchpad** (`/qa-career-launchpad`): a beginner-to-job-ready QA training program, distinct from both ISTQB prep and Corporate QA Training, with its own curriculum, requirements, and email-based application form (`POST /api/qa-career-launchpad-enroll`).
 - **A bundled FAQ page** (`/faq`) — pulls every question already defined on the Services, Solutions, Resources, and Contact pages into one searchable, filterable hub, rather than duplicating content. See `src/features/faq/data/faq-data.ts`.
