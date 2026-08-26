@@ -29,7 +29,7 @@ const FEATURE_ICONS: Record<PathwayFeatureIcon, LucideIcon> = {
 };
 
 export default function PathwayCard({ pathway }: { pathway: Pathway }) {
-  const { track, routeLabel, title, tagline, description, priceLabel, originalPriceLabel, priceNote, features, ctaLabel, highlight, badge } = pathway;
+  const { track, eyebrow, title, tagline, description, priceLabel, originalPriceLabel, priceNote, features, ctaLabel, highlight, badge } = pathway;
 
   return (
     <motion.article
@@ -50,7 +50,7 @@ export default function PathwayCard({ pathway }: { pathway: Pathway }) {
       )}
 
       <span className="text-xs font-bold uppercase tracking-[0.3em] text-indigo-500 dark:text-indigo-400">
-        {routeLabel}
+        {eyebrow}
       </span>
       <h3 className="mt-3 text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-[28px]">
         {title}

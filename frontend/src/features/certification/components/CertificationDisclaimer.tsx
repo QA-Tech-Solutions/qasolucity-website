@@ -24,7 +24,7 @@ export default function CertificationDisclaimer() {
           <p className="mt-3">
             The official certification exam itself is written, administered, and proctored
             entirely by independent, globally recognized exam boards (such as AT*SQA or
-            iSQI) — QA Solucity has no role in writing, administering, scoring, or issuing
+            iSQI). QA Solucity has no role in writing, administering, scoring, or issuing
             the exam or the certificate. Our Self-Starter Prep Track and All-Inclusive
             Certification Bundle are preparation programs only; the Bundle&apos;s prepaid
             voucher is a reimbursement of the registrar&apos;s own exam fee, purchased on

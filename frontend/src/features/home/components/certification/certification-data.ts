@@ -27,7 +27,7 @@ export const certificationCards = [
     description:
       "New to software testing? Learn manual and automated testing from the ground up with hands-on mentorship built to take you from complete beginner to job-ready QA engineer.",
     button: "Start Training",
-    href: "/contact",
+    href: "/qa-career-launchpad",
     variant: "secondary",
   },
 ] as const;

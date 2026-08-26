@@ -11,12 +11,18 @@ const nairaFormatter = new Intl.NumberFormat("en-NG", {
 });
 
 export default async function CertificationPathways() {
+  // Both the training fee and the exam cost, and so both prices below,
+  // vary by which certification the buyer picks — this default (Foundation
+  // Level, the cheapest tier) is just an anchor "starting from" figure
+  // shown before that choice happens.
   const pricing = await getCertificationPricing();
-  const bundlePriceLabel = nairaFormatter.format(pricing.bundlePriceNgn);
+  const trainingFeeLabel = `From ${nairaFormatter.format(pricing.trainingFeeNgn)}`;
+  const bundlePriceLabel = `From ${nairaFormatter.format(pricing.bundlePriceNgn)}`;
 
-  const livePathways = pathways.map((pathway) =>
-    pathway.track === "bundle" ? { ...pathway, priceLabel: bundlePriceLabel } : pathway
-  );
+  const livePathways = pathways.map((pathway) => ({
+    ...pathway,
+    priceLabel: pathway.track === "bundle" ? bundlePriceLabel : trainingFeeLabel,
+  }));
 
   return (
     <Section id="pathways" className="bg-white dark:bg-slate-900 py-20 sm:py-28">

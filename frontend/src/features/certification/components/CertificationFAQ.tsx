@@ -11,32 +11,27 @@ const faqs = [
   {
     question: "Who actually administers and grades the exam?",
     answer:
-      "An independent official exam board — for most NGSTQB candidates that's AT*SQA, though iSQI administers exams for some other ISTQB tracks. QA Solucity trains you; the registrar writes, proctors, scores, and certifies the exam itself. We have no role in that part.",
+      "An independent official exam board. For most NGSTQB candidates that's AT*SQA, though iSQI administers exams for some other ISTQB tracks. QA Solucity trains you; the registrar writes, proctors, scores, and certifies the exam itself. We have no role in that part.",
   },
   {
     question: "What does the exam actually look like?",
     answer:
-      "For Foundation Level (CTFL), expect 40 multiple-choice questions in 60 minutes (75 minutes if you're sitting it in a non-native language), with a 65% pass mark and no negative marking. Format varies slightly for Advanced Level and specialist exams — we cover the specifics for your track in class.",
+      "For Foundation Level (CTFL), expect 40 multiple-choice questions in 60 minutes (75 minutes if you're sitting it in a non-native language), with a 65% pass mark and no negative marking. Format varies slightly for Advanced Level and specialist exams, and we cover the specifics for your track in class.",
   },
   {
     question: "Can I take the exam online, or do I need a test center?",
     answer:
-      "Both are usually available — most official registrars offer remote online proctoring as well as in-person test centers in major Nigerian cities. You choose whichever works for you when you book your slot.",
+      "Both are usually available. Most official registrars offer remote online proctoring as well as in-person test centers in major Nigerian cities, so you choose whichever works for you when you book your slot.",
   },
   {
-    question: "If I choose the Prep Track (Route A), how do I book my exam?",
+    question: "If I choose the Self-Starter Prep Track, how do I book my exam?",
     answer:
       "After your course, we hand you a short guide showing exactly where to create your account with the official registrar, buy your exam voucher directly from them, and schedule your date. Most vouchers stay valid for booking within 365 days of purchase.",
   },
   {
-    question: "If I choose the Bundle (Route C), when do I get my voucher code?",
+    question: "If I choose the All-Inclusive Bundle, when do I get my voucher code?",
     answer:
       "Within 24 hours of your payment clearing, our team emails your prepaid official exam voucher code straight to the inbox you registered with, along with instructions for redeeming it on the registrar's site.",
-  },
-  {
-    question: "Is the Naira price final?",
-    answer:
-      "The Prep Track's ₦180,000 training fee is fixed. The Bundle's price is recalculated from the live USD→NGN exchange rate (plus a small buffer for currency swings and processing costs) each time this page loads, so it can shift slightly day to day — the exact total is always shown before you pay.",
   },
 ];
 

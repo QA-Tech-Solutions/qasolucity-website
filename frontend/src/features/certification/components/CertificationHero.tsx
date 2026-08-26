@@ -31,7 +31,7 @@ export default function CertificationHero() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-          Two ways to prepare for your ISTQB certification with QA Solucity — train
+          Two ways to prepare for your ISTQB certification with QA Solucity: train
           independently and register for your exam yourself when you&apos;re ready, or let
           us handle the entire journey, exam voucher included, in one Naira payment.
         </p>
