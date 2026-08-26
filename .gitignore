@@ -44,3 +44,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# local-dev fallback for the voucher assignment audit trail — contains real
+# customer names/emails, never commit it. Production uses Upstash Redis
+# instead (see lib/certification-voucher-log-store.ts).
+frontend/data/voucher-assignment-log.json

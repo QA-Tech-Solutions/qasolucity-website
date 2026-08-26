@@ -9,9 +9,11 @@ import {
   ShieldCheck,
   Zap,
   TrendingUp,
+  Info,
   type LucideIcon,
 } from "lucide-react";
 import type { QualityMetrics } from "@/lib/quality-metrics-store";
+import Tooltip from "@/components/ui/Tooltip";
 
 // Helper: count-up animation. Animates from whatever is currently on
 // screen to the new target, rather than always restarting from 0 — the
@@ -210,7 +212,6 @@ export default function Dashboard() {
       className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-4 shadow-2xl shadow-indigo-500/20 transition-all duration-300 sm:p-6"
       onClick={fetchMetrics}
       data-testid="quality-command-center"
-      title="Our own QA automation suite tests qasolucity.com around the clock — this is what it found. Click to refresh."
     >
       {/* Animated Glow Orbs */}
       <motion.div
@@ -260,38 +261,54 @@ export default function Dashboard() {
               <ShieldCheck className="h-5 w-5 text-indigo-400" />
             </motion.div>
             <div>
-              <h3 className="text-sm font-semibold text-white">Quality Command Center</h3>
+              <Tooltip
+                asChild
+                side="bottom"
+                content="We run our own automated QA suite against qasolucity.com every 30 minutes, and this card reflects the latest results. Click anywhere on it to refresh."
+              >
+                <div className="group/qcc flex w-fit cursor-help items-center gap-1.5">
+                  <h3 className="text-sm font-semibold text-white">Quality Command Center</h3>
+                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-slate-500 transition-colors group-hover/qcc:text-slate-300">
+                    <Info className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              </Tooltip>
               <p className="text-xs text-slate-400">Live test results for qasolucity.com</p>
             </div>
           </div>
-          <div
-            className={`flex items-center gap-2 rounded-full px-3 py-1 ${
-              isLive ? "bg-emerald-500/20" : "bg-slate-500/20"
-            }`}
-            data-testid="qcc-live-badge"
-            data-live={isLive}
-            title={
+          <Tooltip
+            asChild
+            side="bottom"
+            content={
               isLive
-                ? "Reporting real results from our automated test suite running against qasolucity.com"
-                : "Showing baseline numbers — waiting for the first automated test run to report in"
+                ? "Reporting real results from our automated test suite running against qasolucity.com."
+                : "Showing baseline numbers while we wait for the first automated test run to report in."
             }
           >
-            <span className="relative flex h-2 w-2">
-              {isLive && (
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              )}
-              <span
-                className={`relative inline-flex h-2 w-2 rounded-full ${
-                  isLive ? "bg-emerald-400" : "bg-slate-400"
-                }`}
-              />
-            </span>
-            <span
-              className={`text-xs font-medium ${isLive ? "text-emerald-400" : "text-slate-400"}`}
+            <div
+              className={`flex items-center gap-2 rounded-full px-3 py-1 ${
+                isLive ? "bg-emerald-500/20" : "bg-slate-500/20"
+              }`}
+              data-testid="qcc-live-badge"
+              data-live={isLive}
             >
-              {isLive ? "Live" : "Baseline"}
-            </span>
-          </div>
+              <span className="relative flex h-2 w-2">
+                {isLive && (
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                )}
+                <span
+                  className={`relative inline-flex h-2 w-2 rounded-full ${
+                    isLive ? "bg-emerald-400" : "bg-slate-400"
+                  }`}
+                />
+              </span>
+              <span
+                className={`text-xs font-medium ${isLive ? "text-emerald-400" : "text-slate-400"}`}
+              >
+                {isLive ? "Live" : "Baseline"}
+              </span>
+            </div>
+          </Tooltip>
         </motion.div>
 
         {/* Chart Section */}

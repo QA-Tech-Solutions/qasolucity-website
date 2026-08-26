@@ -20,14 +20,14 @@ export interface PathwayFeature {
 
 export interface Pathway {
   track: "prep" | "bundle";
-  routeLabel: string;
+  eyebrow: string;
   title: string;
   tagline: string;
   description: string;
-  // Static fallback copy — the Bundle's priceLabel/priceNote are
-  // overridden at render time in CertificationPathways.tsx with the live
-  // computed price from lib/certification-pricing.ts. These values only
-  // show if that computation ever throws.
+  // Static fallback copy. The Bundle's priceLabel/priceNote are overridden
+  // at render time in CertificationPathways.tsx with the live computed
+  // price from lib/certification-pricing.ts. These values only show if
+  // that computation ever throws.
   priceLabel: string;
   priceNote: string;
   originalPriceLabel?: string;
@@ -40,13 +40,13 @@ export interface Pathway {
 export const pathways: Pathway[] = [
   {
     track: "prep",
-    routeLabel: "Route A",
+    eyebrow: "Training Only",
     title: "Self-Starter Prep Track",
     tagline: "Train with us, register for your exam whenever you're ready.",
     description:
       "Best if you already know which board and test window you want, or you'd rather handle exam payment and scheduling yourself, directly with the official registrar.",
-    priceLabel: "₦180,000",
-    priceNote: "one-time · training only, excludes exam voucher",
+    priceLabel: "From ₦180,000",
+    priceNote: "one-time · training only, excludes exam voucher · varies by certification",
     features: [
       { label: "Live, instructor-led ISTQB prep classes", icon: "video" },
       { label: "QA Solucity study guides & slide decks", icon: "bookOpenCheck" },
@@ -59,13 +59,13 @@ export const pathways: Pathway[] = [
   },
   {
     track: "bundle",
-    routeLabel: "Route C",
+    eyebrow: "Training + Exam Voucher",
     title: "All-Inclusive Certification Bundle",
     tagline: "Everything in the Prep Track, plus your exam is already paid for.",
     description:
-      "Best if you'd rather not deal with international card payments, currency conversion, or registrar sign-up — we fold a prepaid official exam voucher into one Naira invoice.",
-    priceLabel: "₦520,000",
-    priceNote: "one-time · training + prepaid official exam voucher · live USD→NGN rate",
+      "Best if you'd rather not deal with international card payments, currency conversion, or registrar sign-up. We fold a prepaid official exam voucher into one Naira invoice.",
+    priceLabel: "From ₦520,000",
+    priceNote: "one-time · training + prepaid official exam voucher · varies by certification, live USD→NGN rate",
     features: [
       { label: "Everything in the Self-Starter Prep Track", icon: "sparkles" },
       { label: "Prepaid official exam voucher included", icon: "ticket" },
@@ -83,6 +83,8 @@ export const pathways: Pathway[] = [
 export interface CertificationEntry {
   code: string;
   name: string;
+  /** Typical training duration for this certification, e.g. "4 to 6 weeks". */
+  duration: string;
 }
 
 export interface CertificationGroup {
@@ -97,10 +99,14 @@ export const certificationCatalog: CertificationGroup[] = [
     description:
       "The foundational and advanced-level path most testers start with, from first principles through specialist advanced roles.",
     items: [
-      { code: "CTFL", name: "Certified Tester Foundation Level" },
-      { code: "CT-TA", name: "Certified Tester Advanced Level — Test Analyst" },
-      { code: "CT-TTA", name: "Certified Tester Advanced Level — Technical Test Analyst" },
-      { code: "CT-TM", name: "Certified Tester Advanced Level — Test Manager" },
+      { code: "CTFL", name: "Certified Tester Foundation Level", duration: "4 to 6 weeks" },
+      { code: "CT-TA", name: "Certified Tester Advanced Level - Test Analyst", duration: "6 to 8 weeks" },
+      {
+        code: "CT-TTA",
+        name: "Certified Tester Advanced Level - Technical Test Analyst",
+        duration: "6 to 8 weeks",
+      },
+      { code: "CT-TM", name: "Certified Tester Advanced Level - Test Manager", duration: "8 weeks" },
     ],
   },
   {
@@ -108,12 +114,16 @@ export const certificationCatalog: CertificationGroup[] = [
     description:
       "Focused, in-demand tracks for testers who want to go deep on a specific discipline once they've built a solid foundation.",
     items: [
-      { code: "CT-TAE", name: "Certified Tester — Test Automation Engineer" },
-      { code: "CT-AI", name: "Certified Tester — AI Testing" },
-      { code: "CT-DEVOPS", name: "Certified Tester — DevOps Testing" },
-      { code: "CT-PT", name: "Certified Tester — Performance Testing" },
-      { code: "CT-MAT", name: "Certified Tester — Mobile Application Testing" },
-      { code: "CT-SEC", name: "Certified Tester — Security Tester" },
+      {
+        code: "CT-TAE",
+        name: "Certified Tester - Test Automation Engineer",
+        duration: "10 to 12 weeks",
+      },
+      { code: "CT-AI", name: "Certified Tester - AI Testing", duration: "5 to 6 weeks" },
+      { code: "CT-DEVOPS", name: "Certified Tester - DevOps Testing", duration: "6 weeks" },
+      { code: "CT-PT", name: "Certified Tester - Performance Testing", duration: "6 weeks" },
+      { code: "CT-MAT", name: "Certified Tester - Mobile Application Testing", duration: "4 weeks" },
+      { code: "CT-SEC", name: "Certified Tester - Security Tester", duration: "6 to 8 weeks" },
     ],
   },
   {
@@ -121,8 +131,12 @@ export const certificationCatalog: CertificationGroup[] = [
     description:
       "For testers embedded in agile teams who need to formalize how they work inside sprints, ceremonies, and cross-functional squads.",
     items: [
-      { code: "CTFL-AT", name: "Certified Tester Foundation Level — Agile Tester" },
-      { code: "CTAL-ATT", name: "Certified Tester Advanced Level — Agile Technical Tester" },
+      { code: "CTFL-AT", name: "Certified Tester Foundation Level - Agile Tester", duration: "4 weeks" },
+      {
+        code: "CTAL-ATT",
+        name: "Certified Tester Advanced Level - Agile Technical Tester",
+        duration: "6 to 8 weeks",
+      },
     ],
   },
 ];

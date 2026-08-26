@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Clock } from "lucide-react";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import { certificationCatalog } from "../data/certification-data";
@@ -18,7 +18,7 @@ export default function CertificationCatalog() {
             Every ISTQB track we cover.
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-600 dark:text-slate-400">
-            Tell us which certification you&apos;re targeting when you enroll — our
+            Tell us which certification you&apos;re targeting when you enroll, and our
             instructors tailor the syllabus, exercises, and mock exams to it.
           </p>
         </div>
@@ -43,14 +43,20 @@ export default function CertificationCatalog() {
                 {group.description}
               </p>
 
-              <ul className="mt-6 space-y-3 border-t border-slate-100 dark:border-slate-800 pt-6">
+              <ul className="mt-6 space-y-4 border-t border-slate-100 dark:border-slate-800 pt-6">
                 {group.items.map((item) => (
-                  <li key={item.code} className="flex items-baseline justify-between gap-3">
-                    <span className="text-[14px] leading-6 text-slate-700 dark:text-slate-300">
-                      {item.name}
-                    </span>
-                    <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                      {item.code}
+                  <li key={item.code} className="flex flex-col gap-1.5">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="text-[14px] leading-6 text-slate-700 dark:text-slate-300">
+                        {item.name}
+                      </span>
+                      <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        {item.code}
+                      </span>
+                    </div>
+                    <span className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
+                      <Clock className="h-3 w-3" />
+                      {item.duration} of training
                     </span>
                   </li>
                 ))}

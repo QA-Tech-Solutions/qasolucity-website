@@ -6,17 +6,13 @@ import path from "path";
  * Bulk exam-voucher inventory for the All-Inclusive Certification Bundle.
  *
  * QA Solucity buys official exam vouchers from the registrar (AT*SQA/iSQI)
- * in batches and loads the unused codes here, keyed by certification. When
- * a Bundle enrollment comes in, `assignVoucherCode` pops one unused code
- * for that certification so it can be handed to the buyer immediately. If
- * the batch for that certification is empty — the default state until an
- * admin tool exists to load real codes — enrollment still succeeds; the
- * confirmation email tells the buyer their voucher will follow within 24
- * hours, which is our admin manually purchasing and assigning one.
- *
- * TODO: replace this Redis-list / local-JSON store with a real `vouchers`
- * DB table (columns: code, certification_code, status, assigned_to,
- * assigned_at) once an admin panel exists for loading and auditing stock.
+ * in batches and loads the unused codes here, keyed by certification. This
+ * store is read-only from the enrollment flow (it may *suggest* a code so
+ * the admin doesn't have to hunt for one) and is only ever mutated by an
+ * explicit, authenticated admin action on /admin/assign-voucher — see
+ * frontend/data/VOUCHER_INVENTORY_TEMPLATE.md for the full process and why
+ * nothing here is ever consumed automatically (there's no payment gateway,
+ * so nothing is confirmed paid at enrollment time).
  */
 
 const inventoryKey = (certificationCode: string) =>
@@ -44,28 +40,64 @@ async function writeLocalInventory(inventory: LocalInventory): Promise<void> {
   await fs.writeFile(DATA_FILE, JSON.stringify(inventory, null, 2));
 }
 
-/**
- * Pops one unused voucher code for the given certification, or `null` if
- * the batch is empty or the store is unreachable — either way, the caller
- * falls back to "an admin will email your voucher within 24 hours".
- */
-export async function assignVoucherCode(certificationCode: string): Promise<string | null> {
+/** Read-only: the oldest available code for a certification, without removing it. Used only as a convenience suggestion. */
+export async function peekNextVoucherCode(certificationCode: string): Promise<string | null> {
   try {
     if (redis) {
-      const code = await redis.lpop<string>(inventoryKey(certificationCode));
+      const code = (await redis.lindex(inventoryKey(certificationCode), 0)) as string | null;
       return code ?? null;
     }
-
     const inventory = await readLocalInventory();
-    const codes = inventory[certificationCode];
-    if (!codes || codes.length === 0) return null;
-
-    const [code, ...rest] = codes;
-    inventory[certificationCode] = rest;
-    await writeLocalInventory(inventory);
-    return code;
+    return inventory[certificationCode]?.[0] ?? null;
   } catch (error) {
-    console.error("certification-voucher-store: failed to assign a voucher code", error);
+    console.error("certification-voucher-store: failed to peek a voucher code", error);
     return null;
+  }
+}
+
+/** Read-only: every currently available code for a certification, oldest first. */
+export async function listAvailableVoucherCodes(certificationCode: string): Promise<string[]> {
+  try {
+    if (redis) {
+      return await redis.lrange<string>(inventoryKey(certificationCode), 0, -1);
+    }
+    const inventory = await readLocalInventory();
+    return inventory[certificationCode] ?? [];
+  } catch (error) {
+    console.error("certification-voucher-store: failed to list voucher codes", error);
+    return [];
+  }
+}
+
+/** Whether a specific code is still in the available pool for a certification. */
+export async function isVoucherAvailable(certificationCode: string, code: string): Promise<boolean> {
+  const codes = await listAvailableVoucherCodes(certificationCode);
+  return codes.includes(code);
+}
+
+/**
+ * Removes a specific code from the available pool — this IS the "used"
+ * record. There's no separate used/unused flag: whatever remains in the
+ * pool is available, and nothing else is. Returns false if the code
+ * wasn't found (already used, typo'd, or never loaded).
+ */
+export async function markVoucherUsed(certificationCode: string, code: string): Promise<boolean> {
+  try {
+    if (redis) {
+      const removed = await redis.lrem(inventoryKey(certificationCode), 1, code);
+      return removed > 0;
+    }
+    const inventory = await readLocalInventory();
+    const codes = inventory[certificationCode] ?? [];
+    const index = codes.indexOf(code);
+    if (index === -1) return false;
+
+    codes.splice(index, 1);
+    inventory[certificationCode] = codes;
+    await writeLocalInventory(inventory);
+    return true;
+  } catch (error) {
+    console.error("certification-voucher-store: failed to mark a voucher code used", error);
+    return false;
   }
 }

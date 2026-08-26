@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
 import { getCertificationPricing } from "@/lib/certification-pricing";
+import { allCertifications } from "@/features/certification/data/certification-data";
 
-export async function GET() {
-  const pricing = await getCertificationPricing();
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const requested = searchParams.get("certification");
+  const certificationCode =
+    requested && allCertifications.some((item) => item.code === requested) ? requested : undefined;
+
+  const pricing = await getCertificationPricing(certificationCode);
 
   return NextResponse.json(pricing, {
     headers: {

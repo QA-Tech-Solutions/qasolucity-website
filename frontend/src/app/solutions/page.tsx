@@ -4,7 +4,7 @@ import SolutionsPageShell from "@/features/solutions/components/SolutionsPageShe
 export const metadata: Metadata = {
   title: "Solutions",
   description:
-    "QA solutions shaped around how your team actually ships — launch readiness, release regression, automation acceleration, API quality, performance, and more.",
+    "QA solutions shaped around how your team actually ships: launch readiness, release regression, automation acceleration, API quality, performance, and more.",
   alternates: {
     canonical: "/solutions",
   },

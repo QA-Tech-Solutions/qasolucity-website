@@ -75,6 +75,10 @@ Create `frontend/.env.local` with at least:
 ```bash
 RESEND_API_KEY=your_resend_api_key
 
+# Optional — where form-submission notifications go. Defaults to
+# hello@qasolucity.com if unset.
+CONTACT_NOTIFICATION_EMAIL=
+
 # Optional — maintenance mode (see below)
 MAINTENANCE_MODE=false
 MAINTENANCE_BYPASS_SECRET=
@@ -88,6 +92,10 @@ AUTOMATION_API_TOKEN=
 # these, pricing falls back to a cached/hardcoded rate automatically.
 EXCHANGERATE_API_KEY=
 CURRENCYFREAKS_API_KEY=
+
+# Required to use /admin/assign-voucher locally. Any string works for
+# local dev, but set a real secret before deploying.
+ADMIN_ACCESS_CODE=
 ```
 
 Then run the dev server:
@@ -115,12 +123,14 @@ Run from `frontend/`:
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `RESEND_API_KEY` | Yes | Sends contact form notification emails via Resend |
+| `CONTACT_NOTIFICATION_EMAIL` | No | Where the contact form, ISTQB enrollment, and QA Career Launchpad application notifications are sent (the internal "someone submitted a form" email, not the confirmation the submitter gets). Defaults to `hello@qasolucity.com` if unset. |
 | `MAINTENANCE_MODE` | No | Set `true` to show a 503 maintenance page site-wide |
 | `MAINTENANCE_BYPASS_SECRET` | No | Visit `/?bypass=<secret>` during maintenance to get a cookie that lets you preview the live site |
 | `AUTOMATION_API_TOKEN` | No | Bearer token [qasolucity-automation](https://github.com/QA-Tech-Solutions/qasolucity-automation) authenticates with to POST live test results to `/api/quality-metrics`. Generate one with `node -e "console.log(require('crypto').randomBytes(24).toString('hex'))"` |
 | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | No | Where `/api/quality-metrics`, the ISTQB Bundle rate cache, and the voucher inventory all persist in production. Set automatically when you connect the Upstash Redis integration from Vercel's Marketplace tab — no need to fill these in by hand. Without them, each falls back to a local file (dev only). |
-| `EXCHANGERATE_API_KEY` | No | Primary live USD→NGN rate source for the ISTQB Bundle price, via [exchangerate-api.com](https://www.exchangerate-api.com/). Without it, pricing falls through to the next tier automatically — see "ISTQB Certification Pathways" below. |
+| `EXCHANGERATE_API_KEY` | No | Primary live USD→NGN rate source for the ISTQB Bundle price, via [exchangerate-api.com](https://www.exchangerate-api.com/). Without it, pricing falls through to the next tier automatically; see "ISTQB Certification Pathways" below. |
 | `CURRENCYFREAKS_API_KEY` | No | Secondary fallback rate source, via [CurrencyFreaks](https://currencyfreaks.com/), used only if `EXCHANGERATE_API_KEY` is unset or its request fails. |
+| `ADMIN_ACCESS_CODE` | Yes (for voucher assignment) | Shared secret gating `/admin/assign-voucher`. Fails closed: unset means nobody gets in, including a correct-looking code. |
 
 ## Writing a blog post
 
@@ -154,7 +164,8 @@ The homepage's scrolling tech/testing-type marquee automatically links a pill to
 - **Mega-menu navigation** across Services, Solutions, and Resources, each backed by structured data with FAQ accordions and cross-links between related content.
 - **Contact form** with server-side validation and branded email notifications via Resend.
 - **File-based blog** with MDX rendering, category filtering, related-post suggestions, social sharing, and copy-link functionality.
-- **ISTQB Certification Pathways** (`/certification`) — two enrollment routes with live-computed Naira pricing and an email-based enrollment flow. See below.
+- **ISTQB Certification Pathways** (`/certification`): two enrollment routes with live-computed Naira pricing and an email-based enrollment flow. See below.
+- **QA Career Launchpad** (`/qa-career-launchpad`): a beginner-to-job-ready QA training program, distinct from both ISTQB prep and Corporate QA Training, with its own curriculum, requirements, and email-based application form (`POST /api/qa-career-launchpad-enroll`).
 - **A bundled FAQ page** (`/faq`) — pulls every question already defined on the Services, Solutions, Resources, and Contact pages into one searchable, filterable hub, rather than duplicating content. See `src/features/faq/data/faq-data.ts`.
 - **Maintenance mode** — a real `HTTP 503` (not just a themed 200 page) triggered by an environment variable, with a bypass mechanism for the team.
 - **Custom error states** — a branded 404 page and 500 error boundaries (route-level and global), not the framework defaults.
@@ -173,16 +184,18 @@ How the two repos connect:
 
 ## ISTQB Certification Pathways
 
-`/certification` offers two independent, ISTQB-adjacent enrollment routes — QA Solucity is a training provider, not an official ISTQB/NGSTQB partner or accredited center, and the site is explicit about that (see the disclaimer rendered on every certification page).
+`/certification` offers two independent, ISTQB-adjacent enrollment routes. QA Solucity is a training provider, not an official ISTQB/NGSTQB partner or accredited center, and the site is explicit about that (see the disclaimer rendered on every certification page).
 
-- **Self-Starter Prep Track (Route A)** — training only, at a fixed Naira fee. The customer books and pays for their official exam directly with the registrar (AT\*SQA / iSQI) whenever they're ready.
-- **All-Inclusive Certification Bundle (Route C)** — training plus a prepaid official exam voucher, in one Naira price.
+- **Self-Starter Prep Track:** training only. The customer books and pays for their official exam directly with the registrar (AT\*SQA / iSQI) whenever they're ready.
+- **All-Inclusive Certification Bundle:** training plus a prepaid official exam voucher, in one Naira price.
 
-**Live pricing.** The Prep Track's fee is fixed; the Bundle's price is computed from a live USD→NGN exchange rate every time the page renders, via `src/lib/certification-pricing.ts`. It resolves the rate through four fallback tiers — a primary live provider, a secondary live provider, the last cached rate, then a hardcoded emergency baseline — so pricing always resolves to something even if every external API is down, then applies a parallel-market spread and a safety margin before rounding up to a clean number. `GET /api/certification-pricing` exposes the same computation.
+**Live pricing.** Both the Prep Track's training fee and the Bundle's exam voucher cost vary by certification (Advanced Level and some Specialist certs cost more than Foundation Level); see the `EXAM_USD_COST_BY_CERTIFICATION` and `TRAINING_FEE_NGN_BY_CERTIFICATION` maps in `src/lib/certification-pricing.ts`. The Bundle's Naira total is then computed from a live USD→NGN exchange rate every time it's requested, resolved through four fallback tiers (a primary live provider, a secondary live provider, the last cached rate, then a hardcoded emergency baseline), so pricing always resolves to something even if every external API is down, then applies a parallel-market spread and a safety margin before rounding up to a clean number. `GET /api/certification-pricing?certification=<code>` exposes the same computation.
 
-**Enrollment.** There is currently **no payment gateway wired up** — `/certification/enroll` is a lead-capture form (mirroring the contact form's pattern) that emails a confirmation to the customer and a notification to `hello@qasolucity.com` via `POST /api/certification-enroll`. Payment itself happens offline, separately, until a real gateway is integrated. The confirmation page (and email) shows a track-specific next-steps guide: registrar sign-up instructions for Route A, or voucher-delivery status for Route C.
+**Enrollment.** There is currently **no payment gateway wired up**. `/certification/enroll` is a lead-capture form (mirroring the contact form's pattern) that emails a confirmation to the customer and a notification to `CONTACT_NOTIFICATION_EMAIL` via `POST /api/certification-enroll`. Payment itself happens offline, separately, until a real gateway is integrated. A success modal confirms the submission and tells the customer their next step is a team follow-up, deliberately without claiming payment is confirmed, since it isn't yet.
 
-**Voucher inventory.** Bundle purchases try to auto-assign a real voucher code from a per-certification stock list (`src/lib/certification-voucher-store.ts` — Upstash Redis in production, a local JSON file in dev). If a certification's stock is empty — the default until real codes are loaded — enrollment still succeeds, and the customer is told their voucher will follow by email within 24 hours instead. See [`frontend/data/VOUCHER_INVENTORY_TEMPLATE.md`](frontend/data/VOUCHER_INVENTORY_TEMPLATE.md) for the full walkthrough of that process (buying codes, loading them, and a known timing gap worth reading before pre-loading stock, given there's no payment gateway yet).
+**Voucher assignment.** Nothing is ever assigned or emailed automatically; see `src/lib/certification-voucher-store.ts`. At enrollment, the app only *peeks* the next available code for that certification (read-only, doesn't remove it) to prefill an admin screen; the internal notification email includes an "Assign & Send Voucher" link to `/admin/assign-voucher`, gated by `ADMIN_ACCESS_CODE` (a shared-secret cookie gate, same pattern as `MAINTENANCE_BYPASS_SECRET`). That screen requires the admin to check off "payment confirmed" and "code verified unused" (enforced server-side too, not just a disabled button) before it will mark a code used and email it to the customer. Marking used just means removing it from the pool, so whatever remains there is always exactly the available codes. See [`frontend/data/VOUCHER_INVENTORY_TEMPLATE.md`](frontend/data/VOUCHER_INVENTORY_TEMPLATE.md) for the full walkthrough, including how to load codes in.
+
+**Voucher assignment log.** Every successful assignment also gets appended (never overwritten) to an audit trail via `src/lib/certification-voucher-log-store.ts`, same Redis-when-configured, local-JSON-fallback pattern as the rest of this app. `/admin/voucher-log` (same access-code gate) downloads it as a CSV, and the admin gets a confirmation email with a link to that page every time a voucher goes out. The local fallback file, `frontend/data/voucher-assignment-log.json`, holds real customer names and emails, so it's gitignored; production should always have Redis configured rather than relying on it.
 
 ## Deployment
 

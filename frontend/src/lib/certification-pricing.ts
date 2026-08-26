@@ -3,23 +3,61 @@ import { promises as fs } from "fs";
 import path from "path";
 
 /**
- * Live Naira pricing for the All-Inclusive Certification Bundle (Route C).
+ * Live Naira pricing for QA Solucity's ISTQB certification pathways.
  *
- * The Self-Starter Prep Track (Route A) is a fixed local fee and never
- * touches this module — only the Bundle needs a USD exam voucher cost
- * converted to Naira, which is why the exchange-rate volatility problem
- * (and this file) exists at all.
+ * Both the Prep Track's training fee and the Bundle's exam voucher cost
+ * vary by certification (Advanced Level and some Specialist certs cost
+ * more to train for and to sit than Foundation Level), so pricing is
+ * always resolved for a specific certification code, not one flat number
+ * across the whole catalog.
  */
 
 // ---------------------------------------------------------------------------
 // Fixed platform constants
 // ---------------------------------------------------------------------------
 
-/** AT*SQA's published Foundation Level base exam price, in USD. */
-export const EXAM_USD_COST = 230;
+/**
+ * Per-certification exam voucher cost, in USD — confirmed rates.
+ */
+export const EXAM_USD_COST_BY_CERTIFICATION: Record<string, number> = {
+  CTFL: 230,
+  "CT-TA": 250,
+  "CT-TTA": 250,
+  "CT-TM": 250,
+  "CT-TAE": 250,
+  "CT-AI": 200,
+  "CT-DEVOPS": 200,
+  "CT-PT": 200,
+  "CT-MAT": 200,
+  "CT-SEC": 250,
+  "CTFL-AT": 200,
+  "CTAL-ATT": 250,
+};
 
-/** QA Solucity's fixed local training/prep fee (Naira) — the Prep Track's full price. */
-export const TRAINING_FEE_NGN = 180_000;
+/** Used only if a certification code isn't in the map above (shouldn't happen for known codes). */
+export const DEFAULT_EXAM_USD_COST = 230;
+
+/**
+ * QA Solucity's local training fee per certification (Naira) — the Prep
+ * Track's full price, and the base the Bundle price is built on top of.
+ */
+export const TRAINING_FEE_NGN_BY_CERTIFICATION: Record<string, number> = {
+  CTFL: 180_000,
+  "CT-TA": 220_000,
+  "CT-TTA": 220_000,
+  "CT-TM": 250_000,
+  "CT-TAE": 200_000,
+  "CT-AI": 200_000,
+  "CT-DEVOPS": 200_000,
+  "CT-PT": 200_000,
+  "CT-MAT": 180_000,
+  "CT-SEC": 250_000,
+  "CTFL-AT": 180_000,
+  "CTAL-ATT": 250_000,
+};
+
+/** Used only if a certification code isn't in the map above (shouldn't happen for known codes). */
+export const DEFAULT_TRAINING_FEE_NGN = 180_000;
 
 /** Absolute last-resort USD->NGN rate if every live source and the cache are unreachable. */
 export const HARDCODED_EMERGENCY_RATE = 1550;
@@ -177,15 +215,28 @@ function roundUpToNearest(value: number, step: number): number {
   return Math.ceil(value / step) * step;
 }
 
+function resolveExamUsdCost(certificationCode: string): number {
+  return EXAM_USD_COST_BY_CERTIFICATION[certificationCode] ?? DEFAULT_EXAM_USD_COST;
+}
+
+function resolveTrainingFeeNgn(certificationCode: string): number {
+  return TRAINING_FEE_NGN_BY_CERTIFICATION[certificationCode] ?? DEFAULT_TRAINING_FEE_NGN;
+}
+
 /**
- * Turns a raw USD->NGN rate into the final bundle checkout price:
- * parallel-market spread -> safety margin -> exam cost -> training fee -> round up.
+ * Turns a raw USD->NGN rate into the final bundle checkout price for a
+ * given certification: parallel-market spread -> safety margin -> exam
+ * cost -> that certification's training fee -> round up.
  */
-function computeBundlePriceNgn(baseRate: number): { bundlePriceNgn: number; effectiveRate: number } {
+function computeBundlePriceNgn(
+  baseRate: number,
+  examUsdCost: number,
+  trainingFeeNgn: number
+): { bundlePriceNgn: number; effectiveRate: number } {
   const parallelRate = baseRate + PARALLEL_MARKET_SPREAD_NGN;
   const hedgedRate = parallelRate * SAFETY_MARGIN_MULTIPLIER;
-  const voucherNgn = hedgedRate * EXAM_USD_COST;
-  const rawTotal = voucherNgn + TRAINING_FEE_NGN;
+  const voucherNgn = hedgedRate * examUsdCost;
+  const rawTotal = voucherNgn + trainingFeeNgn;
   return {
     bundlePriceNgn: roundUpToNearest(rawTotal, ROUND_TO_NEAREST_NGN),
     effectiveRate: hedgedRate,
@@ -203,16 +254,24 @@ export interface CertificationPricing {
 
 /**
  * Public entry point: resolves the live rate through the fallback pipeline
- * and returns fully-computed Naira pricing for both routes.
+ * and returns fully-computed Naira pricing for both routes, for the given
+ * certification. Defaults to CTFL (Foundation Level, the cheapest tier) so
+ * a caller that hasn't asked the buyer which certification yet still gets
+ * a sensible "starting from" price to display.
  */
-export async function getCertificationPricing(): Promise<CertificationPricing> {
+export async function getCertificationPricing(
+  certificationCode: string = "CTFL"
+): Promise<CertificationPricing> {
+  const examUsdCost = resolveExamUsdCost(certificationCode);
+  const trainingFeeNgn = resolveTrainingFeeNgn(certificationCode);
+
   try {
     const { rate, source } = await resolveUsdToNgnRate();
-    const { bundlePriceNgn, effectiveRate } = computeBundlePriceNgn(rate);
+    const { bundlePriceNgn, effectiveRate } = computeBundlePriceNgn(rate, examUsdCost, trainingFeeNgn);
 
     return {
-      trainingFeeNgn: TRAINING_FEE_NGN,
-      examUsdCost: EXAM_USD_COST,
+      trainingFeeNgn,
+      examUsdCost,
       bundlePriceNgn,
       rateUsed: Math.round(effectiveRate),
       rateSource: source,
@@ -225,10 +284,14 @@ export async function getCertificationPricing(): Promise<CertificationPricing> {
       "certification-pricing: pricing pipeline failed unexpectedly, using hardcoded baseline",
       error
     );
-    const { bundlePriceNgn, effectiveRate } = computeBundlePriceNgn(HARDCODED_EMERGENCY_RATE);
+    const { bundlePriceNgn, effectiveRate } = computeBundlePriceNgn(
+      HARDCODED_EMERGENCY_RATE,
+      examUsdCost,
+      trainingFeeNgn
+    );
     return {
-      trainingFeeNgn: TRAINING_FEE_NGN,
-      examUsdCost: EXAM_USD_COST,
+      trainingFeeNgn,
+      examUsdCost,
       bundlePriceNgn,
       rateUsed: Math.round(effectiveRate),
       rateSource: "hardcoded",
