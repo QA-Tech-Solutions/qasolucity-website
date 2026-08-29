@@ -887,3 +887,84 @@ export function jobApplicationConfirmationEmail(payload: JobApplicationDetails) 
     text,
   };
 }
+
+// ---------------------------------------------------------------------------
+// Newsletter subscription
+// ---------------------------------------------------------------------------
+
+export interface NewsletterSubscriptionDetails {
+  name: string;
+  email: string;
+}
+
+export function newsletterInternalNotificationEmail(payload: NewsletterSubscriptionDetails) {
+  const { name, email } = payload;
+
+  const html = wrapper(`
+    ${badge("indigo", "#4F46E5", "#eef2ff", "#4338ca", "New subscriber")}
+    <h1 class="email-heading" style="margin:0 0 8px;font-size:22px;line-height:1.3;color:#0f172a;">New newsletter subscriber 📬</h1>
+    <p class="email-muted" style="margin:0 0 24px;font-size:14px;line-height:1.6;color:#64748b;">
+      ${escapeHtml(name)} just subscribed to the newsletter. The full, up-to-date subscriber list is attached as a CSV.
+    </p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:4px;">
+      ${detailRow("Name", escapeHtml(name))}
+      ${detailRow("Email", `<a href="mailto:${escapeHtml(email)}" class="email-link" style="color:#4F46E5;text-decoration:none;">${escapeHtml(email)}</a>`)}
+    </table>
+  `);
+
+  const text = [
+    `New newsletter subscriber: ${name} <${email}>`,
+    "",
+    "The full, up-to-date subscriber list is attached as a CSV.",
+  ].join("\n");
+
+  return {
+    subject: `📬 New newsletter subscriber: ${name}`,
+    html,
+    text,
+  };
+}
+
+export function newsletterConfirmationEmail(
+  payload: NewsletterSubscriptionDetails & { alreadySubscribed?: boolean }
+) {
+  const { name, alreadySubscribed } = payload;
+
+  const headingText = alreadySubscribed
+    ? `You're already on the list, ${name}!`
+    : `You're subscribed, ${name}! 🎉`;
+
+  const intro = alreadySubscribed
+    ? "Good news, this email address is already subscribed, so there's nothing else to do."
+    : "You're officially on the list.";
+
+  const html = wrapper(`
+    ${badge("emerald", "#10b981", "#ecfdf5", "#047857", alreadySubscribed ? "Already subscribed" : "Subscribed")}
+    <h1 class="email-heading" style="margin:0 0 8px;font-size:22px;line-height:1.3;color:#0f172a;">${escapeHtml(headingText)}</h1>
+    <p class="email-muted" style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#64748b;">
+      ${intro} You'll get QA insights, testing tips, and company updates from QA Solucity, sent every so often, not every day.
+    </p>
+    <p class="email-muted" style="margin:0;font-size:13px;line-height:1.6;color:#94a3b8;">
+      Changed your mind? Just reply to this email and we'll take you off the list.
+    </p>
+    ${button("https://qasolucity.com/blogs", "Read our latest posts")}
+  `);
+
+  const text = [
+    headingText,
+    "",
+    `${intro} You'll get QA insights, testing tips, and company updates from QA Solucity, sent every so often, not every day.`,
+    "",
+    "Changed your mind? Just reply to this email and we'll take you off the list.",
+    "",
+    "Read our latest posts: https://qasolucity.com/blogs",
+  ].join("\n");
+
+  return {
+    subject: alreadySubscribed
+      ? "You're already subscribed: QA Solucity"
+      : "You're subscribed to QA Solucity updates 🎉",
+    html,
+    text,
+  };
+}

@@ -8,7 +8,7 @@ import Footer from "@/features/home/components/footer";
 export const metadata = {
   title: "Cookie Policy | QA Solucity",
   description:
-    "QA Solucity's cookie policy – how we use cookies and tracking technologies on our website.",
+    "QA Solucity's cookie policy: what cookies we actually use on our website, and what we don't.",
 };
 
 export default function CookiesPage() {
@@ -73,7 +73,7 @@ export default function CookiesPage() {
               </h1>
 
               <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
-                Last updated: September 7, 2026
+                Last updated: August 29, 2026
               </p>
             </div>
           </Container>

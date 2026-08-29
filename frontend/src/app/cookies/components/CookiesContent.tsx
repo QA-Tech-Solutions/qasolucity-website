@@ -6,71 +6,53 @@ const sections = [
   {
     title: "1. What Are Cookies?",
     content: [
-      "Cookies are small text files that are placed on your device when you visit a website. They are widely used to make websites work more efficiently and provide useful information to website owners.",
-      "Cookies enable websites to remember your actions and preferences over a period of time, so you don't have to keep re-entering them whenever you come back to the site.",
+      "Cookies are small text files placed on your device when you visit a website. They help websites function properly and remember information about your visit.",
+      "One thing covered here isn't a cookie in the strict technical sense: your light/dark theme preference is saved in your browser's local storage, not a cookie. We cover it in this policy anyway since it works the same way from your side, something small saved in your browser to remember a choice you made.",
     ],
   },
   {
-    title: "2. How We Use Cookies",
+    title: "2. What We Actually Use",
     content: [
-      "QA Solucity uses cookies for the following purposes:",
-      "• To provide essential website functionality",
-      "• To remember your preferences and settings",
-      "• To analyze how you use our website",
-      "• To improve our services based on user behavior",
-      "• To measure the effectiveness of our marketing",
+      "We keep this simple. QA Solucity does not use advertising, marketing, or third-party analytics cookies, no Google Analytics, no ad trackers, nothing that follows you around the web.",
+      "What we do use:",
+      "• An authentication cookie, set only when someone logs into our admin tools, to keep that session signed in.",
+      "• Your light/dark theme preference, saved in your browser's local storage so the site remembers your choice on your next visit.",
+      "Neither of these tracks you across the web or builds a marketing profile.",
     ],
   },
   {
-    title: "3. Types of Cookies We Use",
+    title: "3. If This Changes",
     content: [
-      "We use the following types of cookies:",
-      "• Essential cookies – required for basic website functionality",
-      "• Preference cookies – remember your choices and settings",
-      "• Analytics cookies – help us understand how visitors interact with our site",
-      "• Marketing cookies – used to deliver relevant content and measure campaign performance",
-      "• Third-party cookies – from trusted partners (Google Analytics, etc.)",
+      "If we ever add analytics or marketing tools that use cookies, we'll update this page first and describe exactly what's added and why, rather than leaving this policy vague or out of date.",
     ],
   },
   {
-    title: "4. Third-Party Cookies",
+    title: "4. Third-Party Sites",
     content: [
-      "We may use third-party services that place cookies on your device, including:",
-      "• Google Analytics – for website analytics and performance tracking",
-      "• Social media platforms – for sharing content and engagement",
-      "• Calendly – for scheduling consultations",
-      "These third parties have their own privacy policies and cookie practices.",
+      "Some pages link out to our social media profiles or other external sites. Those third-party sites have their own cookie and privacy practices, which we don't control.",
+      "We encourage you to review the privacy and cookie policies of any third-party site you visit.",
     ],
   },
   {
-    title: "5. Your Cookie Choices",
+    title: "5. Managing Cookies in Your Browser",
     content: [
-      "You can control and manage cookies in several ways:",
-      "• Browser settings – most browsers allow you to block or delete cookies",
-      "• Cookie consent – we provide options to accept or decline non-essential cookies",
-      "• Opt-out tools – available for third-party analytics services",
-      "Please note that blocking certain cookies may affect your experience on our website.",
+      "You can control or delete cookies through your browser settings at any time. Here's where to find that setting in common browsers:",
+      "• Google Chrome: Settings > Privacy and Security > Cookies",
+      "• Mozilla Firefox: Options > Privacy & Security > Cookies",
+      "• Safari: Preferences > Privacy > Cookies",
+      "• Microsoft Edge: Settings > Cookies and Site Permissions",
+      "Blocking the authentication cookie described above only affects our admin tools; it won't change your experience browsing the public site.",
     ],
   },
   {
-    title: "6. How to Manage Cookies",
-    content: [
-      "You can manage your cookie preferences through your browser settings. Here are links to instructions for common browsers:",
-      "• Google Chrome – Settings > Privacy and Security > Cookies",
-      "• Mozilla Firefox – Options > Privacy & Security > Cookies",
-      "• Safari – Preferences > Privacy > Cookies",
-      "• Microsoft Edge – Settings > Cookies and Site Permissions",
-    ],
-  },
-  {
-    title: "7. Changes to This Policy",
+    title: "6. Changes to This Policy",
     content: [
       "We may update this Cookie Policy from time to time. Any changes will be posted on this page with an updated date.",
       "We encourage you to review this policy periodically.",
     ],
   },
   {
-    title: "8. Contact Us",
+    title: "7. Contact Us",
     content: [
       "If you have any questions about our Cookie Policy, please contact us:",
       "📧 hello@qasolucity.com",
@@ -85,9 +67,10 @@ export default function CookiesContent() {
       <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-12">
         <div className="prose prose-lg prose-slate max-w-none">
           <p className="text-lg leading-8 text-slate-600 dark:text-slate-400">
-            QA Solucity uses cookies and similar tracking technologies to improve
-            your experience on our website. This Cookie Policy explains what
-            cookies are, how we use them, and your choices regarding them.
+            QA Solucity uses a small number of cookies and similar technologies,
+            only what&apos;s needed to keep the site working the way you&apos;d expect.
+            This Cookie Policy explains what those are, how we use them, and
+            your choices regarding them.
           </p>
 
           <div className="mt-12 space-y-10">

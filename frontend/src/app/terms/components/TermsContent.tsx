@@ -6,7 +6,7 @@ const sections = [
   {
     title: "1. Acceptance of Terms",
     content: [
-      "By accessing or using the QA Solucity website and services, you agree to be bound by these Terms & Conditions. If you do not agree with any part of these terms, you may not use our website or services.",
+      "By accessing or using the QA Solucity website and services, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our website or services.",
       "These terms apply to all visitors, users, and others who access or use our services.",
     ],
   },
@@ -73,7 +73,7 @@ const sections = [
   {
     title: "8. Indemnification",
     content: [
-      "You agree to indemnify and hold QA Solucity harmless from any claims, damages, losses, or expenses arising from your violation of these Terms & Conditions or your use of our services.",
+      "You agree to indemnify and hold QA Solucity harmless from any claims, damages, losses, or expenses arising from your violation of these Terms of Service or your use of our services.",
     ],
   },
   {
@@ -86,21 +86,21 @@ const sections = [
   {
     title: "10. Governing Law",
     content: [
-      "These Terms & Conditions shall be governed by and construed in accordance with the laws of Nigeria.",
+      "These Terms of Service shall be governed by and construed in accordance with the laws of Nigeria.",
       "Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the courts in Lagos, Nigeria.",
     ],
   },
   {
     title: "11. Changes to Terms",
     content: [
-      "We reserve the right to update these Terms & Conditions at any time. Changes will be effective immediately upon posting on this page.",
+      "We reserve the right to update these Terms of Service at any time. Changes will be effective immediately upon posting on this page.",
       "We encourage you to review these terms periodically.",
     ],
   },
   {
     title: "12. Contact Information",
     content: [
-      "If you have any questions about these Terms & Conditions, please contact us:",
+      "If you have any questions about these Terms of Service, please contact us:",
       "📧 hello@qasolucity.com",
       "📍 Lagos, Nigeria",
     ],
@@ -114,7 +114,7 @@ export default function TermsContent() {
         <div className="prose prose-lg prose-slate max-w-none">
           <p className="text-lg leading-8 text-slate-600 dark:text-slate-400">
             Welcome to QA Solucity. By using our website and services, you agree
-            to comply with and be bound by these Terms & Conditions. Please read
+            to comply with and be bound by these Terms of Service. Please read
             them carefully before using our services.
           </p>
 
@@ -154,7 +154,7 @@ export default function TermsContent() {
               })}
             </p>
             <p className="mt-2">
-              These Terms & Conditions apply to all users of the QA Solucity
+              These Terms of Service apply to all users of the QA Solucity
               website and services.
             </p>
           </div>
