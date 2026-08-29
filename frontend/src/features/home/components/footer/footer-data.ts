@@ -19,7 +19,7 @@ export const footerLinks = {
     { label: "Blog", href: "/blogs" },
     { label: "FAQs", href: "/faq" },
     { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Terms of Service", href: "/terms" },
     { label: "Cookie Policy", href: "/cookies" },
   ],
 };
