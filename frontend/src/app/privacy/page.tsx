@@ -8,7 +8,7 @@ import Footer from "@/features/home/components/footer";
 export const metadata = {
   title: "Privacy Policy | QA Solucity",
   description:
-    "QA Solucity's privacy policy – how we collect, use, and protect your personal information.",
+    "QA Solucity's privacy policy: how we collect, use, and protect your personal information.",
 };
 
 export default function PrivacyPage() {
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
               </h1>
 
               <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
-                Last updated: September 7, 2026
+                Last updated: August 29, 2026
               </p>
             </div>
           </Container>

@@ -50,6 +50,11 @@ yarn-error.log*
 # instead (see lib/certification-voucher-log-store.ts).
 frontend/data/voucher-assignment-log.json
 
+# local-dev fallback for newsletter subscribers. Contains real customer
+# names/emails, never commit it. Production uses Upstash Redis instead
+# (see lib/newsletter-store.ts).
+frontend/data/newsletter-subscribers.json
+
 # local-dev fallback caches that rewrite themselves on every fetch/poll —
 # tracking these in git just generates merge-conflict noise on every branch
 # that gets run locally, with no real content worth keeping in history.

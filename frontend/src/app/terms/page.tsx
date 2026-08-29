@@ -6,9 +6,9 @@ import TermsContent from "./components/TermsContent";
 import Footer from "@/features/home/components/footer";
 
 export const metadata = {
-  title: "Terms & Conditions | QA Solucity",
+  title: "Terms of Service | QA Solucity",
   description:
-    "QA Solucity's terms and conditions – the legal agreement governing your use of our website and services.",
+    "QA Solucity's terms of service: the legal agreement governing your use of our website and services.",
 };
 
 export default function TermsPage() {
@@ -68,12 +68,12 @@ export default function TermsPage() {
 
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl lg:text-6xl">
                 <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-                  Terms & Conditions
+                  Terms of Service
                 </span>
               </h1>
 
               <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
-                Last updated: September 7, 2026
+                Last updated: August 29, 2026
               </p>
             </div>
           </Container>
