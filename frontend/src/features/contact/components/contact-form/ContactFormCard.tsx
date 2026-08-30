@@ -11,6 +11,7 @@ import { Send, CheckCircle2, Sparkles, ArrowRight, Mic, MicOff } from "lucide-re
 import { useState } from "react";
 import { services as serviceCatalog } from "@/features/services/data/services";
 import { useSpeechToText } from "../../hooks/useSpeechToText";
+import { trackEvent, ANALYTICS_EVENTS } from "@/features/analytics/lib/posthog";
 
 // Sourced from the actual /services catalog so this list can't drift out
 // of sync with the services we offer; "Other" covers anything not yet
@@ -202,6 +203,7 @@ export default function ContactFormCard() {
 
       setStatus("success");
       setShowSuccessModal(true); // ✅ Open modal on success
+      trackEvent(ANALYTICS_EVENTS.CONTACT_FORM_SUBMITTED, { service: formData.service || undefined });
 
       // Reset form
       setFormData({

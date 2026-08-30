@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import Modal from "@/components/ui/Modal";
+import { trackEvent, ANALYTICS_EVENTS } from "@/features/analytics/lib/posthog";
 
 interface Props {
   jobTitle: string;
@@ -171,6 +172,7 @@ export default function JobApplicationForm({ jobTitle, jobSlug }: Props) {
 
       setStatus("idle");
       setShowSuccessModal(true);
+      trackEvent(ANALYTICS_EVENTS.CAREER_APPLICATION_SUBMITTED, { jobTitle, jobSlug });
       setFormData(initialFormData);
       clearResume();
       setErrors({});

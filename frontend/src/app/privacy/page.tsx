@@ -81,7 +81,7 @@ export default function PrivacyPage() {
               </h1>
 
               <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
-                Last updated: August 29, 2026
+                Last updated: August 30, 2026
               </p>
             </div>
           </Container>

@@ -5,6 +5,8 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import Navbar from "@/features/navigation/components/Navbar";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import CookieConsentBanner from "@/features/analytics/components/CookieConsentBanner";
+import PostHogPageviewTracker from "@/features/analytics/components/PostHogPageviewTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -105,6 +107,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <ServiceWorkerRegister />
+        <PostHogPageviewTracker />
+        <CookieConsentBanner />
         <ThemeProvider>
           {/* <CustomCursor /> */}
           <Navbar />

@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/Textarea";
 import Select from "@/components/ui/Select";
 import Modal from "@/components/ui/Modal";
 import { allCertifications, certificationCatalog, type Pathway } from "../data/certification-data";
+import { trackEvent, ANALYTICS_EVENTS } from "@/features/analytics/lib/posthog";
 
 interface Props {
   initialTrack: Pathway["track"];
@@ -195,6 +196,11 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
       setEnrolledTrack(track);
       setStatus("idle");
       setShowSuccessModal(true);
+      trackEvent(ANALYTICS_EVENTS.CERTIFICATION_ENROLLED, {
+        track,
+        certification: formData.certification || undefined,
+        priceNgn: price,
+      });
     } catch (error) {
       setStatus("error");
       setErrorMessage(error instanceof Error ? error.message : "Failed to submit enrollment");
