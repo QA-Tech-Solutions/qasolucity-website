@@ -9,29 +9,31 @@ const sections = [
     title: "1. What Are Cookies?",
     content: [
       "Cookies are small text files placed on your device when you visit a website. They help websites function properly and remember information about your visit.",
-      "A couple of things covered here aren't cookies in the strict technical sense: your light/dark theme preference and your analytics choice below are both saved in your browser's local storage, not a cookie. We cover them here anyway since they work the same way from your side, something small saved in your browser to remember a choice you made.",
+      "This policy also covers similar technologies, like your browser's local storage, which work the same way from your side: something small saved in your browser to remember a choice or preference you made.",
     ],
   },
   {
-    title: "2. Essential Cookies (Always On)",
+    title: "2. Necessary Cookies",
     content: [
-      "These keep the site working and aren't optional:",
-      "• An authentication cookie, set only when someone logs into our admin tools, to keep that session signed in.",
-      "• Your light/dark theme preference, so the site remembers your choice on your next visit.",
+      "These are required for the site to work properly, such as remembering your light/dark theme preference and keeping the site secure. They're always on and can't be switched off through our cookie banner.",
     ],
   },
   {
-    title: "3. Analytics (Optional, Off by Default)",
+    title: "3. Cookies We Use",
     content: [
-      "We use PostHog, a product analytics tool, to understand how visitors use this site: which pages get viewed, general device/browser/approximate-location information, and whether key actions (like submitting the contact form or subscribing to our newsletter) happen. This helps us fix what's broken and improve what isn't.",
-      "PostHog only loads if you click Accept on the cookie banner shown on your first visit. If you click Decline, or never respond, none of it loads and no analytics cookies are set.",
-      "We don't use advertising or marketing cookies, and we don't sell this data or share it with third parties for their own marketing.",
+      "We use cookies and third-party analytics tools to:",
+      "• Track session activity and usage patterns",
+      "• Understand how visitors navigate and interact with our site",
+      "• Measure the performance of our pages and features",
+      "• Improve our website and services over time",
+      "These cookies are optional and off by default. They only load if you accept them in the cookie banner shown on your first visit. If you decline, or don't respond, none of them load.",
+      "We don't use advertising cookies, and we don't sell your information or share it with third parties for their own marketing.",
     ],
   },
   {
     title: "4. Third-Party Sites",
     content: [
-      "Some pages link out to our social media profiles or other external sites. Those third-party sites, and PostHog itself if you've accepted analytics, have their own privacy and cookie practices, which we don't control.",
+      "Some pages link out to our social media profiles or other external sites, and our analytics tools are themselves operated by third parties. Those third parties have their own privacy and cookie practices, which we don't control.",
       "We encourage you to review the privacy and cookie policies of any third-party site or service you visit.",
     ],
   },
@@ -43,7 +45,7 @@ const sections = [
       "• Mozilla Firefox: Options > Privacy & Security > Cookies",
       "• Safari: Preferences > Privacy > Cookies",
       "• Microsoft Edge: Settings > Cookies and Site Permissions",
-      "Blocking the essential authentication cookie only affects our admin tools; it won't change your experience browsing the public site.",
+      "Blocking necessary cookies may affect how parts of the site work.",
     ],
   },
   {
@@ -80,7 +82,7 @@ function ManageConsent() {
   return (
     <div className="mt-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-6">
       <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-        Your current analytics choice:{" "}
+        Your current cookie preference:{" "}
         <span className={consent === "accepted" ? "text-emerald-600 dark:text-emerald-400" : "text-slate-500 dark:text-slate-400"}>
           {consent === "accepted" ? "Accepted" : consent === "declined" ? "Declined" : "Not yet chosen"}
         </span>
@@ -105,10 +107,10 @@ export default function CookiesContent() {
       <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-12">
         <div className="prose prose-lg prose-slate max-w-none">
           <p className="text-lg leading-8 text-slate-600 dark:text-slate-400">
-            QA Solucity uses a small number of cookies and similar technologies.
-            Some keep the site working and are always on; analytics is optional
-            and off until you say yes. This Cookie Policy explains what those
-            are, how we use them, and your choices regarding them.
+            QA Solucity uses cookies and similar technologies to optimize your experience and to
+            provide us insight into how visitors interact with our site. Some cookies are necessary
+            and always on; others are optional and off until you say yes. This Cookie Policy explains
+            what those are, how we use them, and your choices regarding them.
           </p>
 
           <div className="mt-12 space-y-10">
@@ -149,9 +151,9 @@ export default function CookiesContent() {
               })}
             </p>
             <p className="mt-2">
-              Essential cookies apply automatically since the site can&apos;t function without
-              them. Analytics only turns on if you explicitly accept it in the cookie banner,
-              and you can change that choice at any time above.
+              Necessary cookies apply automatically since the site can&apos;t function without
+              them. Optional cookies only turn on if you explicitly accept them in the cookie
+              banner, and you can change that choice at any time above.
             </p>
           </div>
         </div>
