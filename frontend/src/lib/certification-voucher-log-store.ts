@@ -3,12 +3,12 @@ import { promises as fs } from "fs";
 import path from "path";
 
 /**
- * Append-only audit trail of every voucher an admin has actually sent —
+ * Append-only audit trail of every voucher an admin has actually sent -
  * separate from certification-voucher-store.ts (which only tracks what's
  * still *available*, not history). This file exists purely so there's a
  * record to hand back, as a CSV, of who got what code and when.
  *
- * Contains real customer PII (names, emails) — the local JSON file this
+ * Contains real customer PII (names, emails) - the local JSON file this
  * falls back to in dev is gitignored, and production should always have
  * Upstash Redis configured rather than relying on a server's local disk,
  * which is not guaranteed to persist between requests on serverless hosts.
@@ -55,7 +55,7 @@ export async function appendVoucherLogEntry(entry: VoucherLogEntry): Promise<voi
     entries.push(entry);
     await writeLocalLog(entries);
   } catch (error) {
-    // Best-effort — a logging failure must never block the actual voucher
+    // Best-effort - a logging failure must never block the actual voucher
     // email from going out. The assignment itself is the source of truth;
     // this is an audit trail on top of it, not a prerequisite for it.
     console.error("certification-voucher-log-store: failed to append log entry", error);
@@ -69,7 +69,7 @@ function escapeCsvField(value: string): string {
   return value;
 }
 
-// Entries store the precise ISO timestamp (unambiguous, sortable) — this
+// Entries store the precise ISO timestamp (unambiguous, sortable) - this
 // only formats it for human eyes at export time, in QA Solucity's own
 // timezone rather than raw UTC.
 const csvTimestampFormatter = new Intl.DateTimeFormat("en-NG", {

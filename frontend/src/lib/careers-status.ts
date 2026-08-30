@@ -1,7 +1,7 @@
 export type JobStatus = "open" | "closed";
 
 /**
- * Whether a posting is actually still accepting applications — `status`
+ * Whether a posting is actually still accepting applications - `status`
  * says "open", *and* its deadline (if it has one) hasn't passed. Nobody
  * has to remember to come back and flip `status` to `"closed"` by hand
  * once the date arrives; it just stops counting as open on its own.

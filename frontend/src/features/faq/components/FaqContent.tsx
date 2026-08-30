@@ -86,7 +86,7 @@ export default function FaqContent() {
   const [query, setQuery] = useState("");
 
   // Category and search combine (narrow to a category, then search
-  // within it) rather than being mutually exclusive — with ~50 questions
+  // within it) rather than being mutually exclusive - with ~50 questions
   // across four categories, someone who's already filtered down to
   // "Services" and searched "automation" almost certainly wants both
   // applied, not one to reset the other.
@@ -123,7 +123,7 @@ export default function FaqContent() {
         </div>
 
         {/* aria-label is deliberately more specific than the visible
-            "Services"/"Solutions" text — the page also has a "Services"
+            "Services"/"Solutions" text - the page also has a "Services"
             nav link and questions containing those words, so a screen
             reader announcing just the category name would be ambiguous. */}
         <div className="mb-14 flex flex-wrap items-center justify-center gap-3">

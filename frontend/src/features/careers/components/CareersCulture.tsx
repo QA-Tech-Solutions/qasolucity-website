@@ -7,7 +7,7 @@ import Section from "@/components/layout/Section";
 
 const REASONS = [
   {
-    title: "Real client work, not busywork",
+    title: "Client work, not busywork",
     description:
       "You'll work on actual products for actual clients from early on, not shadow work while you wait to be trusted with something that matters.",
     icon: Target,
@@ -25,7 +25,7 @@ const REASONS = [
     icon: GraduationCap,
   },
   {
-    title: "Small team, real ownership",
+    title: "Small team, full ownership",
     description:
       "We're not big enough for your work to get lost in the noise. What you build and ship is visibly yours.",
     icon: Users2,
@@ -33,7 +33,7 @@ const REASONS = [
   {
     title: "Exposure across the discipline",
     description:
-      "Manual, automation, API, performance, consulting, training — we work across all of it, and so will you if you want to.",
+      "We work across manual, automation, API, performance, consulting, and training, and so will you if you want to.",
     icon: Layers,
   },
   {

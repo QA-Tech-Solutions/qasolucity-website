@@ -1,6 +1,6 @@
 # Adding a job posting
 
-This folder is empty by default — the careers page shows its empty state
+This folder is empty by default - the careers page shows its empty state
 until a real posting is added here. Don't add a posting for a role that
 isn't actually open; the page links straight to applying.
 
@@ -14,6 +14,7 @@ department: "QA Testing"
 type: "Full-time"
 workMode: "Remote"
 location: "Lagos, Nigeria (Remote)"
+experienceLevel: "Mid-level (2+ years of QA automation experience)"
 salaryLabel: "₦450,000 – ₦700,000 / month"
 deadline: "2026-09-30"
 postedDate: "2026-08-26"
@@ -36,37 +37,39 @@ hiringProcess:
   - "Offer"
 ---
 
-## About the role
-
-Freeform Markdown goes here — headings, paragraphs, lists, bold, all work
-and render the same as a blog post. This is the narrative "what you'd
-actually be doing" section; the structured lists above (responsibilities,
-requirements, etc.) get their own dedicated, consistently-styled sections
-on the page automatically, so there's no need to repeat them here.
+Freeform Markdown goes here, headings, paragraphs, lists, bold, all work
+and render the same as a blog post. The page wraps this in its own "Role
+Summary" heading, so don't start with one of your own. This is the
+narrative "what you'd actually be doing" section; the structured lists
+above (responsibilities, requirements, etc.) get their own dedicated,
+consistently-styled sections on the page automatically, so there's no
+need to repeat them here.
 ```
 
 ## Field notes
 
 - **`type`**: `"Full-time"`, `"Part-time"`, `"Contract"`, or `"Internship"`.
-- **`workMode`**: `"Remote"`, `"Hybrid"`, or `"Onsite"` — shown as a badge on
+- **`workMode`**: `"Remote"`, `"Hybrid"`, or `"Onsite"` - shown as a badge on
   every card and the detail page.
+- **`experienceLevel`**: required, free text (e.g. `"Mid-level (2+ years of
+  QA automation experience)"`). Shown as a badge on the detail page.
 - **`salaryLabel`**: optional. Omit it entirely (delete the line) rather
   than leaving it blank if the role's pay isn't being disclosed publicly.
 - **`deadline`**: optional. Omit it for a rolling/open-until-filled role;
   the page then just doesn't show a deadline instead of showing a blank one.
   Once this date passes (end of day, Lagos time), the posting **stops
-  counting as open on its own** — you don't have to remember to come back
+  counting as open on its own** - you don't have to remember to come back
   and flip `status` by hand. This check re-runs on every page visit (see
   `export const dynamic = "force-dynamic"` in `app/careers/page.tsx` and
   `app/careers/[slug]/page.tsx`), not just at the next deploy.
 - **`status`**: set to `"closed"` once a role is filled rather than
   deleting the file. Closed (or deadline-passed) postings still show on
-  the public `/careers` listing — muted, badged "Closed", with no apply
-  button — rather than disappearing, so people can see what's been hired
+  the public `/careers` listing - muted, badged "Closed", with no apply
+  button - rather than disappearing, so people can see what's been hired
   for. Their page keeps working too, with a "no longer accepting
   applications" notice in place of the form, so a shared or bookmarked
   link doesn't just 404 once a role fills. Only genuinely open postings
-  get a canonical URL, `JobPosting` schema, and a `sitemap.xml` entry —
+  get a canonical URL, `JobPosting` schema, and a `sitemap.xml` entry -
   closed ones are `noindex` and left out of the sitemap (see
   `generateMetadata` in `app/careers/[slug]/page.tsx` and
   `app/sitemap.ts`).

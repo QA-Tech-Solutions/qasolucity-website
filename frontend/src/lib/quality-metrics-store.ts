@@ -19,7 +19,7 @@ const DATA_FILE = path.join(process.cwd(), "data", "quality-metrics.json");
 // Vercel's Upstash Redis integration has used both naming conventions
 // over time depending on how the store was provisioned (via the
 // Marketplace "Upstash" integration, or the older "Vercel KV" product it
-// replaced) — checking both means this works regardless of which one is
+// replaced) - checking both means this works regardless of which one is
 // connected to the project, with no extra configuration needed beyond
 // connecting the integration itself.
 const redisUrl = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
@@ -29,12 +29,12 @@ const redis =
   redisUrl && redisToken ? new Redis({ url: redisUrl, token: redisToken }) : null;
 
 /**
- * Redis when it's configured (any real deployment should have it —
+ * Redis when it's configured (any real deployment should have it -
  * that's the whole point, a serverless host's local filesystem doesn't
  * survive between requests), a local JSON file otherwise. The file
  * fallback exists purely so `npm run dev` works out of the box without
  * anyone having to provision a Redis instance just to see the dashboard
- * locally — it is not a production persistence strategy.
+ * locally - it is not a production persistence strategy.
  */
 export async function getMetrics(): Promise<QualityMetrics | null> {
   if (redis) {

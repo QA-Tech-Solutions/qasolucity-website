@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>You're offline — QA Solucity</title>
+<title>You're offline - QA Solucity</title>
 <style>
   :root {
     --bg: #f8fafc;
@@ -77,13 +77,17 @@
     width: 8px; height: 8px; border-radius: 50%;
     background: currentColor;
   }
-  .status-dot.offline { animation: pulse 1.6s ease-in-out infinite; }
+  .status-dot.offline, .status-dot.online { animation: pulse 1.6s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
   .status-bar button {
+    /* Fixed, deliberately-chosen colors rather than currentColor: this
+       button sets its own `color`, so `background: currentColor` would
+       resolve to that same color (white-on-white / near-invisible text)
+       instead of the parent status bar's tint. */
     margin-left: 8px;
     border: none;
-    background: currentColor;
-    color: var(--card-bg);
+    background: #047857;
+    color: #ffffff;
     font-weight: 700;
     font-size: 12px;
     padding: 4px 10px;
@@ -347,11 +351,12 @@
   var statusBar = document.getElementById("statusBar");
   var statusDot = document.getElementById("statusDot");
   var statusText = document.getElementById("statusText");
+  var isOnline = null;
 
-  function renderStatus() {
-    if (navigator.onLine) {
+  function renderStatus(online) {
+    if (online) {
       statusBar.className = "status-bar online";
-      statusDot.className = "status-dot";
+      statusDot.className = "status-dot online";
       statusText.textContent = "Back online";
       if (!document.getElementById("reloadBtn")) {
         var btn = document.createElement("button");
@@ -368,9 +373,28 @@
       if (existing) existing.remove();
     }
   }
-  window.addEventListener("online", renderStatus);
-  window.addEventListener("offline", renderStatus);
-  renderStatus();
+
+  // navigator.onLine / the online-offline events only reflect the network
+  // adapter's state, not whether the internet is actually reachable (a
+  // Wi-Fi connected to a router with no upstream still reports "online").
+  // A real fetch is the only way to confirm connectivity is genuinely
+  // back, so this polls with one on an interval and on the online event,
+  // rather than trusting the browser's flag alone.
+  function checkConnectivity() {
+    fetch("/favicon.ico", { method: "HEAD", cache: "no-store" })
+      .then(function () {
+        if (isOnline !== true) { isOnline = true; renderStatus(true); }
+      })
+      .catch(function () {
+        if (isOnline !== false) { isOnline = false; renderStatus(false); }
+      });
+  }
+
+  window.addEventListener("online", checkConnectivity);
+  window.addEventListener("offline", function () { isOnline = false; renderStatus(false); });
+  renderStatus(false);
+  checkConnectivity();
+  setInterval(checkConnectivity, 4000);
 
   // ---------- Bug Squash ----------
   var GRID_SIZE = 16;

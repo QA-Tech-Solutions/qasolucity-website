@@ -12,7 +12,7 @@ const nairaFormatter = new Intl.NumberFormat("en-NG", {
 
 export default async function CertificationPathways() {
   // Both the training fee and the exam cost, and so both prices below,
-  // vary by which certification the buyer picks — this default (Foundation
+  // vary by which certification the buyer picks - this default (Foundation
   // Level, the cheapest tier) is just an anchor "starting from" figure
   // shown before that choice happens.
   const pricing = await getCertificationPricing();

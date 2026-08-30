@@ -12,7 +12,7 @@ export async function GET(request: Request) {
 
   return NextResponse.json(pricing, {
     headers: {
-      // Fine for a short public cache — the underlying rate itself is
+      // Fine for a short public cache - the underlying rate itself is
       // already cached upstream (see lib/certification-pricing.ts).
       "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
     },

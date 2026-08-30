@@ -10,7 +10,7 @@ export default function ServiceGrid() {
     // that opt in via `variants`, which these don't (they set their own
     // initial/whileInView below), so this wrapper doing its own opacity
     // animation on top of theirs was just a second, redundant fade nested
-    // around every card's — the two compound multiplicatively and made
+    // around every card's - the two compound multiplicatively and made
     // the whole section noticeably slower to finish appearing.
     <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
       {services.map((service, index) => (

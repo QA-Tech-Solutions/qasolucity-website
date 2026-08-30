@@ -37,7 +37,7 @@ export default function AssignVoucherForm({
         if (!cancelled) setAvailableCodes(data.codes ?? []);
       })
       .catch(() => {
-        // Non-fatal — the admin can still type a code in by hand.
+        // Non-fatal - the admin can still type a code in by hand.
       })
       .finally(() => {
         if (!cancelled) setLoadingCodes(false);

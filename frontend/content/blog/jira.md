@@ -23,12 +23,12 @@ A defect ticket that just says "checkout is broken" wastes everyone's time, the 
 
 A defect ticket that follows a simple structure saves enormous back-and-forth:
 
-1. **Summary** — one clear sentence describing the problem.
-2. **Steps to reproduce** — numbered, specific, no ambiguity.
-3. **Expected result** — what should have happened.
-4. **Actual result** — what happened instead.
-5. **Evidence** — screenshot, video, or log, whatever proves it.
-6. **Environment** — browser, device, build version.
+1. **Summary**: one clear sentence describing the problem.
+2. **Steps to reproduce**: numbered, specific, no ambiguity.
+3. **Expected result**: what should have happened.
+4. **Actual result**: what happened instead.
+5. **Evidence**: screenshot, video, or log, whatever proves it.
+6. **Environment**: browser, device, build version.
 
 > A bug report that requires a follow-up question to understand isn't done yet. The goal is a report a developer can act on without needing to ask "wait, what do you mean?"
 

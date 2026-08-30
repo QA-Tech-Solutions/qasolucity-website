@@ -10,7 +10,7 @@ interface Props {
   alt: string;
   /** "adaptive" sizes the container to the image's own aspect ratio (e.g. the article hero, via next/image width/height), "natural" is a plain <img> for inline content images */
   variant?: "adaptive" | "natural";
-  /** Required for "adaptive" — the image's real pixel dimensions, so the box reserves the correct aspect ratio instead of guessing. */
+  /** Required for "adaptive" - the image's real pixel dimensions, so the box reserves the correct aspect ratio instead of guessing. */
   width?: number;
   height?: number;
   className?: string;

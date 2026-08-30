@@ -19,7 +19,7 @@ const EMPLOYMENT_TYPE_SCHEMA: Record<string, string> = {
   Internship: "INTERN",
 };
 
-// Same reasoning as app/careers/page.tsx — open/closed here partly depends
+// Same reasoning as app/careers/page.tsx - open/closed here partly depends
 // on today's date vs. each posting's deadline, so this route must actually
 // re-check on every visit rather than freeze that check at build time.
 // generateStaticParams below still lets Next.js know every valid slug
@@ -69,7 +69,7 @@ export default async function JobPage({ params }: JobPageProps) {
   const relatedJobs = getRelatedJobs(job);
 
   // Google Jobs expects JobPosting markup only for postings actually
-  // accepting applications — omit it entirely once a role is closed or
+  // accepting applications - omit it entirely once a role is closed or
   // its deadline has passed.
   const jsonLd = !isJobOpen(job) ? null : {
     "@context": "https://schema.org",

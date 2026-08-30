@@ -19,7 +19,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Only step in for full-page navigations that fail — in-page fetches
+// Only step in for full-page navigations that fail - in-page fetches
 // (contact form submits, API calls, etc.) should surface their own
 // errors rather than silently receiving this HTML as a fake response.
 self.addEventListener("fetch", (event) => {
