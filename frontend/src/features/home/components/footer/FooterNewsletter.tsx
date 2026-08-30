@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { trackEvent, ANALYTICS_EVENTS } from "@/features/analytics/lib/posthog";
 
 export default function FooterNewsletter() {
   const [name, setName] = useState("");
@@ -30,6 +31,7 @@ export default function FooterNewsletter() {
       if (!response.ok) throw new Error(data.error || "Failed to subscribe");
 
       setStatus("success");
+      trackEvent(ANALYTICS_EVENTS.NEWSLETTER_SUBSCRIBED);
     } catch (error) {
       setStatus("error");
       setErrorMessage(error instanceof Error ? error.message : "Failed to subscribe");
