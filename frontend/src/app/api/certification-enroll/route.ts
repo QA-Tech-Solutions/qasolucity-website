@@ -56,7 +56,7 @@ export async function POST(request: Request) {
   const pricing = await getCertificationPricing(certification);
   const priceNgn = track === "bundle" ? pricing.bundlePriceNgn : pricing.trainingFeeNgn;
 
-  // Deliberately no voucher assignment here — there's no payment gateway,
+  // Deliberately no voucher assignment here - there's no payment gateway,
   // so nothing has actually been paid for at this point. Popping a real
   // code from inventory now would hand out a paid asset for free if the
   // buyer never follows through. We only *peek* the next available code
@@ -94,7 +94,7 @@ export async function POST(request: Request) {
 
     await Promise.all([
       resend.emails.send({
-        from: "QA Solucity Website <onboarding@resend.dev>",
+        from: "QA Solucity <onboarding@resend.dev>",
         to: CONTACT_EMAIL,
         replyTo: email,
         subject: internal.subject,

@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Star,
   Lock,
+  BarChart3,
 } from "lucide-react";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
@@ -77,10 +78,6 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
                 <ModeIcon className="h-3.5 w-3.5" />
                 {job.workMode}
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
-                <Briefcase className="h-3.5 w-3.5" />
-                {job.type}
-              </span>
             </div>
 
             <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-[-0.03em] text-slate-900 dark:text-slate-100 md:text-4xl lg:text-5xl">
@@ -92,12 +89,10 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
                 <MapPin className="h-4 w-4" />
                 {job.location}
               </span>
-              {job.salaryLabel && (
-                <span className="flex items-center gap-1.5">
-                  <Wallet className="h-4 w-4" />
-                  {job.salaryLabel}
-                </span>
-              )}
+              <span className="flex items-center gap-1.5">
+                <Briefcase className="h-4 w-4" />
+                {job.type}
+              </span>
               {deadlineLabel && (
                 <span
                   className={`flex items-center gap-1.5 ${deadlineSoon ? "font-semibold text-amber-600 dark:text-amber-400" : ""}`}
@@ -131,98 +126,181 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
 
       <Section className="bg-white dark:bg-slate-900 py-16">
         <Container>
-          <div className="mx-auto max-w-3xl space-y-10">
-            <div>
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">About the role</h2>
-              <article className="mt-4">{children}</article>
-            </div>
+          {/* Two-column layout (main content + a sticky facts/apply sidebar)
+              is the standard pattern on LinkedIn Jobs, Indeed, Greenhouse,
+              and Lever job pages: it keeps Apply reachable without forcing
+              a scroll to the bottom of a long single-column page. The
+              sidebar comes first in DOM order (so it's the top card on a
+              stacked mobile layout, where a visitor should see the key
+              facts and Apply button before scrolling through the full
+              writeup) and is pushed to the right visually only at lg. */}
+          <div className="mx-auto max-w-6xl lg:grid lg:grid-cols-[1fr_320px] lg:items-start lg:gap-12">
+            <aside className="lg:order-2 lg:sticky lg:top-28 lg:self-start">
+              <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-6">
+                <h2 className="text-sm font-bold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">
+                  Job Overview
+                </h2>
 
-            <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-7 sm:p-8">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">What you&apos;ll do</h2>
-              <ul className="mt-5 space-y-4">
-                {job.responsibilities.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
-                    <span className="text-[15px] leading-7 text-slate-700 dark:text-slate-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                <dl className="mt-5 space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Briefcase className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500 dark:text-indigo-400" />
+                    <div>
+                      <dt className="text-xs text-slate-500 dark:text-slate-400">Job Type</dt>
+                      <dd className="text-sm font-semibold text-slate-900 dark:text-slate-100">{job.type}</dd>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500 dark:text-indigo-400" />
+                    <div>
+                      <dt className="text-xs text-slate-500 dark:text-slate-400">Location</dt>
+                      <dd className="text-sm font-semibold text-slate-900 dark:text-slate-100">{job.location}</dd>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <BarChart3 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500 dark:text-indigo-400" />
+                    <div>
+                      <dt className="text-xs text-slate-500 dark:text-slate-400">Experience Level</dt>
+                      <dd className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                        {job.experienceLevel}
+                      </dd>
+                    </div>
+                  </div>
+                  {job.salaryLabel && (
+                    <div className="flex items-start gap-3">
+                      <Wallet className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500 dark:text-indigo-400" />
+                      <div>
+                        <dt className="text-xs text-slate-500 dark:text-slate-400">Salary &amp; Benefits</dt>
+                        <dd className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                          {job.salaryLabel}
+                        </dd>
+                      </div>
+                    </div>
+                  )}
+                  {deadlineLabel && (
+                    <div className="flex items-start gap-3">
+                      <CalendarClock className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500 dark:text-indigo-400" />
+                      <div>
+                        <dt className="text-xs text-slate-500 dark:text-slate-400">Application Deadline</dt>
+                        <dd
+                          className={`text-sm font-semibold ${deadlineSoon ? "text-amber-600 dark:text-amber-400" : "text-slate-900 dark:text-slate-100"}`}
+                        >
+                          {deadlineLabel}
+                        </dd>
+                      </div>
+                    </div>
+                  )}
+                </dl>
 
-            <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-7 sm:p-8">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                What we&apos;re looking for
-              </h2>
-              <ul className="mt-5 space-y-4">
-                {job.requirements.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
-                    <span className="text-[15px] leading-7 text-slate-700 dark:text-slate-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                {isOpen ? (
+                  <a
+                    href="#apply"
+                    onClick={scrollToApply}
+                    className="mt-6 flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+                  >
+                    Apply Now
+                  </a>
+                ) : (
+                  <span className="mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                    <Lock className="h-4 w-4" />
+                    Closed
+                  </span>
+                )}
+              </div>
+            </aside>
 
-            {job.niceToHave && job.niceToHave.length > 0 && (
+            <div className="order-2 mt-10 space-y-10 lg:order-1 lg:mt-0">
+              <WhoWeAre />
+
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Role Summary</h2>
+                <article className="mt-4">{children}</article>
+              </div>
+
               <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-7 sm:p-8">
-                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Nice to have</h2>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Key Responsibilities</h2>
                 <ul className="mt-5 space-y-4">
-                  {job.niceToHave.map((item) => (
+                  {job.responsibilities.map((item) => (
                     <li key={item} className="flex items-start gap-3">
-                      <Star className="mt-0.5 h-5 w-5 shrink-0 text-violet-500 dark:text-violet-400" />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
                       <span className="text-[15px] leading-7 text-slate-700 dark:text-slate-300">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            )}
 
-            <div>
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Our hiring process</h2>
-              <div className="relative mt-6">
-                <div className="absolute bottom-2 left-[19px] top-2 w-px bg-slate-200 dark:bg-slate-800" />
-                <ol className="space-y-6">
-                  {job.hiringProcess.map((step, index) => (
-                    <li key={step} className="relative flex items-start gap-4 pl-0">
-                      <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white shadow-md shadow-indigo-500/20">
-                        {index + 1}
-                      </span>
-                      <span className="mt-2 text-[15px] leading-7 text-slate-700 dark:text-slate-300">
-                        {step}
-                      </span>
+              <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-7 sm:p-8">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                  Required Qualifications
+                </h2>
+                <ul className="mt-5 space-y-4">
+                  {job.requirements.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
+                      <span className="text-[15px] leading-7 text-slate-700 dark:text-slate-300">{item}</span>
                     </li>
                   ))}
-                </ol>
+                </ul>
               </div>
-            </div>
 
-            <WhoWeAre />
-
-            <div id="apply" className="scroll-mt-28">
-              {isOpen ? (
-                <JobApplicationForm jobTitle={job.title} jobSlug={job.slug} />
-              ) : (
-                <div className="flex flex-col items-center gap-4 rounded-[28px] border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-900/70 px-8 py-12 text-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 shadow-md ring-1 ring-slate-200/60 dark:ring-slate-700/60">
-                    <Lock className="h-5 w-5 text-slate-400 dark:text-slate-500" />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
-                    This role is no longer accepting applications.
-                  </h3>
-                  <p className="max-w-md text-[15px] leading-7 text-slate-600 dark:text-slate-400">
-                    It&apos;s either been filled or the posting closed. Take a look at what else is
-                    open.
-                  </p>
-                  <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
-                    <Link
-                      href="/careers"
-                      className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
-                    >
-                      See open roles
-                    </Link>
-                  </div>
+              {job.niceToHave && job.niceToHave.length > 0 && (
+                <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-7 sm:p-8">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Preferred Qualifications</h2>
+                  <ul className="mt-5 space-y-4">
+                    {job.niceToHave.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <Star className="mt-0.5 h-5 w-5 shrink-0 text-violet-500 dark:text-violet-400" />
+                        <span className="text-[15px] leading-7 text-slate-700 dark:text-slate-300">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
+
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Our hiring process</h2>
+                <div className="relative mt-6">
+                  <div className="absolute bottom-2 left-[19px] top-2 w-px bg-slate-200 dark:bg-slate-800" />
+                  <ol className="space-y-6">
+                    {job.hiringProcess.map((step, index) => (
+                      <li key={step} className="relative flex items-start gap-4 pl-0">
+                        <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white shadow-md shadow-indigo-500/20">
+                          {index + 1}
+                        </span>
+                        <span className="mt-2 text-[15px] leading-7 text-slate-700 dark:text-slate-300">
+                          {step}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+
+              <div id="apply" className="scroll-mt-28">
+                {isOpen ? (
+                  <JobApplicationForm jobTitle={job.title} jobSlug={job.slug} />
+                ) : (
+                  <div className="flex flex-col items-center gap-4 rounded-[28px] border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-900/70 px-8 py-12 text-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 shadow-md ring-1 ring-slate-200/60 dark:ring-slate-700/60">
+                      <Lock className="h-5 w-5 text-slate-400 dark:text-slate-500" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                      This role is no longer accepting applications.
+                    </h3>
+                    <p className="max-w-md text-[15px] leading-7 text-slate-600 dark:text-slate-400">
+                      It&apos;s either been filled or the posting closed. Take a look at what else is
+                      open.
+                    </p>
+                    <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+                      <Link
+                        href="/careers"
+                        className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+                      >
+                        See open roles
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </Container>
@@ -246,7 +324,7 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
               </h3>
             </motion.div>
 
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {relatedJobs.map((related, index) => (
                 <JobCard key={related.slug} job={related} delay={index * 0.06} />
               ))}

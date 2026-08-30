@@ -48,7 +48,7 @@ export default function Select({
   // open/close cycle. Base UI fires onValueChange and onOpenChange(false)
   // back-to-back for the same "pick an item" interaction, but this
   // component's onOpenChange closes over the `value` prop from the render
-  // *before* that selection's state update lands — so reading `value`
+  // *before* that selection's state update lands - so reading `value`
   // there is stale and would report "empty" for a split second even
   // though a real choice was just made. Tracking the selection directly
   // sidesteps that instead of relying on prop freshness.
@@ -62,7 +62,7 @@ export default function Select({
   // Opening the popup moves focus off the trigger button, which would fire
   // a native onBlur immediately on click, before the user has actually
   // made or abandoned a choice. "Blur" for a select should mean "the
-  // popup was opened and then closed without picking anything" — so
+  // popup was opened and then closed without picking anything" - so
   // validate on close, and only when nothing was actually selected.
   const handleOpenChange = (open: boolean) => {
     if (open) {

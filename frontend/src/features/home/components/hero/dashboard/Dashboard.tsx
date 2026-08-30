@@ -15,8 +15,26 @@ import {
 import type { QualityMetrics } from "@/lib/quality-metrics-store";
 import Tooltip from "@/components/ui/Tooltip";
 
+// 12-hour clock with AM/PM plus a same-day-relative date label, e.g.
+// "6:44 AM • Today" - spelled out explicitly (hour12: true) rather than
+// left to the runtime's default locale, which isn't always 12-hour.
+function formatLastUpdated(date: Date): string {
+  // .toUpperCase() guarantees "AM"/"PM" (not "am"/"pm") regardless of the
+  // runtime's locale/ICU data, which isn't consistent about casing here.
+  const time = date
+    .toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })
+    .toUpperCase();
+  const today = new Date();
+  const isToday =
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear();
+  const dateLabel = isToday ? "Today" : date.toLocaleDateString([], { month: "short", day: "numeric" });
+  return `${time} • ${dateLabel}`;
+}
+
 // Helper: count-up animation. Animates from whatever is currently on
-// screen to the new target, rather than always restarting from 0 — the
+// screen to the new target, rather than always restarting from 0 - the
 // dashboard polls for fresh data every 60s, and resetting to 0 on every
 // poll would make a live metric look like it just broke.
 const useCountUp = (target: number, duration: number = 1200) => {
@@ -198,11 +216,9 @@ export default function Dashboard() {
 
   const { passRate, passedTests, bugs, coverage, apiHealth, lastUpdated, source } = metrics;
   // "Live" only when a real automation run has reported in and the most
-  // recent poll succeeded — never claim real-time data we don't have.
+  // recent poll succeeded - never claim real-time data we don't have.
   const isLive = source === "automation" && !isFetchFailing;
-  const lastUpdatedLabel = lastUpdated
-    ? new Date(lastUpdated).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-    : "No automation run yet";
+  const lastUpdatedLabel = lastUpdated ? formatLastUpdated(new Date(lastUpdated)) : "No automation run yet";
 
   return (
     <motion.div

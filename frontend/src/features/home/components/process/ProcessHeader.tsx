@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function ProcessHeader() {
   return (
@@ -22,10 +23,12 @@ export default function ProcessHeader() {
         release.
       </p>
 
-      <Button className="mt-10 h-14 rounded-2xl bg-indigo-600 text-white px-8 font-semibold shadow-lg shadow-indigo-500/20 hover:bg-indigo-700">
-        Discuss Your Project
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </Button>
+      <Link href="/contact">
+        <Button className="mt-10 h-14 rounded-2xl bg-indigo-600 text-white px-8 font-semibold shadow-lg shadow-indigo-500/20 hover:bg-indigo-700">
+          Discuss Your Project
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </Link>
     </div>
   );
 }

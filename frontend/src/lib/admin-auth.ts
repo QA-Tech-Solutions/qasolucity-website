@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
  * Shared-secret admin gate for /admin/* actions (currently just voucher
  * assignment). Mirrors the MAINTENANCE_BYPASS_SECRET pattern already used
  * in proxy.ts: one secret, compared directly, stored in an httpOnly
- * cookie on success — no user accounts or session store, which matches
+ * cookie on success - no user accounts or session store, which matches
  * the rest of this app's "small team, shared secret" security model.
  */
 

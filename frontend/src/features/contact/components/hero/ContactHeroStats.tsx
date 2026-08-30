@@ -10,7 +10,7 @@ const contactItems = [
     title: "Email",
     value: "hello@qasolucity.com",
     href: "mailto:hello@qasolucity.com",
-    action: "Send us a message",
+    action: "Send us an email",
   },
   {
     icon: MessageCircle,

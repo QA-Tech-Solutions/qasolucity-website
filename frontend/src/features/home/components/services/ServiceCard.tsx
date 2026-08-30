@@ -18,7 +18,7 @@ export default function ServiceCard({
 }: Props) {
   return (
     // Entrance fade/slide lives on the wrapping motion.div in ServiceGrid
-    // (which also drives the per-card stagger delay) — animating it again
+    // (which also drives the per-card stagger delay) - animating it again
     // here too used to nest two opacity transitions inside one another,
     // which compound multiplicatively and made the section visibly slower
     // to finish fading in than either animation alone.

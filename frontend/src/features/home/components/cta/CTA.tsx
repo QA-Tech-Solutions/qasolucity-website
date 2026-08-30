@@ -13,7 +13,7 @@ export default function CTA() {
       {/* Background */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950" />
 
-      {/* Animated Glows — whileInView (not animate) so this stops costing
+      {/* Animated Glows - whileInView (not animate) so this stops costing
           compositor work while scrolled out of view; these run for the
           entire time the page is open otherwise, most of it off-screen. */}
       <motion.div

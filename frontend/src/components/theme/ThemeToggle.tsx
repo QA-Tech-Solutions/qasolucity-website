@@ -24,7 +24,7 @@ const LABELS: Record<ThemeSetting, string> = {
 
 /**
  * One button, three states, cycled in a fixed order (light -> dark ->
- * system -> light...) rather than a dropdown — the ask was specifically
+ * system -> light...) rather than a dropdown - the ask was specifically
  * "one button that when clicked it goes to the next". The icon shown is
  * always the *setting* that's currently selected, not the resolved
  * light/dark appearance, so "system" reliably shows the monitor icon

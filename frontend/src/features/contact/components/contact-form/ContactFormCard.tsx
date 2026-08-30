@@ -7,9 +7,10 @@ import Select from "@/components/ui/Select";
 import Modal from "@/components/ui/Modal";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
+import { Send, CheckCircle2, Sparkles, ArrowRight, Mic, MicOff } from "lucide-react";
 import { useState } from "react";
 import { services as serviceCatalog } from "@/features/services/data/services";
+import { useSpeechToText } from "../../hooks/useSpeechToText";
 
 // Sourced from the actual /services catalog so this list can't drift out
 // of sync with the services we offer; "Other" covers anything not yet
@@ -20,7 +21,7 @@ const services = [
 ];
 
 // Services with their own dedicated landing page (pricing, enrollment/apply
-// flow) rather than just a generic /services/[slug] detail page — see
+// flow) rather than just a generic /services/[slug] detail page - see
 // ServiceDetail.href in features/services/data/services.ts. Picking one of
 // these routes the visitor there directly instead of through this form.
 const DEDICATED_PAGE_SERVICES: Record<string, { title: string; href: string; ctaLabel: string }> = {
@@ -69,6 +70,16 @@ export default function ContactFormCard() {
   const [suggestionIntro, setSuggestionIntro] = useState("");
   const dedicatedPageSuggestion = DEDICATED_PAGE_SERVICES[formData.service];
 
+  const { isListening, isSupported: speechSupported, toggle: toggleListening } = useSpeechToText(
+    (transcript) => {
+      setFormData((prev) => ({
+        ...prev,
+        message: prev.message.trim() ? `${prev.message.trim()} ${transcript}` : transcript,
+      }));
+      setErrors((prev) => ({ ...prev, message: "" }));
+    }
+  );
+
   // ---------- Validation functions ----------
   const validateField = (name: string, value: string): string => {
     switch (name) {
@@ -112,7 +123,7 @@ export default function ContactFormCard() {
     }
 
     // Roll a fresh suggestion phrasing here, in the event handler, rather
-    // than during render (e.g. in useMemo) — Math.random() during render
+    // than during render (e.g. in useMemo) - Math.random() during render
     // is an impure call React explicitly disallows.
     if (name === "service") {
       const suggestion = DEDICATED_PAGE_SERVICES[value];
@@ -150,7 +161,7 @@ export default function ContactFormCard() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Derived purely from formData, not from `errors` — `errors` only tracks
+  // Derived purely from formData, not from `errors` - `errors` only tracks
   // blur-time messages and can retain stale keys after a field is
   // corrected (handleChange clears a message to "" rather than deleting
   // the key), which would otherwise leave this permanently false once any
@@ -336,16 +347,51 @@ export default function ContactFormCard() {
           </div>
 
           <div className="mt-5">
-            <Textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              rows={5}
-              placeholder="Tell us about your project..."
-              required
-              className="rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20"
-            />
+            <div className="relative">
+              <Textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                rows={5}
+                placeholder="Tell us about your project..."
+                required
+                className={`rounded-xl border-slate-200 dark:border-slate-800 transition-all duration-300 focus:border-indigo-300 dark:focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-500/20 ${
+                  speechSupported ? "pr-12" : ""
+                }`}
+              />
+              {speechSupported && (
+                <button
+                  type="button"
+                  onClick={toggleListening}
+                  aria-label={isListening ? "Stop dictating" : "Dictate your message"}
+                  aria-pressed={isListening}
+                  className={`absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-300 ${
+                    isListening
+                      ? "bg-red-500 text-white"
+                      : "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50"
+                  }`}
+                >
+                  {isListening ? (
+                    <MicOff className="h-4 w-4" />
+                  ) : (
+                    <Mic className="h-4 w-4" />
+                  )}
+                  {isListening && (
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-60" />
+                  )}
+                </button>
+              )}
+            </div>
+            {isListening && (
+              <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-red-500 dark:text-red-400">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
+                </span>
+                Listening... speak now
+              </p>
+            )}
             {errors.message && (
               <p className="mt-1 text-xs text-red-500">{errors.message}</p>
             )}

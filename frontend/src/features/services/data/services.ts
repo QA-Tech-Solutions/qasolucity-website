@@ -33,7 +33,7 @@ export interface ServiceDetail {
   idealFor: string[];
   faqs: ServiceFAQ[];
   icon: LucideIcon;
-  /** Overrides the default `/services/${slug}` destination — used for
+  /** Overrides the default `/services/${slug}` destination - used for
    * services that live on their own dedicated route instead of the
    * generic service detail page. */
   href?: string;

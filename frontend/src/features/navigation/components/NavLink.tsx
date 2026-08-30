@@ -1,25 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 interface NavLinkProps {
   href: string;
+  active: boolean;
   children: React.ReactNode;
 }
 
 export default function NavLink({
   href,
+  active,
   children,
 }: NavLinkProps) {
-  const pathname = usePathname();
-
-  const active =
-    href === "/"
-      ? pathname === "/"
-      : pathname.startsWith(href);
-
   return (
     <Link
       href={href}

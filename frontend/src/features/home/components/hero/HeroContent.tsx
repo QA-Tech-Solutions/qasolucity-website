@@ -27,7 +27,7 @@ export default function HeroContent() {
           <Text
             className="mt-6 max-w-lg text-[17px] leading-8 text-muted-foreground"
           >
-            QA Solucity tests web, mobile and API products to uncover the bugs, gaps and risks that can hurt your users, revenue and reputation.
+            QA Solucity tests web, mobile and API products to catch bugs and gaps early, before they cost you users, revenue, or reputation.
           </Text>
         </div>
 

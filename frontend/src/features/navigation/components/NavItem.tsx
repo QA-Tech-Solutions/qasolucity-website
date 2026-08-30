@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import NavLink from "./NavLink";
@@ -24,8 +25,23 @@ export default function NavItem({
   close,
   toggle,
 }: NavItemProps) {
+  const pathname = usePathname();
   const isOpen = openMenu === item.label;
   const hasMegaMenu = item.megaMenu && item.sections && item.sections.length > 0;
+
+  // A nav item counts as active (underlined) if the current page is its own
+  // href, or any page reachable through its mega menu — some entries link
+  // outside the item's own URL prefix on purpose (Resources -> Blog/FAQs,
+  // Services -> ISTQB Certification Prep/QA Career Launchpad), so matching
+  // on item.href alone would miss those.
+  const activeHrefs = [
+    item.href,
+    ...(item.sections?.flatMap((section) => section.links.map((link) => link.href)) ?? []),
+  ];
+  const isActive = activeHrefs.some((href) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href)
+  );
+
   const menuRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isMenuHovered, setIsMenuHovered] = useState(false);
@@ -90,7 +106,7 @@ export default function NavItem({
       onMouseLeave={handleMouseLeave}
     >
       <div className="flex items-center gap-1 rounded-xl px-2 py-2">
-        <NavLink href={item.href}>{item.label}</NavLink>
+        <NavLink href={item.href} active={isActive}>{item.label}</NavLink>
 
         {hasMegaMenu && (
           <button

@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 };
 
 // Site-wide Organization/LocalBusiness structured data. Lives once in the
-// root layout (not per-page) per Google's guidance — a page-level
+// root layout (not per-page) per Google's guidance - a page-level
 // duplicate of this on every route would be redundant, not additive.
 const organizationJsonLd = {
   "@context": "https://schema.org",

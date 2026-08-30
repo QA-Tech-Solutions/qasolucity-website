@@ -8,7 +8,7 @@ import { getOpenJobs } from "@/lib/careers";
 const SITE_URL = "https://qasolucity.com";
 
 // getOpenJobs() below is date-dependent (see isJobOpen in lib/careers-status.ts)
-// the same way app/careers/page.tsx is — without this, a job's presence here
+// the same way app/careers/page.tsx is - without this, a job's presence here
 // would freeze at whatever was open/closed at build time instead of updating
 // as deadlines pass.
 export const dynamic = "force-dynamic";
@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Only open postings — closed ones set `robots: noindex` on the page
+  // Only open postings - closed ones set `robots: noindex` on the page
   // itself (see app/careers/[slug]/page.tsx), and listing a noindex URL
   // in the sitemap is a known anti-pattern Search Console flags.
   const careerRoutes: MetadataRoute.Sitemap = getOpenJobs().map((job) => ({

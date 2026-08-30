@@ -8,7 +8,7 @@
 /* Registers the CSS custom properties below as real Tailwind color
    utilities (bg-background, text-foreground, border-border, ...).
    `inline` means these are references to the runtime-changeable
-   variables defined in :root/.dark below, not fixed values — so the
+   variables defined in :root/.dark below, not fixed values - so the
    generated utility classes automatically follow the active theme
    with no `dark:` prefix needed at the call site. */
 @theme inline {
@@ -33,7 +33,7 @@
    shadows on white cards. This design leans on them heavily (including
    with a colored shadow, e.g. shadow-2xl shadow-indigo-500/20, which only
    swaps the color and inherits this blur/spread) so the stock values read
-   as oversized, heavy glows — moderated here once, site-wide, rather than
+   as oversized, heavy glows - moderated here once, site-wide, rather than
    hand-tuning every call site. */
 @theme {
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.04);
@@ -45,15 +45,15 @@
 }
 
 :root {
-  /* Semantic tokens — every component should reach for these first.
+  /* Semantic tokens - every component should reach for these first.
      Values are WCAG AA-verified against each other (4.5:1+ for text). */
   --background: #ffffff; /* page canvas */
   --surface: #ffffff; /* cards, elevated panels */
-  --muted: #f8fafc; /* slate-50 — alternate section backgrounds */
-  --foreground: #0f172a; /* slate-900 — primary text, 16.9:1 on background */
-  --muted-foreground: #475569; /* slate-600 — secondary text, 7.6:1 on background */
+  --muted: #f8fafc; /* slate-50 - alternate section backgrounds */
+  --foreground: #0f172a; /* slate-900 - primary text, 16.9:1 on background */
+  --muted-foreground: #475569; /* slate-600 - secondary text, 7.6:1 on background */
   --border: #e2e8f0; /* slate-200 */
-  --accent: #4f46e5; /* indigo-600 — links/icons at text size */
+  --accent: #4f46e5; /* indigo-600 - links/icons at text size */
 
   /* Legacy brand tokens (kept for existing references) */
   --primary: #111111;
@@ -88,12 +88,12 @@
 
 .dark {
   --background: #020617; /* slate-950 */
-  --surface: #0f172a; /* slate-900 — sits one step above background */
+  --surface: #0f172a; /* slate-900 - sits one step above background */
   --muted: #0f172a; /* slate-900 */
-  --foreground: #f1f5f9; /* slate-100 — 18.4:1 on background */
-  --muted-foreground: #94a3b8; /* slate-400 — 7.9:1 on background, never dimmer */
+  --foreground: #f1f5f9; /* slate-100 - 18.4:1 on background */
+  --muted-foreground: #94a3b8; /* slate-400 - 7.9:1 on background, never dimmer */
   --border: #1e293b; /* slate-800 */
-  --accent: #818cf8; /* indigo-400 — indigo-600 fails contrast on dark bg */
+  --accent: #818cf8; /* indigo-400 - indigo-600 fails contrast on dark bg */
   --ring: #818cf8;
   --input: #1e293b;
 

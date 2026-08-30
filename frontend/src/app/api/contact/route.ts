@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 
     await Promise.all([
       resend.emails.send({
-        from: "QA Solucity Website <onboarding@resend.dev>",
+        from: "QA Solucity <onboarding@resend.dev>",
         to: CONTACT_EMAIL,
         replyTo: email,
         subject: internal.subject,

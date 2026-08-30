@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing or invalid customer email" }, { status: 400 });
   }
   // The checklist is enforced here too, not just as a disabled button on
-  // the client — a request that skips the client entirely must still be
+  // the client - a request that skips the client entirely must still be
   // unable to send a voucher without both confirmations.
   if (!paymentConfirmed || !codeVerifiedUnused) {
     return NextResponse.json(
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
   const marked = await markVoucherUsed(certification!, code);
   if (!marked) {
     // Someone else claimed it between the check above and now (rare, but
-    // possible with two admins working at once) — fail rather than send
+    // possible with two admins working at once) - fail rather than send
     // a code that's no longer actually reserved for this customer.
     return NextResponse.json(
       { error: "This code was just claimed elsewhere. Refresh and pick a different one." },
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
       text: email.text,
     });
 
-    // Audit trail — append-only, never overwritten. Best-effort: a logging
+    // Audit trail - append-only, never overwritten. Best-effort: a logging
     // failure here shouldn't undo or fail an assignment that already went
     // out to the customer.
     await appendVoucherLogEntry({
@@ -97,7 +97,7 @@ export async function POST(request: Request) {
       customerEmail,
     });
 
-    // Confirms to the admin, in writing, that this went out — separate
+    // Confirms to the admin, in writing, that this went out - separate
     // from the in-browser success screen, with a link to the running log.
     try {
       const confirmation = voucherAssignmentConfirmedEmail({
@@ -107,25 +107,25 @@ export async function POST(request: Request) {
         customerEmail,
       });
       await resend.emails.send({
-        from: "QA Solucity Website <onboarding@resend.dev>",
+        from: "QA Solucity <onboarding@resend.dev>",
         to: CONTACT_EMAIL,
         subject: confirmation.subject,
         html: confirmation.html,
         text: confirmation.text,
       });
     } catch (confirmationError) {
-      // Non-fatal — the customer already has their voucher; this is just
+      // Non-fatal - the customer already has their voucher; this is just
       // a courtesy notification on top of that.
       console.error("Failed to send admin voucher-assignment confirmation email:", confirmationError);
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    // The code is already marked used at this point — an email failure
+    // The code is already marked used at this point - an email failure
     // here needs a human to notice and resend by hand, not a silent retry
     // that could double-send or leave the pool permanently short by one.
     console.error(
-      `Failed to email voucher ${code} (${certification}) to ${customerEmail} — code is already marked used:`,
+      `Failed to email voucher ${code} (${certification}) to ${customerEmail} - code is already marked used:`,
       error
     );
     return NextResponse.json(
