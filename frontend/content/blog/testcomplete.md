@@ -2,7 +2,7 @@
 title: "TestComplete: Commercial Automation for Desktop, Web, and Mobile"
 excerpt: "Where open-source frameworks require more engineering investment, TestComplete trades a license fee for object recognition and broader out-of-the-box platform support."
 category: "Automation"
-date: "2026-09-08"
+date: "2026-07-19"
 image: "/images/blog/testcomplete.png"
 author: "John Adeniyi"
 authorRole: "Automation Engineering"

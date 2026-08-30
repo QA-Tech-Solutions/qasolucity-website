@@ -2,7 +2,7 @@
 title: "LoadRunner: The Enterprise Veteran of Performance Testing"
 excerpt: "Before performance testing had a dozen modern alternatives, LoadRunner was already the standard for large-scale enterprise load testing. It still is, in the environments built around it."
 category: "Performance"
-date: "2026-09-09"
+date: "2026-07-20"
 image: "/images/blog/loadrunner.png"
 author: "John Adeniyi"
 authorRole: "Performance Engineering"

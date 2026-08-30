@@ -2,7 +2,7 @@
 title: "TestLink: The Free, Self-Hosted Option for Test Management"
 excerpt: "Not every team needs, or can budget for, a commercial test management platform. TestLink remains a legitimate free alternative."
 category: "Tools"
-date: "2026-09-03"
+date: "2026-07-14"
 image: "/images/blog/testlink.png"
 author: "John Adeniyi"
 authorRole: "Quality Engineering"

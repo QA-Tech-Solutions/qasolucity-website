@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LaunchpadPage from "@/features/qa-career-launchpad/components/LaunchpadPage";
+import { SITE_URL } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "QA Career Launchpad",
@@ -20,9 +21,9 @@ export default function Page() {
     provider: {
       "@type": "ProfessionalService",
       name: "QA Solucity",
-      url: "https://qasolucity.com",
+      url: SITE_URL,
     },
-    url: "https://qasolucity.com/qa-career-launchpad",
+    url: `${SITE_URL}/qa-career-launchpad`,
   };
 
   return (

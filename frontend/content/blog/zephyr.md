@@ -2,7 +2,7 @@
 title: "Zephyr: Test Management Without Leaving JIRA"
 excerpt: "For teams already living in JIRA all day, Zephyr brings test management directly into the tool everyone's already using."
 category: "Tools"
-date: "2026-09-04"
+date: "2026-07-15"
 image: "/images/blog/zephyr.png"
 author: "John Adeniyi"
 authorRole: "Quality Engineering"

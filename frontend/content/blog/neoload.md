@@ -2,7 +2,7 @@
 title: "NeoLoad: Performance Testing for Complex Enterprise Applications"
 excerpt: "Positioned between JMeter's open-source flexibility and LoadRunner's enterprise weight, NeoLoad focuses on ease of use for complex, packaged enterprise applications."
 category: "Performance"
-date: "2026-09-11"
+date: "2026-07-22"
 image: "/images/blog/neoload.png"
 author: "John Adeniyi"
 authorRole: "Performance Engineering"

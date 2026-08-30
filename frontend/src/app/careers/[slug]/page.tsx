@@ -7,6 +7,7 @@ import rehypeSlug from "rehype-slug";
 import JobDetailContent from "@/features/careers/components/JobDetailContent";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 import { getJobBySlug, getJobSlugs, getRelatedJobs, isJobOpen } from "@/lib/careers";
+import { SITE_URL } from "@/lib/site-config";
 
 interface JobPageProps {
   params: Promise<{ slug: string }>;
@@ -82,8 +83,8 @@ export default async function JobPage({ params }: JobPageProps) {
     hiringOrganization: {
       "@type": "Organization",
       name: "QA Solucity",
-      sameAs: "https://qasolucity.com",
-      logo: "https://qasolucity.com/images/logos/qa-solucity-logo.png",
+      sameAs: SITE_URL,
+      logo: `${SITE_URL}/images/logos/qa-solucity-logo.png`,
     },
     ...(job.workMode === "Remote"
       ? {
