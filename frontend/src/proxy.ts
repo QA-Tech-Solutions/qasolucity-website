@@ -2,18 +2,20 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 import { getMaintenanceHtml } from "@/lib/maintenance-html";
+import { SITE_URL } from "@/lib/site-config";
 
 const BYPASS_COOKIE = "qas_maintenance_bypass";
 
 // The site's original home before the qasolucity.com domain existed.
 // Once that domain is live, flip ENABLE_DOMAIN_REDIRECT to "true" (see
 // .env.example) so anyone still landing here (old links, bookmarks,
-// whatever's already indexed) gets a real 301 to the canonical domain
-// instead of two copies of the site competing for the same search
-// queries. Matches metadataBase/sitemap.ts/robots.ts, which already
-// treat qasolucity.com as canonical.
+// whatever's already indexed) gets a real 301 straight to the canonical
+// www.qasolucity.com (see lib/site-config.ts) instead of two copies of
+// the site competing for the same search queries. Vercel already
+// redirects the bare qasolucity.com to www at the domain level, so this
+// points there directly rather than chaining through that extra hop.
 const LEGACY_HOST = "qasolucity.vercel.app";
-const CANONICAL_HOST = "qasolucity.com";
+const CANONICAL_HOST = new URL(SITE_URL).hostname;
 
 export function proxy(request: NextRequest) {
   // request.nextUrl.hostname isn't reliable for this: it can reflect the

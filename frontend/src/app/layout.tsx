@@ -7,6 +7,7 @@ import ThemeProvider from "@/components/theme/ThemeProvider";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import CookieConsentBanner from "@/features/analytics/components/CookieConsentBanner";
 import PostHogPageviewTracker from "@/features/analytics/components/PostHogPageviewTracker";
+import { SITE_URL } from "@/lib/site-config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,12 +44,12 @@ export const metadata: Metadata = {
   authors: [{ name: "QA Solucity" }],
   creator: "QA Solucity",
   publisher: "QA Solucity",
-  metadataBase: new URL("https://qasolucity.com"), // Update if your production domain differs
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     title: "QA Solucity | Where Quality Meets Innovation",
     description:
       "Helping businesses deliver reliable software through quality engineering, software testing, automation, DevOps, and AI-powered QA solutions.",
-    url: "https://qasolucity.com",
+    url: SITE_URL,
     siteName: "QA Solucity",
     locale: "en_US",
     type: "website",
@@ -73,9 +74,9 @@ const organizationJsonLd = {
   "@type": "ProfessionalService",
   name: "QA Solucity",
   alternateName: "QA Solucity",
-  url: "https://qasolucity.com",
-  logo: "https://qasolucity.com/images/logos/qa-solucity-logo.png",
-  image: "https://qasolucity.com/images/logos/qa-solucity-logo.png",
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/logos/qa-solucity-logo.png`,
+  image: `${SITE_URL}/images/logos/qa-solucity-logo.png`,
   description:
     "QA Solucity is a quality engineering and software testing company helping businesses build reliable, scalable, and high-performing digital products through manual testing, test automation, QA consulting, training, and AI-powered automation solutions.",
   email: "hello@qasolucity.com",

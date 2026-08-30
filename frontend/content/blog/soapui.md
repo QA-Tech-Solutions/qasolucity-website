@@ -2,7 +2,7 @@
 title: "SoapUI: Still the Standard for SOAP and Enterprise API Testing"
 excerpt: "REST gets most of the attention today, but plenty of enterprise systems still run on SOAP, and SoapUI remains the tool built specifically for that world."
 category: "API Testing"
-date: "2026-09-06"
+date: "2026-07-17"
 image: "/images/blog/soapui.png"
 author: "John Adeniyi"
 authorRole: "Quality Engineering"

@@ -2,7 +2,7 @@
 title: "Katalon Studio: One Platform for Web, API, Mobile, and Desktop"
 excerpt: "Most automation tools specialize in one layer. Katalon Studio's pitch is covering all of them, with a lower barrier to entry than code-first frameworks."
 category: "Automation"
-date: "2026-09-07"
+date: "2026-07-18"
 image: "/images/blog/katalon-studio.png"
 author: "John Adeniyi"
 authorRole: "Automation Engineering"

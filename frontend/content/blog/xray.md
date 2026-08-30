@@ -2,7 +2,7 @@
 title: "Xray: JIRA-Native Test Management With a BDD Edge"
 excerpt: "Another strong option for JIRA-embedded test management, with particular strength for teams working in a behavior-driven testing style."
 category: "Tools"
-date: "2026-09-05"
+date: "2026-07-16"
 image: "/images/blog/xray.png"
 author: "John Adeniyi"
 authorRole: "Quality Engineering"

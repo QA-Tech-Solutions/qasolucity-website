@@ -2,7 +2,7 @@
 title: "TestRail: Bringing Structure to Test Case Management"
 excerpt: "Spreadsheets work for test case tracking until they suddenly don't. Here's what a dedicated test management tool actually adds."
 category: "Tools"
-date: "2026-09-01"
+date: "2026-07-12"
 image: "/images/blog/testrail.png"
 author: "John Adeniyi"
 authorRole: "Quality Engineering"

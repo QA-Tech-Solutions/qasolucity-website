@@ -7,6 +7,7 @@ import rehypeSlug from "rehype-slug";
 import BlogPostContent from "@/features/blog/components/BlogPostContent";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 import { getPostBySlug, getPostSlugs, getRelatedPosts } from "@/lib/blog";
+import { SITE_URL } from "@/lib/site-config";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -57,7 +58,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: `https://qasolucity.com${post.image}`,
+    image: `${SITE_URL}${post.image}`,
     datePublished: post.date,
     dateModified: post.date,
     author: {
@@ -69,12 +70,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       name: "QA Solucity",
       logo: {
         "@type": "ImageObject",
-        url: "https://qasolucity.com/images/logos/qa-solucity-logo.png",
+        url: `${SITE_URL}/images/logos/qa-solucity-logo.png`,
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://qasolucity.com/blogs/${slug}`,
+      "@id": `${SITE_URL}/blogs/${slug}`,
     },
   };
 

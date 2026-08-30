@@ -4,8 +4,7 @@ import { solutions } from "@/features/solutions/data/solutions";
 import { resourceCategories } from "@/features/resources/data/resources";
 import { getAllPosts } from "@/lib/blog";
 import { getOpenJobs } from "@/lib/careers";
-
-const SITE_URL = "https://qasolucity.com";
+import { SITE_URL } from "@/lib/site-config";
 
 // getOpenJobs() below is date-dependent (see isJobOpen in lib/careers-status.ts)
 // the same way app/careers/page.tsx is - without this, a job's presence here
@@ -22,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/resources`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/blogs`, changeFrequency: "daily", priority: 0.8 },
     { url: `${SITE_URL}/careers`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/certification`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE_URL}/qa-career-launchpad`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/faq`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
@@ -29,11 +30,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/cookies`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
-    url: `${SITE_URL}/services/${service.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  // istqb-certification and qa-career-launchpad each defer (noindex +
+  // canonical) to a dedicated page - /certification and
+  // /qa-career-launchpad above - so they're excluded here too, same
+  // reasoning as the closed-postings exclusion below.
+  const DEDICATED_ELSEWHERE = new Set(["istqb-certification", "qa-career-launchpad"]);
+  const serviceRoutes: MetadataRoute.Sitemap = services
+    .filter((service) => !DEDICATED_ELSEWHERE.has(service.slug))
+    .map((service) => ({
+      url: `${SITE_URL}/services/${service.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
 
   const solutionRoutes: MetadataRoute.Sitemap = solutions.map((solution) => ({
     url: `${SITE_URL}/solutions/${solution.slug}`,
