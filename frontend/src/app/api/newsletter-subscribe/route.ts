@@ -51,7 +51,7 @@ export async function POST(request: Request) {
       }),
     ];
 
-    // Only notify the admin for a genuinely new subscriber — a repeat
+    // Only notify the admin for a genuinely new subscriber - a repeat
     // signup from the same email shouldn't send the CSV again.
     if (isNew) {
       const csv = await getSubscribersCsv();

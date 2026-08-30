@@ -6,7 +6,7 @@ import path from "path";
  * Newsletter subscribers, keyed by lowercased email so resubscribing just
  * refreshes the existing record instead of creating a duplicate row.
  *
- * Contains real customer PII (names, emails) — the local JSON file this
+ * Contains real customer PII (names, emails) - the local JSON file this
  * falls back to in dev is gitignored, and production should always have
  * Upstash Redis configured rather than relying on a server's local disk,
  * which is not guaranteed to persist between requests on serverless hosts.
@@ -31,7 +31,7 @@ function normalizeEmail(email: string): string {
 }
 
 // @upstash/redis has, in some versions, auto-deserialized JSON values on
-// read — accept either a raw string or an already-parsed object so this
+// read - accept either a raw string or an already-parsed object so this
 // keeps working regardless.
 function parseEntry(value: unknown): NewsletterSubscriber {
   return typeof value === "string" ? (JSON.parse(value) as NewsletterSubscriber) : (value as NewsletterSubscriber);
@@ -54,7 +54,7 @@ async function writeLocal(entries: Record<string, NewsletterSubscriber>): Promis
 /**
  * Adds a subscriber, or refreshes their name/timestamp if that email is
  * already on the list. Returns whether this email is new (false means they
- * were already subscribed) — callers use that to avoid re-notifying the
+ * were already subscribed) - callers use that to avoid re-notifying the
  * admin for a repeat signup.
  */
 export async function upsertSubscriber(entry: { name: string; email: string }): Promise<boolean> {
@@ -85,7 +85,7 @@ function escapeCsvField(value: string): string {
   return value;
 }
 
-// Subscribers store the precise ISO timestamp (unambiguous, sortable) —
+// Subscribers store the precise ISO timestamp (unambiguous, sortable) -
 // this only formats it for human eyes at export time, in QA Solucity's
 // own timezone rather than raw UTC.
 const csvTimestampFormatter = new Intl.DateTimeFormat("en-NG", {

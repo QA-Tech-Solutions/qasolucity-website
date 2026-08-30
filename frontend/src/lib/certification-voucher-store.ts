@@ -9,7 +9,7 @@ import path from "path";
  * in batches and loads the unused codes here, keyed by certification. This
  * store is read-only from the enrollment flow (it may *suggest* a code so
  * the admin doesn't have to hunt for one) and is only ever mutated by an
- * explicit, authenticated admin action on /admin/assign-voucher — see
+ * explicit, authenticated admin action on /admin/assign-voucher - see
  * frontend/data/VOUCHER_INVENTORY_TEMPLATE.md for the full process and why
  * nothing here is ever consumed automatically (there's no payment gateway,
  * so nothing is confirmed paid at enrollment time).
@@ -76,7 +76,7 @@ export async function isVoucherAvailable(certificationCode: string, code: string
 }
 
 /**
- * Removes a specific code from the available pool — this IS the "used"
+ * Removes a specific code from the available pool - this IS the "used"
  * record. There's no separate used/unused flag: whatever remains in the
  * pool is available, and nothing else is. Returns false if the code
  * wasn't found (already used, typo'd, or never loaded).

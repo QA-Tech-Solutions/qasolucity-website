@@ -17,7 +17,7 @@ import path from "path";
 // ---------------------------------------------------------------------------
 
 /**
- * Per-certification exam voucher cost, in USD — confirmed rates.
+ * Per-certification exam voucher cost, in USD - confirmed rates.
  */
 export const EXAM_USD_COST_BY_CERTIFICATION: Record<string, number> = {
   CTFL: 230,
@@ -38,7 +38,7 @@ export const EXAM_USD_COST_BY_CERTIFICATION: Record<string, number> = {
 export const DEFAULT_EXAM_USD_COST = 230;
 
 /**
- * QA Solucity's local training fee per certification (Naira) — the Prep
+ * QA Solucity's local training fee per certification (Naira) - the Prep
  * Track's full price, and the base the Bundle price is built on top of.
  */
 export const TRAINING_FEE_NGN_BY_CERTIFICATION: Record<string, number> = {
@@ -74,7 +74,7 @@ const ROUND_TO_NEAREST_NGN = 1_000;
 const FETCH_TIMEOUT_MS = 5_000;
 
 // ---------------------------------------------------------------------------
-// Tier 3 storage — same Redis-when-configured / local-file-fallback pattern
+// Tier 3 storage - same Redis-when-configured / local-file-fallback pattern
 // used by the quality metrics dashboard (see lib/quality-metrics-store.ts).
 // Swap getFromDatabase/saveToDatabase for real DB queries if this ever
 // moves off Redis (e.g. a `fx_rate_cache` table with a single latest row).
@@ -102,7 +102,7 @@ async function getFromDatabase(): Promise<CachedRate | null> {
     const raw = await fs.readFile(DATA_FILE, "utf-8");
     return JSON.parse(raw) as CachedRate;
   } catch {
-    // File/key doesn't exist yet, or the store is unreachable — either way
+    // File/key doesn't exist yet, or the store is unreachable - either way
     // the caller treats "no cached rate" the same as "cache unreachable".
     return null;
   }
@@ -118,13 +118,13 @@ async function saveToDatabase(entry: CachedRate): Promise<void> {
     await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
     await fs.writeFile(DATA_FILE, JSON.stringify(entry, null, 2));
   } catch (error) {
-    // Caching is best-effort — a write failure here must never block checkout pricing.
+    // Caching is best-effort - a write failure here must never block checkout pricing.
     console.error("certification-pricing: failed to persist rate cache", error);
   }
 }
 
 // ---------------------------------------------------------------------------
-// Tier 1 & 2 — live providers
+// Tier 1 & 2 - live providers
 // ---------------------------------------------------------------------------
 
 async function fetchWithTimeout(url: string): Promise<Response> {
@@ -179,7 +179,7 @@ export interface ResolvedRate {
 
 /**
  * The triple-fallback pipeline: two live providers, then the last cached
- * rate, then a hardcoded emergency baseline. Never throws — checkout
+ * rate, then a hardcoded emergency baseline. Never throws - checkout
  * pricing must always resolve to *something*.
  */
 async function resolveUsdToNgnRate(): Promise<ResolvedRate> {

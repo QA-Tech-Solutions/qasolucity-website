@@ -78,7 +78,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
         }
       })
       .catch(() => {
-        // Keep whatever price was already showing — better a slightly
+        // Keep whatever price was already showing - better a slightly
         // stale number than a broken checkout.
       })
       .finally(() => {

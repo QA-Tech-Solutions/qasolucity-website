@@ -10,7 +10,7 @@ const PUBLIC_DIR = path.join(process.cwd(), "public");
 // size itself to whatever the image actually is rather than cropping it
 // into a fixed box. PNG stores width/height as big-endian uint32s right
 // after the 8-byte signature + IHDR chunk header, so reading just the
-// first 24 bytes is enough — no need for an image-processing dependency.
+// first 24 bytes is enough - no need for an image-processing dependency.
 function readPngDimensions(publicPath: string): { width: number; height: number } | null {
   try {
     const fd = fs.openSync(path.join(PUBLIC_DIR, publicPath), "r");

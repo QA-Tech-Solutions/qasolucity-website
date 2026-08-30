@@ -29,7 +29,7 @@ const FEATURE_ICONS: Record<PathwayFeatureIcon, LucideIcon> = {
 };
 
 export default function PathwayCard({ pathway }: { pathway: Pathway }) {
-  const { track, eyebrow, title, tagline, description, priceLabel, originalPriceLabel, priceNote, features, ctaLabel, highlight, badge } = pathway;
+  const { track, eyebrow, title, tagline, description, priceLabel, originalPriceLabel, priceNote, durationLabel, features, ctaLabel, highlight, badge } = pathway;
 
   return (
     <motion.article
@@ -71,6 +71,11 @@ export default function PathwayCard({ pathway }: { pathway: Pathway }) {
       <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">
         {priceNote}
         {track === "prep" && " · excludes payment processing fee"}
+      </p>
+
+      <p className="mt-3 flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <Timer className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" />
+        {durationLabel} to certification-ready, varies by certification
       </p>
 
       <ul className="mt-8 flex-1 space-y-4">

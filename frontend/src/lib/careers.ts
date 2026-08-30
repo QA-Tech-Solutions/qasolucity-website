@@ -17,6 +17,8 @@ export interface CareerFrontmatter {
   type: EmploymentType;
   workMode: WorkMode;
   location: string;
+  /** Free text, e.g. "Mid-level (2+ years of QA automation experience)". */
+  experienceLevel: string;
   /** Free text, e.g. "₦450,000 – ₦700,000 / month". Omit if not disclosed. */
   salaryLabel?: string;
   /** ISO date. Omit for "open until filled" / rolling applications. */
@@ -52,7 +54,7 @@ function listJobFiles(): string[] {
   if (!fs.existsSync(CAREERS_DIR)) {
     return [];
   }
-  // README.md documents the frontmatter shape for whoever adds a posting —
+  // README.md documents the frontmatter shape for whoever adds a posting -
   // it lives alongside the postings for discoverability, but isn't one.
   return fs
     .readdirSync(CAREERS_DIR)
@@ -69,7 +71,7 @@ export function getAllJobs(): CareerPosting[] {
 /**
  * Only postings currently accepting applications. The public careers page
  * itself shows every posting (open and closed, via getAllJobs) so closed
- * roles stay visible with the correct restrictions instead of vanishing —
+ * roles stay visible with the correct restrictions instead of vanishing -
  * this narrower list is for things that should only ever surface open
  * roles: the sitemap, and "related roles" on a job's own detail page.
  */

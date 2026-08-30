@@ -14,11 +14,11 @@ import {
 
 const BADGES = [
   { icon: Globe2, label: "Remote-friendly" },
-  { icon: TrendingUp, label: "Real client work from day one" },
-  { icon: Users, label: "Small team, real ownership" },
+  { icon: TrendingUp, label: "Client work from day one" },
+  { icon: Users, label: "Small team, full ownership" },
 ];
 
-// Ambient decorative icon chips scattered around the headline — purely
+// Ambient decorative icon chips scattered around the headline - purely
 // visual, so they're hidden below lg where there's no room for them
 // without colliding with the text.
 const FLOATING_ICONS = [
@@ -99,7 +99,7 @@ export default function CareersHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400"
         >
-          We help businesses ship better software and help QA professionals build real careers.
+          We help businesses ship better software and help QA professionals build their careers.
           If that sounds like work worth doing, we&apos;d like to meet you.
         </motion.p>
 

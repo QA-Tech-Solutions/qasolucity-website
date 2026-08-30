@@ -23,7 +23,7 @@ export default function OpenPositions() {
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-600 dark:text-slate-400">
             {openCount > 0
-              ? "Every open role below is real and currently accepting applications. Closed roles are shown too, so you can see what we've hired for."
+              ? "Browse our current openings below and apply directly. We read every application ourselves."
               : "That changes fast around here. Here's how to stay on our radar."}
           </p>
         </div>

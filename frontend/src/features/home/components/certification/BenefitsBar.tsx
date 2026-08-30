@@ -21,11 +21,11 @@ export default function BenefitsBar() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="max-w-[260px] text-4xl font-bold leading-tight text-slate-900 dark:text-slate-100"
+          className="max-w-[260px] text-2xl font-bold leading-tight text-slate-900 dark:text-slate-100"
         >
-          Two Paths. <br />
+          Why train with{" "}
           <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-            One Career.
+            QA Solucity
           </span>
         </motion.h3>
 

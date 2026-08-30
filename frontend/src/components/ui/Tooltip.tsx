@@ -8,7 +8,7 @@ interface TooltipProps {
   content: ReactNode;
   children: ReactNode;
   side?: "top" | "bottom" | "left" | "right";
-  /** Renders the trigger as a plain inline wrapper instead of a `<button>` — use for non-interactive content (badges, status pills) that already has its own semantics. */
+  /** Renders the trigger as a plain inline wrapper instead of a `<button>` - use for non-interactive content (badges, status pills) that already has its own semantics. */
   asChild?: boolean;
   className?: string;
 }

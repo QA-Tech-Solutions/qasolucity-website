@@ -28,7 +28,7 @@ const nairaFormatter = new Intl.NumberFormat("en-NG", {
   maximumFractionDigits: 0,
 });
 
-// Indicative one-time program fee — same "confirm before launch" caveat as
+// Indicative one-time program fee - same "confirm before launch" caveat as
 // the rest of the site's pricing until the business locks in a final rate.
 const PROGRAM_FEE_NGN = 100_000;
 const PROGRAM_DURATION = "8 to 10 weeks";

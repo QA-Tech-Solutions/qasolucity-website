@@ -34,7 +34,7 @@ const escapeHtml = (value: string) =>
   });
 
 // "indigo" and "emerald" map to the .email-badge-* dark-mode overrides
-// defined in DARK_STYLE_BLOCK below — inline styles below are the light
+// defined in DARK_STYLE_BLOCK below - inline styles below are the light
 // (and no-dark-mode-support fallback) colors.
 const badge = (variant: "indigo" | "emerald", dotColor: string, bg: string, text: string, label: string) => `
   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 20px;">
@@ -69,7 +69,7 @@ const button = (href: string, label: string) => `
 // no dark-mode support at all (e.g. Outlook desktop). Clients that *do*
 // support it (Apple Mail, iOS/Android Mail, Outlook mobile, Thunderbird,
 // and Gmail's own dark rendering to varying degrees) pick up the
-// `!important` overrides below via the matching class names instead —
+// `!important` overrides below via the matching class names instead -
 // inline styles win over plain CSS, so overriding them needs both a class
 // hook here and the meta tags declaring the page supports both schemes.
 const DARK_STYLE_BLOCK = `
@@ -272,7 +272,7 @@ export interface CertificationEnrollmentDetails {
   certificationName: string;
   notes?: string;
   priceNgn: number;
-  /** Bundle only — a read-only suggestion (not reserved) to prefill the admin's assign-voucher screen. */
+  /** Bundle only - a read-only suggestion (not reserved) to prefill the admin's assign-voucher screen. */
   suggestedVoucherCode?: string | null;
 }
 
@@ -465,7 +465,7 @@ export function certificationConfirmationEmail(payload: CertificationEnrollmentD
 }
 
 // ---------------------------------------------------------------------------
-// Voucher delivery — sent by an admin, by hand, only after they've
+// Voucher delivery - sent by an admin, by hand, only after they've
 // confirmed payment and completed the checklist on /admin/assign-voucher.
 // Never sent automatically. See lib/certification-voucher-store.ts.
 // ---------------------------------------------------------------------------
@@ -692,7 +692,7 @@ export function launchpadConfirmationEmail(payload: LaunchpadEnrollmentDetails) 
 }
 
 // ---------------------------------------------------------------------------
-// Job applications — deliberately different visual treatment from
+// Job applications - deliberately different visual treatment from
 // wrapper()/badge()/button() above. Those carry QA Solucity's marketing
 // voice (gradient header, big rounded product-card look, colorful status
 // pills); a job application is a more formal, document-like moment, so
@@ -843,7 +843,7 @@ export function jobApplicationInternalEmail(payload: JobApplicationDetails) {
     .join("\n");
 
   return {
-    subject: `New application: ${jobTitle} — ${firstName} ${lastName}`,
+    subject: `New application: ${jobTitle} - ${firstName} ${lastName}`,
     html,
     text,
   };
