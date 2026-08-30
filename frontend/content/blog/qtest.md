@@ -2,7 +2,7 @@
 title: "QTest: Test Management Built for Enterprise Scale"
 excerpt: "When test management needs to serve multiple teams, multiple products, and enterprise governance requirements, QTest is one of the tools built for that scale."
 category: "Tools"
-date: "2026-09-02"
+date: "2026-07-13"
 image: "/images/blog/qtest.png"
 author: "John Adeniyi"
 authorRole: "Quality Engineering"

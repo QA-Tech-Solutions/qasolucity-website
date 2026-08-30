@@ -4,6 +4,7 @@ import CertificationHero from "@/features/certification/components/Certification
 import CertificationPathways from "@/features/certification/components/CertificationPathways";
 import CertificationCatalog from "@/features/certification/components/CertificationCatalog";
 import CertificationFAQ from "@/features/certification/components/CertificationFAQ";
+import { SITE_URL } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "ISTQB Certification Pathways",
@@ -24,9 +25,9 @@ export default function Page() {
     provider: {
       "@type": "ProfessionalService",
       name: "QA Solucity",
-      url: "https://qasolucity.com",
+      url: SITE_URL,
     },
-    url: "https://qasolucity.com/certification",
+    url: `${SITE_URL}/certification`,
   };
 
   return (

@@ -2,7 +2,7 @@
 title: "Testim: AI-Assisted Test Automation That Fights Flakiness"
 excerpt: "One of the most persistent problems in test automation is flakiness caused by brittle selectors. Testim's core pitch is using machine learning to solve exactly that."
 category: "Automation"
-date: "2026-09-12"
+date: "2026-07-23"
 image: "/images/blog/testim.png"
 author: "John Adeniyi"
 authorRole: "Automation Engineering"

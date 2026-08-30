@@ -2,7 +2,7 @@
 title: "Bugzilla: The Original Defect Tracker Still Doing the Job"
 excerpt: "Long before JIRA was the default answer, Bugzilla defined what a defect tracker should do. It's still running in more places than you'd expect."
 category: "Tools"
-date: "2026-09-14"
+date: "2026-07-25"
 image: "/images/blog/bugzilla.png"
 author: "John Adeniyi"
 authorRole: "Quality Engineering"

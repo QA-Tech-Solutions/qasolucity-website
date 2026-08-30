@@ -2,7 +2,7 @@
 title: "Mabl: Cloud-Native, Low-Code Test Automation"
 excerpt: "Mabl bets on a fully cloud-hosted, low-code approach to automation, aimed at teams that want serious coverage without a heavy in-house automation engineering investment."
 category: "Automation"
-date: "2026-09-13"
+date: "2026-07-24"
 image: "/images/blog/mabl.png"
 author: "John Adeniyi"
 authorRole: "Automation Engineering"

@@ -2,7 +2,7 @@
 title: "JMeter: The Open-Source Standard for Load Testing"
 excerpt: "Free, mature, and genuinely capable, JMeter has been the default answer to 'how do we load test this' for two decades running."
 category: "Performance"
-date: "2026-08-31"
+date: "2026-07-11"
 image: "/images/blog/jmeter.png"
 author: "John Adeniyi"
 authorRole: "Performance Engineering"

@@ -2,7 +2,7 @@
 title: "Gatling: Performance Testing as Code, Built for CI/CD"
 excerpt: "Gatling brought a code-first, developer-friendly approach to load testing, and made performance testing something that can genuinely live inside a CI pipeline."
 category: "Performance"
-date: "2026-09-10"
+date: "2026-07-21"
 image: "/images/blog/gatling.png"
 author: "John Adeniyi"
 authorRole: "Performance Engineering"

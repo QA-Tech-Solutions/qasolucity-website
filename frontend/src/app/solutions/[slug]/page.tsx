@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SolutionDetailPage from "@/features/solutions/components/SolutionDetailPage";
 import { getSolutionBySlug, solutions } from "@/features/solutions/data/solutions";
+import { SITE_URL } from "@/lib/site-config";
 
 interface SolutionPageProps {
   params: Promise<{ slug: string }>;
@@ -46,10 +47,10 @@ export default async function Page({ params }: SolutionPageProps) {
     provider: {
       "@type": "ProfessionalService",
       name: "QA Solucity",
-      url: "https://qasolucity.com",
+      url: SITE_URL,
     },
     areaServed: "Worldwide",
-    url: `https://qasolucity.com/solutions/${slug}`,
+    url: `${SITE_URL}/solutions/${slug}`,
   };
 
   return (

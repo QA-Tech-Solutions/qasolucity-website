@@ -1,4 +1,9 @@
 import { services } from "@/features/services/data/services";
+// Renamed on import: this file already has its own env-driven SITE_URL
+// below (used for admin tool links, deliberately reflecting wherever the
+// app actually happens to be deployed). This one is the fixed public
+// domain, always, for the customer-facing marketing links further down.
+import { SITE_URL as CANONICAL_URL } from "@/lib/site-config";
 
 interface ContactDetails {
   firstName: string;
@@ -228,7 +233,7 @@ export function confirmationEmail(payload: ContactDetails) {
     ${stepsHtml}
     <p class="email-muted" style="margin:24px 0 8px;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#94a3b8;">Your message</p>
     <p class="email-quote-bg email-quote-text" style="margin:0;font-size:14px;line-height:1.6;color:#0f172a;white-space:pre-wrap;background-color:#f8fafc;border-radius:14px;padding:18px;">${escapeHtml(message)}</p>
-    ${button("https://qasolucity.com/services", "Explore our services")}
+    ${button(`${CANONICAL_URL}/services`, "Explore our services")}
     <p class="email-muted" style="margin:24px 0 0;font-size:13px;line-height:1.6;color:#94a3b8;">
       Something urgent? Reach us directly at
       <a href="mailto:hello@qasolucity.com" class="email-link" style="color:#4F46E5;">hello@qasolucity.com</a>.
@@ -434,7 +439,7 @@ export function certificationConfirmationEmail(payload: CertificationEnrollmentD
       Thanks for enrolling in ${escapeHtml(certificationName)} prep with QA Solucity (${priceLabel}). Here's what happens next:
     </p>
     ${stepsHtml}
-    ${button("https://qasolucity.com/certification", "View your certification pathway")}
+    ${button(`${CANONICAL_URL}/certification`, "View your certification pathway")}
     <p class="email-muted" style="margin:24px 0 0;font-size:13px;line-height:1.6;color:#94a3b8;">
       QA Solucity is an independent training provider and is not an official partner, accredited center, or
       authorized testing provider of ISTQB or NGSTQB. Your official exam is written, administered, and
@@ -667,7 +672,7 @@ export function launchpadConfirmationEmail(payload: LaunchpadEnrollmentDetails) 
       Thanks for applying to the QA Career Launchpad. Here's what happens next:
     </p>
     ${stepsHtml}
-    ${button("https://qasolucity.com/qa-career-launchpad", "Review the program details")}
+    ${button(`${CANONICAL_URL}/qa-career-launchpad`, "Review the program details")}
     <p class="email-muted" style="margin:24px 0 0;font-size:13px;line-height:1.6;color:#94a3b8;">
       Questions in the meantime? Reach us at
       <a href="mailto:hello@qasolucity.com" class="email-link" style="color:#4F46E5;">hello@qasolucity.com</a>.
@@ -866,7 +871,7 @@ export function jobApplicationConfirmationEmail(payload: JobApplicationDetails) 
       If your background looks like a fit, we'll reach out directly to set up a conversation. Either
       way, you'll hear from us.
     </p>
-    ${applicationButton("https://qasolucity.com/careers", "View other open roles")}
+    ${applicationButton(`${CANONICAL_URL}/careers`, "View other open roles")}
   `);
 
   const text = [
@@ -878,7 +883,7 @@ export function jobApplicationConfirmationEmail(payload: JobApplicationDetails) 
     "If your background looks like a fit, we'll reach out directly to set up a conversation. Either way,",
     "you'll hear from us.",
     "",
-    "Other open roles: https://qasolucity.com/careers",
+    `Other open roles: ${CANONICAL_URL}/careers`,
   ].join("\n");
 
   return {
@@ -947,7 +952,7 @@ export function newsletterConfirmationEmail(
     <p class="email-muted" style="margin:0;font-size:13px;line-height:1.6;color:#94a3b8;">
       Changed your mind? Just reply to this email and we'll take you off the list.
     </p>
-    ${button("https://qasolucity.com/blogs", "Read our latest posts")}
+    ${button(`${CANONICAL_URL}/blogs`, "Read our latest posts")}
   `);
 
   const text = [
@@ -957,7 +962,7 @@ export function newsletterConfirmationEmail(
     "",
     "Changed your mind? Just reply to this email and we'll take you off the list.",
     "",
-    "Read our latest posts: https://qasolucity.com/blogs",
+    `Read our latest posts: ${CANONICAL_URL}/blogs`,
   ].join("\n");
 
   return {
