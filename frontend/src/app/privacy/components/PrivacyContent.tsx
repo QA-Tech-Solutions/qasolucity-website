@@ -33,9 +33,10 @@ const sections = [
   {
     title: "4. Cookies & Similar Technologies",
     content: [
-      "We use a small number of cookies and similar technologies, such as an authentication cookie for our admin tools and local storage for your light/dark theme preference, to make the website work the way you'd expect.",
-      "We do not use advertising, marketing, or third-party analytics cookies.",
-      "You can control cookie settings in your browser. However, disabling cookies may affect some features of our website, such as staying signed in to admin tools.",
+      "We use a small number of essential cookies and similar technologies, such as an authentication cookie for our admin tools and local storage for your light/dark theme preference, to make the website work the way you'd expect. These are always on.",
+      "We also use PostHog, a product analytics tool, to understand how visitors use this site, but only if you explicitly accept it in the cookie banner shown on your first visit. It's off by default, and you can change your choice at any time.",
+      "We do not use advertising or marketing cookies, and we don't sell this data or share it with third parties for their own marketing.",
+      "You can control cookie settings in your browser. However, disabling essential cookies may affect some features of our website, such as staying signed in to admin tools.",
       "For more details, please see our Cookie Policy.",
     ],
   },

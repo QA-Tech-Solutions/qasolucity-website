@@ -1,36 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { clearConsent, getConsent } from "@/features/analytics/lib/posthog";
+import { useEffect, useState } from "react";
 
 const sections = [
   {
     title: "1. What Are Cookies?",
     content: [
       "Cookies are small text files placed on your device when you visit a website. They help websites function properly and remember information about your visit.",
-      "One thing covered here isn't a cookie in the strict technical sense: your light/dark theme preference is saved in your browser's local storage, not a cookie. We cover it in this policy anyway since it works the same way from your side, something small saved in your browser to remember a choice you made.",
+      "A couple of things covered here aren't cookies in the strict technical sense: your light/dark theme preference and your analytics choice below are both saved in your browser's local storage, not a cookie. We cover them here anyway since they work the same way from your side, something small saved in your browser to remember a choice you made.",
     ],
   },
   {
-    title: "2. What We Actually Use",
+    title: "2. Essential Cookies (Always On)",
     content: [
-      "We keep this simple. QA Solucity does not use advertising, marketing, or third-party analytics cookies, no Google Analytics, no ad trackers, nothing that follows you around the web.",
-      "What we do use:",
+      "These keep the site working and aren't optional:",
       "• An authentication cookie, set only when someone logs into our admin tools, to keep that session signed in.",
-      "• Your light/dark theme preference, saved in your browser's local storage so the site remembers your choice on your next visit.",
-      "Neither of these tracks you across the web or builds a marketing profile.",
+      "• Your light/dark theme preference, so the site remembers your choice on your next visit.",
     ],
   },
   {
-    title: "3. If This Changes",
+    title: "3. Analytics (Optional, Off by Default)",
     content: [
-      "If we ever add analytics or marketing tools that use cookies, we'll update this page first and describe exactly what's added and why, rather than leaving this policy vague or out of date.",
+      "We use PostHog, a product analytics tool, to understand how visitors use this site: which pages get viewed, general device/browser/approximate-location information, and whether key actions (like submitting the contact form or subscribing to our newsletter) happen. This helps us fix what's broken and improve what isn't.",
+      "PostHog only loads if you click Accept on the cookie banner shown on your first visit. If you click Decline, or never respond, none of it loads and no analytics cookies are set.",
+      "We don't use advertising or marketing cookies, and we don't sell this data or share it with third parties for their own marketing.",
     ],
   },
   {
     title: "4. Third-Party Sites",
     content: [
-      "Some pages link out to our social media profiles or other external sites. Those third-party sites have their own cookie and privacy practices, which we don't control.",
-      "We encourage you to review the privacy and cookie policies of any third-party site you visit.",
+      "Some pages link out to our social media profiles or other external sites. Those third-party sites, and PostHog itself if you've accepted analytics, have their own privacy and cookie practices, which we don't control.",
+      "We encourage you to review the privacy and cookie policies of any third-party site or service you visit.",
     ],
   },
   {
@@ -41,7 +43,7 @@ const sections = [
       "• Mozilla Firefox: Options > Privacy & Security > Cookies",
       "• Safari: Preferences > Privacy > Cookies",
       "• Microsoft Edge: Settings > Cookies and Site Permissions",
-      "Blocking the authentication cookie described above only affects our admin tools; it won't change your experience browsing the public site.",
+      "Blocking the essential authentication cookie only affects our admin tools; it won't change your experience browsing the public site.",
     ],
   },
   {
@@ -61,16 +63,52 @@ const sections = [
   },
 ];
 
+function ManageConsent() {
+  const [consent, setLocalConsent] = useState<"accepted" | "declined" | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // One-time localStorage read on mount so server/client markup match
+    // before this reveals the (per-browser) actual consent state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- see above
+    setMounted(true);
+    setLocalConsent(getConsent());
+  }, []);
+
+  if (!mounted) return null;
+
+  return (
+    <div className="mt-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/70 p-6">
+      <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+        Your current analytics choice:{" "}
+        <span className={consent === "accepted" ? "text-emerald-600 dark:text-emerald-400" : "text-slate-500 dark:text-slate-400"}>
+          {consent === "accepted" ? "Accepted" : consent === "declined" ? "Declined" : "Not yet chosen"}
+        </span>
+      </p>
+      <button
+        type="button"
+        onClick={() => {
+          clearConsent();
+          window.location.reload();
+        }}
+        className="mt-3 inline-flex items-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-colors duration-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+      >
+        Change my cookie preferences
+      </button>
+    </div>
+  );
+}
+
 export default function CookiesContent() {
   return (
     <div className="relative -mt-16">
       <div className="rounded-[28px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-xl shadow-slate-200/40 transition-all duration-300 hover:shadow-indigo-100/30 md:p-12">
         <div className="prose prose-lg prose-slate max-w-none">
           <p className="text-lg leading-8 text-slate-600 dark:text-slate-400">
-            QA Solucity uses a small number of cookies and similar technologies,
-            only what&apos;s needed to keep the site working the way you&apos;d expect.
-            This Cookie Policy explains what those are, how we use them, and
-            your choices regarding them.
+            QA Solucity uses a small number of cookies and similar technologies.
+            Some keep the site working and are always on; analytics is optional
+            and off until you say yes. This Cookie Policy explains what those
+            are, how we use them, and your choices regarding them.
           </p>
 
           <div className="mt-12 space-y-10">
@@ -99,7 +137,9 @@ export default function CookiesContent() {
             ))}
           </div>
 
-          <div className="mt-12 rounded-2xl bg-gradient-to-br from-indigo-50 dark:from-indigo-950/40 to-violet-50 dark:to-violet-950/40 p-6 text-sm text-slate-500 dark:text-slate-400">
+          <ManageConsent />
+
+          <div className="mt-8 rounded-2xl bg-gradient-to-br from-indigo-50 dark:from-indigo-950/40 to-violet-50 dark:to-violet-950/40 p-6 text-sm text-slate-500 dark:text-slate-400">
             <p>
               <strong className="text-slate-700 dark:text-slate-300">Effective Date:</strong>{" "}
               {new Date().toLocaleDateString("en-US", {
@@ -109,8 +149,9 @@ export default function CookiesContent() {
               })}
             </p>
             <p className="mt-2">
-              By continuing to use our website, you consent to our use of cookies
-              in accordance with this Cookie Policy.
+              Essential cookies apply automatically since the site can&apos;t function without
+              them. Analytics only turns on if you explicitly accept it in the cookie banner,
+              and you can change that choice at any time above.
             </p>
           </div>
         </div>
