@@ -35,16 +35,16 @@ export const testimonials: Testimonial[] = [
     quote:
       "One of the most professional QA teams we've worked with. From manual testing to automation, everything was documented and delivered beyond expectations.",
   },
-  // {
-  //   id: 3,
-  //   name: "Hello IBK",
-  //   role: "Senior Software Engineer",
-  //   company: "HealthTech Startup",
-  //   image: "/images/testimonials/Joshua-2.jpg",
-  //   rating: 5,
-  //   quote:
-  //     "We needed a QA partner who understood our compliance needs. QA Solucity not only delivered but also trained our internal team on best practices.",
-  // },
+  {
+    id: 3,
+    name: "Hello IBK",
+    role: "Senior Software Engineer",
+    company: "Fintech Company",
+    // image: "/images/testimonials/Joshua-2.jpg",
+    rating: 5,
+    quote:
+      "If you care about product quality and want to ship your product without stressing, just call them. Honestly, QA Solucity is a lifesaver",
+  },
   // {
   //   id: 4,
   //   name: "Ngozi Eze",
