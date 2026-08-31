@@ -24,7 +24,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 py-6 text-sm text-slate-400 lg:flex-row">
           {/* Left - Copyright */}
           <p className="text-center lg:text-left">
-            © {new Date().getFullYear()} QA Solucity. All rights reserved.
+            © {new Date().getFullYear()} QA Solucity. All rights reserved. RC 9818417.
           </p>
           
           {/* Center - Legal Links */}
