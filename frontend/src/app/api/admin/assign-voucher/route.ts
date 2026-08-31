@@ -78,7 +78,7 @@ export async function POST(request: Request) {
     });
 
     await resend.emails.send({
-      from: "QA Solucity <onboarding@resend.dev>",
+      from: "QA Solucity <noreply@qasolucity.com>",
       to: customerEmail,
       subject: email.subject,
       html: email.html,
@@ -107,7 +107,7 @@ export async function POST(request: Request) {
         customerEmail,
       });
       await resend.emails.send({
-        from: "QA Solucity <onboarding@resend.dev>",
+        from: "QA Solucity <noreply@qasolucity.com>",
         to: CONTACT_EMAIL,
         subject: confirmation.subject,
         html: confirmation.html,

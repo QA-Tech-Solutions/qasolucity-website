@@ -24,7 +24,7 @@ export default function PitchYourselfCTA() {
         you just want to be on our radar for when something opens up, tell us why.
       </p>
       <a
-        href="mailto:hello@qasolucity.com?subject=Speculative%20application"
+        href="mailto:careers@qasolucity.com?subject=Speculative%20application"
         className="mt-2 inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
       >
         <Mail className="h-4 w-4" />

@@ -43,8 +43,9 @@ export async function POST(request: Request) {
 
     const emailsToSend = [
       resend.emails.send({
-        from: "QA Solucity <onboarding@resend.dev>",
+        from: "QA Solucity <noreply@qasolucity.com>",
         to: email,
+        replyTo: CONTACT_EMAIL,
         subject: confirmation.subject,
         html: confirmation.html,
         text: confirmation.text,
@@ -59,7 +60,7 @@ export async function POST(request: Request) {
 
       emailsToSend.push(
         resend.emails.send({
-          from: "QA Solucity Newsletter <onboarding@resend.dev>",
+          from: "QA Solucity Newsletter <noreply@qasolucity.com>",
           to: CONTACT_EMAIL,
           replyTo: email,
           subject: internal.subject,

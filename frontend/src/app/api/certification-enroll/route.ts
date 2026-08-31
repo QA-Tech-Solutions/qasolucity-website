@@ -94,7 +94,7 @@ export async function POST(request: Request) {
 
     await Promise.all([
       resend.emails.send({
-        from: "QA Solucity <onboarding@resend.dev>",
+        from: "QA Solucity <noreply@qasolucity.com>",
         to: CONTACT_EMAIL,
         replyTo: email,
         subject: internal.subject,
@@ -102,8 +102,9 @@ export async function POST(request: Request) {
         text: internal.text,
       }),
       resend.emails.send({
-        from: "QA Solucity <onboarding@resend.dev>",
+        from: "QA Solucity <noreply@qasolucity.com>",
         to: email,
+        replyTo: CONTACT_EMAIL,
         subject: confirmation.subject,
         html: confirmation.html,
         text: confirmation.text,

@@ -8,7 +8,7 @@ export default function TrustedByHeader() {
 
       </span>
 
-      <h2 className="mt-7 text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 lg:text-6xl">
+      <h2 className="mt-7 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl lg:text-6xl">
 
         Powered by industry-leading QA technologies.
 

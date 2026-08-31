@@ -5,7 +5,7 @@ import { ElementType, ReactNode } from "react";
 const headingVariants = cva("font-bold tracking-tight text-foreground", {
   variants: {
     level: {
-      h1: "text-5xl lg:text-6xl",
+      h1: "text-4xl md:text-5xl lg:text-6xl",
       h2: "text-4xl lg:text-5xl",
       h3: "text-3xl lg:text-4xl",
       h4: "text-2xl lg:text-3xl",
