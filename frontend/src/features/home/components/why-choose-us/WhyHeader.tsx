@@ -5,7 +5,7 @@ export default function WhyHeader() {
         WHY QA SOLUCITY
       </span>
 
-      <h2 className="mt-5 text-5xl font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100">
+      <h2 className="mt-5 text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
         Trusted by growing startups and enterprise teams.
       </h2>
 

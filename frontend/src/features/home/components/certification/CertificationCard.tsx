@@ -48,7 +48,7 @@ export default function CertificationCard({
       </motion.div>
 
       <div className="relative z-10">
-        <h3 className="mx-auto max-w-[240px] whitespace-pre-line text-[38px] font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 transition-colors duration-300 group-hover:text-indigo-800 dark:group-hover:text-indigo-300 sm:max-w-xs md:max-w-sm">
+        <h3 className="mx-auto max-w-[240px] whitespace-pre-line text-[26px] font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 transition-colors duration-300 group-hover:text-indigo-800 dark:group-hover:text-indigo-300 sm:max-w-xs sm:text-[32px] md:max-w-sm md:text-[38px]">
           {title}
         </h3>
 
