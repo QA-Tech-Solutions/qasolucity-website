@@ -6,7 +6,7 @@ import {
 } from "@/lib/email-templates";
 import { getJobBySlug, isJobOpen } from "@/lib/careers";
 
-const CONTACT_EMAIL = process.env.CONTACT_NOTIFICATION_EMAIL || "hello@qasolucity.com";
+const CONTACT_EMAIL = process.env.CAREERS_NOTIFICATION_EMAIL || "careers@qasolucity.com";
 
 const MAX_RESUME_BYTES = 5 * 1024 * 1024; // 5MB
 const ALLOWED_RESUME_TYPES = new Set([
@@ -94,7 +94,7 @@ export async function POST(request: Request) {
 
     await Promise.all([
       resend.emails.send({
-        from: "QA Solucity Careers <onboarding@resend.dev>",
+        from: "QA Solucity Careers <noreply@qasolucity.com>",
         to: CONTACT_EMAIL,
         replyTo: email,
         subject: internal.subject,
@@ -108,8 +108,9 @@ export async function POST(request: Request) {
         ],
       }),
       resend.emails.send({
-        from: "QA Solucity Careers <onboarding@resend.dev>",
+        from: "QA Solucity Careers <noreply@qasolucity.com>",
         to: email,
+        replyTo: CONTACT_EMAIL,
         subject: confirmation.subject,
         html: confirmation.html,
         text: confirmation.text,

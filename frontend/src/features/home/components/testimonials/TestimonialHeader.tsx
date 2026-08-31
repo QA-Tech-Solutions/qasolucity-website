@@ -20,16 +20,15 @@ export default function TestimonialHeader() {
       </div>
 
       <h2 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-        What our{" "}
+        What{" "}
         <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-          clients
+          people
         </span>{" "}
         are saying
       </h2>
 
       <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-        Trusted by startups, enterprises and growing product teams to
-        deliver reliable software through world-class quality assurance.
+        Hear what people who&apos;ve experienced QA Solucity have to say.
       </p>
     </motion.div>
   );

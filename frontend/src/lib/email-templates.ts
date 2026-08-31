@@ -764,7 +764,7 @@ const applicationWrapper = (bodyHtml: string) => `
               <td class="app-email-footer-bg" style="padding:18px 32px;background-color:#f8fafc;border-top:1px solid #eef1f6;">
                 <p class="app-email-muted" style="margin:0;font-size:11px;color:#94a3b8;">
                   QA Solucity Careers &middot; Lagos, Nigeria &middot;
-                  <a href="mailto:hello@qasolucity.com" class="app-email-muted" style="color:#94a3b8;">hello@qasolucity.com</a>
+                  <a href="mailto:careers@qasolucity.com" class="app-email-muted" style="color:#94a3b8;">careers@qasolucity.com</a>
                 </p>
               </td>
             </tr>
