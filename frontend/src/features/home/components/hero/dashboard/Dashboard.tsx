@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
+import Link from "next/link";
 import {
   Activity,
   CheckCircle2,
@@ -10,6 +11,7 @@ import {
   Zap,
   TrendingUp,
   Info,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 import type { QualityMetrics } from "@/lib/quality-metrics-store";
@@ -194,10 +196,6 @@ export default function Dashboard() {
     }
   }, []);
 
-  const fetchMetrics = useCallback(async () => {
-    applyFetchResult(await loadMetrics());
-  }, [applyFetchResult]);
-
   useEffect(() => {
     let cancelled = false;
 
@@ -226,7 +224,6 @@ export default function Dashboard() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-4 shadow-2xl shadow-indigo-500/20 transition-all duration-300 sm:p-6"
-      onClick={fetchMetrics}
       data-testid="quality-command-center"
     >
       {/* Animated Glow Orbs */}
@@ -280,7 +277,7 @@ export default function Dashboard() {
               <Tooltip
                 asChild
                 side="bottom"
-                content="We run our own automated QA suite against qasolucity.com every 30 minutes, and this card reflects the latest results. Click anywhere on it to refresh."
+                content="We run our own automated QA suite against qasolucity.com daily, and this card reflects the latest results."
               >
                 <div className="group/qcc flex w-fit cursor-help items-center gap-1.5">
                   <h3 className="text-sm font-semibold text-white">Quality Command Center</h3>
@@ -451,10 +448,15 @@ export default function Dashboard() {
           <span data-testid="qcc-last-updated">
             Last updated: <span className="text-slate-400">{lastUpdatedLabel}</span>
           </span>
-          <span className="flex items-center gap-1">
+          <Link
+            href="/dashboard"
+            className="group flex items-center gap-1 text-slate-500 transition-colors duration-300 hover:text-slate-300"
+            data-testid="qcc-dashboard-link"
+          >
             <span className={`h-1.5 w-1.5 rounded-full ${apiHealth === "Healthy" ? "bg-green-400" : "bg-red-400 animate-pulse"}`} />
             {apiHealth === "Healthy" ? "All systems operational" : "API Degraded"}
-          </span>
+            <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </Link>
         </motion.div>
       </div>
     </motion.div>
