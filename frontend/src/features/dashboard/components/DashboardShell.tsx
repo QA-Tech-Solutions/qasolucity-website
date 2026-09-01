@@ -101,7 +101,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
 
             <p className="px-3.5 text-xs leading-5 text-slate-500 dark:text-slate-600">
               Everything here is public except Admin, which covers the suite
-              testing the voucher tools and requires the team login.
+              testing the app and requires the team login.
             </p>
           </div>
         </aside>
