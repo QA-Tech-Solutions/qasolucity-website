@@ -254,7 +254,7 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
                 <Icon className="h-4 w-4" />
               </span>
               <span className="text-[15px] font-semibold text-slate-900 dark:text-slate-100">{copy.title}</span>
-              <span className="text-xs leading-5 text-slate-500 dark:text-slate-400">{copy.description}</span>
+              <span className="text-xs leading-5 text-slate-600 dark:text-slate-400">{copy.description}</span>
             </button>
           );
         })}

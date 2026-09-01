@@ -38,7 +38,7 @@ export default function MobileMenuItem({
   }
 
   return (
-    <div className="border-b border-slate-200/80 dark:border-slate-800/80 py-2">
+    <div>
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}

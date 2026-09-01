@@ -50,7 +50,7 @@ export default function OpenPositions() {
                         {departmentOpenCount} open
                       </span>
                       {departmentJobs.length > departmentOpenCount && (
-                        <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">
+                        <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-slate-600 dark:text-slate-400">
                           {departmentJobs.length - departmentOpenCount} closed
                         </span>
                       )}

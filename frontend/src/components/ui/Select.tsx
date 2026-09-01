@@ -91,7 +91,7 @@ export default function Select({
           className
         )}
       >
-        <SelectPrimitive.Value className="truncate data-placeholder:text-slate-400 dark:data-placeholder:text-slate-500">
+        <SelectPrimitive.Value className="truncate data-placeholder:text-slate-600 dark:data-placeholder:text-slate-500">
           {(v: string | null) => options.find((o) => o.value === v)?.label ?? placeholder}
         </SelectPrimitive.Value>
         <SelectPrimitive.Icon className="flex shrink-0 items-center">
