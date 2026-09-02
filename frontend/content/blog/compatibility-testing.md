@@ -37,4 +37,4 @@ Testing every possible combination of OS, browser, device, and screen size is im
 
 Layout breaks at unusual viewport widths, CSS features that don't behave consistently across browser engines, and touch interactions that work differently than mouse interactions are the most common categories we find. None of them show up if testing only ever happens on one browser, on one machine, at one screen size.
 
-If your product's compatibility coverage is based on assumptions rather than real testing across environments, QA Solucity's [manual testing](/services/manual-testing) service includes structured compatibility checks as part of the process. [Reach out](/contact) to talk through your environment mix.
+If your product's compatibility coverage is based on assumptions rather than real testing across environments, QA Solucity's [manual testing](/services/qa-software-testing) service includes structured compatibility checks as part of the process. [Reach out](/contact) to talk through your environment mix.

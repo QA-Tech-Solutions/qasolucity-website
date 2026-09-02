@@ -119,7 +119,7 @@ export default function LaunchpadPage() {
         </div>
 
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -130,7 +130,14 @@ export default function LaunchpadPage() {
                 {service.eyebrow}
               </div>
 
-              <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 dark:text-slate-100 md:text-5xl">
+              {/* text-4xl (not 5xl) through the `lg` range specifically -
+                  that's exactly where the 2-column grid above kicks in but
+                  the left column is still narrow, so a bigger size wrapped
+                  this heading to a second line and made this column taller
+                  than the "Program fee" card next to it. Sizing back up at
+                  `xl`, once the column actually has room, keeps it on one
+                  line at every width instead. */}
+              <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 dark:text-slate-100 md:text-5xl lg:text-4xl xl:text-5xl">
                 Become a QA engineer. From scratch.
               </h1>
 

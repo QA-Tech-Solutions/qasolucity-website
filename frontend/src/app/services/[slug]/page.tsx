@@ -45,17 +45,18 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   return [
-    { slug: "manual-testing" },
+    { slug: "qa-software-testing" },
     { slug: "automation-testing" },
     { slug: "api-testing" },
     { slug: "performance-testing" },
-    { slug: "qa-strategy" },
-    { slug: "qa-process-setup" },
-    { slug: "release-readiness" },
-    { slug: "test-management" },
+    { slug: "ai-testing" },
+    { slug: "security-testing" },
+    { slug: "qa-consulting" },
+    { slug: "testing-as-a-service" },
+    { slug: "staff-augmentation" },
+    { slug: "devops" },
     { slug: "corporate-training" },
     { slug: "tools-training" },
-    { slug: "workshops" },
   ];
 }
 

@@ -32,4 +32,4 @@ Modern integrations, CI/CD, Slack, modern automation tooling, generally require 
 
 For most commercial product teams already using JIRA or a similar tool for broader project management, consolidating defect tracking into that same system usually makes more practical sense than introducing Bugzilla as a separate tool. For open-source projects, or organizations wanting a lightweight, dedicated, self-hosted defect tracker without broader project management scope, Bugzilla remains a legitimate, capable choice.
 
-Whatever tool sits behind your defect tracking, the discipline around it, consistent bug templates, clear severity criteria, a defined workflow, matters more than the platform itself. QA Solucity's [QA process setup](/services/qa-process-setup) service helps build that discipline regardless of tooling. [Get in touch](/contact).
+Whatever tool sits behind your defect tracking, the discipline around it, consistent bug templates, clear severity criteria, a defined workflow, matters more than the platform itself. QA Solucity's [QA process setup](/services/qa-consulting) service helps build that discipline regardless of tooling. [Get in touch](/contact).

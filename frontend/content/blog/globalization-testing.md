@@ -42,4 +42,4 @@ The cost of fixing a globalization gap scales dramatically with how late it's di
 
 Teams often treat globalization as a "someday" concern, until "someday" becomes "we need to launch in three new markets this quarter" and the architecture isn't ready. Building globalization awareness into QA early means expansion becomes a content and translation effort, not an engineering emergency.
 
-If international expansion is on your roadmap, even distantly, QA Solucity's [QA strategy](/services/qa-strategy) service can help assess whether your architecture is actually ready for it. [Get in touch](/contact) to talk through your plans.
+If international expansion is on your roadmap, even distantly, QA Solucity's [QA strategy](/services/qa-consulting) service can help assess whether your architecture is actually ready for it. [Get in touch](/contact) to talk through your plans.

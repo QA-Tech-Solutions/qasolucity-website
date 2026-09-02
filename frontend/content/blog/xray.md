@@ -48,4 +48,4 @@ Both tools solve the same core problem inside JIRA. The practical differences us
 
 Whichever tool a team picks, the underlying discipline matters more than the platform: keeping test cases current, actually linking them to the requirements and defects they relate to, and making sure automated test results flow back in rather than living in a separate, disconnected pipeline.
 
-If your team is evaluating JIRA-native test management, or already writes BDD-style specifications and wants tooling that matches that workflow, QA Solucity's [test management service](/services/test-management) can help you set it up right. [Get in touch](/contact).
+If your team is evaluating JIRA-native test management, or already writes BDD-style specifications and wants tooling that matches that workflow, QA Solucity's [test management service](/services/qa-consulting) can help you set it up right. [Get in touch](/contact).

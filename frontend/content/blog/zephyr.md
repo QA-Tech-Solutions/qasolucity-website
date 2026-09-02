@@ -31,4 +31,4 @@ Deep JIRA integration is also a constraint: Zephyr is a strong fit specifically 
 
 Zephyr and Xray solve a near-identical problem, JIRA-native test management, and the choice between them often comes down to specific integration needs and pricing rather than a fundamental capability gap. Xray has historically had an edge for teams doing BDD/Cucumber-style testing; Zephyr's broader tiering (Squad vs. Scale) gives more flexibility for teams at different scales.
 
-If your team already lives in JIRA and wants test management that doesn't require living somewhere else too, QA Solucity's [test management service](/services/test-management) can help you set that up properly. [Reach out](/contact) to talk through your JIRA workflow.
+If your team already lives in JIRA and wants test management that doesn't require living somewhere else too, QA Solucity's [test management service](/services/qa-consulting) can help you set that up properly. [Reach out](/contact) to talk through your JIRA workflow.

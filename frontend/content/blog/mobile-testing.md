@@ -36,4 +36,4 @@ A user starts a checkout flow on wifi, walks out of range, and finishes it on ce
 
 Rather than trying to test every device that exists, we prioritize the devices and OS versions that represent the large majority of your actual user base, using services like BrowserStack for broad real-device coverage, supplemented with focused manual testing on the specific interaction patterns, gestures, permissions, connectivity transitions, that matter most for mobile.
 
-If your product needs a testing process built specifically for how mobile actually gets used, not just a smaller version of web testing, QA Solucity's [manual testing](/services/manual-testing) service covers exactly this. [Reach out](/contact) to talk through your mobile testing needs.
+If your product needs a testing process built specifically for how mobile actually gets used, not just a smaller version of web testing, QA Solucity's [manual testing](/services/qa-software-testing) service covers exactly this. [Reach out](/contact) to talk through your mobile testing needs.

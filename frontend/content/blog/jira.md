@@ -42,4 +42,4 @@ The dashboards this enables matter more than they sound: a release manager shoul
 
 The most common failure mode isn't a tooling problem, it's inconsistency. Half the team follows the bug template, half doesn't. Severity gets assigned based on mood rather than criteria. Tickets get closed without verification. None of these are JIRA's fault, they're process gaps that good test management discipline closes.
 
-If your team's JIRA setup has more chaos than structure, that's exactly the kind of thing QA Solucity's [QA process setup](/services/qa-process-setup) and [test management](/services/test-management) services help fix. [Get in touch](/contact) and we'll help you build a workflow your whole team actually follows.
+If your team's JIRA setup has more chaos than structure, that's exactly the kind of thing QA Solucity's [QA process setup](/services/qa-consulting) and [test management](/services/qa-consulting) services help fix. [Get in touch](/contact) and we'll help you build a workflow your whole team actually follows.

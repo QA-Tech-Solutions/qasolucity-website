@@ -123,9 +123,9 @@ export default function FaqContent() {
         </div>
 
         {/* aria-label is deliberately more specific than the visible
-            "Services"/"Solutions" text - the page also has a "Services"
-            nav link and questions containing those words, so a screen
-            reader announcing just the category name would be ambiguous. */}
+            "Services" text - the page also has a "Services" nav link and
+            questions containing that word, so a screen reader announcing
+            just the category name would be ambiguous. */}
         <div className="mb-14 flex flex-wrap items-center justify-center gap-3">
           {faqCategories.map((category) => (
             <button
