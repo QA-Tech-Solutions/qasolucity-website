@@ -51,4 +51,4 @@ You don't need to write test cases yourself, but you do need to protect time for
 
 Teams that do this consistently ship fewer emergency fixes, keep early users longer, and walk into fundraising conversations with a product that holds up under scrutiny. That's what a QA strategy is actually for.
 
-If you're pre-launch and want a lean QA strategy built around your actual timeline, not a generic checklist, QA Solucity's [QA strategy service](/services/qa-strategy) is built for exactly this stage. [Get in touch](/contact) to talk through your launch plan.
+If you're pre-launch and want a lean QA strategy built around your actual timeline, not a generic checklist, QA Solucity's [QA strategy service](/services/qa-consulting) is built for exactly this stage. [Get in touch](/contact) to talk through your launch plan.

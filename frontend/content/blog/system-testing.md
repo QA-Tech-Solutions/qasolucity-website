@@ -42,4 +42,4 @@ Each level catches problems the level below it structurally can't see. Skipping 
 
 System testing is resource-intensive if done properly, it requires an environment that genuinely resembles production and enough time to exercise the product broadly, not just the features that changed most recently. The payoff is real confidence that the product, as a whole, does what it was built to do.
 
-If your release process is missing a genuine system-level checkpoint before launch, QA Solucity's [release readiness](/services/release-readiness) service is built exactly for that gap. [Reach out](/contact) to talk through your release process.
+If your release process is missing a genuine system-level checkpoint before launch, QA Solucity's [release readiness](/services/qa-consulting) service is built exactly for that gap. [Reach out](/contact) to talk through your release process.

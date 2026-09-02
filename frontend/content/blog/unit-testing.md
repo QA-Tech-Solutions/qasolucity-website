@@ -50,4 +50,4 @@ Coverage percentage alone is a weak signal, 100% coverage with shallow assertion
 
 ## Where QA fits into this conversation
 
-Part of QA Solucity's [QA strategy](/services/qa-strategy) and [QA consulting](/services/qa-process-setup) work involves helping teams think about testing as a full pyramid, unit, integration, and system-level coverage working together, rather than QA compensating for gaps lower in the stack. [Get in touch](/contact) if your team's testing strategy could use that broader view.
+Part of QA Solucity's [QA strategy](/services/qa-consulting) and [QA consulting](/services/qa-consulting) work involves helping teams think about testing as a full pyramid, unit, integration, and system-level coverage working together, rather than QA compensating for gaps lower in the stack. [Get in touch](/contact) if your team's testing strategy could use that broader view.

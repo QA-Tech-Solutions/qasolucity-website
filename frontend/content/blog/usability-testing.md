@@ -42,4 +42,4 @@ We combine structured task-based sessions, where real users attempt defined goal
 
 The earlier usability testing happens, the cheaper the fixes. Catching a confusing flow in a prototype costs a design iteration. Catching it after launch costs churn, support tickets, and users who quietly leave rather than complain.
 
-If you want a clear-eyed look at how real users experience your product, QA Solucity's [manual testing service](/services/manual-testing) includes usability evaluation as part of the process. [Get in touch](/contact) to talk through what that could look like for you.
+If you want a clear-eyed look at how real users experience your product, QA Solucity's [manual testing service](/services/qa-software-testing) includes usability evaluation as part of the process. [Get in touch](/contact) to talk through what that could look like for you.

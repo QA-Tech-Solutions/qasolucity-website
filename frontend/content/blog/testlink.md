@@ -33,4 +33,4 @@ For most growing teams, though, the time saved by a modern SaaS test management 
 
 As with any test management tool, TestLink included, the platform is only as valuable as the discipline behind how it's used: consistent test case structure, current (not stale) test data, and reporting stakeholders actually reference. A well-maintained TestLink instance beats a poorly-maintained commercial platform every time.
 
-If you're weighing test management options against real budget and infrastructure constraints, QA Solucity's [test management service](/services/test-management) can help you think through the actual tradeoffs. [Get in touch](/contact).
+If you're weighing test management options against real budget and infrastructure constraints, QA Solucity's [test management service](/services/qa-consulting) can help you think through the actual tradeoffs. [Get in touch](/contact).

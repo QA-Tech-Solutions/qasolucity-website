@@ -38,4 +38,4 @@ It's tempting to skip sanity testing on "small" fixes, and that instinct is exac
 
 Building this habit into a team's workflow, quick verification immediately after every fix, before it's marked resolved, closes a gap that causes a surprising share of "wait, didn't we fix this already?" moments.
 
-If your defect resolution process needs tighter verification discipline, that's exactly the kind of process gap QA Solucity's [QA process setup](/services/qa-process-setup) service closes. [Reach out](/contact) to talk through your workflow.
+If your defect resolution process needs tighter verification discipline, that's exactly the kind of process gap QA Solucity's [QA process setup](/services/qa-consulting) service closes. [Reach out](/contact) to talk through your workflow.

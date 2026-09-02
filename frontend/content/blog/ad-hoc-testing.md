@@ -39,4 +39,4 @@ Ad-hoc testing's value is almost entirely a function of who's doing it. A tester
 
 We don't rely on ad-hoc testing as a primary strategy, it's not repeatable or auditable enough for that. But it's a natural, low-cost complement layered on top of structured manual and automated testing, especially valuable from testers who've spent enough time with a product to have real intuition about where it tends to break.
 
-If you want that kind of product-aware testing instinct applied to your product, that's part of what QA Solucity's [manual testing service](/services/manual-testing) brings to an engagement. [Get in touch](/contact) to learn more.
+If you want that kind of product-aware testing instinct applied to your product, that's part of what QA Solucity's [manual testing service](/services/qa-software-testing) brings to an engagement. [Get in touch](/contact) to learn more.

@@ -61,7 +61,7 @@ export const services = [
     icon: Wrench,
   },
   {
-    title: "AI-powered Automation Tools",
+    title: "AI Testing",
     description:
       "Accelerate testing with intelligent AI-driven automation that adapts to your application's evolving needs.",
     icon: Sparkles,

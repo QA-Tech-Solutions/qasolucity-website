@@ -36,4 +36,4 @@ Neither is objectively "better." QTest earns its complexity in contexts that act
 
 Regardless of which platform a team chooses, the same fundamentals determine whether it actually adds value: consistent test case structure, requirements genuinely linked to coverage, and reporting that stakeholders actually use rather than ignore in favor of asking QA directly. The tool provides the structure; the team's discipline determines whether that structure gets used well.
 
-If you're evaluating test management options for a growing or multi-team QA function, QA Solucity's [test management](/services/test-management) and [QA strategy](/services/qa-strategy) services can help you choose based on your actual requirements, not vendor comparison sheets. [Reach out](/contact).
+If you're evaluating test management options for a growing or multi-team QA function, QA Solucity's [test management](/services/qa-consulting) and [QA strategy](/services/qa-consulting) services can help you choose based on your actual requirements, not vendor comparison sheets. [Reach out](/contact).

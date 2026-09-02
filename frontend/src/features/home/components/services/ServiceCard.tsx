@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -61,12 +61,6 @@ export default function ServiceCard({
         <p className="mt-3 text-[15px] leading-7 text-slate-600 dark:text-slate-400">
           {description}
         </p>
-
-        {/* Arrow */}
-        <div className="mt-6 flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 opacity-0 transition-all duration-300 group-hover:opacity-100">
-          <span>Learn More</span>
-          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </div>
       </div>
     </motion.article>
   );
