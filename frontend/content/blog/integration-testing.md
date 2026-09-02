@@ -36,4 +36,4 @@ Integration testing sits in an awkward gap: developers often feel it's QA's job,
 
 We prioritize integration points with the highest blast radius if they fail: payment processing, authentication handoffs between services, and any point where your system depends on a third party's actual (not documented) behavior.
 
-If your architecture has grown more interconnected than your integration test coverage has kept up with, QA Solucity's [API testing](/services/api-testing) and [QA strategy](/services/qa-strategy) services help close that gap. [Get in touch](/contact) to talk through your system's integration points.
+If your architecture has grown more interconnected than your integration test coverage has kept up with, QA Solucity's [API testing](/services/api-testing) and [QA strategy](/services/qa-consulting) services help close that gap. [Get in touch](/contact) to talk through your system's integration points.

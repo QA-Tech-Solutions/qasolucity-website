@@ -11,51 +11,27 @@ export const navigation: NavigationItem[] = [
     megaMenu: true,
     sections: [
       {
-        title: "QA Testing",
+        title: "Full-Cycle Testing Services",
         links: [
-          { label: "Manual Testing", href: "/services/manual-testing" },
-          { label: "Automation Testing", href: "/services/automation-testing" },
+          { label: "QA & Software Testing", href: "/services/qa-software-testing" },
+          { label: "Test Automation", href: "/services/automation-testing" },
           { label: "API Testing", href: "/services/api-testing" },
           { label: "Performance Testing", href: "/services/performance-testing" },
-        ],
-      },
-      {
-        title: "QA Consulting",
-        links: [
-          { label: "QA Strategy", href: "/services/qa-strategy" },
-          { label: "QA Process Setup", href: "/services/qa-process-setup" },
-          { label: "Release Readiness", href: "/services/release-readiness" },
-          { label: "Test Management", href: "/services/test-management" },
+          { label: "AI Testing", href: "/services/ai-testing" },
+          { label: "Security Testing", href: "/services/security-testing" },
+          { label: "QA Consulting", href: "/services/qa-consulting" },
+          { label: "Testing as a Service (TaaS)", href: "/services/testing-as-a-service" },
+          { label: "Staff Augmentation", href: "/services/staff-augmentation" },
+          { label: "DevOps", href: "/services/devops" },
         ],
       },
       {
         title: "Training",
         links: [
-          { label: "Corporate QA Training", href: "/services/corporate-training" },
-          { label: "Tools Training", href: "/services/tools-training" },
-          { label: "Workshops", href: "/services/workshops" },
-          { label: "ISTQB Certification Prep", href: "/certification" },
           { label: "QA Career Launchpad", href: "/qa-career-launchpad" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Solutions",
-    href: "/solutions",
-    megaMenu: true,
-    sections: [
-      {
-        title: "Solutions",
-        links: [
-          { label: "Startup QA & Launch Readiness", href: "/solutions/startup-qa-launch-readiness" },
-          { label: "Release Readiness & Regression Testing", href: "/solutions/release-readiness-regression-testing" },
-          { label: "Test Automation Acceleration", href: "/solutions/test-automation-acceleration" },
-          { label: "API Quality & Integration Assurance", href: "/solutions/api-quality-integration-assurance" },
-          { label: "Performance & Load Testing", href: "/solutions/performance-load-testing" },
-          { label: "Mobile App Quality Assurance", href: "/solutions/mobile-app-quality-assurance" },
-          { label: "QA Process & Strategy Consulting", href: "/solutions/qa-process-strategy-consulting" },
-          { label: "Dedicated QA Team Augmentation", href: "/solutions/dedicated-qa-team-augmentation" },
+          { label: "ISTQB Certification Prep", href: "/certification" },
+          { label: "Tools Proficiency Training", href: "/services/tools-training" },
+          { label: "Corporate QA Training", href: "/services/corporate-training" },
         ],
       },
     ],

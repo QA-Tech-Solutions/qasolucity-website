@@ -33,4 +33,4 @@ Smoke testing is the natural first automated check in a CI/CD pipeline, a small,
 
 We build lightweight smoke suites as the first line of defense in a release pipeline, catching catastrophic breaks before they consume QA time, or worse, reach a later stage of the release process.
 
-If your release process could use a faster first line of defense before deeper testing kicks in, that's part of what QA Solucity's [test automation](/services/automation-testing) and [release readiness](/services/release-readiness) services help build. [Get in touch](/contact) to talk through your pipeline.
+If your release process could use a faster first line of defense before deeper testing kicks in, that's part of what QA Solucity's [test automation](/services/automation-testing) and [release readiness](/services/qa-consulting) services help build. [Get in touch](/contact) to talk through your pipeline.

@@ -8,6 +8,12 @@ import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import ServiceFAQ from "./ServiceFAQ";
 import ServicesCTA from "./ServicesCTA";
 import Footer from "@/features/home/components/footer";
+import ServiceVisual from "./blocks/ServiceVisual";
+import StatsStrip from "./blocks/StatsStrip";
+import StickyScrollCapabilities from "./blocks/StickyScrollCapabilities";
+import CapabilityGrid from "./blocks/CapabilityGrid";
+import ProcessTimeline from "./blocks/ProcessTimeline";
+import ComparisonTable from "./blocks/ComparisonTable";
 import { getRelatedServices, getServiceBySlug } from "../data/services";
 
 interface ServiceDetailPageProps {
@@ -111,6 +117,44 @@ export default function ServiceDetailPage({ slug }: ServiceDetailPageProps) {
         </Container>
       </Section>
 
+      {/* Brand visual - a break from text for Full-Cycle Testing Services
+          pages specifically; Training pages have their own dedicated,
+          more literal visuals elsewhere and don't need this. */}
+      {service.category === "Full-Cycle Testing Services" && service.visual && (
+        <Section className="bg-white dark:bg-slate-900 pb-4 pt-16">
+          <Container>
+            <ServiceVisual checklist={service.visual.checklist} />
+          </Container>
+        </Section>
+      )}
+
+      {/* Stats */}
+      {service.stats && service.stats.length > 0 && (
+        <Section className="bg-white dark:bg-slate-900 py-16">
+          <Container>
+            <StatsStrip stats={service.stats} />
+          </Container>
+        </Section>
+      )}
+
+      {/* Sticky-scroll capability explorer (flagship pages only) */}
+      {service.stickyScroll && (
+        <Section className="bg-slate-50 dark:bg-slate-950 py-24">
+          <Container>
+            <StickyScrollCapabilities {...service.stickyScroll} />
+          </Container>
+        </Section>
+      )}
+
+      {/* Capability grid */}
+      {service.capabilityGrid && (
+        <Section className="bg-slate-50 dark:bg-slate-950 py-24">
+          <Container>
+            <CapabilityGrid {...service.capabilityGrid} />
+          </Container>
+        </Section>
+      )}
+
       {/* Outcomes / Deliverables */}
       <Section className="bg-white dark:bg-slate-900 py-24">
         <Container>
@@ -152,27 +196,6 @@ export default function ServiceDetailPage({ slug }: ServiceDetailPageProps) {
             </motion.div>
           </div>
 
-          {/* Tools */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-8 rounded-[32px] border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-8 shadow-sm"
-          >
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Tools & methods we use</h3>
-            <div className="mt-6 flex flex-wrap gap-3">
-              {service.tools.map((tool) => (
-                <span
-                  key={tool}
-                  className="rounded-full border border-indigo-100 dark:border-indigo-900/60 bg-indigo-50 dark:bg-indigo-950/40 px-4 py-2 text-sm font-semibold text-indigo-700 dark:text-indigo-300"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
           {/* Best fit for */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -195,6 +218,24 @@ export default function ServiceDetailPage({ slug }: ServiceDetailPageProps) {
           </motion.div>
         </Container>
       </Section>
+
+      {/* Process */}
+      {service.process && (
+        <Section className="bg-slate-50 dark:bg-slate-950 py-24">
+          <Container>
+            <ProcessTimeline {...service.process} />
+          </Container>
+        </Section>
+      )}
+
+      {/* Comparison */}
+      {service.comparison && (
+        <Section className="bg-white dark:bg-slate-900 py-24">
+          <Container>
+            <ComparisonTable {...service.comparison} />
+          </Container>
+        </Section>
+      )}
 
       {/* FAQ */}
       <Section className="bg-slate-50 dark:bg-slate-950 py-24">
@@ -238,7 +279,7 @@ export default function ServiceDetailPage({ slug }: ServiceDetailPageProps) {
                   Keep exploring
                 </p>
                 <h3 className="mt-3 text-2xl font-bold text-slate-900 dark:text-slate-100">
-                  Related {service.category} services
+                  Related services
                 </h3>
               </div>
             </motion.div>

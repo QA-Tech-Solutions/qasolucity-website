@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/features/services/data/services";
-import { solutions } from "@/features/solutions/data/solutions";
 import { resourceCategories } from "@/features/resources/data/resources";
 import { getAllPosts } from "@/lib/blog";
 import { getOpenJobs } from "@/lib/careers";
@@ -17,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/services`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${SITE_URL}/solutions`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/resources`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/blogs`, changeFrequency: "daily", priority: 0.8 },
     { url: `${SITE_URL}/careers`, changeFrequency: "weekly", priority: 0.7 },
@@ -42,12 +40,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     }));
-
-  const solutionRoutes: MetadataRoute.Sitemap = solutions.map((solution) => ({
-    url: `${SITE_URL}/solutions/${solution.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
 
   const resourceRoutes: MetadataRoute.Sitemap = resourceCategories.map((resource) => ({
     url: `${SITE_URL}/resources/${resource.slug}`,
@@ -75,7 +67,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...serviceRoutes,
-    ...solutionRoutes,
     ...resourceRoutes,
     ...blogRoutes,
     ...careerRoutes,

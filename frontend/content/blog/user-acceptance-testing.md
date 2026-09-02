@@ -41,4 +41,4 @@ QA teams test against specifications. But specifications are written by people t
 
 The most common UAT failure mode is starting it too late, squeezed into the final days before launch with no time to act on what's found. We help teams structure UAT earlier and more iteratively, so findings become fixes instead of footnotes in a launch retrospective.
 
-If your release process needs a stronger UAT checkpoint, that's part of what QA Solucity's [release readiness](/services/release-readiness) work covers, making sure "tested" and "ready" mean the same thing before you ship. [Reach out](/contact) to talk through your process.
+If your release process needs a stronger UAT checkpoint, that's part of what QA Solucity's [release readiness](/services/qa-consulting) work covers, making sure "tested" and "ready" mean the same thing before you ship. [Reach out](/contact) to talk through your process.

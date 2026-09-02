@@ -39,8 +39,8 @@ export default function FaqHero() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400 md:text-xl">
-            Everything about our services, solutions, resources, and how we
-            work, gathered in one place.
+            Everything about our services, resources, and how we work,
+            gathered in one place.
           </p>
         </motion.div>
       </Container>

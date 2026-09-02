@@ -42,4 +42,4 @@ That discipline is what separates useful manual testing from busywork.
 
 The real question isn't "manual or automated?" It's "what's the right mix for this product, at this stage?" Early-stage products with rapidly shifting requirements lean manual. Mature products with stable, high-traffic flows lean automated. Most teams need both, applied deliberately rather than by default.
 
-If you're trying to figure out where manual testing fits in your own QA process, that's exactly the conversation QA Solucity's [manual testing service](/services/manual-testing) exists for. [Get in touch](/contact) and we'll help you find the right balance.
+If you're trying to figure out where manual testing fits in your own QA process, that's exactly the conversation QA Solucity's [manual testing service](/services/qa-software-testing) exists for. [Get in touch](/contact) and we'll help you find the right balance.

@@ -33,4 +33,4 @@ Simply owning a TestRail license doesn't automatically produce better testing. T
 3. **Actually use the reporting**, dashboards only help if stakeholders check them instead of asking QA for a manual status update anyway.
 4. **Link test cases to requirements**, closing the loop between "what we built" and "what we verified."
 
-If your test case tracking has outgrown a spreadsheet, QA Solucity's [test management service](/services/test-management) helps set up a structure that actually gets used, not just a tool that gets installed. [Get in touch](/contact) to talk through your current process.
+If your test case tracking has outgrown a spreadsheet, QA Solucity's [test management service](/services/qa-consulting) helps set up a structure that actually gets used, not just a tool that gets installed. [Get in touch](/contact) to talk through your current process.

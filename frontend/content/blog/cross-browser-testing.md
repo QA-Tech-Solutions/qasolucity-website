@@ -36,4 +36,4 @@ For teams that primarily develop and test in Chrome, Safari differences are cons
 
 Cross browser testing doesn't need to be exhaustive to be effective. A well-prioritized suite covering your highest-traffic browsers, run consistently on every meaningful release, catches the large majority of real-world compatibility issues without the effort of testing every possible combination.
 
-If cross-browser coverage has been more assumption than verification for your product, QA Solucity's [manual testing](/services/manual-testing) and [automation testing](/services/automation-testing) services build this into a repeatable process. [Get in touch](/contact) to talk through your browser mix.
+If cross-browser coverage has been more assumption than verification for your product, QA Solucity's [manual testing](/services/qa-software-testing) and [automation testing](/services/automation-testing) services build this into a repeatable process. [Get in touch](/contact) to talk through your browser mix.

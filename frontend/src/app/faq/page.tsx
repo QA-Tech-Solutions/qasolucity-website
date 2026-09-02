@@ -5,7 +5,7 @@ import { faqs } from "@/features/faq/data/faq-data";
 export const metadata: Metadata = {
   title: "FAQs",
   description:
-    "Answers to the most common questions about QA Solucity's services, solutions, resources, and how we work with clients.",
+    "Answers to the most common questions about QA Solucity's services, resources, and how we work with clients.",
   alternates: {
     canonical: "/faq",
   },

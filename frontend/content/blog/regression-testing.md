@@ -43,4 +43,4 @@ That said, automation only covers what you thought to write tests for. Pairing a
 
 Skipping regression testing doesn't save time, it defers the cost, usually with interest. A regression caught in QA costs an hour. The same regression caught by a customer costs support time, engineering time to hotfix, and a small dent in trust that's harder to quantify but very real.
 
-If your release process needs a more reliable regression safety net, QA Solucity's [release readiness](/services/release-readiness) and [test automation](/services/automation-testing) services are built exactly for this. [Talk to us](/contact) about protecting what already works while you keep shipping what's new.
+If your release process needs a more reliable regression safety net, QA Solucity's [release readiness](/services/qa-consulting) and [test automation](/services/automation-testing) services are built exactly for this. [Talk to us](/contact) about protecting what already works while you keep shipping what's new.

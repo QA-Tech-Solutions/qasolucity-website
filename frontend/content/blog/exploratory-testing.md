@@ -49,4 +49,4 @@ It's not a replacement for scripted testing or automation, it's the layer that c
 
 Exploratory testing is easy to do badly, aimless clicking that produces vague notes and little value. Done well, it's one of the highest-signal activities in QA, requiring genuine skill in observation, hypothesis-forming, and knowing where bugs tend to hide.
 
-If you want that skill applied to your product before your users apply it for you, that's exactly what QA Solucity's [manual testing service](/services/manual-testing) covers. [Get in touch](/contact) to see it in action.
+If you want that skill applied to your product before your users apply it for you, that's exactly what QA Solucity's [manual testing service](/services/qa-software-testing) covers. [Get in touch](/contact) to see it in action.
