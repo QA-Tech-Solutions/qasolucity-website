@@ -22,12 +22,6 @@ import Footer from "@/features/home/components/footer";
 import LaunchpadEnrollmentForm from "./LaunchpadEnrollmentForm";
 import { getServiceBySlug } from "@/features/services/data/services";
 
-const nairaFormatter = new Intl.NumberFormat("en-NG", {
-  style: "currency",
-  currency: "NGN",
-  maximumFractionDigits: 0,
-});
-
 // Indicative one-time program fee - same "confirm before launch" caveat as
 // the rest of the site's pricing until the business locks in a final rate.
 const PROGRAM_FEE_NGN = 100_000;
@@ -119,7 +113,13 @@ export default function LaunchpadPage() {
         </div>
 
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start">
+          {/* The 2-column split waits for `xl` (not `lg`) specifically so
+              the heading always has the full container width to work
+              with below that - splitting earlier squeezed this column
+              enough that "Become a QA engineer. From scratch." wrapped
+              to a second line and made this column taller than the
+              "Program fee" card next to it. */}
+          <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -130,14 +130,7 @@ export default function LaunchpadPage() {
                 {service.eyebrow}
               </div>
 
-              {/* text-4xl (not 5xl) through the `lg` range specifically -
-                  that's exactly where the 2-column grid above kicks in but
-                  the left column is still narrow, so a bigger size wrapped
-                  this heading to a second line and made this column taller
-                  than the "Program fee" card next to it. Sizing back up at
-                  `xl`, once the column actually has room, keeps it on one
-                  line at every width instead. */}
-              <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 dark:text-slate-100 md:text-5xl lg:text-4xl xl:text-5xl">
+              <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 dark:text-slate-100 md:text-5xl">
                 Become a QA engineer. From scratch.
               </h1>
 
@@ -167,13 +160,10 @@ export default function LaunchpadPage() {
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-500/20">
                 <service.icon className="h-6 w-6" />
               </div>
-              <h2 className="mt-6 text-xl font-semibold text-slate-900 dark:text-slate-100">Program fee</h2>
-              <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-slate-100">
-                {nairaFormatter.format(PROGRAM_FEE_NGN)}
-              </p>
-              <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">
-                one-time · {PROGRAM_DURATION} · indicative price, confirmed when you enroll · payment plans
-                available
+              <h2 className="mt-6 text-xl font-semibold text-slate-900 dark:text-slate-100">Ready when you are</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                One-time enrollment, {PROGRAM_DURATION}, with payment plans available. Full pricing is on the
+                application form below.
               </p>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <a
@@ -414,7 +404,7 @@ export default function LaunchpadPage() {
           </motion.div>
 
           <div className="mx-auto mt-10 max-w-xl">
-            <LaunchpadEnrollmentForm />
+            <LaunchpadEnrollmentForm feeNgn={PROGRAM_FEE_NGN} duration={PROGRAM_DURATION} />
           </div>
         </Container>
       </Section>

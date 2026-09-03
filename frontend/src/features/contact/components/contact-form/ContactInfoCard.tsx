@@ -64,7 +64,7 @@ export default function ContactInfoCard() {
         </div>
 
         <Link
-          href="https://calendar.google.com"
+          href="https://cal.com/qasolucity"
           target="_blank"
           rel="noopener noreferrer"
           className="block mt-8"

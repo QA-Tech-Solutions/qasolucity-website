@@ -2,6 +2,8 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { newsletterInternalNotificationEmail, newsletterConfirmationEmail } from "@/lib/email-templates";
 import { upsertSubscriber, getSubscribersCsv } from "@/lib/newsletter-store";
+import { createUnsubscribeToken } from "@/lib/newsletter-unsubscribe-token";
+import { SITE_URL } from "@/lib/site-config";
 
 const CONTACT_EMAIL = process.env.CONTACT_NOTIFICATION_EMAIL || "hello@qasolucity.com";
 
@@ -39,7 +41,9 @@ export async function POST(request: Request) {
     const isNew = await upsertSubscriber({ name, email });
 
     const resend = new Resend(apiKey);
-    const confirmation = newsletterConfirmationEmail({ name, email, alreadySubscribed: !isNew });
+    const unsubscribeParams = new URLSearchParams({ email, token: createUnsubscribeToken(email) });
+    const unsubscribeUrl = `${SITE_URL}/api/newsletter-unsubscribe?${unsubscribeParams}`;
+    const confirmation = newsletterConfirmationEmail({ name, email, alreadySubscribed: !isNew, unsubscribeUrl });
 
     const emailsToSend = [
       resend.emails.send({
@@ -49,6 +53,14 @@ export async function POST(request: Request) {
         subject: confirmation.subject,
         html: confirmation.html,
         text: confirmation.text,
+        // RFC 8058 one-click unsubscribe - lets Gmail/Yahoo/Outlook show a
+        // native "Unsubscribe" button next to the sender, which both
+        // respects the recipient and is now a real ranking factor for
+        // inbox placement on high-volume providers.
+        headers: {
+          "List-Unsubscribe": `<${unsubscribeUrl}>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        },
       }),
     ];
 

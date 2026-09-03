@@ -16,7 +16,18 @@ const initialFormData = {
   notes: "",
 };
 
-export default function LaunchpadEnrollmentForm() {
+const nairaFormatter = new Intl.NumberFormat("en-NG", {
+  style: "currency",
+  currency: "NGN",
+  maximumFractionDigits: 0,
+});
+
+interface Props {
+  feeNgn: number;
+  duration: string;
+}
+
+export default function LaunchpadEnrollmentForm({ feeNgn, duration }: Props) {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
@@ -207,7 +218,19 @@ export default function LaunchpadEnrollmentForm() {
             />
           </div>
 
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-6">
+          <div className="mt-8 rounded-2xl bg-slate-50 dark:bg-slate-800/60 px-5 py-4">
+            <div className="flex items-baseline justify-between">
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Program fee</span>
+              <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                {nairaFormatter.format(feeNgn)}
+              </span>
+            </div>
+            <p className="mt-1 text-right text-xs text-slate-500 dark:text-slate-500">
+              one-time · {duration} · indicative price, confirmed when you enroll · payment plans available
+            </p>
+          </div>
+
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-4">
             <Button
               type="submit"
               disabled={status === "loading" || !isFormValid()}
