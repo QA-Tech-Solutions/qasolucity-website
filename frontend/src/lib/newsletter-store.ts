@@ -78,6 +78,24 @@ export async function upsertSubscriber(entry: { name: string; email: string }): 
   return isNew;
 }
 
+/** Removes a subscriber (used by the one-click/List-Unsubscribe flow). Returns
+ * whether an entry was actually removed, so the caller can tell an unknown
+ * or already-unsubscribed email apart from a real removal. */
+export async function removeSubscriber(email: string): Promise<boolean> {
+  const key = normalizeEmail(email);
+
+  if (redis) {
+    const removed = await redis.hdel(REDIS_KEY, key);
+    return removed > 0;
+  }
+
+  const entries = await readLocal();
+  if (!(key in entries)) return false;
+  delete entries[key];
+  await writeLocal(entries);
+  return true;
+}
+
 function escapeCsvField(value: string): string {
   if (/[",\n]/.test(value)) {
     return `"${value.replace(/"/g, '""')}"`;

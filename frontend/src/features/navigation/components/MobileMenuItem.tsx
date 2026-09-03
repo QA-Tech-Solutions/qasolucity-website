@@ -72,16 +72,29 @@ export default function MobileMenuItem({
           >
             <div className="ml-3 mt-3 space-y-3 border-l border-slate-200 dark:border-slate-800 pl-4 pb-2">
               {item.sections!.flatMap((section) =>
-                section.links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={onClose}
-                    className="block py-1 text-sm text-slate-600 dark:text-slate-400 transition hover:text-indigo-600 dark:hover:text-indigo-400"
-                  >
-                    {link.label}
-                  </Link>
-                ))
+                section.links.map((link) =>
+                  link.comingSoon ? (
+                    <span
+                      key={link.href}
+                      aria-disabled="true"
+                      className="flex cursor-not-allowed items-center gap-2 py-1 text-sm text-slate-600 dark:text-slate-400"
+                    >
+                      <span className="select-none blur-[3px]">{link.label}</span>
+                      <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        Soon
+                      </span>
+                    </span>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={onClose}
+                      className="block py-1 text-sm text-slate-600 dark:text-slate-400 transition hover:text-indigo-600 dark:hover:text-indigo-400"
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )
               )}
             </div>
           </motion.div>

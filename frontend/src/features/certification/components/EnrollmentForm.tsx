@@ -91,7 +91,15 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
     };
   }, [formData.certification]);
 
-  const price = track === "bundle" ? pricing.bundlePriceNgn : pricing.trainingFeeNgn;
+  // Shows ₦0 until a certification is actually picked, rather than a
+  // "starting from" estimate - the real total depends entirely on which
+  // certification is chosen (Advanced Level costs more than Foundation),
+  // so a default number here would just be a guess dressed up as a price.
+  const price = formData.certification
+    ? track === "bundle"
+      ? pricing.bundlePriceNgn
+      : pricing.trainingFeeNgn
+    : 0;
   const selectedCertification = allCertifications.find((item) => item.code === formData.certification);
 
   const handleChange = (
@@ -260,29 +268,6 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
         })}
       </div>
 
-      <div className="mt-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 px-5 py-4">
-        <div className="flex items-baseline justify-between">
-          <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Total due</span>
-          <span
-            className={`text-2xl font-bold text-slate-900 dark:text-slate-100 transition-opacity ${pricingLoading ? "opacity-50" : ""}`}
-          >
-            {nairaFormatter.format(price)}
-          </span>
-        </div>
-        {!formData.certification ? (
-          <p className="mt-1 text-right text-xs text-slate-500 dark:text-slate-500">
-            Starting price shown. Pick a certification below for your exact total.
-          </p>
-        ) : (
-          selectedCertification && (
-            <p className="mt-1 flex items-center justify-end gap-1.5 text-right text-xs text-slate-500 dark:text-slate-500">
-              <Clock className="h-3 w-3" />
-              {selectedCertification.duration} of training for {selectedCertification.code}
-            </p>
-          )
-        )}
-      </div>
-
       <form onSubmit={handleSubmit} noValidate className="mt-8">
         <div className="grid gap-5 md:grid-cols-2">
           <div>
@@ -364,7 +349,30 @@ export default function EnrollmentForm({ initialTrack, trainingFeeNgn, bundlePri
           />
         </div>
 
-        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-6">
+        <div className="mt-8 rounded-2xl bg-slate-50 dark:bg-slate-800/60 px-5 py-4">
+          <div className="flex items-baseline justify-between">
+            <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Total due</span>
+            <span
+              className={`text-2xl font-bold text-slate-900 dark:text-slate-100 transition-opacity ${pricingLoading ? "opacity-50" : ""}`}
+            >
+              {nairaFormatter.format(price)}
+            </span>
+          </div>
+          {!formData.certification ? (
+            <p className="mt-1 text-right text-xs text-slate-500 dark:text-slate-500">
+              Select a certification above to see your total.
+            </p>
+          ) : (
+            selectedCertification && (
+              <p className="mt-1 flex items-center justify-end gap-1.5 text-right text-xs text-slate-500 dark:text-slate-500">
+                <Clock className="h-3 w-3" />
+                {selectedCertification.duration} of training for {selectedCertification.code}
+              </p>
+            )
+          )}
+        </div>
+
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-4">
           <Button
             type="submit"
             disabled={status === "loading" || !isFormValid()}
