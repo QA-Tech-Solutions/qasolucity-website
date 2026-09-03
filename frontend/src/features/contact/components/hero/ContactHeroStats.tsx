@@ -52,11 +52,11 @@ export default function ContactHeroStats() {
           <div>
             <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Get in Touch</h3>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              We respond within 24 hours
+              Choose whatever works best for you
             </p>
           </div>
           <Link
-            href="https://calendar.google.com"
+            href="https://cal.com/qasolucity"
             target="_blank"
             className="inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-950/40 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition-colors duration-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/40"
           >

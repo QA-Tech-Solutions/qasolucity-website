@@ -37,6 +37,12 @@ function Avatar({ testimonial }: { testimonial: Testimonial }) {
 
 export default function TestimonialSlider() {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  // The real number of "pages" to scroll through - not the raw testimonial
+  // count. At the lg breakpoint 3 cards show at once, so 3 testimonials is
+  // one page (nothing to slide to); this also changes on resize as the
+  // per-view card count changes across breakpoints, so it's tracked as
+  // state and recomputed on every embla reInit, not read once.
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -65,18 +71,28 @@ export default function TestimonialSlider() {
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
+  const onReInit = useCallback(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    onSelect();
+  }, [emblaApi, onSelect]);
+
   useEffect(() => {
     if (!emblaApi) return;
-    // Syncs local state with embla's own current index right after it
-    // mounts, then on every subsequent slide change via the listeners below.
+    // Syncs local state with embla's own current index/snap list right
+    // after it mounts, then on every subsequent slide change or re-layout
+    // (e.g. a resize crossing a breakpoint) via the listeners below.
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync with the just-initialized carousel instance, not a value with its own external subscription yet
-    onSelect();
+    onReInit();
     emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
+    emblaApi.on("reInit", onReInit);
     return () => {
       emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onReInit);
     };
-  }, [emblaApi, onSelect]);
+  }, [emblaApi, onSelect, onReInit]);
+
+  const hasMultiplePages = scrollSnaps.length > 1;
 
   return (
     <div className="relative">
@@ -118,38 +134,40 @@ export default function TestimonialSlider() {
         </div>
       </div>
 
-      <div className="mt-10 flex items-center justify-center gap-6">
-        <button
-          onClick={scrollPrev}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md"
-          aria-label="Previous testimonials"
-        >
-          <ChevronLeft className="h-5 w-5 text-slate-700 dark:text-slate-300" />
-        </button>
+      {hasMultiplePages && (
+        <div className="mt-10 flex items-center justify-center gap-6">
+          <button
+            onClick={scrollPrev}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md"
+            aria-label="Previous testimonials"
+          >
+            <ChevronLeft className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+          </button>
 
-        <div className="flex gap-2.5">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => emblaApi?.scrollTo(index)}
-              className={`h-2 rounded-full transition-all duration-500 ${
-                selectedIndex === index
-                  ? "w-8 bg-indigo-600"
-                  : "w-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400"
-              }`}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
-          ))}
+          <div className="flex gap-2.5">
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => emblaApi?.scrollTo(index)}
+                className={`h-2 rounded-full transition-all duration-500 ${
+                  selectedIndex === index
+                    ? "w-8 bg-indigo-600"
+                    : "w-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400"
+                }`}
+                aria-label={`Go to testimonial page ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={scrollNext}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md"
+            aria-label="Next testimonials"
+          >
+            <ChevronRight className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+          </button>
         </div>
-
-        <button
-          onClick={scrollNext}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md"
-          aria-label="Next testimonials"
-        >
-          <ChevronRight className="h-5 w-5 text-slate-700 dark:text-slate-300" />
-        </button>
-      </div>
+      )}
     </div>
   );
 }

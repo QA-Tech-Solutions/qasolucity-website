@@ -931,9 +931,9 @@ export function newsletterInternalNotificationEmail(payload: NewsletterSubscript
 }
 
 export function newsletterConfirmationEmail(
-  payload: NewsletterSubscriptionDetails & { alreadySubscribed?: boolean }
+  payload: NewsletterSubscriptionDetails & { alreadySubscribed?: boolean; unsubscribeUrl: string }
 ) {
-  const { name, alreadySubscribed } = payload;
+  const { name, alreadySubscribed, unsubscribeUrl } = payload;
 
   const headingText = alreadySubscribed
     ? `You're already on the list, ${name}!`
@@ -950,7 +950,7 @@ export function newsletterConfirmationEmail(
       ${intro} You'll get QA insights, testing tips, and company updates from QA Solucity, sent every so often, not every day.
     </p>
     <p class="email-muted" style="margin:0;font-size:13px;line-height:1.6;color:#94a3b8;">
-      Changed your mind? Just reply to this email and we'll take you off the list.
+      Changed your mind? <a href="${unsubscribeUrl}" class="email-link" style="color:#4F46E5;text-decoration:none;">Unsubscribe</a> any time, or just reply to this email.
     </p>
     ${button(`${CANONICAL_URL}/blogs`, "Read our latest posts")}
   `);
@@ -960,7 +960,7 @@ export function newsletterConfirmationEmail(
     "",
     `${intro} You'll get QA insights, testing tips, and company updates from QA Solucity, sent every so often, not every day.`,
     "",
-    "Changed your mind? Just reply to this email and we'll take you off the list.",
+    `Changed your mind? Unsubscribe any time: ${unsubscribeUrl}`,
     "",
     `Read our latest posts: ${CANONICAL_URL}/blogs`,
   ].join("\n");
