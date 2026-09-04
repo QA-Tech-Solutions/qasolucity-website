@@ -20,10 +20,10 @@ export default function MegaMenuSection({
             <li key={link.href}>
               <span
                 aria-disabled="true"
-                className="-mx-3 flex cursor-not-allowed items-center gap-2 rounded-xl px-3 py-1 whitespace-nowrap text-[14px] font-medium text-slate-600 dark:text-slate-400"
+                className="-mx-3 flex cursor-not-allowed items-center gap-2 rounded-xl px-3 py-1 whitespace-nowrap text-[14px] font-medium text-slate-400 dark:text-slate-600"
               >
-                <span className="select-none blur-[3px]">{link.label}</span>
-                <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                <span className="select-none">{link.label}</span>
+                <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-600">
                   Soon
                 </span>
               </span>
