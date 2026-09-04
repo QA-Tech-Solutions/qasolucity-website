@@ -77,10 +77,10 @@ export default function MobileMenuItem({
                     <span
                       key={link.href}
                       aria-disabled="true"
-                      className="flex cursor-not-allowed items-center gap-2 py-1 text-sm text-slate-600 dark:text-slate-400"
+                      className="flex cursor-not-allowed items-center gap-2 py-1 text-sm text-slate-400 dark:text-slate-600"
                     >
-                      <span className="select-none blur-[3px]">{link.label}</span>
-                      <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      <span className="select-none">{link.label}</span>
+                      <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-600">
                         Soon
                       </span>
                     </span>
