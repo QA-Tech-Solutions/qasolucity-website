@@ -11,6 +11,8 @@ import {
   ShieldCheck,
   ShieldAlert,
   Lock,
+  Sparkles,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 
@@ -103,6 +105,24 @@ export default function DashboardShell({ children }: { children: React.ReactNode
               Everything here is public except Admin, which covers the suite
               testing the app and requires the team login.
             </p>
+
+            <Link
+              href="/contact"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 p-4 text-white shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:shadow-indigo-500/30"
+            >
+              <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-white/10 blur-xl" />
+              <Sparkles className="h-4 w-4 text-white/80" />
+              <p className="relative mt-2.5 text-sm font-semibold leading-snug">
+                Want a dashboard like this for your own product?
+              </p>
+              <p className="relative mt-1.5 text-xs leading-5 text-white/70">
+                We build and run this exact quality automation setup for teams, customized to your stack.
+              </p>
+              <span className="relative mt-3 flex items-center gap-1 text-xs font-semibold">
+                Talk to us
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </Link>
           </div>
         </aside>
 
