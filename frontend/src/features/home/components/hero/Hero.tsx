@@ -9,7 +9,7 @@ import HeroVisual from "./HeroVisual";
 
 export default function Hero() {
   return (
-    <Section className="relative overflow-hidden bg-[#FCFBF8] dark:bg-[#020617] pt-28 pb-24 lg:min-h-screen">
+    <Section className="relative bg-[#FCFBF8] dark:bg-[#020617] pt-28 pb-24 lg:min-h-screen">
       {/* ===== BACKGROUND ===== */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         
@@ -93,8 +93,8 @@ export default function Hero() {
 
       {/* ===== CONTENT ===== */}
       <Container>
-        <div className="grid min-h-[82vh] items-center gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-20">
-          <div className="order-1 lg:col-span-7">
+        <div className="grid min-h-[82vh] items-start gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-20">
+          <div className="order-1 self-start lg:col-span-7 lg:sticky lg:top-28 lg:pt-10">
             <HeroContent />
           </div>
 

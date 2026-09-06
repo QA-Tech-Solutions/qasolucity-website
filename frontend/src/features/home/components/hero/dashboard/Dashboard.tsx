@@ -336,8 +336,8 @@ export default function Dashboard() {
             side="bottom"
             content={
               isLive
-                ? "Reporting real results from our automated test suite running against qasolucity.com."
-                : "Showing baseline numbers while we wait for the first automated test run to report in."
+                ? "Real numbers from the last time we ran this against our own site."
+                : "These are starter numbers - our first automated run hasn't checked in yet."
             }
           >
             <div
