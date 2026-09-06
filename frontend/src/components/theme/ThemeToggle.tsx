@@ -3,50 +3,42 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Tooltip } from "@base-ui/react/tooltip";
-import { Sun, Moon, Monitor, type LucideIcon } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type ThemeSetting = "light" | "dark" | "system";
+type Appearance = "light" | "dark";
 
-const ORDER: ThemeSetting[] = ["light", "dark", "system"];
-
-const ICONS: Record<ThemeSetting, LucideIcon> = {
-  light: Sun,
-  dark: Moon,
-  system: Monitor,
-};
-
-const LABELS: Record<ThemeSetting, string> = {
-  light: "Light",
-  dark: "Dark",
-  system: "System",
-};
+const ICONS: Record<Appearance, typeof Sun> = { light: Sun, dark: Moon };
+const LABELS: Record<Appearance, string> = { light: "Light", dark: "Dark" };
 
 /**
- * One button, three states, cycled in a fixed order (light -> dark ->
- * system -> light...) rather than a dropdown - the ask was specifically
- * "one button that when clicked it goes to the next". The icon shown is
- * always the *setting* that's currently selected, not the resolved
- * light/dark appearance, so "system" reliably shows the monitor icon
- * even when the OS happens to be in dark mode.
+ * One button, two states. A first-time visitor's initial appearance
+ * still follows their OS preference (see ThemeProvider's
+ * defaultTheme="system" + enableSystem) - this toggle just never exposes
+ * "System" as something to click through or land back on. It reads
+ * `resolvedTheme` (the actual light/dark appearance on screen) rather
+ * than the raw `theme` setting, so it shows the right icon/label even
+ * before anyone has made an explicit choice; clicking always sets an
+ * explicit "light" or "dark" via next-themes, which is what persists it
+ * to localStorage for future visits.
  */
 export default function ThemeToggle({ className }: { className?: string }) {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // The selected theme is unknown on the server (it lives in
-  // localStorage), so rendering it before mount would mismatch
-  // hydration. A neutral placeholder avoids a flash of the wrong icon.
-  // This is next-themes' own documented mount-detection pattern.
+  // The resolved appearance is unknown on the server (it depends on
+  // localStorage and/or the OS setting), so rendering it before mount
+  // would mismatch hydration. A neutral placeholder avoids a flash of
+  // the wrong icon. This is next-themes' own documented mount-detection
+  // pattern.
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
-  const current = (theme as ThemeSetting | undefined) ?? "light";
+  const current: Appearance = mounted && resolvedTheme === "dark" ? "dark" : "light";
   const Icon = ICONS[current];
 
   const cycle = () => {
-    const next = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length];
-    setTheme(next);
+    setTheme(current === "dark" ? "light" : "dark");
   };
 
   if (!mounted) {
