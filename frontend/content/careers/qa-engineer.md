@@ -8,7 +8,7 @@ experienceLevel: "Entry to Mid-level (1+ years of QA experience)"
 salaryLabel: "₦250,000 / month"
 deadline: "2026-08-15"
 postedDate: "2026-08-01"
-status: "open"
+status: "closed"
 summary: "Test client products end to end, from exploratory testing through structured test cases and clear bug reports, working closely with our QA and delivery teams."
 responsibilities:
   - "Execute exploratory and scripted testing across web and mobile client products"

@@ -8,7 +8,7 @@ experienceLevel: "Mid-level (2+ years of QA automation experience)"
 salaryLabel: "₦350,000 – ₦500,000 / month"
 deadline: "2026-08-19"
 postedDate: "2026-08-05"
-status: "open"
+status: "closed"
 summary: "Build and maintain automated test suites for client products, working closely with our QA and delivery teams."
 responsibilities:
   - "Design, build, and maintain automated test suites using Playwright and Selenium"
