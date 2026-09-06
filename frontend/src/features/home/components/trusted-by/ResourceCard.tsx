@@ -58,7 +58,10 @@ export default function ResourceCard() {
 
             </div>
 
+            {/* Disabled for now - the starter kit isn't ready to ship yet.
+                Re-enable by removing the disabled prop once it is. */}
             <Button
+              disabled
               className="
                 mt-8
                 h-12
@@ -75,7 +78,7 @@ export default function ResourceCard() {
             </Button>
 
             <p className="mt-4 text-center text-sm text-slate-400">
-              No signup required.
+              Coming soon.
             </p>
 
           </div>
