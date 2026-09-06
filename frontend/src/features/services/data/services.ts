@@ -184,7 +184,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Login flow", status: "done" },
         { label: "Checkout", status: "done" },
-        { label: "Checkout form — issue found", status: "flag" },
+        { label: "Checkout form - issue found", status: "flag" },
         { label: "Payment retry", status: "pending" },
       ],
     },
@@ -428,7 +428,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Regression suite", status: "done" },
         { label: "CI pipeline run", status: "done" },
-        { label: "Cross-browser run — flaky result found", status: "flag" },
+        { label: "Cross-browser run - flaky result found", status: "flag" },
         { label: "Nightly build", status: "pending" },
       ],
     },
@@ -540,7 +540,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Auth headers", status: "done" },
         { label: "Response schema", status: "done" },
-        { label: "Webhook retry — timeout found", status: "flag" },
+        { label: "Webhook retry - timeout found", status: "flag" },
         { label: "Rate limit check", status: "pending" },
       ],
     },
@@ -646,7 +646,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Load test", status: "done" },
         { label: "Stress test", status: "done" },
-        { label: "Response time — threshold exceeded", status: "flag" },
+        { label: "Response time - threshold exceeded", status: "flag" },
         { label: "Scalability check", status: "pending" },
       ],
     },
@@ -753,7 +753,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Prompt accuracy", status: "done" },
         { label: "Bias & fairness scan", status: "done" },
-        { label: "Response consistency — drift found", status: "flag" },
+        { label: "Response consistency - drift found", status: "flag" },
         { label: "Regression harness", status: "pending" },
       ],
     },
@@ -905,7 +905,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Auth & session checks", status: "done" },
         { label: "OWASP Top 10 scan", status: "done" },
-        { label: "API endpoint — vulnerability found", status: "flag" },
+        { label: "API endpoint - vulnerability found", status: "flag" },
         { label: "Penetration test", status: "pending" },
       ],
     },
@@ -1011,7 +1011,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Strategy review", status: "done" },
         { label: "Process audit", status: "done" },
-        { label: "Release gate — risk flagged", status: "flag" },
+        { label: "Release gate - risk flagged", status: "flag" },
         { label: "Reporting setup", status: "pending" },
       ],
     },
@@ -1117,7 +1117,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Sprint coverage", status: "done" },
         { label: "Release testing", status: "done" },
-        { label: "Regression cycle — defect found", status: "flag" },
+        { label: "Regression cycle - defect found", status: "flag" },
         { label: "Capacity scaling", status: "pending" },
       ],
     },
@@ -1215,7 +1215,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Role scoping", status: "done" },
         { label: "Team onboarding", status: "done" },
-        { label: "Sprint handoff — coverage gap found", status: "flag" },
+        { label: "Sprint handoff - coverage gap found", status: "flag" },
         { label: "Capacity flex", status: "pending" },
       ],
     },
@@ -1263,7 +1263,7 @@ export const services: ServiceDetail[] = [
   },
   {
     slug: "devops",
-    title: "DevOps",
+    title: "DevOps as a Service",
     category: "Full-Cycle Testing Services",
     eyebrow: "Ship faster, without shipping blind",
     summary:
@@ -1298,7 +1298,7 @@ export const services: ServiceDetail[] = [
       checklist: [
         { label: "Pipeline build", status: "done" },
         { label: "Quality gate", status: "done" },
-        { label: "Deploy check — rollback triggered", status: "flag" },
+        { label: "Deploy check - rollback triggered", status: "flag" },
         { label: "Monitoring setup", status: "pending" },
       ],
     },
