@@ -201,7 +201,7 @@ export default function OverviewContent() {
           color="emerald"
         />
         <KPICard icon={Bug} label="Bugs" value={metrics.bugs} color="red" />
-        <KPICard icon={Zap} label="Coverage" value={`${metrics.coverage}%`} color="amber" />
+        <KPICard icon={Zap} label="Test Coverage" value={`${metrics.coverage}%`} color="amber" />
         <KPICard
           icon={Activity}
           label="Site Health"
