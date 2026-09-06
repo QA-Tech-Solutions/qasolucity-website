@@ -37,7 +37,7 @@ export const services = [
     icon: BadgeCheck,
   },
   {
-    title: "Cyber Security",
+    title: "Security & Vulnerability Testing",
     description:
       "Protect your systems with robust security testing – vulnerability assessments, penetration testing, and more.",
     icon: Shield,

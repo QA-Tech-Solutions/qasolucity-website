@@ -22,7 +22,7 @@ export const navigation: NavigationItem[] = [
           { label: "QA Consulting", href: "/services/qa-consulting" },
           { label: "Testing as a Service (TaaS)", href: "/services/testing-as-a-service" },
           { label: "Staff Augmentation", href: "/services/staff-augmentation" },
-          { label: "DevOps", href: "/services/devops" },
+          { label: "DevOps as a Service", href: "/services/devops" },
         ],
       },
       {
@@ -45,11 +45,11 @@ export const navigation: NavigationItem[] = [
         title: "Resources",
         links: [
           { label: "Blog", href: "/blogs" },
+          { label: "FAQs", href: "/faq" },
           { label: "QA Templates", href: "/resources/templates", comingSoon: true },
           { label: "QA Guides", href: "/resources/guides", comingSoon: true },
           { label: "E-books", href: "/resources/ebooks", comingSoon: true },
           { label: "Events", href: "/resources/events", comingSoon: true },
-          { label: "FAQs", href: "/faq" },
         ],
       },
     ],
@@ -57,13 +57,5 @@ export const navigation: NavigationItem[] = [
   {
     label: "About",
     href: "/about",
-  },
-  {
-    label: "Careers",
-    href: "/careers",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
   },
 ] as const;

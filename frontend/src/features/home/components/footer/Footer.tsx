@@ -1,6 +1,7 @@
 import Container from "@/components/layout/Container";
-import { Heart } from "lucide-react";
 import Link from "next/link";
+// Heart is unused while the credit line below is commented out - see
+// that comment for why. Re-import it if that line ever comes back.
 
 import FooterBrand from "./FooterBrand";
 import FooterLinks from "./FooterLinks";
@@ -49,8 +50,11 @@ export default function Footer() {
             </Link>
           </div>
           
-          {/* Right - Credit */}
-          <div className="flex items-center justify-center gap-1.5 text-xs lg:text-sm">
+          {/* Right - Credit: commented out, this is company work (QA
+              Solucity), not a personal/portfolio project, so a personal
+              byline doesn't belong here. Restore the Heart import above
+              if this ever comes back. */}
+          {/* <div className="flex items-center justify-center gap-1.5 text-xs lg:text-sm">
             Made with
             <Heart className="h-3.5 w-3.5 fill-red-400 text-red-400 animate-pulse" />
             by
@@ -62,7 +66,7 @@ export default function Footer() {
             >
               John Adeniyi
             </a>
-          </div>
+          </div> */}
         </div>
       </Container>
     </footer>

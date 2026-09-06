@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/features/services/data/services";
-import { resourceCategories } from "@/features/resources/data/resources";
+// import { resourceCategories } from "@/features/resources/data/resources";
 import { getAllPosts } from "@/lib/blog";
 import { getOpenJobs } from "@/lib/careers";
 import { SITE_URL } from "@/lib/site-config";
@@ -16,7 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/services`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${SITE_URL}/resources`, changeFrequency: "weekly", priority: 0.7 },
+    // /resources is commented out below - see src/app/resources/page.tsx.
+    // { url: `${SITE_URL}/resources`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/blogs`, changeFrequency: "daily", priority: 0.8 },
     { url: `${SITE_URL}/careers`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/certification`, changeFrequency: "monthly", priority: 0.9 },
@@ -41,11 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }));
 
-  const resourceRoutes: MetadataRoute.Sitemap = resourceCategories.map((resource) => ({
-    url: `${SITE_URL}/resources/${resource.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  // Commented out along with /resources itself - see src/app/resources/page.tsx.
+  // const resourceRoutes: MetadataRoute.Sitemap = resourceCategories.map((resource) => ({
+  //   url: `${SITE_URL}/resources/${resource.slug}`,
+  //   changeFrequency: "monthly",
+  //   priority: 0.6,
+  // }));
 
   const blogRoutes: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
     url: `${SITE_URL}/blogs/${post.slug}`,
@@ -67,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...serviceRoutes,
-    ...resourceRoutes,
+    // ...resourceRoutes,
     ...blogRoutes,
     ...careerRoutes,
   ];
