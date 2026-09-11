@@ -25,7 +25,7 @@ export default function CertificationCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="group relative overflow-visible rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-10 pb-10 pt-14 text-center transition-all duration-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-[0_35px_80px_rgba(79,70,229,.12)] dark:hover:shadow-[0_25px_50px_rgba(0,0,0,.35)]"
+      className="group relative overflow-visible rounded-[34px] border border-slate-200/80 dark:border-slate-800/80 bg-gradient-to-br from-white dark:from-slate-900 via-white dark:via-slate-900 to-indigo-50/30 dark:to-indigo-950/30 px-6 pb-10 pt-14 text-center transition-all duration-500 hover:border-indigo-200 dark:hover:border-indigo-700 hover:shadow-[0_35px_80px_rgba(79,70,229,.12)] dark:hover:shadow-[0_25px_50px_rgba(0,0,0,.35)] sm:px-10"
     >
       {/* Glow effects – stay subtle */}
       <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-200/20 dark:bg-indigo-800/20 blur-3xl transition-opacity duration-500 group-hover:opacity-75" />
@@ -60,7 +60,7 @@ export default function CertificationCard({
         <Button
           render={<Link href={href} />}
           nativeButton={false}
-          className={`group/btn mt-10 h-14 rounded-2xl px-8 text-[15px] font-semibold transition-all duration-300 ${
+          className={`group/btn mt-10 h-auto min-h-14 w-full whitespace-normal rounded-2xl px-6 py-3.5 text-[15px] font-semibold transition-all duration-300 sm:w-auto sm:whitespace-nowrap sm:px-8 sm:py-0 ${
             variant === "primary"
               ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20 hover:scale-105 hover:from-indigo-700 hover:to-violet-700 hover:shadow-indigo-500/30"
               : "border border-indigo-200 dark:border-indigo-800/60 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm hover:scale-105 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:shadow-lg hover:shadow-indigo-100/50"
