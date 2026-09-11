@@ -370,7 +370,7 @@ export default function ContactFormCard() {
                   aria-pressed={isListening}
                   className={`absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-300 ${
                     isListening
-                      ? "bg-red-500 text-white"
+                      ? "bg-emerald-500 text-white"
                       : "bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50"
                   }`}
                 >
@@ -380,16 +380,16 @@ export default function ContactFormCard() {
                     <Mic className="h-4 w-4" />
                   )}
                   {isListening && (
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-60" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
                   )}
                 </button>
               )}
             </div>
             {isListening && (
-              <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-red-500 dark:text-red-400">
+              <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 </span>
                 Listening... speak now
               </p>

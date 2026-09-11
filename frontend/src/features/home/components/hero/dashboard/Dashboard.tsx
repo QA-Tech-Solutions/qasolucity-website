@@ -282,7 +282,7 @@ export default function Dashboard() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-4 shadow-2xl shadow-indigo-500/20 transition-all duration-300 sm:p-6"
+      className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 p-4 shadow-2xl shadow-indigo-500/20 transition-all duration-300 sm:max-w-[560px] sm:p-6 md:max-w-[640px] lg:max-w-[520px]"
       data-testid="quality-command-center"
     >
       {/* Animated Glow Orbs */}
@@ -393,7 +393,7 @@ export default function Dashboard() {
           }}
           initial="hidden"
           animate="visible"
-          className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2"
+          className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2"
         >
           <KPICard icon={CheckCircle2} label="Passed" value={passedTests} color="emerald" delay={0.1} testId="qcc-passed" />
           <KPICard icon={Bug} label="Bugs" value={bugs} color="red" delay={0.2} testId="qcc-bugs" />

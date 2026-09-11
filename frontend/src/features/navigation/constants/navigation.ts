@@ -41,6 +41,7 @@ export const navigation: NavigationItem[] = [
     href: "/resources",
     megaMenu: true,
     showFeaturedCard: false,
+    disableLink: true,
     sections: [
       {
         title: "Resources",

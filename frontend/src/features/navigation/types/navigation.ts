@@ -19,4 +19,7 @@ export interface NavigationItem {
   sections?: NavigationSection[];
   /** Shows the "Book Consultation" card in the mega menu. Defaults to true. */
   showFeaturedCard?: boolean;
+  /** Renders the label as inert text instead of a Link - for a mega-menu
+   * entry point whose own href doesn't resolve to a real page. */
+  disableLink?: boolean;
 }
