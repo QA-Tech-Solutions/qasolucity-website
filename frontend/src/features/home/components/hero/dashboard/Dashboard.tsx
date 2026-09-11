@@ -254,6 +254,12 @@ export default function Dashboard() {
     let cancelled = false;
 
     const poll = async () => {
+      // A backgrounded tab doesn't need fresh data, and there's no viewer
+      // to show it to - skip the network round trip entirely rather than
+      // just not rendering the result, since this is what was quietly
+      // running up Vercel's function-invocation usage across every idle
+      // tab left open on the homepage.
+      if (document.hidden) return;
       const [metricsData, trendData] = await Promise.all([
         fetchJson<QualityMetrics>("/api/quality-metrics"),
         fetchJson<{ trend: TrendPoint[] }>(`/api/quality-metrics/trend?limit=${TREND_POINTS}`),
@@ -265,9 +271,18 @@ export default function Dashboard() {
 
     poll();
     const interval = setInterval(poll, POLL_INTERVAL_MS);
+
+    // Catch up immediately when the tab regains focus, rather than waiting
+    // out whatever's left of the current interval.
+    const handleVisibilityChange = () => {
+      if (!document.hidden) poll();
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
       cancelled = true;
       clearInterval(interval);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [applyFetchResult]);
 
