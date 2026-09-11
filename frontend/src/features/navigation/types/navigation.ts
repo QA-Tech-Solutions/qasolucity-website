@@ -17,4 +17,6 @@ export interface NavigationItem {
   href: string;
   megaMenu?: boolean;
   sections?: NavigationSection[];
+  /** Shows the "Book Consultation" card in the mega menu. Defaults to true. */
+  showFeaturedCard?: boolean;
 }

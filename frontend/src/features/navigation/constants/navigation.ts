@@ -40,16 +40,13 @@ export const navigation: NavigationItem[] = [
     label: "Resources",
     href: "/resources",
     megaMenu: true,
+    showFeaturedCard: false,
     sections: [
       {
         title: "Resources",
         links: [
           { label: "Blog", href: "/blogs" },
           { label: "FAQs", href: "/faq" },
-          { label: "QA Templates", href: "/resources/templates", comingSoon: true },
-          { label: "QA Guides", href: "/resources/guides", comingSoon: true },
-          { label: "E-books", href: "/resources/ebooks", comingSoon: true },
-          { label: "Events", href: "/resources/events", comingSoon: true },
         ],
       },
     ],

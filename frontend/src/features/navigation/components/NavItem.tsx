@@ -140,7 +140,7 @@ export default function NavItem({
             onMouseEnter={() => handleMenuHover(true)}
             onMouseLeave={() => handleMenuHover(false)}
           >
-            <MegaMenu sections={item.sections!} />
+            <MegaMenu sections={item.sections!} showFeaturedCard={item.showFeaturedCard} />
           </motion.div>
         )}
       </AnimatePresence>
