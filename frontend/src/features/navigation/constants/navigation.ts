@@ -12,6 +12,7 @@ export const navigation: NavigationItem[] = [
     sections: [
       {
         title: "Full-Cycle Testing Services",
+        href: "/services#full-cycle-testing-services",
         links: [
           { label: "QA & Software Testing", href: "/services/qa-software-testing" },
           { label: "Test Automation", href: "/services/automation-testing" },
@@ -27,6 +28,7 @@ export const navigation: NavigationItem[] = [
       },
       {
         title: "Training",
+        href: "/services#training",
         links: [
           { label: "QA Career Launchpad", href: "/qa-career-launchpad" },
           { label: "ISTQB Certification Prep", href: "/certification" },
@@ -40,16 +42,14 @@ export const navigation: NavigationItem[] = [
     label: "Resources",
     href: "/resources",
     megaMenu: true,
+    showFeaturedCard: false,
+    disableLink: true,
     sections: [
       {
         title: "Resources",
         links: [
           { label: "Blog", href: "/blogs" },
           { label: "FAQs", href: "/faq" },
-          { label: "QA Templates", href: "/resources/templates", comingSoon: true },
-          { label: "QA Guides", href: "/resources/guides", comingSoon: true },
-          { label: "E-books", href: "/resources/ebooks", comingSoon: true },
-          { label: "Events", href: "/resources/events", comingSoon: true },
         ],
       },
     ],

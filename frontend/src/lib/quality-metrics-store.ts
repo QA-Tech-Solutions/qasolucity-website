@@ -1,4 +1,5 @@
 import { Redis } from "@upstash/redis";
+import { revalidateTag, unstable_cache } from "next/cache";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -54,6 +55,11 @@ export type QualityRunSummary = Omit<QualityRun, "tests">;
 
 const REDIS_KEY = "quality-metrics";
 const REDIS_RUNS_KEY = "quality-metrics:runs";
+// Tags the two read paths the homepage widget polls every 60s (see
+// Dashboard.tsx) so a fresh automation report can invalidate them
+// immediately via revalidateTag instead of waiting out the cache window.
+const METRICS_CACHE_TAG = "quality-metrics";
+const METRICS_CACHE_SECONDS = 30;
 const DATA_FILE = path.join(process.cwd(), "data", "quality-metrics.json");
 const RUNS_FILE = path.join(process.cwd(), "data", "quality-metrics-runs.json");
 
@@ -85,7 +91,7 @@ const redis =
  * anyone having to provision a Redis instance just to see the dashboard
  * locally - it is not a production persistence strategy.
  */
-export async function getMetrics(): Promise<QualityMetrics | null> {
+async function readMetrics(): Promise<QualityMetrics | null> {
   if (redis) {
     return (await redis.get<QualityMetrics>(REDIS_KEY)) ?? null;
   }
@@ -97,12 +103,28 @@ export async function getMetrics(): Promise<QualityMetrics | null> {
   }
 }
 
+// Cached for METRICS_CACHE_SECONDS - the homepage's Quality Command Center
+// widget polls this every 60s from every open tab (see Dashboard.tsx), and
+// automation only reports in about once a day (see MAX_RUNS's comment), so
+// most of those polls were re-hitting Redis for data that hadn't changed.
+// A short cache window turns repeat polls into edge cache hits instead of
+// fresh function invocations; setMetrics below invalidates it immediately
+// on a real write so a new report still shows up without waiting it out.
+export const getMetrics = unstable_cache(
+  readMetrics,
+  ["quality-metrics:get-metrics"],
+  { tags: [METRICS_CACHE_TAG], revalidate: METRICS_CACHE_SECONDS }
+);
+
 export async function setMetrics(metrics: QualityMetrics): Promise<void> {
   if (redis) {
     await redis.set(REDIS_KEY, metrics);
-    return;
+  } else {
+    await fs.writeFile(DATA_FILE, JSON.stringify(metrics, null, 2));
   }
-  await fs.writeFile(DATA_FILE, JSON.stringify(metrics, null, 2));
+  // A real automation report should be visible right away, not held back
+  // by getMetrics' cache window above.
+  revalidateTag(METRICS_CACHE_TAG, { expire: 0 });
 }
 
 async function readLocalRuns(): Promise<QualityRun[]> {
@@ -126,11 +148,14 @@ export async function appendRun(run: QualityRun): Promise<void> {
     // setMetrics above. Stringifying it ourselves first would double-encode.
     await redis.lpush(REDIS_RUNS_KEY, run);
     await redis.ltrim(REDIS_RUNS_KEY, 0, MAX_RUNS - 1);
-    return;
+  } else {
+    const runs = await readLocalRuns();
+    runs.unshift(run);
+    await writeLocalRuns(runs.slice(0, MAX_RUNS));
   }
-  const runs = await readLocalRuns();
-  runs.unshift(run);
-  await writeLocalRuns(runs.slice(0, MAX_RUNS));
+  // Same reasoning as setMetrics: this run should show up in the trend
+  // chart on the next poll, not after the cache window expires.
+  revalidateTag(METRICS_CACHE_TAG, { expire: 0 });
 }
 
 function toSummary(run: QualityRun): QualityRunSummary {
@@ -176,8 +201,19 @@ export async function getRunsFull(limit = 20): Promise<QualityRun[]> {
   return runs.slice(0, limit);
 }
 
-/** Just timestamp + passRate for each of the last `limit` runs, oldest first (chart-ready). */
-export async function getTrend(limit = 30): Promise<Array<{ timestamp: string; passRate: number }>> {
+async function readTrend(limit: number): Promise<Array<{ timestamp: string; passRate: number }>> {
   const summaries = await getRuns(limit, 0);
   return summaries.map(({ timestamp, passRate }) => ({ timestamp, passRate })).reverse();
 }
+
+/**
+ * Just timestamp + passRate for each of the last `limit` runs, oldest first
+ * (chart-ready). Cached the same way and for the same reason as getMetrics
+ * above - this is the other half of what the homepage widget polls every
+ * 60s.
+ */
+export const getTrend = unstable_cache(
+  readTrend,
+  ["quality-metrics:get-trend"],
+  { tags: [METRICS_CACHE_TAG], revalidate: METRICS_CACHE_SECONDS }
+);

@@ -4,15 +4,21 @@ import { NavigationSection } from "../types/navigation";
 
 interface MegaMenuProps {
   sections: NavigationSection[];
+  showFeaturedCard?: boolean;
 }
 
-export default function MegaMenu({ sections }: MegaMenuProps) {
-  const width =
-    sections.length === 1
+export default function MegaMenu({ sections, showFeaturedCard = true }: MegaMenuProps) {
+  const width = showFeaturedCard
+    ? sections.length === 1
       ? "760px"
       : sections.length === 2
       ? "1000px"
-      : "1100px";
+      : "1100px"
+    : sections.length === 1
+    ? "340px"
+    : sections.length === 2
+    ? "600px"
+    : "900px";
 
   return (
     <div className="w-[100vw] flex justify-center pt-4">
@@ -23,14 +29,16 @@ export default function MegaMenu({ sections }: MegaMenuProps) {
         <div
           className="grid gap-6"
           style={{
-            gridTemplateColumns: `repeat(${sections.length}, minmax(230px,1fr)) 280px`,
+            gridTemplateColumns: showFeaturedCard
+              ? `repeat(${sections.length}, minmax(230px,1fr)) 280px`
+              : `repeat(${sections.length}, minmax(230px,1fr))`,
           }}
         >
           {sections.map((section) => (
             <MegaMenuSection key={section.title} section={section} />
           ))}
 
-          <FeaturedCard />
+          {showFeaturedCard && <FeaturedCard />}
         </div>
       </div>
     </div>

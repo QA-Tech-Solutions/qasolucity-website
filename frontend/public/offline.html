@@ -61,6 +61,9 @@
   }
 
   .status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -68,6 +71,8 @@
     font-size: 13px;
     font-weight: 600;
     background: rgba(225, 29, 72, 0.08);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     color: var(--bug);
     gap: 8px;
     align-items: center;

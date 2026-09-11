@@ -67,10 +67,12 @@ export default function NavItem({
     // If menu is hovered, don't close
     if (isMenuHovered) return;
 
-    // Close after a short delay to allow moving to menu
+    // Close after a short delay - just enough to bridge the gap between
+    // the nav item and the fixed-positioned menu below it while the mouse
+    // travels diagonally. Kept short so the close still reads as instant.
     closeTimeoutRef.current = setTimeout(() => {
       close();
-    }, 150);
+    }, 40);
   }, [hasMegaMenu, isMenuHovered, close]);
 
   const handleMenuHover = useCallback((hovered: boolean) => {
@@ -85,7 +87,7 @@ export default function NavItem({
       // If leaving the menu, schedule close
       closeTimeoutRef.current = setTimeout(() => {
         close();
-      }, 150);
+      }, 40);
     }
   }, [close]);
 
@@ -106,7 +108,7 @@ export default function NavItem({
       onMouseLeave={handleMouseLeave}
     >
       <div className="flex items-center gap-1 rounded-xl px-2 py-2">
-        <NavLink href={item.href} active={isActive}>{item.label}</NavLink>
+        <NavLink href={item.href} active={isActive} disabled={item.disableLink}>{item.label}</NavLink>
 
         {hasMegaMenu && (
           <button
@@ -133,14 +135,14 @@ export default function NavItem({
           <motion.div
             id={`mega-menu-${item.label}`}
             className="fixed left-1/2 top-20 z-50 -translate-x-1/2"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.05, ease: "linear" }}
             onMouseEnter={() => handleMenuHover(true)}
             onMouseLeave={() => handleMenuHover(false)}
           >
-            <MegaMenu sections={item.sections!} />
+            <MegaMenu sections={item.sections!} showFeaturedCard={item.showFeaturedCard} />
           </motion.div>
         )}
       </AnimatePresence>

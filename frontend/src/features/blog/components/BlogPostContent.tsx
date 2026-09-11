@@ -132,12 +132,12 @@ export default function BlogPostContent({ post, relatedPosts, children }: Props)
                 Talk to Our Team
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
-              <Link
-                href="/resources"
-                className="inline-flex h-12 items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+              <span
+                aria-disabled="true"
+                className="inline-flex h-12 cursor-not-allowed items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 text-sm font-semibold text-slate-400 dark:text-slate-600"
               >
                 Browse More Resources
-              </Link>
+              </span>
             </motion.div>
           </div>
         </Container>
