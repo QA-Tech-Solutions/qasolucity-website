@@ -83,14 +83,6 @@ export default function ServicesHero() {
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <a
-                href="#services"
-                className="inline-flex h-14 items-center rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 px-8 font-semibold text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-white dark:hover:bg-slate-800"
-              >
-                Explore Services
-              </a>
-            </motion.div>
           </div>
 
           {/* Category quick nav */}

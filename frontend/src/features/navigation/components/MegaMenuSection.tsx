@@ -10,9 +10,18 @@ export default function MegaMenuSection({
 }: MegaMenuSectionProps) {
   return (
     <div>
-      <h4 className="mb-3 whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-slate-400 dark:text-slate-500">
-        {section.title}
-      </h4>
+      {section.href ? (
+        <Link
+          href={section.href}
+          className="mb-3 block whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-slate-400 dark:text-slate-500 transition-colors duration-200 hover:text-indigo-600 dark:hover:text-indigo-400"
+        >
+          {section.title}
+        </Link>
+      ) : (
+        <h4 className="mb-3 whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] text-slate-400 dark:text-slate-500">
+          {section.title}
+        </h4>
+      )}
 
       <ul className="space-y-1.5 min-w-[200px]">
         {section.links.map((link) =>

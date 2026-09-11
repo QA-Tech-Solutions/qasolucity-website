@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/Badge";
 const quickLinks = [
   { label: "Services", href: "/services" },
   { label: "About Us", href: "/about" },
-  { label: "Resources", href: "/resources" },
+  { label: "Resources", href: "/resources", disabled: true },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -140,15 +140,25 @@ export default function ErrorContent({ digest, onRetry }: Props) {
 
           <div className="mt-14 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-sm">
             <span className="text-slate-400 dark:text-slate-500">Or try one of these:</span>
-            {quickLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 px-4 py-1.5 font-medium text-slate-600 dark:text-slate-400 shadow-sm transition-all duration-300 hover:border-indigo-200 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-md"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {quickLinks.map((link) =>
+              link.disabled ? (
+                <span
+                  key={link.href}
+                  aria-disabled="true"
+                  className="cursor-not-allowed rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 px-4 py-1.5 font-medium text-slate-400 dark:text-slate-600 shadow-sm"
+                >
+                  {link.label}
+                </span>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 px-4 py-1.5 font-medium text-slate-600 dark:text-slate-400 shadow-sm transition-all duration-300 hover:border-indigo-200 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-md"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
         </motion.div>
       </Container>
