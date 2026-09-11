@@ -58,7 +58,7 @@ export default function ContactHeroStats() {
           <Link
             href="https://cal.com/qasolucity"
             target="_blank"
-            className="inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-950/40 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition-colors duration-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/40"
+            className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-indigo-50 dark:bg-indigo-950/40 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition-colors duration-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/40"
           >
             <Calendar className="h-4 w-4" />
             Schedule Call

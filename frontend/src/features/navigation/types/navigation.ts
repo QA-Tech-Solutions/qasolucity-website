@@ -9,6 +9,9 @@ export interface NavigationLink {
 
 export interface NavigationSection {
   title: string;
+  /** When set, the section title itself links here (e.g. an anchor on
+   * the parent page's own section) instead of rendering as plain text. */
+  href?: string;
   links: NavigationLink[];
 }
 

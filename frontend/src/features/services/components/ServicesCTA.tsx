@@ -60,16 +60,8 @@ export default function ServicesCTA() {
                 href="/contact"
                 className="group inline-flex h-14 items-center rounded-2xl bg-white px-8 text-slate-900 font-semibold shadow-lg shadow-white/10 transition-all duration-300 hover:bg-slate-100 hover:shadow-white/20"
               >
-                Start a Conversation
+                Discuss Your Project
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/services#services"
-                className="inline-flex h-14 items-center rounded-2xl border border-white/20 bg-transparent px-8 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30"
-              >
-                Browse Services Again
               </Link>
             </motion.div>
           </div>

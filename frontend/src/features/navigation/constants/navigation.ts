@@ -12,6 +12,7 @@ export const navigation: NavigationItem[] = [
     sections: [
       {
         title: "Full-Cycle Testing Services",
+        href: "/services#full-cycle-testing-services",
         links: [
           { label: "QA & Software Testing", href: "/services/qa-software-testing" },
           { label: "Test Automation", href: "/services/automation-testing" },
@@ -27,6 +28,7 @@ export const navigation: NavigationItem[] = [
       },
       {
         title: "Training",
+        href: "/services#training",
         links: [
           { label: "QA Career Launchpad", href: "/qa-career-launchpad" },
           { label: "ISTQB Certification Prep", href: "/certification" },
