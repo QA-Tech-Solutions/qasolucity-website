@@ -110,7 +110,7 @@ export default function StickyScrollCapabilities({
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-md shadow-indigo-500/20">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-500 dark:text-indigo-400">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -119,18 +119,12 @@ export default function StickyScrollCapabilities({
                   className={`mt-4 text-xl font-bold transition-colors duration-300 lg:mt-0 md:text-2xl ${
                     isActive
                       ? "text-slate-900 dark:text-slate-100"
-                      : "text-slate-400 dark:text-slate-600"
+                      : "text-slate-600 dark:text-slate-400"
                   }`}
                 >
                   {item.title}
                 </h4>
-                <p
-                  className={`mt-3 max-w-xl text-[15px] leading-7 transition-colors duration-300 ${
-                    isActive
-                      ? "text-slate-600 dark:text-slate-400"
-                      : "text-slate-400 dark:text-slate-600"
-                  }`}
-                >
+                <p className="mt-3 max-w-xl text-[15px] leading-7 text-slate-600 dark:text-slate-400">
                   {item.description}
                 </p>
                 {item.bullets && item.bullets.length > 0 && (
@@ -138,11 +132,7 @@ export default function StickyScrollCapabilities({
                     {item.bullets.map((bullet) => (
                       <li
                         key={bullet}
-                        className={`flex items-start gap-2.5 text-sm leading-6 transition-colors duration-300 ${
-                          isActive
-                            ? "text-slate-600 dark:text-slate-400"
-                            : "text-slate-400 dark:text-slate-600"
-                        }`}
+                        className="flex items-start gap-2.5 text-sm leading-6 text-slate-600 dark:text-slate-400"
                       >
                         <span
                           className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-300 ${
