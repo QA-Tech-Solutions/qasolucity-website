@@ -33,12 +33,12 @@ const socials = [
 //   },
   {
     name: "X",
-    href: "#",
+    href: "https://x.com/QASolucity",
     icon: FaXTwitter,
   },
   {
     name: "Facebook",
-    href: "#",
+    href: "https://web.facebook.com/profile.php?id=61556325820466",
     icon: FaFacebookF,
   },
   // {
