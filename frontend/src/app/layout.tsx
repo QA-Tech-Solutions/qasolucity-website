@@ -91,6 +91,8 @@ const organizationJsonLd = {
     "https://www.linkedin.com/company/qasolucity/",
     "https://medium.com/@qasolucity",
     "https://instagram.com/qasolucity",
+    "https://x.com/QASolucity",
+    "https://web.facebook.com/profile.php?id=61556325820466",
   ],
 };
 
