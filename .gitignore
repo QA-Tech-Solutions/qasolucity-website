@@ -63,3 +63,9 @@ frontend/data/newsletter-subscribers.json
 frontend/data/certification-rate-cache.json
 frontend/data/quality-metrics.json
 frontend/data/quality-metrics-runs.json
+
+# AI-assistant instruction/config files: local tooling, not part of the
+# product. Kept on disk for whoever uses them, never committed.
+CLAUDE.md
+AGENTS.md
+.claude/
