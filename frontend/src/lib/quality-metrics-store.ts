@@ -2,6 +2,7 @@ import { Redis } from "@upstash/redis";
 import { revalidateTag, unstable_cache } from "next/cache";
 import { promises as fs } from "fs";
 import path from "path";
+import { summarizeError } from "./summarize-test-error";
 
 export interface QualityMetrics {
   passRate: number;
@@ -158,6 +159,20 @@ export async function appendRun(run: QualityRun): Promise<void> {
   revalidateTag(METRICS_CACHE_TAG, { expire: 0 });
 }
 
+/**
+ * Every read that returns per-test detail goes through this, so stored
+ * history is public-safe regardless of when it was reported: runs from
+ * before the automation repo started summarizing errors still hold raw
+ * Playwright output (code frames, runner paths, selectors). A no-op on
+ * already-summarized messages.
+ */
+function withReadableErrors(run: QualityRun): QualityRun {
+  return {
+    ...run,
+    tests: run.tests.map((test) => (test.error ? { ...test, error: summarizeError(test.error) } : test)),
+  };
+}
+
 function toSummary(run: QualityRun): QualityRunSummary {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- destructured only to exclude it from `summary`
   const { tests: _tests, ...summary } = run;
@@ -182,10 +197,12 @@ export async function getRuns(limit = 20, offset = 0): Promise<QualityRunSummary
 export async function getRunById(id: string): Promise<QualityRun | null> {
   if (redis) {
     const runs = await redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, MAX_RUNS - 1);
-    return runs.find((run) => run.id === id) ?? null;
+    const run = runs.find((r) => r.id === id);
+    return run ? withReadableErrors(run) : null;
   }
   const runs = await readLocalRuns();
-  return runs.find((run) => run.id === id) ?? null;
+  const run = runs.find((r) => r.id === id);
+  return run ? withReadableErrors(run) : null;
 }
 
 /**
@@ -195,10 +212,11 @@ export async function getRunById(id: string): Promise<QualityRun | null> {
  */
 export async function getRunsFull(limit = 20): Promise<QualityRun[]> {
   if (redis) {
-    return redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, limit - 1);
+    const runs = await redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, limit - 1);
+    return runs.map(withReadableErrors);
   }
   const runs = await readLocalRuns();
-  return runs.slice(0, limit);
+  return runs.slice(0, limit).map(withReadableErrors);
 }
 
 async function readTrend(limit: number): Promise<Array<{ timestamp: string; passRate: number }>> {

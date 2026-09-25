@@ -49,7 +49,7 @@ function TestRow({ test }: { test: TestResult }) {
             <span>{(test.durationMs / 1000).toFixed(1)}s</span>
           </div>
           {test.error && (
-            <pre className="mt-2 overflow-x-auto rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700 dark:bg-red-500/10 dark:text-red-300">
+            <pre className="mt-2 whitespace-pre-wrap break-words rounded-lg bg-red-50 font-sans px-3 py-2 text-xs text-red-700 dark:bg-red-500/10 dark:text-red-300">
               {test.error}
             </pre>
           )}
