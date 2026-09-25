@@ -13,6 +13,12 @@ export interface QualityMetrics {
   apiHealth: "Healthy" | "Degraded";
   lastUpdated: string | null;
   source: "seed" | "automation";
+  /**
+   * Tests that were skipped (test.skip with a reason) - not bugs, and not
+   * part of totalTests or passRate. Derived on read from the latest run's
+   * per-test detail (see withLatestRunCounts); absent when there isn't any.
+   */
+  skippedTests?: number;
 }
 
 export interface TestResult {
@@ -92,7 +98,7 @@ const redis =
  * anyone having to provision a Redis instance just to see the dashboard
  * locally - it is not a production persistence strategy.
  */
-async function readMetrics(): Promise<QualityMetrics | null> {
+async function readStoredMetrics(): Promise<QualityMetrics | null> {
   if (redis) {
     return (await redis.get<QualityMetrics>(REDIS_KEY)) ?? null;
   }
@@ -102,6 +108,35 @@ async function readMetrics(): Promise<QualityMetrics | null> {
   } catch {
     return null;
   }
+}
+
+async function readLatestRun(): Promise<QualityRun | null> {
+  if (redis) {
+    const [run] = await redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, 0);
+    return run ?? null;
+  }
+  const [run] = await readLocalRuns();
+  return run ?? null;
+}
+
+/**
+ * The snapshot and the latest run are written together by the same report
+ * (same timestamp - see the POST handler), so when they match, the
+ * snapshot's counts are recounted from that run's tests the same way
+ * stored runs are (withRecountedTotals). That corrects a snapshot reported
+ * while skipped tests were still counted as bugs, and supplies
+ * skippedTests, which the snapshot itself doesn't carry.
+ */
+function withLatestRunCounts(metrics: QualityMetrics, run: QualityRun | null): QualityMetrics {
+  if (!run || run.timestamp !== metrics.lastUpdated || !run.tests?.length) return metrics;
+  const { passedTests, totalTests, bugs, passRate } = withRecountedTotals(run);
+  const skippedTests = run.tests.filter((test) => test.status === "skipped").length;
+  return { ...metrics, passedTests, totalTests, bugs, passRate, skippedTests };
+}
+
+async function readMetrics(): Promise<QualityMetrics | null> {
+  const [metrics, latestRun] = await Promise.all([readStoredMetrics(), readLatestRun()]);
+  return metrics ? withLatestRunCounts(metrics, latestRun) : null;
 }
 
 // Cached for METRICS_CACHE_SECONDS - the homepage's Quality Command Center
@@ -197,7 +232,8 @@ function withRecountedTotals(run: QualityRun): QualityRun {
     passedTests: passed,
     totalTests: ran,
     bugs: failed,
-    passRate: ran > 0 ? Math.round((passed / ran) * 100) : 0,
+    // Rounded down, same as report-metrics.mjs: 531/532 must not show 100%.
+    passRate: ran > 0 ? Math.floor((passed / ran) * 100) : 0,
   };
 }
 
