@@ -46,7 +46,7 @@ export default function AboutCTAContent() {
         </motion.div>
 
         <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-          <Link href="/contact">
+          <Link href="/qa-career-launchpad">
             <Button
               variant="outline"
               className="group h-14 rounded-2xl border-white/20 bg-transparent px-8 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30"

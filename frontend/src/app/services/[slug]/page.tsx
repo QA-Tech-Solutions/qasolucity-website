@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import ServicesDetailPage from "@/features/services/components/ServiceDetailPage";
 import { getServiceBySlug } from "@/features/services/data/services";
 import { SITE_URL } from "@/lib/site-config";
+import { buildMetadata } from "@/lib/page-metadata";
+import { buildBreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -34,13 +36,12 @@ export async function generateMetadata({
 
   const dedicatedPage = DEDICATED_PAGE_FOR_SLUG[slug];
 
-  return {
+  return buildMetadata({
     title: service.title,
     description: service.summary,
-    ...(dedicatedPage
-      ? { alternates: { canonical: dedicatedPage }, robots: { index: false, follow: true } }
-      : { alternates: { canonical: `/services/${slug}` } }),
-  };
+    path: dedicatedPage ?? `/services/${slug}`,
+    noIndex: Boolean(dedicatedPage),
+  });
 }
 
 export async function generateStaticParams() {
@@ -88,6 +89,18 @@ export default async function Page({ params }: ServicePageProps) {
         url: `${SITE_URL}/services/${slug}`,
       };
 
+  // Same reasoning as jsonLd above: the two dedicated-elsewhere slugs
+  // defer their breadcrumb trail to /certification and
+  // /qa-career-launchpad too, rather than this noindexed page emitting a
+  // second, conflicting one for the same content.
+  const breadcrumbJsonLd = DEDICATED_PAGE_FOR_SLUG[slug]
+    ? null
+    : buildBreadcrumbJsonLd([
+        { label: "Home", href: "/" },
+        { label: "Services", href: "/services" },
+        { label: service.title },
+      ]);
+
   return (
     <>
       {jsonLd && (
@@ -95,6 +108,13 @@ export default async function Page({ params }: ServicePageProps) {
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      {breadcrumbJsonLd && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       )}
       <ServicesDetailPage slug={slug} />

@@ -19,6 +19,6 @@ export const twoSides = [
     description:
       "We help aspiring and growing QA professionals develop practical skills, access industry-recognised certification pathways and gain opportunities to grow within the field.",
     button: "Explore QA Training",
-    href: "/contact",
+    href: "/qa-career-launchpad",
   },
 ] as const;

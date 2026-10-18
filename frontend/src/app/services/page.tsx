@@ -1,14 +1,12 @@
-import type { Metadata } from "next";
 import ServicesPageShell from "@/features/services/components/ServicesPageShell";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Services",
   description:
     "Manual testing, test automation, API and performance testing, QA consulting, and corporate training from QA Solucity.",
-  alternates: {
-    canonical: "/services",
-  },
-};
+  path: "/services",
+});
 
 export default function Page() {
   return <ServicesPageShell />;

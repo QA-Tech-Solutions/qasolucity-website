@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Check, Link2 } from "lucide-react";
 import { FaLinkedinIn, FaXTwitter, FaFacebookF } from "react-icons/fa6";
+import { SITE_URL } from "@/lib/site-config";
 
 interface Props {
   title: string;
@@ -10,12 +11,14 @@ interface Props {
 }
 
 export default function ShareButtons({ title, path }: Props) {
-  const [url, setUrl] = useState(path);
+  // The canonical origin, not window.location.origin - this is a client
+  // component, so the server-rendered HTML (before hydration) would
+  // otherwise ship relative hrefs straight into these share-intent URLs.
+  // A relative path means nothing as a query param on a third-party
+  // domain, so every one of these links would be broken for as long as
+  // hydration takes, not just the single tick a useEffect would cost.
+  const url = `${SITE_URL}${path}`;
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    setUrl(`${window.location.origin}${path}`);
-  }, [path]);
 
   const shareLinks = [
     {

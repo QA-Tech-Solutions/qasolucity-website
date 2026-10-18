@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
 import Footer from "@/features/home/components/footer";
 import CertificationHero from "@/features/certification/components/CertificationHero";
 import CertificationPathways from "@/features/certification/components/CertificationPathways";
 import CertificationCatalog from "@/features/certification/components/CertificationCatalog";
 import CertificationFAQ from "@/features/certification/components/CertificationFAQ";
 import { SITE_URL } from "@/lib/site-config";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "ISTQB Certification Pathways",
   description:
     "Independent ISTQB exam prep from QA Solucity, with live classes and mock exams, then sit your official exam through an independent registrar like AT*SQA or iSQI. Choose the Self-Starter Prep Track, or the All-Inclusive Bundle with a prepaid exam voucher.",
-  alternates: {
-    canonical: "/certification",
-  },
-};
+  path: "/certification",
+});
 
 export default function Page() {
   const jsonLd = {

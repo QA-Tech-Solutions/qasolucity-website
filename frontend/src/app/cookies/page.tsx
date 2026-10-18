@@ -4,12 +4,15 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import CookiesContent from "./components/CookiesContent";
 import Footer from "@/features/home/components/footer";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata = {
-  title: "Cookie Policy | QA Solucity",
+// See privacy/page.tsx's comment - same title.template double-suffix fix.
+export const metadata = buildMetadata({
+  title: "Cookie Policy",
   description:
     "QA Solucity's cookie policy: what cookies we actually use on our website, and what we don't.",
-};
+  path: "/cookies",
+});
 
 export default function CookiesPage() {
   return (

@@ -27,8 +27,9 @@ export default function StoryContent() {
 
       <div className="mt-10 space-y-6 text-lg leading-8 text-slate-600 dark:text-slate-400">
         <p>
-          QA Solucity was founded in 2023 with a simple idea: better
-          software and better QA talent should be easier to access.
+          QA Solucity was founded in Lagos, Nigeria in 2023 with a simple
+          idea: better software and better QA talent should be easier to
+          access.
         </p>
 
         <p>
