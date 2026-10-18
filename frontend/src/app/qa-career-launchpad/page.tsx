@@ -1,15 +1,13 @@
-import type { Metadata } from "next";
 import LaunchpadPage from "@/features/qa-career-launchpad/components/LaunchpadPage";
 import { SITE_URL } from "@/lib/site-config";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "QA Career Launchpad",
   description:
     "Go from complete beginner to job-ready QA engineer with hands-on, mentor-led training in manual and automated testing. No prior experience required.",
-  alternates: {
-    canonical: "/qa-career-launchpad",
-  },
-};
+  path: "/qa-career-launchpad",
+});
 
 export default function Page() {
   const jsonLd = {

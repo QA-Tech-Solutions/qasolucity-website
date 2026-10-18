@@ -4,12 +4,15 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import TermsContent from "./components/TermsContent";
 import Footer from "@/features/home/components/footer";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata = {
-  title: "Terms of Service | QA Solucity",
+// See privacy/page.tsx's comment - same title.template double-suffix fix.
+export const metadata = buildMetadata({
+  title: "Terms of Service",
   description:
     "QA Solucity's terms of service: the legal agreement governing your use of our website and services.",
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

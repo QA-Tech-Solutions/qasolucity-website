@@ -15,6 +15,7 @@ import CapabilityGrid from "./blocks/CapabilityGrid";
 import ProcessTimeline from "./blocks/ProcessTimeline";
 import ComparisonTable from "./blocks/ComparisonTable";
 import { getRelatedServices, getServiceBySlug } from "../data/services";
+import { BreadcrumbTrail } from "@/components/seo/Breadcrumbs";
 
 interface ServiceDetailPageProps {
   slug: string;
@@ -48,6 +49,15 @@ export default function ServiceDetailPage({ slug }: ServiceDetailPageProps) {
         </div>
 
         <Container>
+          <BreadcrumbTrail
+            className="mb-4"
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Services", href: "/services" },
+              { label: service.title },
+            ]}
+          />
+
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <Link
               href="/services"

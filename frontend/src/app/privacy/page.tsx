@@ -4,12 +4,18 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import PrivacyContent from "./components/PrivacyContent";
 import Footer from "@/features/home/components/footer";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata = {
-  title: "Privacy Policy | QA Solucity",
+// A plain "Privacy Policy" title, not "Privacy Policy | QA Solucity" -
+// the root layout's title.template already appends "| QA Solucity" to
+// every child segment's title, so the old string here was rendering as
+// "Privacy Policy | QA Solucity | QA Solucity".
+export const metadata = buildMetadata({
+  title: "Privacy Policy",
   description:
     "QA Solucity's privacy policy: how we collect, use, and protect your personal information.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

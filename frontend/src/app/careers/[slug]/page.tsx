@@ -8,6 +8,8 @@ import JobDetailContent from "@/features/careers/components/JobDetailContent";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 import { getJobBySlug, getJobSlugs, getRelatedJobs, isJobOpen } from "@/lib/careers";
 import { SITE_URL } from "@/lib/site-config";
+import { buildMetadata } from "@/lib/page-metadata";
+import { buildBreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 interface JobPageProps {
   params: Promise<{ slug: string }>;
@@ -41,22 +43,17 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
 
   const open = isJobOpen(job);
 
-  return {
+  return buildMetadata({
     title: open ? job.title : `${job.title} (Closed)`,
     description: job.summary,
+    path: `/careers/${slug}`,
+    type: "article",
+    publishedTime: job.postedDate,
     // Closed postings stay reachable (a shared or bookmarked link
     // shouldn't just 404 once a role fills or its deadline passes), but
     // not indexed as if they were still an open listing.
-    ...(open
-      ? { alternates: { canonical: `/careers/${slug}` } }
-      : { robots: { index: false, follow: true } }),
-    openGraph: {
-      title: job.title,
-      description: job.summary,
-      type: "article",
-      publishedTime: job.postedDate,
-    },
-  };
+    noIndex: !open,
+  });
 }
 
 export default async function JobPage({ params }: JobPageProps) {
@@ -107,6 +104,12 @@ export default async function JobPage({ params }: JobPageProps) {
     directApply: false,
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { label: "Home", href: "/" },
+    { label: "Careers", href: "/careers" },
+    { label: job.title },
+  ]);
+
   return (
     <>
       {jsonLd && (
@@ -116,6 +119,11 @@ export default async function JobPage({ params }: JobPageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <JobDetailContent job={job} relatedJobs={relatedJobs}>
         <MDXRemote
           source={job.content}

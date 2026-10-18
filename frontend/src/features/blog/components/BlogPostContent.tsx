@@ -11,6 +11,7 @@ import ZoomableImage from "@/components/blog/ZoomableImage";
 import ShareButtons from "@/components/blog/ShareButtons";
 import Footer from "@/features/home/components/footer";
 import type { BlogPost } from "@/lib/blog";
+import { BreadcrumbTrail } from "@/components/seo/Breadcrumbs";
 
 interface Props {
   post: BlogPost;
@@ -28,6 +29,15 @@ export default function BlogPostContent({ post, relatedPosts, children }: Props)
         </div>
 
         <Container>
+          <BreadcrumbTrail
+            className="mb-4"
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Blog", href: "/blogs" },
+              { label: post.title },
+            ]}
+          />
+
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <Link
               href="/blogs"

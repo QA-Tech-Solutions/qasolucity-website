@@ -1,15 +1,13 @@
-import type { Metadata } from "next";
 import FaqPage from "@/features/faq";
 import { faqs } from "@/features/faq/data/faq-data";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "FAQs",
   description:
     "Answers to the most common questions about QA Solucity's services, resources, and how we work with clients.",
-  alternates: {
-    canonical: "/faq",
-  },
-};
+  path: "/faq",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

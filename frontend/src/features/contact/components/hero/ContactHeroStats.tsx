@@ -19,13 +19,13 @@ const contactItems = [
     href: "https://wa.me/2347080702920?text=Hello%20QA%20Solucity%2C%20I%27d%20like%20to%20discuss%20a%20project.",
     action: "Chat with us instantly",
   },
-  // {
-  //   icon: MapPin,
-  //   title: "Location",
-  //   value: "Lagos, Nigeria",
-  //   href: null,
-  //   action: "Find us on Google Maps",
-  // },
+  {
+    icon: MapPin,
+    title: "Location",
+    value: "Lagos, Nigeria",
+    href: "https://www.google.com/maps/search/?api=1&query=QA+Solucity+Lagos+Nigeria",
+    action: "Find us on Google Maps",
+  },
   {
     icon: Clock3,
     title: "Business Hours",

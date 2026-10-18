@@ -8,6 +8,8 @@ import BlogPostContent from "@/features/blog/components/BlogPostContent";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 import { getPostBySlug, getPostSlugs, getRelatedPosts } from "@/lib/blog";
 import { SITE_URL } from "@/lib/site-config";
+import { buildMetadata } from "@/lib/page-metadata";
+import { buildBreadcrumbJsonLd } from "@/components/seo/Breadcrumbs";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -27,20 +29,14 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildMetadata({
     title: post.title,
     description: post.excerpt,
-    alternates: {
-      canonical: `/blogs/${slug}`,
-    },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image],
-      type: "article",
-      publishedTime: post.date,
-    },
-  };
+    path: `/blogs/${slug}`,
+    image: post.image,
+    type: "article",
+    publishedTime: post.date,
+  });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -79,12 +75,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { label: "Home", href: "/" },
+    { label: "Blog", href: "/blogs" },
+    { label: post.title },
+  ]);
+
   return (
     <>
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <BlogPostContent post={post} relatedPosts={relatedPosts}>
         <MDXRemote

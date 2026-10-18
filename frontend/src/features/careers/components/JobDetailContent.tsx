@@ -24,6 +24,7 @@ import JobApplicationForm from "./JobApplicationForm";
 import type { CareerPosting } from "@/lib/careers";
 import { isJobOpen } from "@/lib/careers-status";
 import { WORK_MODE_STYLE, formatDeadline, isDeadlineSoon } from "../lib/workMode";
+import { BreadcrumbTrail } from "@/components/seo/Breadcrumbs";
 
 interface Props {
   job: CareerPosting;
@@ -52,6 +53,15 @@ export default function JobDetailContent({ job, relatedJobs, children }: Props) 
         </div>
 
         <Container>
+          <BreadcrumbTrail
+            className="mb-4"
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Careers", href: "/careers" },
+              { label: job.title },
+            ]}
+          />
+
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <Link
               href="/careers"

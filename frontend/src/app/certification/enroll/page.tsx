@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import Footer from "@/features/home/components/footer";
 import EnrollmentForm from "@/features/certification/components/EnrollmentForm";
 import { getCertificationPricing } from "@/lib/certification-pricing";
 import type { Pathway } from "@/features/certification/data/certification-data";
+import { buildMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Enroll",
   description:
     "Reserve your seat on QA Solucity's Self-Starter Prep Track or All-Inclusive Certification Bundle for your ISTQB certification.",
-  alternates: {
-    canonical: "/certification/enroll",
-  },
-};
+  path: "/certification/enroll",
+});
 
 interface PageProps {
   searchParams: Promise<{ track?: string }>;
