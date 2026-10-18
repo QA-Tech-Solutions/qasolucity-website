@@ -103,11 +103,13 @@ function KPICard({
   label,
   value,
   color,
+  footer,
 }: {
   icon: LucideIcon;
   label: string;
   value: string | number;
   color: keyof typeof KPI_STYLES;
+  footer?: React.ReactNode;
 }) {
   const styles = KPI_STYLES[color];
   return (
@@ -117,7 +119,34 @@ function KPICard({
         <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</span>
       </div>
       <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">{value}</p>
+      {footer}
     </div>
+  );
+}
+
+/**
+ * Failed and skipped side by side, so a skipped test (test.skip with a
+ * reason, e.g. careers form tests while no posting is open) is never read
+ * as a bug. Only failures count toward the headline number.
+ */
+function BugsBreakdown({ failed, skipped }: { failed: number; skipped?: number }) {
+  return (
+    <dl className="mt-3 space-y-1.5 text-xs">
+      <div className="flex items-center gap-2">
+        <span className="h-2 w-2 shrink-0 rounded-full bg-red-500" aria-hidden />
+        <dt className="text-slate-600 dark:text-slate-300">Failed</dt>
+        <dd className="ml-auto font-semibold text-slate-900 dark:text-white">{failed}</dd>
+      </div>
+      {skipped !== undefined && (
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 shrink-0 rounded-full border border-slate-400 dark:border-slate-500" aria-hidden />
+          <dt className="text-slate-500 dark:text-slate-400">
+            Skipped <span className="text-slate-400 dark:text-slate-500">· not bugs</span>
+          </dt>
+          <dd className="ml-auto font-semibold text-slate-500 dark:text-slate-400">{skipped}</dd>
+        </div>
+      )}
+    </dl>
   );
 }
 
@@ -200,7 +229,13 @@ export default function OverviewContent() {
           value={`${metrics.passedTests}/${metrics.totalTests}`}
           color="emerald"
         />
-        <KPICard icon={Bug} label="Bugs" value={metrics.bugs} color="red" />
+        <KPICard
+          icon={Bug}
+          label="Bugs"
+          value={metrics.bugs}
+          color="red"
+          footer={<BugsBreakdown failed={metrics.bugs} skipped={metrics.skippedTests} />}
+        />
         <KPICard icon={Zap} label="Test Coverage" value={`${metrics.coverage}%`} color="amber" />
         <KPICard
           icon={Activity}

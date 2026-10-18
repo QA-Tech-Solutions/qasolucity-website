@@ -49,7 +49,13 @@ export default function ServiceFAQ({ faqs }: Props) {
               </div>
             </button>
 
-            <AnimatePresence>
+            {/* initial={false}: the first answer starts open, so it shouldn't
+                play its expand animation on page load. Animating height to
+                "auto" makes framer-motion measure the element and then
+                restore the scroll position it saw beforehand, which cancels
+                any smooth scroll started in that moment, e.g. the
+                Launchpad's "Apply Now" link clicked right after load. */}
+            <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}

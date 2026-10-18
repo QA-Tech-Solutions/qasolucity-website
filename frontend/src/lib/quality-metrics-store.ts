@@ -2,6 +2,7 @@ import { Redis } from "@upstash/redis";
 import { revalidateTag, unstable_cache } from "next/cache";
 import { promises as fs } from "fs";
 import path from "path";
+import { summarizeError } from "./summarize-test-error";
 
 export interface QualityMetrics {
   passRate: number;
@@ -12,6 +13,12 @@ export interface QualityMetrics {
   apiHealth: "Healthy" | "Degraded";
   lastUpdated: string | null;
   source: "seed" | "automation";
+  /**
+   * Tests that were skipped (test.skip with a reason) - not bugs, and not
+   * part of totalTests or passRate. Derived on read from the latest run's
+   * per-test detail (see withLatestRunCounts); absent when there isn't any.
+   */
+  skippedTests?: number;
 }
 
 export interface TestResult {
@@ -91,7 +98,7 @@ const redis =
  * anyone having to provision a Redis instance just to see the dashboard
  * locally - it is not a production persistence strategy.
  */
-async function readMetrics(): Promise<QualityMetrics | null> {
+async function readStoredMetrics(): Promise<QualityMetrics | null> {
   if (redis) {
     return (await redis.get<QualityMetrics>(REDIS_KEY)) ?? null;
   }
@@ -101,6 +108,35 @@ async function readMetrics(): Promise<QualityMetrics | null> {
   } catch {
     return null;
   }
+}
+
+async function readLatestRun(): Promise<QualityRun | null> {
+  if (redis) {
+    const [run] = await redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, 0);
+    return run ?? null;
+  }
+  const [run] = await readLocalRuns();
+  return run ?? null;
+}
+
+/**
+ * The snapshot and the latest run are written together by the same report
+ * (same timestamp - see the POST handler), so when they match, the
+ * snapshot's counts are recounted from that run's tests the same way
+ * stored runs are (withRecountedTotals). That corrects a snapshot reported
+ * while skipped tests were still counted as bugs, and supplies
+ * skippedTests, which the snapshot itself doesn't carry.
+ */
+function withLatestRunCounts(metrics: QualityMetrics, run: QualityRun | null): QualityMetrics {
+  if (!run || run.timestamp !== metrics.lastUpdated || !run.tests?.length) return metrics;
+  const { passedTests, totalTests, bugs, passRate } = withRecountedTotals(run);
+  const skippedTests = run.tests.filter((test) => test.status === "skipped").length;
+  return { ...metrics, passedTests, totalTests, bugs, passRate, skippedTests };
+}
+
+async function readMetrics(): Promise<QualityMetrics | null> {
+  const [metrics, latestRun] = await Promise.all([readStoredMetrics(), readLatestRun()]);
+  return metrics ? withLatestRunCounts(metrics, latestRun) : null;
 }
 
 // Cached for METRICS_CACHE_SECONDS - the homepage's Quality Command Center
@@ -158,6 +194,54 @@ export async function appendRun(run: QualityRun): Promise<void> {
   revalidateTag(METRICS_CACHE_TAG, { expire: 0 });
 }
 
+/**
+ * Every read that returns per-test detail goes through this, so stored
+ * history is public-safe regardless of when it was reported: runs from
+ * before the automation repo started summarizing errors still hold raw
+ * Playwright output (code frames, runner paths, selectors). A no-op on
+ * already-summarized messages.
+ */
+function withReadableErrors(run: QualityRun): QualityRun {
+  return {
+    ...run,
+    tests: run.tests.map((test) => (test.error ? { ...test, error: summarizeError(test.error) } : test)),
+  };
+}
+
+/**
+ * Recounts a run's totals from its own per-test statuses. Runs reported
+ * before qasolucity-automation stopped counting skipped tests as failures
+ * have inflated numbers stored - e.g. bugs=59 for 43 real failures plus 16
+ * skipped careers tests. Skipped tests didn't run, so they're neither a
+ * pass nor a bug: this gives the same numbers report-metrics.mjs now sends
+ * (passed / (passed + failed)), so it's a no-op on newer runs. Runs from
+ * before per-test detail existed have no tests to recount and are left as
+ * stored.
+ */
+function withRecountedTotals(run: QualityRun): QualityRun {
+  if (!run.tests?.length) return run;
+  let passed = 0;
+  let failed = 0;
+  for (const test of run.tests) {
+    if (test.status === "passed") passed += 1;
+    else if (test.status === "failed") failed += 1;
+  }
+  const ran = passed + failed;
+  return {
+    ...run,
+    passedTests: passed,
+    totalTests: ran,
+    bugs: failed,
+    // Rounded down, same as report-metrics.mjs: 531/532 must not show 100%.
+    passRate: ran > 0 ? Math.floor((passed / ran) * 100) : 0,
+  };
+}
+
+/** Every read of stored runs goes through this - see the two steps above. */
+function normalizeRun(run: QualityRun): QualityRun {
+  return withRecountedTotals(withReadableErrors(run));
+}
+
 function toSummary(run: QualityRun): QualityRunSummary {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- destructured only to exclude it from `summary`
   const { tests: _tests, ...summary } = run;
@@ -168,10 +252,10 @@ function toSummary(run: QualityRun): QualityRunSummary {
 export async function getRuns(limit = 20, offset = 0): Promise<QualityRunSummary[]> {
   if (redis) {
     const runs = await redis.lrange<QualityRun>(REDIS_RUNS_KEY, offset, offset + limit - 1);
-    return runs.map(toSummary);
+    return runs.map((run) => toSummary(withRecountedTotals(run)));
   }
   const runs = await readLocalRuns();
-  return runs.slice(offset, offset + limit).map(toSummary);
+  return runs.slice(offset, offset + limit).map((run) => toSummary(withRecountedTotals(run)));
 }
 
 /**
@@ -182,10 +266,12 @@ export async function getRuns(limit = 20, offset = 0): Promise<QualityRunSummary
 export async function getRunById(id: string): Promise<QualityRun | null> {
   if (redis) {
     const runs = await redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, MAX_RUNS - 1);
-    return runs.find((run) => run.id === id) ?? null;
+    const run = runs.find((r) => r.id === id);
+    return run ? normalizeRun(run) : null;
   }
   const runs = await readLocalRuns();
-  return runs.find((run) => run.id === id) ?? null;
+  const run = runs.find((r) => r.id === id);
+  return run ? normalizeRun(run) : null;
 }
 
 /**
@@ -195,10 +281,11 @@ export async function getRunById(id: string): Promise<QualityRun | null> {
  */
 export async function getRunsFull(limit = 20): Promise<QualityRun[]> {
   if (redis) {
-    return redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, limit - 1);
+    const runs = await redis.lrange<QualityRun>(REDIS_RUNS_KEY, 0, limit - 1);
+    return runs.map(normalizeRun);
   }
   const runs = await readLocalRuns();
-  return runs.slice(0, limit);
+  return runs.slice(0, limit).map(normalizeRun);
 }
 
 async function readTrend(limit: number): Promise<Array<{ timestamp: string; passRate: number }>> {

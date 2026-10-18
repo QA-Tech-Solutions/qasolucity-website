@@ -5,6 +5,11 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { QualityRunSummary } from "@/lib/quality-metrics-store";
 
+// The runs API caps a single request at 100 (see api/quality-metrics/runs).
+// At the scheduled cadence that's well over a year of runs, so every month
+// section below is complete rather than cut off partway through.
+const RUNS_LIMIT = 100;
+
 function formatTimestamp(iso: string): string {
   return new Date(iso).toLocaleString("en-US", {
     month: "short",
@@ -14,6 +19,38 @@ function formatTimestamp(iso: string): string {
   });
 }
 
+interface MonthGroup {
+  key: string;
+  label: string;
+  runs: QualityRunSummary[];
+}
+
+/**
+ * Buckets runs into calendar months ("September 2026", "January 2027", ...)
+ * in the viewer's local time zone - the same zone formatTimestamp uses, so a
+ * run never shows a date that disagrees with the section it sits under.
+ * Runs arrive newest first, so the groups come out newest month first and
+ * each group keeps that order.
+ */
+function groupByMonth(runs: QualityRunSummary[]): MonthGroup[] {
+  const groups: MonthGroup[] = [];
+  for (const run of runs) {
+    const date = new Date(run.timestamp);
+    const key = `${date.getFullYear()}-${date.getMonth()}`;
+    let group = groups[groups.length - 1];
+    if (!group || group.key !== key) {
+      group = {
+        key,
+        label: date.toLocaleDateString("en-US", { month: "long", year: "numeric" }),
+        runs: [],
+      };
+      groups.push(group);
+    }
+    group.runs.push(run);
+  }
+  return groups;
+}
+
 export default function ExecutionsList() {
   const [runs, setRuns] = useState<QualityRunSummary[] | null>(null);
 
@@ -21,7 +58,7 @@ export default function ExecutionsList() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch("/api/quality-metrics/runs?limit=30", { cache: "no-store" });
+        const res = await fetch(`/api/quality-metrics/runs?limit=${RUNS_LIMIT}`, { cache: "no-store" });
         const data = res.ok ? ((await res.json()) as { runs: QualityRunSummary[] }) : { runs: [] };
         if (!cancelled) setRuns(data.runs);
       } catch {
@@ -37,7 +74,7 @@ export default function ExecutionsList() {
     <div>
       <h1 className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">Executions</h1>
       <p className="mt-1 text-sm text-slate-500">
-        Every reported run of the automated suite, newest first.
+        Every reported run of the automated suite, grouped by month, newest first.
       </p>
 
       {runs === null ? (
@@ -49,66 +86,83 @@ export default function ExecutionsList() {
           </p>
         </div>
       ) : (
-        <div className="mt-8 overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10">
-          <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Executions table, scrollable">
-            <table className="w-full min-w-[640px] text-left text-sm">
-              <thead>
-                <tr className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:border-white/10 dark:bg-white/[0.02]">
-                  <th className="px-5 py-3 font-medium">Run</th>
-                  <th className="px-5 py-3 font-medium">Pass rate</th>
-                  <th className="px-5 py-3 font-medium">Passed</th>
-                  <th className="px-5 py-3 font-medium">Bugs</th>
-                  <th className="px-5 py-3 font-medium">Coverage</th>
-                  <th className="px-5 py-3 font-medium">Health</th>
-                  <th className="px-5 py-3" />
-                </tr>
-              </thead>
-              <tbody>
-                {runs.map((run) => (
-                  <tr
-                    key={run.id}
-                    className="border-b border-slate-100 last:border-0 hover:bg-slate-50 dark:border-white/5 dark:hover:bg-white/[0.02]"
-                  >
-                    <td className="px-5 py-3.5 text-slate-600 dark:text-slate-300">
-                      {formatTimestamp(run.timestamp)}
-                    </td>
-                    <td className="px-5 py-3.5 font-semibold text-slate-900 dark:text-white">
-                      {run.passRate}%
-                    </td>
-                    <td className="px-5 py-3.5 text-slate-500 dark:text-slate-400">
-                      {run.passedTests}/{run.totalTests}
-                    </td>
-                    <td
-                      className={`px-5 py-3.5 ${run.bugs > 0 ? "text-red-600 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}
-                    >
-                      {run.bugs}
-                    </td>
-                    <td className="px-5 py-3.5 text-slate-500 dark:text-slate-400">{run.coverage}%</td>
-                    <td className="px-5 py-3.5">
-                      <span
-                        className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-                          run.apiHealth === "Healthy"
-                            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400"
-                            : "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400"
-                        }`}
+        groupByMonth(runs).map((group) => (
+          <section key={group.key} aria-labelledby={`executions-${group.key}`} className="mt-8">
+            <div className="flex items-baseline justify-between gap-4">
+              <h2 id={`executions-${group.key}`} className="text-lg font-semibold text-slate-900 dark:text-white">
+                {group.label}
+              </h2>
+              <span className="text-sm text-slate-500">
+                {group.runs.length} {group.runs.length === 1 ? "run" : "runs"}
+              </span>
+            </div>
+            <div className="mt-3 overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10">
+              <div
+                className="overflow-x-auto"
+                tabIndex={0}
+                role="region"
+                aria-label={`${group.label} executions table, scrollable`}
+              >
+                <table className="w-full min-w-[720px] table-fixed text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wider text-slate-500 dark:border-white/10 dark:bg-white/[0.02]">
+                      <th className="w-[22%] px-5 py-3 font-medium">Run</th>
+                      <th className="px-5 py-3 font-medium">Pass rate</th>
+                      <th className="px-5 py-3 font-medium">Passed</th>
+                      <th className="px-5 py-3 font-medium">Bugs</th>
+                      <th className="px-5 py-3 font-medium">Coverage</th>
+                      <th className="px-5 py-3 font-medium">Health</th>
+                      <th className="px-5 py-3" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {group.runs.map((run) => (
+                      <tr
+                        key={run.id}
+                        className="border-b border-slate-100 last:border-0 hover:bg-slate-50 dark:border-white/5 dark:hover:bg-white/[0.02]"
                       >
-                        {run.apiHealth}
-                      </span>
-                    </td>
-                    <td className="px-5 py-3.5 text-right">
-                      <Link
-                        href={`/dashboard/executions/${run.id}`}
-                        className="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
-                      >
-                        Details <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                        <td className="px-5 py-3.5 text-slate-600 dark:text-slate-300">
+                          {formatTimestamp(run.timestamp)}
+                        </td>
+                        <td className="px-5 py-3.5 font-semibold text-slate-900 dark:text-white">
+                          {run.passRate}%
+                        </td>
+                        <td className="px-5 py-3.5 text-slate-500 dark:text-slate-400">
+                          {run.passedTests}/{run.totalTests}
+                        </td>
+                        <td
+                          className={`px-5 py-3.5 ${run.bugs > 0 ? "text-red-600 dark:text-red-400" : "text-slate-500 dark:text-slate-400"}`}
+                        >
+                          {run.bugs}
+                        </td>
+                        <td className="px-5 py-3.5 text-slate-500 dark:text-slate-400">{run.coverage}%</td>
+                        <td className="px-5 py-3.5">
+                          <span
+                            className={`rounded-full px-2.5 py-1 text-xs font-medium ${
+                              run.apiHealth === "Healthy"
+                                ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400"
+                                : "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400"
+                            }`}
+                          >
+                            {run.apiHealth}
+                          </span>
+                        </td>
+                        <td className="px-5 py-3.5 text-right">
+                          <Link
+                            href={`/dashboard/executions/${run.id}`}
+                            className="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300"
+                          >
+                            Details <ArrowRight className="h-3.5 w-3.5" />
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        ))
       )}
     </div>
   );
